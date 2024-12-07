@@ -11,6 +11,7 @@
     <SolidColorBrush x:Key="BackgroundWarning" Color="#ff9920" />
     <SolidColorBrush x:Key="BackgroundDanger" Color="#ff562f"/>
     <SolidColorBrush x:Key="BackgroundDark" Color="#172b4c"/>
+    <SolidColorBrush x:Key="BackgroundGray" Color="#758694" />
 
     <!--Light colors-->
     <SolidColorBrush x:Key="BackgroundPrimaryLight" Color="#e1eaf9"/>

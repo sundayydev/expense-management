@@ -4,11 +4,184 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI"
-        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:fa="http://schemas.fontawesome.com/icons/svg"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:uc="clr-namespace:GUI.UserControls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="1200"
+        Title="Expense Management" Height="720" Width="1440"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        TextElement.FontWeight="Regular"
+        TextElement.FontFamily="Segoe UI"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Background="#fafbfd"
         >
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="36"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!--Thanh Contrlbar-->
+        <uc:UcControlBar 
+            Grid.Row="0" 
+            MinHeight="{Binding MinHeight_ucControlbar, Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}"
+            Tag="{Binding Title, ElementName=mainwindows}"   
+            VerticalAlignment="Center"
+            Margin="0 5">
+        </uc:UcControlBar>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="MenuColumn" Width="260"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <!--Navbar-->
+            <Grid Grid.Row="0">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="60" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Button Grid.Column="0" Height="40" Width="40" VerticalAlignment="Center" 
+                            HorizontalAlignment="Left" Margin="10" Padding="0"
+                            Background="{StaticResource BackgroundWhite}"
+                            BorderBrush="{StaticResource BackgroundTransparent}"
+                            x:Name="ToggleMenu"
+                            Click="ToggleMenu_Click"
+                            >
+                        <fa:ImageAwesome Icon="Solid_AlignLeft" Height="25" Width="25" PrimaryColor="{StaticResource BackgroundPrimary}"/>
+                    </Button>
+                    <Image Grid.Column="1" Source="/Resource/logo.png" 
+                           Stretch="Uniform" Margin="10"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"/>
+                </Grid>
+                
+                <StackPanel Grid.Row="1" Background="{StaticResource BackgroundWhite}">
+                    <uc:UcButtonIcon x:Name="BtnHome" Icon="Solid_House" Text="Trang Chủ" />
+                    <uc:UcButtonIcon x:Name="BtnCategory" Icon="Brands_Dropbox" Text="Phân Loại"/>
+                    <uc:UcButtonIcon x:Name="BtnExpense" Icon="Solid_MoneyBill" Text="Chi Tiêu"/>
+                    <uc:UcButtonIcon x:Name="BtnIncome" Icon="Solid_Coins" Text="Thu Nhâp"/>
+                    <uc:UcButtonIcon x:Name="BtnStatistical" Icon="Solid_ChartSimple" Text="Thống Kê"/>
+                    <uc:UcButtonIcon x:Name="BtnRemind" Icon="Solid_ClockRotateLeft" Text="Nhắc Nhở"/>
+                    <uc:UcButtonIcon x:Name="BtnNotification" Icon="Solid_Bell" Text="Thông Báo"/>
+                </StackPanel>
+
+                <Grid Grid.Row="2" Background="{StaticResource BackgroundSecondaryLight}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Height="40" Width="40" VerticalAlignment="Center" 
+                            HorizontalAlignment="Left" Margin="10" Padding="0"
+                            Background="{StaticResource BackgroundTransparent}"
+                            BorderBrush="{StaticResource BackgroundTransparent}"
+                            >
+                        <fa:ImageAwesome Icon="Solid_ArrowRightFromBracket" Height="25" Width="25"
+                                         PrimaryColor="{StaticResource BackgroundPrimary}"/>
+                    </Button>
+
+                    <Button Grid.Column="1" Height="40" Width="40" VerticalAlignment="Center" 
+                            HorizontalAlignment="Left" Margin="10" Padding="0"
+                            Background="{StaticResource BackgroundTransparent}"
+                            BorderBrush="{StaticResource BackgroundTransparent}"
+                            >
+                        <fa:ImageAwesome Icon="Solid_Gear" Height="25" Width="25"
+                                         PrimaryColor="{StaticResource BackgroundPrimary}"/>
+                    </Button>
+
+                    <Button Grid.Column="2" Height="40" Width="40" VerticalAlignment="Center" 
+                            HorizontalAlignment="Left" Margin="10" Padding="0"
+                            Background="{StaticResource BackgroundTransparent}"
+                            BorderBrush="{StaticResource BackgroundTransparent}"
+                            >
+                        <fa:ImageAwesome Icon="Solid_User" Height="25" Width="25"
+                                         PrimaryColor="{StaticResource BackgroundPrimary}"/>
+                    </Button>
+                </Grid>
+            </Grid>
+            
+            <!--Hiện thị các page ở đây-->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <!-- TODO: Chưa biết nên làm gì -->
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <!-- Thanh tìm kiếm -->
+                        <Border Background="{StaticResource White400}" CornerRadius="5" BorderThickness="1" BorderBrush="{StaticResource BackgroundGray}" Height="40">
+                            <Grid>
+                                <!-- Button -->
+                                <Button HorizontalAlignment="Right" Margin="0 0 10 0" Width="40" Padding="0"
+                                        Background="{StaticResource BackgroundTransparent}"
+                                        BorderBrush="{StaticResource BackgroundTransparent}"
+                                        >
+                                    <fa:ImageAwesome Icon="Solid_MagnifyingGlass" Height="25" Width="25" 
+                                                     />
+                                </Button>
+                                <!-- TextBox -->
+                                <TextBox Margin="10" VerticalAlignment="Center"
+                                         FontSize="16" Background="Transparent" BorderThickness="0"
+                                         Foreground="{StaticResource TextPrimary}" Height="30" Width="300"/>
+                            </Grid>
+                        </Border>
+                        
+                        <Button Grid.Column="0" Height="40" Width="40" VerticalAlignment="Center" 
+                                HorizontalAlignment="Left" Margin="10" Padding="0"
+                                Background="{StaticResource BackgroundLightest}"
+                                BorderBrush="{StaticResource BackgroundTransparent}"
+                        >
+                            <fa:ImageAwesome Icon="Solid_Bell" Height="25" Width="25" PrimaryColor="{StaticResource BackgroundPrimary}"/>
+                        </Button>
+                        <Button Grid.Column="0" Height="40" Width="40" VerticalAlignment="Center" 
+                                HorizontalAlignment="Left" Margin="10" Padding="0"
+                                Background="{StaticResource BackgroundLightest}"
+                                BorderBrush="{StaticResource BackgroundTransparent}"
+                        >
+                            <fa:ImageAwesome Icon="Solid_CircleUser" Height="25" Width="25" PrimaryColor="{StaticResource BackgroundPrimary}"/>
+                        </Button>                    
+                        <Button Grid.Column="0" Height="40" Width="40" VerticalAlignment="Center" 
+                                HorizontalAlignment="Left" Margin="10" Padding="0"
+                                Background="{StaticResource BackgroundLightest}"
+                                BorderBrush="{StaticResource BackgroundTransparent}"
+                        >
+                            <fa:ImageAwesome Icon="Solid_Gears" Height="25" Width="25" PrimaryColor="{StaticResource BackgroundPrimary}"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+                
+                <DockPanel Grid.Row="1">
+                    <uc:UcHome/>
+                </DockPanel>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>
