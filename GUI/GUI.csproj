@@ -75,8 +75,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DangNhap.xaml.cs">
+      <DependentUpon>DangNhap.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TextHolder.xaml.cs">
+      <DependentUpon>TextHolder.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UcButtonIcon.xaml.cs">
       <DependentUpon>UcButtonIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UcButtonLogin.xaml.cs">
+      <DependentUpon>UcButtonLogin.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UcControlBar.xaml.cs">
       <DependentUpon>UcControlBar.xaml</DependentUpon>
@@ -84,6 +93,10 @@
     <Compile Include="UserControls\UcHome.xaml.cs">
       <DependentUpon>UcHome.xaml</DependentUpon>
     </Compile>
+    <Page Include="DangNhap.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Library\Colors.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -100,7 +113,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserControls\TextHolder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\UcButtonIcon.xaml" />
+    <Page Include="UserControls\UcButtonLogin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\UcControlBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -127,6 +148,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resource\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\bg-login2.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.5.1.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.5.1.0\build\MaterialDesignThemes.targets')" />
