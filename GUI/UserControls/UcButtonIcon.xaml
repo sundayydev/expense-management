@@ -7,8 +7,8 @@
              xmlns:fa="http://schemas.fontawesome.com/icons/svg"
              mc:Ignorable="d"
              >
-    <Button Height="50" Background="Transparent" 
-            HorizontalContentAlignment="Left">
+    <Button Height="50" Background="Transparent" HorizontalContentAlignment="Left"
+            Click="ButtonBase_OnClick">
         <Button.Template>
             <ControlTemplate TargetType="Button">
                 <DockPanel>

@@ -4,8 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GUI.UserControls"
-             mc:Ignorable="d" 
-             x:Name="_this">
+             mc:Ignorable="d">
 
     <UserControl.Resources>
 
@@ -16,7 +15,7 @@
             <Setter Property="Width" Value="120" />
             <Setter Property="Height" Value="30" />
             <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Content" Value="Quen mat khau" />
+            <Setter Property="Content" Value="Quên mật khẩu" />
             <Setter Property="BorderThickness" Value="0" />
         </Style>
 
@@ -27,7 +26,7 @@
     <Border>
         <Grid>
             <!-- Nút Đăng nhập -->
-            <Button x:Name="btnDN"
+            <Button x:Name="BtnLogin"
                     Background="Transparent"
                     BorderThickness="0"
                     HorizontalAlignment="Right"

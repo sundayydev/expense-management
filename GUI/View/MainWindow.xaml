@@ -8,7 +8,8 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:uc="clr-namespace:GUI.UserControls"
         mc:Ignorable="d"
-        Title="Expense Management" Height="720" Width="1440"
+        x:Name="VMainWindow"
+        Title="Expense Management" Height="800" Width="1440"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         ResizeMode="NoResize"
@@ -32,7 +33,7 @@
         <uc:UcControlBar 
             Grid.Row="0" 
             MinHeight="{Binding MinHeight_ucControlbar, Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}"
-            Tag="{Binding Title, ElementName=mainwindows}"   
+            Tag="{Binding Title, ElementName=VMainWindow}"   
             VerticalAlignment="Center"
             Margin="0 5">
         </uc:UcControlBar>
@@ -74,13 +75,13 @@
                 </Grid>
                 
                 <StackPanel Grid.Row="1" Background="{StaticResource BackgroundWhite}">
-                    <uc:UcButtonIcon x:Name="BtnHome" Icon="Solid_House" Text="Trang Chủ" />
-                    <uc:UcButtonIcon x:Name="BtnCategory" Icon="Brands_Dropbox" Text="Phân Loại"/>
-                    <uc:UcButtonIcon x:Name="BtnExpense" Icon="Solid_MoneyBill" Text="Chi Tiêu"/>
-                    <uc:UcButtonIcon x:Name="BtnIncome" Icon="Solid_Coins" Text="Thu Nhâp"/>
-                    <uc:UcButtonIcon x:Name="BtnStatistical" Icon="Solid_ChartSimple" Text="Thống Kê"/>
-                    <uc:UcButtonIcon x:Name="BtnRemind" Icon="Solid_ClockRotateLeft" Text="Nhắc Nhở"/>
-                    <uc:UcButtonIcon x:Name="BtnNotification" Icon="Solid_Bell" Text="Thông Báo"/>
+                    <uc:UcButtonIcon x:Name="BtnHome" Icon="Solid_House" Text="Trang Chủ" UcButtonIconClick="Btn_OnClick"/>
+                    <uc:UcButtonIcon x:Name="BtnCategory" Icon="Brands_Dropbox" Text="Phân Loại" UcButtonIconClick="Btn_OnClick"/>
+                    <uc:UcButtonIcon x:Name="BtnExpense" Icon="Solid_MoneyBill" Text="Chi Tiêu" UcButtonIconClick="Btn_OnClick"/>
+                    <uc:UcButtonIcon x:Name="BtnIncome" Icon="Solid_Coins" Text="Thu Nhâp" UcButtonIconClick="Btn_OnClick"/>
+                    <uc:UcButtonIcon x:Name="BtnStatistical" Icon="Solid_ChartSimple" Text="Thống Kê" UcButtonIconClick="Btn_OnClick"/>
+                    <uc:UcButtonIcon x:Name="BtnRemind" Icon="Solid_ClockRotateLeft" Text="Nhắc Nhở" UcButtonIconClick="Btn_OnClick"/>
+                    <uc:UcButtonIcon x:Name="BtnNotification" Icon="Solid_Bell" Text="Thông Báo" UcButtonIconClick="Btn_OnClick"/>
                 </StackPanel>
 
                 <Grid Grid.Row="2" Background="{StaticResource BackgroundSecondaryLight}">
@@ -89,7 +90,8 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Height="40" Width="40" VerticalAlignment="Center" 
+                    <Button Grid.Column="0" x:Name="BtnLogout" Click="BtnLogout_OnClick"
+                            Height="40" Width="40" VerticalAlignment="Center" 
                             HorizontalAlignment="Left" Margin="10" Padding="0"
                             Background="{StaticResource BackgroundTransparent}"
                             BorderBrush="{StaticResource BackgroundTransparent}"
@@ -107,8 +109,8 @@
                                          PrimaryColor="{StaticResource BackgroundPrimary}"/>
                     </Button>
 
-                    <Button Grid.Column="2" Height="40" Width="40" VerticalAlignment="Center" 
-                            HorizontalAlignment="Left" Margin="10" Padding="0"
+                    <Button Grid.Column="2" Height="40" Width="40" Click="BtnAccount_Click"
+                            VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" Padding="0"
                             Background="{StaticResource BackgroundTransparent}"
                             BorderBrush="{StaticResource BackgroundTransparent}"
                             >
@@ -161,7 +163,8 @@
                         >
                             <fa:ImageAwesome Icon="Solid_Bell" Height="25" Width="25" PrimaryColor="{StaticResource BackgroundPrimary}"/>
                         </Button>
-                        <Button Grid.Column="0" Height="40" Width="40" VerticalAlignment="Center" 
+                        <Button x:Name="BtnAccount" Click="BtnAccount_Click"
+                                Grid.Column="0" Height="40" Width="40" VerticalAlignment="Center" 
                                 HorizontalAlignment="Left" Margin="10" Padding="0"
                                 Background="{StaticResource BackgroundLightest}"
                                 BorderBrush="{StaticResource BackgroundTransparent}"
@@ -178,9 +181,15 @@
                     </StackPanel>
                 </Grid>
                 
-                <DockPanel Grid.Row="1">
-                    <uc:UcHome/>
-                </DockPanel>
+                <!--Màn hình hiển thị-->
+                <Grid x:Name="DisplayMain"
+                        Grid.Row="1" Margin="10 0 10 10">
+                    <ContentControl x:Name="ContentDisplayMain"
+                                    Width="auto"
+                                    Height="auto">
+
+                    </ContentControl>
+                </Grid>
             </Grid>
         </Grid>
     </Grid>

@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="GUI.UserControls.UcAccount"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GUI.UserControls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:fa="http://schemas.fontawesome.com/icons/svg"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1000">
+    <Border BorderBrush="#EEEEEE" BorderThickness="1" CornerRadius="10" Background="{StaticResource BackgroundWhite}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" Margin="20">
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
+                        <GradientStop Color="#FDABDD" Offset="0.0" />
+                        <GradientStop Color="#374A5A" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <!-- Card container -->
+                <Border CornerRadius="10" Background="White" Padding="20" Width="400" Height="250">
+                    <StackPanel>
+                        <!-- Header -->
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <!-- Avatar -->
+                            <Border Width="80" Height="80" Margin="0,0,10,0" CornerRadius="10">
+                                <fa:ImageAwesome Icon="Brands_SquareGithub" PrimaryColor="#640D5F"/>
+                            </Border>
+
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="Ngô Mạnh Hùng" FontWeight="Bold" FontSize="20" Foreground="{StaticResource BackgroundDark}"/>
+                                <TextBlock Text="User" FontSize="14" Foreground="#888"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <!-- Statistics -->
+                        <StackPanel Margin="0,20,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <StackPanel HorizontalAlignment="Center" Margin="10">
+                                <TextBlock Text="12.000" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center"/>
+                                <TextBlock Text="HÓA ĐƠN CHI TIÊU" FontSize="13" HorizontalAlignment="Center" Foreground="#999"/>
+                            </StackPanel>
+
+                            <StackPanel HorizontalAlignment="Center" Margin="10">
+                                <TextBlock Text="550" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center"/>
+                                <TextBlock Text="NGUỒN THU NHÂP" FontSize="13" HorizontalAlignment="Center" Foreground="#999"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <StackPanel Grid.Column="1" Margin="20">
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

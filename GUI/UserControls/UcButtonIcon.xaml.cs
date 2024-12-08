@@ -10,7 +10,7 @@ namespace GUI.UserControls
          InitializeComponent();
       }
       
-      // DependencyProperty cho Icon
+      // DependencyProperty for Icon
       public static readonly DependencyProperty IconProperty =
          DependencyProperty.Register("Icon", typeof(string), typeof(UcButtonIcon), new PropertyMetadata(null));
 
@@ -20,7 +20,7 @@ namespace GUI.UserControls
          set => SetValue(IconProperty, value);
       }
 
-      // DependencyProperty cho Text
+      // DependencyProperty for Text
       public static readonly DependencyProperty TextProperty =
          DependencyProperty.Register("Text", typeof(string), typeof(UcButtonIcon), new PropertyMetadata(null));
 
@@ -28,6 +28,14 @@ namespace GUI.UserControls
       {
          get => (string)GetValue(TextProperty);
          set => SetValue(TextProperty, value);
+      }
+
+      // Khai báo sự kiện
+      public event RoutedEventHandler UcButtonIconClick;
+      
+      private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+      {
+         UcButtonIconClick?.Invoke(this, e);
       }
    }
 }
