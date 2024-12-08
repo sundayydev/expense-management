@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace GUI
 {
     /// <summary>
-    /// Interaction logic for DangNhap.xaml
+    /// Interaction logic for Login.xaml
     /// </summary>
-    public partial class DangNhap : Window
+    public partial class Login : Window
     {
-        public DangNhap()
+        public Login()
         {
             InitializeComponent();
         }
@@ -27,8 +27,9 @@ namespace GUI
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             MainWindow f = new MainWindow();
-            f.Show();
-            this.Close();
+            this.Hide();
+            f.ShowDialog();
+            this.Show();
         }
     }
 }
