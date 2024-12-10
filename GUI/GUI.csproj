@@ -81,7 +81,9 @@
     <Compile Include="UserControls\TextHolder.xaml.cs">
       <DependentUpon>TextHolder.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\UcAccount.xaml.cs" />
+    <Compile Include="UserControls\UcAccount.xaml.cs">
+      <DependentUpon>UcAccount.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UcButtonIcon.xaml.cs">
       <DependentUpon>UcButtonIcon.xaml</DependentUpon>
     </Compile>
@@ -91,7 +93,9 @@
     <Compile Include="UserControls\UcControlBar.xaml.cs">
       <DependentUpon>UcControlBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\UcControlBar2.xaml.cs" />
+    <Compile Include="UserControls\UcControlBar2.xaml.cs">
+      <DependentUpon>UcControlBar2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UcHome.xaml.cs">
       <DependentUpon>UcHome.xaml</DependentUpon>
     </Compile>
@@ -104,8 +108,12 @@
     <Compile Include="View\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\DialogCustoms.xaml.cs" />
-    <Compile Include="View\MainWindow.xaml.cs" />
+    <Compile Include="View\DialogCustoms.xaml.cs">
+      <DependentUpon>DialogCustoms.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="Library\Colors.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -115,6 +123,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UserControls\UcForgotPass.xaml">
+    <Page Include="Library\CustomStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
