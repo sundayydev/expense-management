@@ -116,7 +116,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Library\Colors.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Compile Include="App.xaml.cs">
@@ -124,7 +123,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Library\CustomCalendar.xaml" />
-    <Page Include="UserControls\UcForgotPass.xaml">
+    <Page Include="UserControls\UcForgotPass.xaml"/>
     <Page Include="Library\CustomStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
