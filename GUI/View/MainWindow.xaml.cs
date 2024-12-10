@@ -16,6 +16,7 @@ namespace GUI
 
         private UcHome _ucHome;
         private UcAccount _ucAccount;
+        private UcRemind _ucRemind;
 
         public MainWindow()
         {
@@ -59,6 +60,8 @@ namespace GUI
                 case "BtnStatistical":
                     break;
                 case "BtnRemind":
+                    _ucRemind = new UcRemind();
+                    ContentDisplayMain.Content = _ucRemind;
                     break;                
                 case "BtnNotification":
                     break;

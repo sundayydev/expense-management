@@ -35,8 +35,7 @@
             MinHeight="{Binding MinHeight_ucControlbar, Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}"
             Tag="{Binding Title, ElementName=VMainWindow}"   
             VerticalAlignment="Center"
-            Margin="0 5">
-        </uc:UcControlBar>
+            Margin="0 5"/>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>

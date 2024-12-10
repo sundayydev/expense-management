@@ -7,7 +7,6 @@
              xmlns:local="clr-namespace:GUI.UserControls"
              xmlns:fa="http://schemas.fontawesome.com/icons/svg"
              mc:Ignorable="d" 
-            
              x:Name="_this">
     <UserControl.Resources>
         <Style x:Key="titleStyle" TargetType="{x:Type TextBlock}">

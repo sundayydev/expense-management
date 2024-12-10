@@ -99,6 +99,7 @@
     <Compile Include="UserControls\UcHome.xaml.cs">
       <DependentUpon>UcHome.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UcRemind.xaml.cs" />
     <Compile Include="UserControls\UcSignUp.xaml.cs">
       <DependentUpon>UcSignUp.xaml</DependentUpon>
     </Compile>
@@ -122,6 +123,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Library\CustomCalendar.xaml" />
     <Page Include="UserControls\UcForgotPass.xaml">
     <Page Include="Library\CustomStyle.xaml">
       <SubType>Designer</SubType>
@@ -143,6 +145,7 @@
     </Page>
     <Page Include="UserControls\UcControlBar2.xaml" />
     <Page Include="UserControls\UcHome.xaml" />
+    <Page Include="UserControls\UcRemind.xaml" />
     <Page Include="UserControls\UcSignUp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
