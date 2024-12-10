@@ -186,7 +186,7 @@
                     <ContentControl x:Name="ContentDisplayMain"
                                     Width="auto"
                                     Height="auto">
-
+                     <uc:UcHome />
                     </ContentControl>
                 </Grid>
             </Grid>

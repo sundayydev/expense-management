@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GUI.UserControls"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:fa="http://schemas.fontawesome.com/icons/svg"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:uc="clr-namespace:GUI.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1000">
@@ -25,7 +25,7 @@
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <!-- Avatar -->
                             <Border Width="80" Height="80" Margin="0,0,10,0" CornerRadius="10">
-                                <fa:ImageAwesome Icon="Brands_SquareGithub" PrimaryColor="#640D5F"/>
+                               
                             </Border>
 
                             <StackPanel VerticalAlignment="Center">
