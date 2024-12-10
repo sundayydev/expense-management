@@ -53,6 +53,10 @@
         <GradientStop Color="#ff9920" Offset="0.0" />
         <GradientStop Color="#00baff" Offset="1.0" />
     </LinearGradientBrush>
+    <LinearGradientBrush x:Key="BgGradientMistyPurple" StartPoint="0, 0" EndPoint="1, 1">
+        <GradientStop Color="#FDABDD" Offset="0.0" />
+        <GradientStop Color="#374A5A" Offset="1.0" />
+    </LinearGradientBrush>
 
     <!--3. Border colors-->
     <SolidColorBrush x:Key="BorderPrimary" Color="#0052cc" />

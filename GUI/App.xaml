@@ -17,6 +17,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Secondary/MaterialDesignColor.Lime.xaml" />
                 <ResourceDictionary Source="Library/Colors.xaml" />
                 <ResourceDictionary Source="Library/CustomStyle.xaml" />
+                <ResourceDictionary Source="Library/CustomCalendar.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
