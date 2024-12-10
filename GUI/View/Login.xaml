@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:GUI"
         xmlns:fa="http://schemas.fontawesome.com/icons/svg"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:lc="clr-namespace:System.Windows.Controls;assembly=PresentationFramework"
+
+
         xmlns:uc="clr-namespace:GUI.UserControls" x:Class="GUI.Login"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
@@ -21,13 +24,15 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         Title="Login" Height="800" Width="1440"
         x:Name="VLogin">
+    
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="36"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-
+            <lc:Frame Name="MainFrame" NavigationUIVisibility="Hidden">
+            </lc:Frame>
             <!--Thanh Contrlbar-->
             <uc:UcControlBar 
                 Grid.Row="0" 
@@ -43,11 +48,11 @@
                 </Grid.Background>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="190"/>
                 </Grid.RowDefinitions>
                 
                 <Border Background="{StaticResource BackgroundLight}" BorderBrush="{StaticResource TextPrimary}" BorderThickness="1" 
-                        Grid.Row="0" Width="600" Height="500" CornerRadius="20" HorizontalAlignment="Center">
+                        Grid.Row="0" Width="600" Height="500" CornerRadius="20" HorizontalAlignment="Center" Margin="0,30,0,0">
                 <StackPanel>
 
                     <Label Content="Let's Get Started" HorizontalAlignment="Center" Margin="0,30,0,0" FontSize="32" FontWeight="Bold" Foreground="{StaticResource TextPrimary}"/>
@@ -83,11 +88,14 @@
                             <fa:ImageAwesome Icon="Solid_Link" PrimaryColor="{StaticResource TextPrimary}" 
                                              VerticalAlignment="Center" Width="20" Height="20"  HorizontalAlignment="Right" 
                                              Grid.Column="0"/>
-                            <uc:UcButtonLogin HorizontalAlignment="Right" Grid.Column="1" 
-                                              VerticalAlignment="Center" Background="Transparent"/>
+                            <TextBlock Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16" Foreground="{StaticResource BackgroundDanger}" FontWeight="SemiBold"> 
+                                <Hyperlink x:Name="myLink" NavigateUri="https://begincodingnow.com/wpf-hyperlinks/" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None" >
+                                    Quên mật khẩu
+                                </Hyperlink>
+                            </TextBlock>
+                               
 
-
-                        </Grid>
+                            </Grid>
                     </Grid>
                     <Button x:Name="btnLogin" Content="Đăng Nhập" Height="50" Width="180" FontSize="16"
                             HorizontalAlignment="Center" Margin="0,20" Click="btnLogin_Click" />
@@ -95,10 +103,10 @@
                     <Grid Width="320">
                         <Label Content="Bạn chưa có tài khoản ? " FontSize="16" 
                                FontWeight="SemiBold" HorizontalAlignment="Left"  
-                               VerticalAlignment="Center" Margin="20,0,0,0"></Label>
+                               VerticalAlignment="Center" Margin="30,0,0,0"></Label>
                         <Button Width="120" Background="Transparent" BorderThickness="0" 
                                 VerticalAlignment="Center" HorizontalAlignment="Right" Content="Đăng Ký" 
-                                FontSize="16" FontWeight="Bold" Foreground="Red" Margin="0,0,10,0">
+                                FontSize="16" FontWeight="Bold" Foreground="Red" Margin="0,0,20,0" Click="btnSignUp_Click">
                         </Button>
 
                     </Grid>
@@ -106,14 +114,13 @@
             </Border>
 
             <StackPanel Grid.Row="1">
-                <Label  Content="- Đăng Nhập -" HorizontalAlignment="Center" Margin="10,0,0,10" Width="105" Foreground="White" FontSize="15" FontWeight="Medium" />
+                    <Label  Content="- Đăng Nhập -" HorizontalAlignment="Center" Margin="0,0,0,10" Width="105" Foreground="White" FontSize="15" FontWeight="Medium" />
                 <Grid Width="200">
                     <fa:ImageAwesome  Icon="Brands_SquareYoutube" PrimaryColor="{StaticResource BackgroundLighter}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="40" Height="40" Margin="15,10,0,0"/>
                     <fa:ImageAwesome  Icon="Brands_SquareFacebook"  PrimaryColor="{StaticResource BackgroundLighter}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Margin="0,10,0,0"/>
-                    <fa:ImageAwesome  Icon="Brands_SquareGooglePlus" PrimaryColor="{StaticResource BackgroundLighter}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="40" Height="40" Margin="0,10,15,0"/>
+                        <fa:ImageAwesome  Icon="Brands_SquareGooglePlus" PrimaryColor="{StaticResource BackgroundLighter}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="40" Height="40" Margin="0,10,15,0"/>
 
-
-                </Grid>
+                    </Grid>
 
             </StackPanel>
                 
