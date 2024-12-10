@@ -75,6 +75,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="UserControls\UcForgotPass.xaml.cs">
+      <DependentUpon>UcForgotPass.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\TextHolder.xaml.cs">
       <DependentUpon>TextHolder.xaml</DependentUpon>
     </Compile>
@@ -96,6 +99,12 @@
     <Compile Include="UserControls\UcHome.xaml.cs">
       <DependentUpon>UcHome.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UcSignUp.xaml.cs">
+      <DependentUpon>UcSignUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UcUpdatePass.xaml.cs">
+      <DependentUpon>UcUpdatePass.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -113,6 +122,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserControls\UcForgotPass.xaml">
     <Page Include="Library\CustomStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -133,6 +143,14 @@
     </Page>
     <Page Include="UserControls\UcControlBar2.xaml" />
     <Page Include="UserControls\UcHome.xaml" />
+    <Page Include="UserControls\UcSignUp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UcUpdatePass.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -163,6 +181,13 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resource\bg-login2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\mail2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\salary.png" />
+    <Resource Include="Resource\wallet.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.5.1.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.5.1.0\build\MaterialDesignThemes.targets')" />

@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="GUI.UserControls.UcUpdatePass"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:fa="http://schemas.fontawesome.com/icons/svg"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:GUI.UserControls"
+             mc:Ignorable="d" 
+             x:Name="VUpdatePass">
+
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="36"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--Thanh Contrlbar-->
+            <local:UcControlBar 
+            Grid.Row="0" 
+            MinHeight="{Binding MinHeight_ucControlbar, Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}"
+            VerticalAlignment="Center"
+            Tag="{Binding Tag, ElementName=VUpdatePass}" 
+            Margin="0,10,0,0">
+            </local:UcControlBar>
+
+            <Grid Grid.Row="1">
+                <Grid.Background>
+                    <ImageBrush ImageSource="../Resource/bg-login2.jpg" Stretch="UniformToFill"/>
+                </Grid.Background>
+                
+
+                <Border Background="{StaticResource BackgroundLight}" BorderBrush="{StaticResource TextPrimary}" BorderThickness="1" 
+                    Grid.Row="0" Width="600" Height="560" CornerRadius="20" HorizontalAlignment="Center">
+                    <StackPanel>
+
+                        <Label Content="Cap nhap mat khau" HorizontalAlignment="Center" Margin="0,30,0,0" FontSize="32" FontWeight="Bold" Foreground="{StaticResource TextPrimary}"/>
+                        <Label Content="SignUp to continue to WebkitX " HorizontalAlignment="Center"  FontSize="16" Foreground="{StaticResource TextPrimary}" Grid.Column="1"/>
+
+
+
+                        <local:TextHolder x:Name="txtPassOld" Width="500" Margin="0,20,0,0" PlaceHolder="Mat khau cu" IsPass="True"/>
+                        <local:TextHolder x:Name="txtPassNew"  Width="500" Margin="0,15,0,0" PlaceHolder="mat khau moi" IsPass="True"/>
+
+                        <Grid Width="30" Height="120" Margin="75,-120,0,0" HorizontalAlignment="Left">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30px"/>
+                                <RowDefinition Height="*"/>
+
+                            </Grid.RowDefinitions>
+
+                            <fa:ImageAwesome Icon="Regular_Envelope" PrimaryColor="{StaticResource TextPrimary}" Width="25" Height="25" HorizontalAlignment="Left"  Grid.Row="0" />
+                            <fa:ImageAwesome Icon="Solid_Lock" PrimaryColor="{StaticResource TextPrimary}" Width="25" Height="25" HorizontalAlignment="Left" Margin="0,30,0,0" Grid.Row="1"/>
+                        </Grid>
+
+
+                        <Grid Width="250" Margin="0,15">
+
+                            <CheckBox Content="Tôi đồng ý với các điều khoản" HorizontalAlignment="Center" FontSize="16" VerticalAlignment="Center" Foreground="{StaticResource TextSecondary}" />
+
+
+                        </Grid>
+                        <Button x:Name="btnUpdatePass" Content="Cap nhap" Height="50" Width="180" FontSize="16"
+                        HorizontalAlignment="Center" Margin="0,20" Click="btnUpdatePass_Click" />
+
+                        <Grid Width="320">
+                            <Label Content="Bạn đã có tài khoản ? " FontSize="16" 
+                           FontWeight="SemiBold" HorizontalAlignment="Left"  
+                           VerticalAlignment="Center" Margin="30,0,0,0"></Label>
+                            <Button Width="120" Background="Transparent" BorderThickness="0" 
+                            VerticalAlignment="Center" HorizontalAlignment="Right" Content="Đăng Nhập" 
+                            FontSize="16" FontWeight="Bold" Foreground="Red" Margin="0,0,20,0" Click="btnLogin_Click">
+                            </Button>
+
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+               
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

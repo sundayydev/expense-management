@@ -7,7 +7,7 @@ namespace GUI.View
    {
       public static int YesNo = 1;
       public static int OK = 0;
-      
+      public static int show =0;
       public DialogCustoms()
       {
          InitializeComponent();
@@ -23,10 +23,16 @@ namespace GUI.View
             {
                BtnOK.Visibility = Visibility.Hidden;
             }
-            else
+            else if(mode == OK) 
             {
                BtnYes.Visibility = Visibility.Hidden;
                BtnNo.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                BtnYes.Visibility = Visibility.Hidden;
+                BtnNo.Visibility = Visibility.Hidden;
+                BtnOK.Visibility = Visibility.Hidden;
             }
          }
          catch (Exception ex)
