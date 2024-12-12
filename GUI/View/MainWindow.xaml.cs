@@ -17,6 +17,8 @@ namespace GUI
         private UcHome _ucHome;
         private UcAccount _ucAccount;
         private UcRemind _ucRemind;
+        private UcCategory _ucCategory;
+        private UcRecipient _ucRecipient;
 
         public MainWindow()
         {
@@ -52,11 +54,19 @@ namespace GUI
                     ContentDisplayMain.Content = _ucHome;
                     break;
                 case "BtnCategory":
+                    _ucCategory = new UcCategory();
+                    ContentDisplayMain.Content = _ucCategory;
                     break;
                 case "BtnExpense":
                     break;
                 case "BtnIncome":
-                    break;  
+                    break;
+                case "BtnRecipient":
+                    _ucRecipient = new UcRecipient();
+                    ContentDisplayMain.Content = _ucRecipient;
+                    break;
+                case "BtnLoans":
+                    break;
                 case "BtnStatistical":
                     break;
                 case "BtnRemind":
@@ -77,6 +87,8 @@ namespace GUI
             BtnExpense.Background = bgTransparent;
             BtnIncome.Background = bgTransparent;
             BtnStatistical.Background = bgTransparent;
+            BtnRecipient.Background = bgTransparent;
+            BtnLoans.Background = bgTransparent;
             BtnRemind.Background = bgTransparent;
             BtnNotification.Background = bgTransparent;
         }

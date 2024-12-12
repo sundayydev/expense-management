@@ -78,7 +78,9 @@
                     <uc:UcButtonIcon x:Name="BtnCategory" Icon="Brands_Dropbox" Text="Phân Loại" UcButtonIconClick="Btn_OnClick"/>
                     <uc:UcButtonIcon x:Name="BtnExpense" Icon="Solid_MoneyBill" Text="Chi Tiêu" UcButtonIconClick="Btn_OnClick"/>
                     <uc:UcButtonIcon x:Name="BtnIncome" Icon="Solid_Coins" Text="Thu Nhâp" UcButtonIconClick="Btn_OnClick"/>
+                    <uc:UcButtonIcon x:Name="BtnRecipient" Icon="Solid_UserGroup" Text="Người Nhận" UcButtonIconClick="Btn_OnClick"/>
                     <uc:UcButtonIcon x:Name="BtnStatistical" Icon="Solid_ChartSimple" Text="Thống Kê" UcButtonIconClick="Btn_OnClick"/>
+                    <uc:UcButtonIcon x:Name="BtnLoans" Icon="Solid_MoneyCheckDollar" Text="Mượn Nợ" UcButtonIconClick="Btn_OnClick"/>
                     <uc:UcButtonIcon x:Name="BtnRemind" Icon="Solid_ClockRotateLeft" Text="Nhắc Nhở" UcButtonIconClick="Btn_OnClick"/>
                     <uc:UcButtonIcon x:Name="BtnNotification" Icon="Solid_Bell" Text="Thông Báo" UcButtonIconClick="Btn_OnClick"/>
                 </StackPanel>
@@ -132,8 +134,22 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     
-                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
-                        <!-- TODO: Chưa biết nên làm gì -->
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" 
+                                HorizontalAlignment="Left">
+                        <Button Height="40" Width="40" VerticalAlignment="Center"
+                                HorizontalAlignment="Left" Margin="10" Padding="0"
+                                Background="{StaticResource BackgroundLightest}"
+                                BorderBrush="{StaticResource BackgroundTransparent}"
+                        >
+                            <fa:ImageAwesome Icon="Solid_ArrowLeft" Height="25" Width="25" PrimaryColor="{StaticResource BackgroundPrimary}"/>
+                        </Button>
+                        <Button Height="40" Width="40" VerticalAlignment="Center"
+                                HorizontalAlignment="Left" Margin="10" Padding="0"
+                                Background="{StaticResource BackgroundLightest}"
+                                BorderBrush="{StaticResource BackgroundTransparent}"
+                        >
+                            <fa:ImageAwesome Icon="Solid_ArrowRight" Height="25" Width="25" PrimaryColor="{StaticResource BackgroundPrimary}"/>
+                        </Button>
                     </StackPanel>
                     
                     <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
@@ -186,7 +202,6 @@
                     <ContentControl x:Name="ContentDisplayMain"
                                     Width="auto"
                                     Height="auto">
-                     <uc:UcHome />
                     </ContentControl>
                 </Grid>
             </Grid>

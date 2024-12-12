@@ -75,6 +75,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="UserControls\UcCardRemind.xaml.cs">
+      <DependentUpon>UcCardRemind.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UcCategory.xaml.cs">
+      <DependentUpon>UcCategory.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UcForgotPass.xaml.cs">
       <DependentUpon>UcForgotPass.xaml</DependentUpon>
     </Compile>
@@ -99,7 +105,12 @@
     <Compile Include="UserControls\UcHome.xaml.cs">
       <DependentUpon>UcHome.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\UcRemind.xaml.cs" />
+    <Compile Include="UserControls\UcRecipient.xaml.cs">
+      <DependentUpon>UcRecipient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UcRemind.xaml.cs">
+      <DependentUpon>UcRemind.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UcSignUp.xaml.cs">
       <DependentUpon>UcSignUp.xaml</DependentUpon>
     </Compile>
@@ -123,7 +134,19 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Library\CustomCalendar.xaml" />
-    <Page Include="UserControls\UcForgotPass.xaml"/>
+    <Page Include="Library\CustomDataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UcCardRemind.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UcCategory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UcForgotPass.xaml" />
     <Page Include="Library\CustomStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -144,6 +167,10 @@
     </Page>
     <Page Include="UserControls\UcControlBar2.xaml" />
     <Page Include="UserControls\UcHome.xaml" />
+    <Page Include="UserControls\UcRecipient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\UcRemind.xaml" />
     <Page Include="UserControls\UcSignUp.xaml">
       <SubType>Designer</SubType>

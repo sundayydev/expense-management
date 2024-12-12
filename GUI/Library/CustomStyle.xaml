@@ -2,7 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:fa="http://schemas.fontawesome.com/icons/svg"
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
->
+
+    xmlns:local="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf">
     
     <!--Custom TextBox-->    
     <Style x:Key="CustomStyleTextBox" 
@@ -37,7 +38,40 @@
             </DataTrigger>
         </Style.Triggers>
     </Style>
-    
+
+    <!--Custom TextBox-->
+    <Style x:Key="CustomStylePasswordBox" 
+           TargetType="{x:Type PasswordBox}"
+           >
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="FontWeight" Value="Regular" />
+        <Setter Property="FontSize" Value="16" />
+
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding FontSize ,ElementName= title}" Value="12">
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard SpeedRatio="10">
+                            <DoubleAnimation Storyboard.TargetProperty="FontSize" To="18"/>
+                            <ThicknessAnimation Storyboard.TargetProperty="Margin" To="0 10 0 0"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </DataTrigger.EnterActions>
+
+                <DataTrigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard SpeedRatio="10">
+                            <DoubleAnimation Storyboard.TargetProperty="FontSize" To="15" />
+                            <ThicknessAnimation Storyboard.TargetProperty="Margin" To="0" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </DataTrigger.ExitActions>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
     <!-- Custom Button Navigation -->
     <Style x:Key="CustomButtonNavigation" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
@@ -70,7 +104,7 @@
         <Setter Property="Width" Value="25"/> 
         <Setter Property="Height" Value="25"/> 
         <Setter Property="Margin" Value="0 3 0 0"/> 
-        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}"/> 
+        <Setter Property="PrimaryColor" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}"/> 
     </Style>
     
     <!-- Custom Calendar -->
@@ -108,6 +142,70 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
-    
+
+    <Style x:Key="CustomStyleDataGrid" TargetType="DataGrid">
+        <!-- Make the border and grid lines a little less imposing -->
+        <Setter Property="BorderBrush" Value="#DDDDDD" />
+        <Setter Property="HorizontalGridLinesBrush" Value="#DDDDDD" />
+        <Setter Property="VerticalGridLinesBrush" Value="#DDDDDD" />
+
+        <Setter Property="RowStyle">
+            <Setter.Value>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <!-- Highlight a grid row as the mouse passes over -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="LightCyan" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="CellStyle">
+            <Setter.Value>
+                <Style TargetType="DataGridCell">
+                    <Style.Triggers>
+                        <!-- Highlight selected rows -->
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#ff66ccff" />
+                            <Setter Property="BorderBrush" Value="Transparent" />
+                            <Setter Property="Foreground" Value="Black" />
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="Background" Value="#ff66ccff" />
+                            <Setter Property="BorderBrush" Value="Black" />
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="Foreground" Value="Black" />
+                        </Trigger>
+                    </Style.Triggers>
+                    <!-- Add some padding around the contents of a cell -->
+                    <Setter Property="Padding" Value="4,3,4,3" />
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="DataGridCell">
+                                <Border Padding="{TemplateBinding Padding}" 
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            Background="{TemplateBinding Background}">
+                                    <ContentPresenter />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="FocusVisualStyle">
+                        <Setter.Value>
+                            <Style TargetType="Control">
+                                <Setter Property="BorderBrush" Value="Transparent" />
+                            </Style>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
 </ResourceDictionary>
