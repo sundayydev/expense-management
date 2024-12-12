@@ -26,7 +26,13 @@
             </Border>
             
             <Border Grid.Column="1" CornerRadius="0 10 10 0" Background="{StaticResource BgGradientMistyPurple}">
-                
+                <StackPanel Margin="20">
+                    <local:UcCardRemind />
+                    <local:UcCardRemind />
+                    <local:UcCardRemind />
+                    <local:UcCardRemind />
+                    <local:UcCardRemind />
+                </StackPanel>
             </Border>
         </Grid>
     </Border>

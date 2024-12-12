@@ -18,6 +18,7 @@
                 <ResourceDictionary Source="Library/Colors.xaml" />
                 <ResourceDictionary Source="Library/CustomStyle.xaml" />
                 <ResourceDictionary Source="Library/CustomCalendar.xaml"/>
+                <ResourceDictionary Source="Library/CustomDataGrid.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
