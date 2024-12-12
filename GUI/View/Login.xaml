@@ -44,7 +44,7 @@
             
             <Grid Grid.Row="1">
                 <Grid.Background>
-                    <ImageBrush ImageSource="../Resource/bg-login2.jpg"/>
+                    <ImageBrush ImageSource="../Resource/bg-login3.jpg"/>
                 </Grid.Background>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -55,7 +55,7 @@
                         Grid.Row="0" Width="600" Height="500" CornerRadius="20" HorizontalAlignment="Center" Margin="0,30,0,0">
                 <StackPanel>
 
-                    <Label Content="Let's Get Started" HorizontalAlignment="Center" Margin="0,30,0,0" FontSize="32" FontWeight="Bold" Foreground="{StaticResource TextPrimary}"/>
+                        <Label Content="Let's Get Started" HorizontalAlignment="Center" Margin="0,30,0,0" FontSize="32" FontWeight="Bold" Foreground="{StaticResource TextPrimary}"/>
                     <Label Content="Login to continue to WebkitX " HorizontalAlignment="Center"  FontSize="16" Foreground="{StaticResource TextPrimary}" Grid.Column="1"/>
 
 
@@ -69,36 +69,35 @@
                         </Grid.RowDefinitions>
 
 
-                        <fa:ImageAwesome Icon="Regular_Envelope" PrimaryColor="{StaticResource TextPrimary}" Width="25" Height="25" HorizontalAlignment="Left"  Grid.Column="0" />
+                            <fa:ImageAwesome Icon="Regular_Envelope" PrimaryColor="{StaticResource TextBuleBold}" Width="25" Height="25" HorizontalAlignment="Left"  Grid.Column="0" />
 
 
-                        <fa:ImageAwesome Icon="Solid_Lock" PrimaryColor="{StaticResource TextPrimary}" Width="25" Height="25" HorizontalAlignment="Left" Grid.Column="1" Margin="0,25,0,0" Grid.Row="1"/>
+                            <fa:ImageAwesome Icon="Solid_Lock" PrimaryColor="{StaticResource TextBuleBold}" Width="25" Height="25" HorizontalAlignment="Left" Grid.Column="1" Margin="0,25,0,0" Grid.Row="1"/>
                     </Grid>
 
 
-                    <Grid Width="500" Margin="0,15">
+                    <Grid Width="525" Margin="0,15">
 
-                        <CheckBox Content="Ghi Nhớ Mật Khẩu" HorizontalAlignment="Left" FontSize="16" VerticalAlignment="Center" Foreground="{StaticResource TextSecondary}" />
+                        <CheckBox Content="Ghi Nhớ Mật Khẩu" HorizontalAlignment="Left" FontSize="16" VerticalAlignment="Center" 
+                                  Foreground="{StaticResource TextBuleBold}" Margin="10,0,0,0" Background="{StaticResource TextBuleBold}" />
 
                         <Grid Width="200" HorizontalAlignment="Right">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="85" />
                                 <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="1.4*" />
                             </Grid.ColumnDefinitions>
-                            <fa:ImageAwesome Icon="Solid_Link" PrimaryColor="{StaticResource TextPrimary}" 
+                                <fa:ImageAwesome Icon="Solid_Link" PrimaryColor="{StaticResource TextBuleBold}" 
                                              VerticalAlignment="Center" Width="20" Height="20"  HorizontalAlignment="Right" 
                                              Grid.Column="0"/>
-                            <TextBlock Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16" Foreground="{StaticResource BackgroundDanger}" FontWeight="SemiBold"> 
-                                <Hyperlink x:Name="myLink" NavigateUri="https://begincodingnow.com/wpf-hyperlinks/" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None" >
-                                    Quên mật khẩu
-                                </Hyperlink>
-                            </TextBlock>
+                                <Button Grid.Column="1" Content="Quên mật khẩu" BorderThickness="0" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                        Background="Transparent" Foreground="{StaticResource TextBuleBold}" Padding="5" Click="btnForgotPass_Click">
+                                </Button>
                                
 
                             </Grid>
                     </Grid>
-                    <Button x:Name="btnLogin" Content="Đăng Nhập" Height="50" Width="180" FontSize="16"
-                            HorizontalAlignment="Center" Margin="0,20" Click="btnLogin_Click" />
+                    <Button x:Name="btnLogin" Content="Đăng Nhập" Height="50" Width="180" FontSize="16" BorderThickness="0"
+                            HorizontalAlignment="Center" Margin="0,20" Click="btnLogin_Click" Background="{StaticResource BackgroundPrimary}" />
 
                     <Grid Width="320">
                         <Label Content="Bạn chưa có tài khoản ? " FontSize="16" 

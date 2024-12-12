@@ -27,7 +27,7 @@ namespace GUI.UserControls
 
         private void btnSignUp_Click(object sender, RoutedEventArgs e)
         {
-          UcUpdatePass f = new UcUpdatePass();
+            UcUpdatePass f = new UcUpdatePass();
             this.Content = f;
             
 
