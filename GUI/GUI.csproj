@@ -45,6 +45,12 @@
     <Reference Include="FontAwesome6.Svg.Net, Version=2.5.1.0, Culture=neutral, PublicKeyToken=150287d219411f04, processorArchitecture=MSIL">
       <HintPath>..\packages\FontAwesome6.Svg.2.5.1\lib\net472\FontAwesome6.Svg.Net.dll</HintPath>
     </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=3.1.0.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.3.1.0\lib\net462\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -107,6 +113,11 @@
     </Compile>
     <Compile Include="UserControls\UcIncome.xaml.cs">
       <DependentUpon>UcIncome.xaml</DependentUpon>
+    <Compile Include="UserControls\UcLiveChart.xaml.cs">
+      <DependentUpon>UcLiveChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UcPieChart.xaml.cs">
+      <DependentUpon>UcPieChart.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UcRecipient.xaml.cs">
       <DependentUpon>UcRecipient.xaml</DependentUpon>
@@ -116,6 +127,9 @@
     </Compile>
     <Compile Include="UserControls\UcSignUp.xaml.cs">
       <DependentUpon>UcSignUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UcSpend.xaml.cs">
+      <DependentUpon>UcSpend.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UcUpdatePass.xaml.cs">
       <DependentUpon>UcUpdatePass.xaml</DependentUpon>
@@ -136,6 +150,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Library\CusBorderTran.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Library\CustomCalendar.xaml" />
     <Page Include="Library\CustomDataGrid.xaml">
       <SubType>Designer</SubType>
@@ -170,7 +188,13 @@
     </Page>
     <Page Include="UserControls\UcControlBar2.xaml" />
     <Page Include="UserControls\UcHome.xaml" />
+
     <Page Include="UserControls\UcIncome.xaml">
+    <Page Include="UserControls\UcLiveChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UcPieChart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -180,6 +204,10 @@
     </Page>
     <Page Include="UserControls\UcRemind.xaml" />
     <Page Include="UserControls\UcSignUp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UcSpend.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -224,6 +252,9 @@
   <ItemGroup>
     <Resource Include="Resource\salary.png" />
     <Resource Include="Resource\wallet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\bg-login3.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.5.1.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.5.1.0\build\MaterialDesignThemes.targets')" />
