@@ -27,7 +27,10 @@
     <SolidColorBrush x:Key="BackgroundWhite" Color="#ffffff"/> 
     <SolidColorBrush x:Key="BackgroundTransparent" Color="Transparent"/>
     <SolidColorBrush x:Key="BackgroundLight" Color="#e4e6ef" />
-    <SolidColorBrush x:Key="BackgroundLighter" Color="#ebedf3"/>
+    <SolidColorBrush x:Key="BackgroundLighter" Color="#FBFBFB"/>
+    <SolidColorBrush x:Key="BackgroundRed" Color="#FF4545"/>
+    <SolidColorBrush x:Key="BackgroundBule" Color="#133E87"/>
+    <SolidColorBrush x:Key="BackgroundGree" Color="#219B9D"/>
     <SolidColorBrush x:Key="BackgroundLightest" Color="#f3f6f9"/>
 
     <!--2. Gradient colors--> 
@@ -63,10 +66,15 @@
         <GradientStop Color="#1D976C" Offset="0.0" />
         <GradientStop Color="#93F9B9" Offset="1.0" />
     </LinearGradientBrush>
-    <LinearGradientBrush x:Key="BgGradientBlueCus" StartPoint="0,0" EndPoint="1,1">
-        <GradientStop Color="#00d2ff" Offset="0.0" />
-        <GradientStop Color="#928DAB" Offset="1.0" />
+    <LinearGradientBrush x:Key="BgGradientBlueCus" StartPoint="0.1,0.2" EndPoint="1,1">
+        <GradientStop Color="#61BAFF" Offset="0.0" />
+        <GradientStop Color="#A6EFFD" Offset="0.901" />
     </LinearGradientBrush>
+    <LinearGradientBrush x:Key="BgGradientCyanPurple" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#90c1fc" Offset="0.3" />
+        <GradientStop Color="#f1dee4" Offset="0.7" />
+    </LinearGradientBrush>
+    
 
     <!--3. Border colors-->
     <SolidColorBrush x:Key="BorderPrimary" Color="#0052cc" />

@@ -32,8 +32,10 @@
                         </Grid.ColumnDefinitions>
 
                         <Grid Grid.Column="0">
-                            <Button x:Name="btnAdd" Height="40" Width="120" HorizontalAlignment="Left" 
-                                Margin="10 0 0 0" Background="#51829B" BorderBrush="Transparent" Click="btnAdd_Click" >
+                            <Button Height="40" Width="120" HorizontalAlignment="Left" 
+                                    Margin="10 0 0 0" Background="#51829B" BorderBrush="Transparent"
+                                    x:Name="BtnAddExpense" Click="BtnAddExpense_Click"
+                                    >
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Thêm mới" Margin="0 0 5 0"/>
                                     <fa:ImageAwesome Icon="Solid_Plus" Height="15" PrimaryColor="White"/>
@@ -47,10 +49,9 @@
                                 CornerRadius="5" Padding="10 5" 
                                 Background="#fafbfd"
                                 Height="40" Width="300" >
-                                    <TextBox x:Name="txtFind" FontSize="16" Style="{StaticResource CustomStyleTextBox}" TextChanged="txtFind_TextChanged"/>
+                                    <TextBox FontSize="16" Style="{StaticResource CustomStyleTextBox}"/>
                                 </Border>
-                                <Button x:Name="btnFind" Padding="5" Margin="5 0 0 0" Height="40" 
-                                        Background="{StaticResource BackgroundLight}" BorderThickness="0">
+                                <Button Padding="5" Margin="5 0 0 0" Height="40" Background="{StaticResource BackgroundLight}" BorderThickness="0">
                                     <fa:ImageAwesome Icon="Solid_MagnifyingGlass" />
                                 </Button>
                             </StackPanel>
@@ -75,21 +76,11 @@
                         </DataGridTemplateColumn>
 
                         <!-- Character Column (Recipient Name) -->
-                        <DataGridTemplateColumn Header="Mã Chi Tiêu" Width="Auto" IsReadOnly="True">
+                        <DataGridTemplateColumn Header="Tên Sản phẩm" Width="Auto" IsReadOnly="True">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock FontWeight="Bold" Padding="5" 
                                                Text="{Binding ExpenseID}"  
-                                               VerticalAlignment="Center"
-                                               HorizontalAlignment="Center"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Mã Loại" Width="Auto" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock FontWeight="Bold" Padding="5" 
-                                               Text="{Binding CategoryID}"  
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Center"/>
                                 </DataTemplate>
@@ -137,15 +128,14 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Button x:Name="btnEdit" Padding="6" Margin="0 0 5 0" 
+                                        <Button Padding="6" Margin="0 0 5 0" 
                                             Background="{StaticResource BackgroundSuccess}"
-                                            BorderBrush="{StaticResource BackgroundTransparent}" >
+                                            BorderBrush="{StaticResource BackgroundTransparent}">
                                             <fa:ImageAwesome Icon="Regular_PenToSquare" PrimaryColor="#FBFBFB"/>
                                         </Button>
-                                        <Button x:Name="btnDelete" Padding="6" Margin="5 0 0 0" 
+                                        <Button Padding="6" Margin="5 0 0 0" 
                                             Background="{StaticResource BackgroundDanger}"
-                                            BorderBrush="{StaticResource BackgroundTransparent}" 
-                                            Click="btnDelete_Click">
+                                            BorderBrush="{StaticResource BackgroundTransparent}">
                                             <fa:ImageAwesome Icon="Solid_Trash" PrimaryColor="#FBFBFB"/>
                                         </Button>
                                     </StackPanel>

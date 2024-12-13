@@ -7,9 +7,11 @@
     <Application.Resources>
         <ResourceDictionary>
             <PathGeometry x:Key="showPass"
-                      Figures="M2,12C2,12,6,5,12,5C18,5,22,12,22,12C22,12,18,19,12,19C6,19,2,12,2,12ZM4.22,3.22L3.81,3.63L6.11,5.94C5.08,
-                      7.5,4.35,9.36,4,11.5L4.81,12.19C5.43,12.05,6.12,12,6.83,12C8.33,
-                      12,9.78,12.39,11.03,13.03L15.36,17.36L15.77,16.95C13.82,15.74,11.51,15,9.17,15C8.65,15,8.13,15.05,7.63,15.15L4.22,3.22Z"/>
+                      Figures="M15 5C6.081703 5 0.32098813 14.21118 0.21679688 14.378906 A 1 1 0 0 0 0 15 A 1 1 0 0 0 0.16210938 15.544922 A 1 1 0 0 0 
+                          0.16601562 15.550781C0.18320928 15.586261 5.0188313 25 15 25C24.938822 25 29.767326 15.678741 29.826172 15.564453 A 1 1 0 0 0 
+                          29.837891 15.544922 A 1 1 0 0 0 30 15 A 1 1 0 0 0 29.785156 14.380859 A 1 1 0 0 0 29.783203 14.378906C29.679012 14.21118 23.918297 
+                          5 15 5 z M 15 8C18.866 8 22 11.134 22 15C22 18.866 18.866 22 15 22C11.134 22 8 18.866 8 15C8 11.134 11.134 8 15 8 z M 15 12 A 3 3 
+                          0 0 0 12 15 A 3 3 0 0 0 15 18 A 3 3 0 0 0 18 15 A 3 3 0 0 0 15 12 z"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/materialdesign2.defaults.xaml" />
@@ -19,6 +21,7 @@
                 <ResourceDictionary Source="Library/CustomStyle.xaml" />
                 <ResourceDictionary Source="Library/CustomCalendar.xaml"/>
                 <ResourceDictionary Source="Library/CustomDataGrid.xaml"/>
+                <ResourceDictionary Source="Library/CusBorderTran.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
