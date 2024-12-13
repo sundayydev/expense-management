@@ -19,6 +19,7 @@ namespace GUI
         private UcRemind _ucRemind;
         private UcCategory _ucCategory;
         private UcRecipient _ucRecipient;
+        private UcIncome _ucIncome;
 
         public MainWindow()
         {
@@ -60,6 +61,8 @@ namespace GUI
                 case "BtnExpense":
                     break;
                 case "BtnIncome":
+                    _ucIncome = new UcIncome();
+                    ContentDisplayMain.Content = _ucIncome;
                     break;
                 case "BtnRecipient":
                     _ucRecipient = new UcRecipient();

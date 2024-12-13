@@ -105,6 +105,9 @@
     <Compile Include="UserControls\UcHome.xaml.cs">
       <DependentUpon>UcHome.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UcIncome.xaml.cs">
+      <DependentUpon>UcIncome.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UcRecipient.xaml.cs">
       <DependentUpon>UcRecipient.xaml</DependentUpon>
     </Compile>
@@ -167,6 +170,10 @@
     </Page>
     <Page Include="UserControls\UcControlBar2.xaml" />
     <Page Include="UserControls\UcHome.xaml" />
+    <Page Include="UserControls\UcIncome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\UcRecipient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
