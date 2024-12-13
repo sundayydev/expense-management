@@ -1,0 +1,31 @@
+﻿<Window x:Class="GUI.View.WFormExpense"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI.View"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:uc="clr-namespace:GUI.UserControls"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        AllowsTransparency="True" 
+        WindowStartupLocation="CenterScreen"
+        Title="WFormExpense" Height="450" Width="800"
+
+        >
+    <Window.Clip>
+        <RectangleGeometry Rect="0,0,800,450" RadiusX="10" RadiusY="10"/>
+    </Window.Clip>
+    <Border BorderBrush="#D9EAFD" BorderThickness="2" CornerRadius="10">
+        <Grid Background="{StaticResource BackgroundTransparent}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <uc:UcControlBar2 Grid.Row="0" MinHeight="{Binding MinHeight_ucControlbar, Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}"
+                          Tag="{Binding Title, ElementName=dialogcustom}"  Opacity="0.8" VerticalAlignment="Center">
+            </uc:UcControlBar2>
+        </Grid>
+    </Border>
+
+</Window>
