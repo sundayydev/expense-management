@@ -37,6 +37,9 @@ namespace GUI
             this.Hide();
             f.ShowDialog();
             this.Close();
+
+
+
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -50,13 +53,6 @@ namespace GUI
         private void btnSignUp_Click(object sender, RoutedEventArgs e)
         {
             UcSignUp f = new UcSignUp();
-            this.Content = f;
-
-        }
-
-        private void btnForgotPass_Click(object sender, RoutedEventArgs e)
-        {
-            UcForgotPass f = new UcForgotPass();
             this.Content = f;
 
         }

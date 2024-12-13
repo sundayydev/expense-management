@@ -31,7 +31,7 @@
                         <BeginStoryboard>
                             <Storyboard SpeedRatio="10">
                                 <DoubleAnimation Storyboard.TargetProperty="FontSize" To="12" />
-                                <ThicknessAnimation Storyboard.TargetProperty="Margin" To="3 0 0 25" />
+                                <ThicknessAnimation Storyboard.TargetProperty="Margin" To="0 0 0 25" />
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.ExitActions>
@@ -46,7 +46,6 @@
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="FontWeight" Value="Medium" />
             <Setter Property="FontSize" Value="12" />
-            <Setter Property="Foreground" Value="{StaticResource TextBuleBoldMax}" />
             
 
             <Style.Triggers>
@@ -54,7 +53,7 @@
                     <DataTrigger.EnterActions>
                         <BeginStoryboard>
                             <Storyboard SpeedRatio="10">
-                                <DoubleAnimation Storyboard.TargetProperty="FontSize" To="16"/>
+                                <DoubleAnimation Storyboard.TargetProperty="FontSize" To="18"/>
                                 <ThicknessAnimation Storyboard.TargetProperty="Margin" To="0 10 0 0"/>
                             </Storyboard>
                         </BeginStoryboard>
@@ -81,19 +80,20 @@
         </Style>
 
         <Style  TargetType="{x:Type PasswordBox}">
+
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="FontWeight" Value="Medium" />
             <Setter Property="FontSize" Value="12" />
-            <Setter Property="Foreground" Value="{StaticResource TextBuleBoldMax}" />
             
+
             <Style.Triggers>
                 <DataTrigger Binding="{Binding FontSize ,ElementName= title}" Value="12">
                     <DataTrigger.EnterActions>
                         <BeginStoryboard>
                             <Storyboard SpeedRatio="10">
-                                <DoubleAnimation Storyboard.TargetProperty="FontSize" To="16"/>
+                                <DoubleAnimation Storyboard.TargetProperty="FontSize" To="18"/>
                                 <ThicknessAnimation Storyboard.TargetProperty="Margin" To="0 10 0 0"/>
                             </Storyboard>
                         </BeginStoryboard>
@@ -148,7 +148,6 @@
         Background="{StaticResource BackgroundLight}"
         BorderBrush="{StaticResource BorderPrimary}" 
         BorderThickness="1">
-        
         <Border.Effect>
             <DropShadowEffect BlurRadius="23" ShadowDepth="5" Direction="270" Color="WhiteSmoke"></DropShadowEffect>
         </Border.Effect>

@@ -4,231 +4,165 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:GUI.UserControls"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"
-             d:DesignHeight="700" d:DesignWidth="1200"
+             d:DesignHeight="900" d:DesignWidth="1200"
              Background="White">
-
-    <UserControl.Resources>
-        <Style x:Key="HoverStyle" TargetType="Border">
-            <Style.Setters>
-                <Setter Property="materialDesign:ElevationAssist.Elevation" Value="Dp0"/>
-                <Setter Property="Effect">
-                    <Setter.Value>
-                        <DropShadowEffect Color="Gray" Direction="270" ShadowDepth="2" Opacity="0.5" />
-                    </Setter.Value>
-                </Setter>
-            </Style.Setters>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="materialDesign:ElevationAssist.Elevation" Value="Dp24"/>
-                    <Setter Property="Background" Value="{StaticResource BgGradientBlueCus}"/>
-                    <Setter Property="Effect">
-                        <Setter.Value>
-                            <DropShadowEffect Color="gray" Direction="270" ShadowDepth="5" Opacity="0.8" />
-                        </Setter.Value>
-                    </Setter>
-                </Trigger>
-                <Trigger Property="IsMouseOver" Value="False">
-                    <Setter Property="materialDesign:ElevationAssist.Elevation" Value="Dp0"/>
-                    <Setter Property="Background" Value="SkyBlue"/>
-                    <Setter Property="Effect">
-                        <Setter.Value>
-                            <DropShadowEffect Color="Gray" Direction="270" ShadowDepth="2" Opacity="0.5" />
-                        </Setter.Value>
-                    </Setter>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </UserControl.Resources>
-
     <Grid>
+        
+
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2.5*" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="350" />
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0">
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="130"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+        
+            <Grid >
+                
+                <Label Content="View All " FontSize="16" 
+                   FontWeight="SemiBold" HorizontalAlignment="Right"  
+                   VerticalAlignment="Center" Margin="30,0,10,0"></Label>
+                <Label Content="Bạn chưa có tài khoản ? " FontSize="16" 
+                   FontWeight="SemiBold" HorizontalAlignment="Left"  
+                   VerticalAlignment="Center" Margin="30,0,0,0"></Label>
+            </Grid>
+        
 
-            <StackPanel Grid.Row="0">
-                <Grid Margin="20 5">
-                    <Label Content="View All " FontSize="16" 
-                           FontWeight="SemiBold" HorizontalAlignment="Right"  
-                           VerticalAlignment="Center" />
-                    <Label  Content="Info Card" FontSize="16" 
-                           FontWeight="SemiBold" HorizontalAlignment="Left"  
-                           VerticalAlignment="Center" />
-                </Grid>
-            </StackPanel>
+        
 
-            <StackPanel Grid.Row="1">
-                <Grid Grid.Row="1" Margin="20 5">
-                    <Grid Grid.Column="0" >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                   
+                </Grid.ColumnDefinitions>
+                <StackPanel >
+                    <Border Background="{StaticResource BackgroundBuleSky}" Width="250" Height="120" HorizontalAlignment="Center" CornerRadius="15">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="*" />
 
-                        <Grid Grid.Column="0">
-                            <StackPanel>
-                                <Border Style="{StaticResource HoverStyle}"
-                                        CornerRadius="15" materialDesign:ElevationAssist.Elevation="Dp16" Margin="10" >
+                            </Grid.ColumnDefinitions>
 
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="70" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="../Resource/mail2.png" Width="50" Height="50" 
+                                   HorizontalAlignment="Right" Margin="0,0,0,40"/>
 
-                                        <Image Grid.Column="0" Source="../Resource/wallet.png" Width="50" Height="50" 
-                                               HorizontalAlignment="Right" Margin="0,0,0,40"/>
-
-                                        <StackPanel Grid.Column="1" HorizontalAlignment="Center" Height="120" Width="auto">
-                                            <TextBlock Text="Chi Tiêu" FontSize="18" FontWeight="Bold" Foreground="White"
-                                                      HorizontalAlignment="Left" Margin="0,10,0,0" />
-                                            <TextBlock Text="2222222VND" FontSize="24" Margin="0,10,0,0" FontWeight="Bold" Foreground="White"
-                                                      HorizontalAlignment="Left" />
-                                            <TextBlock Text="All Rights Reserved." FontSize="12" Margin="0,15,30,0" Foreground="White"
-                                                      HorizontalAlignment="Left" />
-                                        </StackPanel>
-                                    </Grid>
-                                </Border>
+                            <StackPanel Grid.Column="1" HorizontalAlignment="Center" Height="120" Width="auto">
+                                <TextBlock Text="Thông Báo" FontSize="18" FontWeight="Bold" Foreground="{StaticResource BackgroundLight}"
+                                       HorizontalAlignment="Left" Margin="0,10,0,0" />
+                                <TextBlock Text="2222222VND" FontSize="24" Margin="0,10,0,0" FontWeight="Bold" Foreground="{StaticResource BackgroundLight}"
+                                       HorizontalAlignment="Left" />
+                                <TextBlock Text="All Rights Reserved." FontSize="12" Margin="0,15,30,0" Foreground="{StaticResource BackgroundLight}"
+                                       HorizontalAlignment="Left"  />
                             </StackPanel>
                         </Grid>
+                    </Border>
+                </StackPanel>
 
-                        <StackPanel Grid.Column="1">
-                            <Border Style="{StaticResource HoverStyle}"
-                                CornerRadius="15" materialDesign:ElevationAssist.Elevation="Dp16" Margin="10">
-
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="70" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-
-                                    <Image Grid.Column="0" Source="../Resource/mail2.png" Width="50" Height="50" 
-                                            HorizontalAlignment="Right" Margin="0,0,0,40"/>
-
-                                    <StackPanel Grid.Column="1" HorizontalAlignment="Center" Height="120" Width="auto">
-                                        <TextBlock Text="Thông báo" FontSize="18" FontWeight="Bold" Foreground="{StaticResource BackgroundWhite}"
-                                                 HorizontalAlignment="Left" Margin="0,10,0,0" />
-                                        <TextBlock Text="2222222VND" FontSize="24" Margin="0,10,0,0" FontWeight="Bold" Foreground="{StaticResource BackgroundWhite}"
-                                                 HorizontalAlignment="Left" />
-                                        <TextBlock Text="All Rights Reserved." FontSize="12" Margin="0,15,30,0" Foreground="{StaticResource BackgroundWhite}"
-                                                 HorizontalAlignment="Left"  />
-                                    </StackPanel>
-                                </Grid>
-                            </Border>
-                        </StackPanel>
-
-                        <StackPanel Grid.Column="2">
-                            <Border Style="{StaticResource HoverStyle}"
-                                    CornerRadius="15" materialDesign:ElevationAssist.Elevation="Dp16" Margin="10">
-
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="70" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-
-                                    <Image Grid.Column="0" Source="../Resource/salary.png" Width="50" Height="50" 
-                                       HorizontalAlignment="Right" Margin="0,0,0,40"/>
-
-                                    <StackPanel Grid.Column="1" HorizontalAlignment="Center" Height="120" Width="auto">
-                                        <TextBlock Text="Thu Nhập" FontSize="18" FontWeight="Bold" Foreground="{StaticResource BackgroundWhite}"
-                                       HorizontalAlignment="Left" Margin="0,10,0,0" />
-                                        <TextBlock Text="2222222VND" FontSize="24" Margin="0,10,0,0" FontWeight="Bold" Foreground="{StaticResource BackgroundWhite}"
-                                       HorizontalAlignment="Left" />
-                                        <TextBlock Text="All Rights Reserved." FontSize="12" Margin="0,15,30,0" Foreground="{StaticResource BackgroundWhite}"
-                                       HorizontalAlignment="Left"  />
-                                    </StackPanel>
-                                </Grid>
-                            </Border>
-                        </StackPanel>
-                    </Grid>
-                </Grid>
-            </StackPanel>
-
-            <StackPanel Grid.Row="2">
-                <Grid Margin="20 5">
-                    <Label Grid.Column="1" Content="Statisics" FontSize="16" 
-                        FontWeight="SemiBold" HorizontalAlignment="Left"  
-                        VerticalAlignment="Center" />
-
-                    <Border Width="100" HorizontalAlignment="Right" BorderThickness="0" CornerRadius="5" Background="{StaticResource BackgroundBuleSky}">
+                <StackPanel Grid.Column="1"  >
+                    <Border Background="{StaticResource BackgroundBuleSky}" Width="250" Height="120" HorizontalAlignment="Center" CornerRadius="15">
                         <Grid>
-                            <ComboBox x:Name="cmbMonth" 
-                                  Padding="5"
-                                  BorderThickness="0" Background="Transparent"
-                                  BorderBrush="Transparent" 
-                                  FontWeight="SemiBold" 
-                                  SelectionChanged="ComboBox_SelectionChanged">
-                                <ComboBox.ItemContainerStyle>
-                                    <Style TargetType="ComboBoxItem">
-                                        <Setter Property="Background" Value="Transparent" />
-                                        <Setter Property="Foreground" Value="Black" />
-                                        <!-- Màu nền khi hover -->
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="White" />
-                                            </Trigger>
-                                            <!-- Màu nền khi chọn -->
-                                            <Trigger Property="IsSelected" Value="True">
-                                                <Setter Property="Background" Value="{StaticResource BackgroundBuleSky}" />
-                                                <Setter Property="Foreground" Value="White" />
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </ComboBox.ItemContainerStyle>
-                            </ComboBox>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="*" />
+
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../Resource/wallet.png" Width="50" Height="50" 
+                   HorizontalAlignment="Right" Margin="0,0,0,40"/>
+
+                            <StackPanel Grid.Column="1" HorizontalAlignment="Center" Height="120" Width="auto">
+                                <TextBlock Text="Khoản trả" FontSize="18" FontWeight="Bold" Foreground="{StaticResource BackgroundLight}"
+                       HorizontalAlignment="Left" Margin="0,10,0,0" />
+                                <TextBlock Text="2222222VND" FontSize="24" Margin="0,10,0,0" FontWeight="Bold" Foreground="{StaticResource BackgroundLight}"
+                       HorizontalAlignment="Left" />
+                                <TextBlock Text="All Rights Reserved." FontSize="12" Margin="0,15,30,0" Foreground="{StaticResource BackgroundLight}"
+                       HorizontalAlignment="Left"  />
+                            </StackPanel>
                         </Grid>
                     </Border>
-                </Grid>
-            </StackPanel>
+                </StackPanel>
 
-            <Grid Grid.Row="3">
-                <StackPanel Margin="20 5" >
-                   <local:UcLiveChart />
+                <StackPanel Grid.Column="2">
+                    <Border Background="{StaticResource BackgroundBuleSky}" Width="250" Height="120" HorizontalAlignment="Center" CornerRadius="15">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="*" />
+
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../Resource/salary.png" Width="50" Height="50" 
+                   HorizontalAlignment="Right" Margin="0,0,0,40"/>
+
+                            <StackPanel Grid.Column="1" HorizontalAlignment="Center" Height="120" Width="auto">
+                                <TextBlock Text="Thu Nhập" FontSize="18" FontWeight="Bold" Foreground="{StaticResource BackgroundLight}"
+                       HorizontalAlignment="Left" Margin="0,10,0,0" />
+                                <TextBlock Text="2222222VND" FontSize="24" Margin="0,10,0,0" FontWeight="Bold" Foreground="{StaticResource BackgroundLight}"
+                       HorizontalAlignment="Left" />
+                                <TextBlock Text="All Rights Reserved." FontSize="12" Margin="0,15,30,0" Foreground="{StaticResource BackgroundLight}"
+                       HorizontalAlignment="Left"  />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
                 </StackPanel>
             </Grid>
+
+                
+            </Grid>
+            <Grid Grid.Row="2">
+                <Label Content="View All " FontSize="16" 
+                    FontWeight="SemiBold" HorizontalAlignment="Right"  
+                    VerticalAlignment="Center" Margin="30,0,10,0"></Label>
+                <Label Content="Bạn chưa có tài khoản ? " FontSize="16" 
+                    FontWeight="SemiBold" HorizontalAlignment="Left"  
+                    VerticalAlignment="Center" Margin="30,0,0,0"></Label>
+            </Grid>
+        
         </Grid>
 
+        
+            
+      
+
+    
+    
         <Grid Grid.Column="1" Grid.Row="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
+                <RowDefinition Height="50"/>
+               
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-
-            <StackPanel>
-                <Grid Margin="20 5">
                     <Label Content="View All " FontSize="16" 
-                   FontWeight="SemiBold" HorizontalAlignment="Right"  
-                   VerticalAlignment="Center" />
-                    <Label Content="New Activity" FontSize="16" 
-                   FontWeight="SemiBold" HorizontalAlignment="Left"  
-                   VerticalAlignment="Center"/>
-                </Grid>
-            </StackPanel>
-
-            <Grid Grid.Row="1">
-                <StackPanel >
-                    <local:UcPieChart />
-                </StackPanel>
-            </Grid>
-
+                       FontWeight="SemiBold" HorizontalAlignment="Right"  
+                       VerticalAlignment="Center" Margin="0,0,5,0"></Label>
+                    <Label Content="Bạn chưa có tài khoản ? " FontSize="16" 
+               FontWeight="SemiBold" HorizontalAlignment="Left"  
+               VerticalAlignment="Center" Margin="10,0,0,0"></Label>
+        
+             <Calendar Grid.Column="1" HorizontalAlignment="Center" Background="#FFFF" Margin="5,0,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="302" Width="330" />
         </Grid>
 
 
-        
-        
+
+
+
+
+
+
+
+
+
+
     </Grid>
+
 </UserControl>
