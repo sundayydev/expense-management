@@ -1,4 +1,5 @@
 ﻿using GUI.View;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace GUI.UserControls
         public UcForgotPass()
         {
             InitializeComponent();
-            txtPass.Text = "12345658888888888888888899999999999999999999999999999999999999999999999999999999999999";
+            
         }
 
        
@@ -53,5 +54,13 @@ namespace GUI.UserControls
             /* Login f = new Login();
              f.ShowDialog();*/
         }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            Login f = new Login();
+            f.ShowDialog();
+            
+        }
+
     }
 }

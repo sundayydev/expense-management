@@ -4,7 +4,7 @@
     <!--1.Background colors-->
     
     <!--Solid colors-->
-    <SolidColorBrush x:Key="BackgroundPrimary" Color="#0052cc" />
+    <SolidColorBrush x:Key="BackgroundPrimary" Color="#9BB8CD" />
     <SolidColorBrush x:Key="BackgroundGreen" Color="#88C273" />
     <SolidColorBrush x:Key="BackgroundSecondary" Color="#b7c1d1" />
     <SolidColorBrush x:Key="BackgroundSuccess" Color="#04a08b" />
@@ -86,4 +86,6 @@
     <SolidColorBrush x:Key="TextDanger" Color="#ff562f"/>
     <SolidColorBrush x:Key="TextDark" Color="#172b4c"/>
     <SolidColorBrush x:Key="TextWhiteMilk" Color="#FDF7F4"/>
+    <SolidColorBrush x:Key="TextBuleBold" Color="#0A5EB0"/>
+    <SolidColorBrush x:Key="TextBuleBoldMax" Color="#131842"/>
 </ResourceDictionary>
