@@ -22,14 +22,14 @@
             MinHeight="{Binding MinHeight_ucControlbar, Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}"
             VerticalAlignment="Center"
             Tag="{Binding Tag, ElementName=VForgotPass}" 
-            >
+            Margin="0,10,0,0">
             </local:UcControlBar>
 
             <Grid Grid.Row="1">
                 <Grid.Background>
                     <ImageBrush ImageSource="../Resource/bg-login2.jpg" Stretch="UniformToFill"/>
                 </Grid.Background>
-
+                
 
                 <Border Background="{StaticResource BackgroundLight}" BorderBrush="{StaticResource TextPrimary}" BorderThickness="1" 
                     Grid.Row="0" Width="600" Height="500" CornerRadius="20" HorizontalAlignment="Center">
@@ -37,7 +37,7 @@
 
                         <Label Content="Quen Mat Khau" HorizontalAlignment="Center" Margin="0,30,0,0" FontSize="32" FontWeight="Bold" Foreground="{StaticResource TextPrimary}"/>
                         <Label Content="SignUp to continue to WebkitX " HorizontalAlignment="Center"  FontSize="16" Foreground="{StaticResource TextPrimary}" Grid.Column="1"/>
-
+                      
                         <local:TextHolder x:Name="txtEmail"  Width="500" Margin="0,20,0,0" PlaceHolder="Email" />
 
                         <Grid Width="500" Height="60" Margin="0,20,0,20">
@@ -52,7 +52,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="30px"/>
                                 <RowDefinition Height="*"/>
-
+                               
                             </Grid.RowDefinitions>
 
                             <fa:ImageAwesome Icon="Regular_Envelope" PrimaryColor="{StaticResource TextPrimary}" Width="25" Height="25" HorizontalAlignment="Left"  Grid.Row="0" />
@@ -73,14 +73,16 @@
                             <Label Content="Xin hãy quay lại trang ? " FontSize="16" 
                            FontWeight="SemiBold" HorizontalAlignment="Left"  
                            VerticalAlignment="Center" Margin="20,0,0,0"></Label>
-                            <Button Width="120" Background="Transparent" BorderThickness="0" HorizontalAlignment="Left" Content="Đăng Nhập" 
-                            FontSize="16" FontWeight="Bold" Foreground="Red" Margin="180,0,0,0" Click="btnLogin_Click"/>
+                            <Button Width="120" Background="Transparent" BorderThickness="0" 
+                            VerticalAlignment="Center" HorizontalAlignment="Right" Content="Đăng Nhập" 
+                            FontSize="16" FontWeight="Bold" Foreground="Red" Margin="0,0,20,0" Click="btnForgotPass_Click">
+                            </Button>
 
                         </Grid>
                     </StackPanel>
                 </Border>
 
-
+               
             </Grid>
         </Grid>
     </Grid>
