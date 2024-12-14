@@ -1,7 +1,17 @@
 ﻿using GUI.UserControls;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace GUI.View
 {
@@ -12,7 +22,7 @@ namespace GUI.View
     {
         public Expense ExpenseData { get; set; }
         public event Action<Expense> OnExpenseAdded;
-
+        private List<Expense> Expenses = new List<Expense>();
         public WFormExpense()
         {
             InitializeComponent();
@@ -44,25 +54,36 @@ namespace GUI.View
 
             OnExpenseAdded?.Invoke(newExpense);
 
-            DialogCustoms dialog = new DialogCustoms("Bạn có muốn cập nhật dữ liệu không?", "Thông báo", DialogCustoms.YesNo);
-            if (dialog.ShowDialog() == true)
+            var findExpense = Expenses.FirstOrDefault(f => f.ExpenseID == newExpense.ExpenseID);
+
+            if (findExpense != null)
             {
-                DialogCustoms successDialog = new DialogCustoms("Cập nhật thành công", "Thông báo", DialogCustoms.Show);
-                successDialog.ShowDialog();
-                this.Close();
+                findExpense.UserID = newExpense.UserID;
+                findExpense.CategoryID = newExpense.CategoryID;
+                findExpense.RecipientID = newExpense.RecipientID;
+                findExpense.Amount = newExpense.Amount;
+                findExpense.ExpenseDate = newExpense.ExpenseDate;
+                findExpense.Note = newExpense.Note;
+
+                DialogCustoms dialog = new DialogCustoms("Cập nhật thành công!", "Thông báo", DialogCustoms.Show);
+                dialog.ShowDialog();
             }
             else
             {
-                DialogCustoms cancelDialog = new DialogCustoms("Hủy thao tác", "Thông báo", DialogCustoms.OK);
-                cancelDialog.ShowDialog();
-                this.Close();
+
+                newExpense.ExpenseID = Expenses.Count + 1; 
+                Expenses.Add(newExpense); 
+                DialogCustoms dialog = new DialogCustoms("Thêm mới thành công!", "Thông báo", DialogCustoms.Show);
+                dialog.ShowDialog();
             }
+
+            this.Close();
         }
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             DialogCustoms cancelDialog = new DialogCustoms("Hủy thao tác", "Thông báo", DialogCustoms.Show);
             cancelDialog.ShowDialog();
-            this.Close(); 
+            this.Close();
         }
     }
 }
