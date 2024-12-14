@@ -7,13 +7,14 @@
              xmlns:fa="http://schemas.fontawesome.com/icons/svg"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="1200">
+    
     <Border BorderBrush="#EEEEEE" BorderThickness="1" CornerRadius="10" Background="{StaticResource BackgroundWhite}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="120"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-
+            
             <Grid Grid.Row="0">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -22,7 +23,7 @@
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0">
-                        <TextBlock Text="Danh sách chi tiêu" FontSize="20" FontWeight="Bold"
+                        <TextBlock Text="Danh sách thu nhập" FontSize="20" FontWeight="Bold"
                            VerticalAlignment="Center" Margin="10"/>
                     </Grid>
                     <Grid Grid.Row="1">
@@ -74,14 +75,13 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <!-- ID chi tiêu -->
-                        <DataGridTemplateColumn Header="Id" Width="*"  >
+                        <DataGridTemplateColumn Header="Số ID" Width="*"  >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding IncomeId}" VerticalAlignment="Center"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        
                         <!-- Thông tin -->
                         <DataGridTemplateColumn Header="Thông tin" Width="*" >
                             <DataGridTemplateColumn.CellTemplate>
@@ -99,7 +99,14 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-
+                        <!--Ngày Nhận-->
+                        <DataGridTemplateColumn Header="Ngày thu nhập" Width="*" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding IncomeDate}" VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                         <!-- Ngày tạo -->
                         <DataGridTemplateColumn Header="Ngày tạo" Width="*" >
                             <DataGridTemplateColumn.CellTemplate>

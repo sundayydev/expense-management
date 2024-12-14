@@ -50,12 +50,12 @@ namespace GUI.UserControls
             dialog.ShowDialog();
             var dialog2 = new DialogCustoms("Bạn đã xóa thành công !", "Thông báo", DialogCustoms.OK);
             var dialog3 = new DialogCustoms("Bạn đã hủy thành công !", "Thông báo",DialogCustoms.OK);
-            if(DialogCustoms.show == DialogCustoms.OK)
+            if(DialogCustoms.Show != DialogCustoms.OK)
             {
                 Incomes.Remove(income);
                 dialog2.ShowDialog();
             }
-            else
+            else if(DialogCustoms.Show == DialogCustoms.OK)
             {
                dialog3.ShowDialog();
             }    
