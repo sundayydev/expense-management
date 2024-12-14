@@ -39,8 +39,8 @@ namespace GUI.UserControls
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
-        { 
-            var button= sender as Button;
+        {
+            var button = sender as Button;
             var income = button.DataContext as Income;
             if (income != null)
             {
@@ -52,8 +52,7 @@ namespace GUI.UserControls
                 }
             }
         }
-
-        }
+    }
     public class Income
     {
         public string IncomeId { get; set; }

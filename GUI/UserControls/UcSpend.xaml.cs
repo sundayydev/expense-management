@@ -1,5 +1,4 @@
 ﻿using GUI.View;
-using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -22,7 +21,6 @@ namespace GUI.UserControls
             dvgExpense.ItemsSource = Expenses;
         }
 
-       
         private void LoadData()
         {
             Expenses = new ObservableCollection<Expense>
@@ -35,7 +33,6 @@ namespace GUI.UserControls
             };
         }
 
-      
         private void txtFind_TextChanged(object sender, TextChangedEventArgs e)
         {
             string searchText = txtFind.Text.ToLower();
@@ -47,21 +44,20 @@ namespace GUI.UserControls
 
             dvgExpense.ItemsSource = new ObservableCollection<Expense>(res);
         }
-
-     
+ 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             WFormExpense formExpense = new WFormExpense();
-            formExpense.OnExpenseAdded += FormExpense_OnExpenseAdded; 
+            formExpense.OnExpenseAdded += FormExpense_OnExpenseAdded;
             formExpense.ShowDialog();
 
         }
         private void FormExpense_OnExpenseAdded(Expense newExpense)
         {
             Expenses.Add(newExpense);
-            dvgExpense.ItemsSource = new ObservableCollection<Expense>(Expenses); 
+            dvgExpense.ItemsSource = new ObservableCollection<Expense>(Expenses);
         }
-
+   
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
@@ -69,7 +65,7 @@ namespace GUI.UserControls
            
             if (expenseToDelete != null)
             {
-                DialogCustoms dialog = new DialogCustoms("Bạn có muốn xoá ko ?", "Thông báo", DialogCustoms.YesNo);
+                DialogCustoms dialog = new DialogCustoms("Bạn có muốn xóa ko ?", "Thông báo", DialogCustoms.YesNo);
                 if (dialog.ShowDialog() == true)
                 {
                     Expenses.Remove(expenseToDelete);
@@ -78,8 +74,6 @@ namespace GUI.UserControls
             }
         }
     }
-
-    // Expense class definition
     public class Expense
     {
         public int ExpenseID { get; set; }
