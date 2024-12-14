@@ -24,7 +24,13 @@ namespace GUI
 
         public MainWindow()
         {
-         InitializeComponent();
+            InitializeComponent();
+
+            var bgSecondaryLight = (SolidColorBrush)Application.Current.Resources["BackgroundSecondaryLight"];
+            ResetBackgroundButtonIcon();
+            BtnHome.Background = bgSecondaryLight;
+            _ucHome = new UcHome();
+            ContentDisplayMain.Content = _ucHome;
         }
 
         private void ToggleMenu_Click(object sender, RoutedEventArgs e)

@@ -22,9 +22,10 @@ namespace GUI.UserControls
             "#B3CDE0", // Xanh dương nhạt
             "#F5B7B1", // Hồng nhạt
             "#C8E6C9", // Xanh lá nhạt
-            "#FFEB3B", // Vàng sáng nhẹ
+            "#FFE893", // Vàng sáng nhẹ
             "#FFCDD2", // Đỏ nhạt
-            "#D1C4E9"
+            "#D1C4E9",
+            "#85A98F"
         };
 
         public UcPieChart()
