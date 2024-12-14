@@ -42,23 +42,15 @@ namespace GUI.UserControls
         { 
             var button= sender as Button;
             var income = button.DataContext as Income;
-            if (income == null)
+            if (income != null)
             {
-                return;
+                DialogCustoms dialog = new DialogCustoms("Bạn có muốn xoá ko ?", "Thông báo", DialogCustoms.YesNo);
+                if (dialog.ShowDialog() == true)
+                {
+                    Incomes.Remove(income);
+                    InvoiceDataGrid.ItemsSource = new ObservableCollection<Income>(Incomes);
+                }
             }
-            DialogCustoms dialog = new DialogCustoms("Bạn có muốn xóa không ?", "Thông báo", DialogCustoms.YesNo);
-            dialog.ShowDialog();
-            var dialog2 = new DialogCustoms("Bạn đã xóa thành công !", "Thông báo", DialogCustoms.OK);
-            var dialog3 = new DialogCustoms("Bạn đã hủy thành công !", "Thông báo",DialogCustoms.OK);
-            if(DialogCustoms.show == DialogCustoms.OK)
-            {
-                Incomes.Remove(income);
-                dialog2.ShowDialog();
-            }
-            else
-            {
-               dialog3.ShowDialog();
-            }    
         }
 
         }

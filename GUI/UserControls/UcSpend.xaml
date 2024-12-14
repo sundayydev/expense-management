@@ -60,7 +60,7 @@
             </Grid>
 
             <Grid Grid.Row="1">
-                <DataGrid x:Name="InvoiceDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" Margin="10" Style="{StaticResource CustomStyleDataGrid}">
+                <DataGrid x:Name="dvgExpense" AutoGenerateColumns="False" CanUserAddRows="False" Margin="10" Style="{StaticResource CustomStyleDataGrid}">
                     <DataGrid.Columns>
                         <!-- Checkbox Column -->
                         <DataGridTemplateColumn Width="Auto">
