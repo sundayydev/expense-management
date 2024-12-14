@@ -15,7 +15,6 @@
             <Setter Property="Foreground" Value="#a3a3a4" />
             <Setter Property="FontSize" Value="20" />
             <Setter Property="Text"  Value="{Binding PlaceHolder , ElementName=_this}" />
-
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Text ,ElementName= email}" Value="">
                     <DataTrigger.EnterActions>
@@ -26,7 +25,6 @@
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.EnterActions>
-
                     <DataTrigger.ExitActions>
                         <BeginStoryboard>
                             <Storyboard SpeedRatio="10">
@@ -38,7 +36,6 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-
         <Style x:Key="titletbtextboxStyle" TargetType="{x:Type TextBox}">
             <Setter Property="Text"  Value="{Binding Text ,Mode=TwoWay, ElementName=_this}" />
             <Setter Property="VerticalAlignment" Value="Center" />
@@ -47,8 +44,6 @@
             <Setter Property="FontWeight" Value="Medium" />
             <Setter Property="FontSize" Value="12" />
             <Setter Property="Foreground" Value="{StaticResource TextBuleBoldMax}" />
-            
-
             <Style.Triggers>
                 <DataTrigger Binding="{Binding FontSize ,ElementName= title}" Value="12">
                     <DataTrigger.EnterActions>
@@ -59,7 +54,6 @@
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.EnterActions>
-
                     <DataTrigger.ExitActions>
                         <BeginStoryboard>
                             <Storyboard SpeedRatio="10">
@@ -73,13 +67,11 @@
                 <DataTrigger Binding="{Binding Text,Mode=TwoWay,ElementName= _this}" Value="">
                     <Setter Property="Text" Value="{Binding Password, ElementName=passbox}"/>
                 </DataTrigger>
-
                 <DataTrigger Binding="{Binding Visibility  ,ElementName= passbox}" Value="Visible">
                     <Setter Property="Visibility" Value="Collapsed"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-
         <Style  TargetType="{x:Type PasswordBox}">
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Background" Value="Transparent" />
@@ -87,7 +79,6 @@
             <Setter Property="FontWeight" Value="Medium" />
             <Setter Property="FontSize" Value="12" />
             <Setter Property="Foreground" Value="{StaticResource TextBuleBoldMax}" />
-            
             <Style.Triggers>
                 <DataTrigger Binding="{Binding FontSize ,ElementName= title}" Value="12">
                     <DataTrigger.EnterActions>
@@ -98,7 +89,6 @@
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.EnterActions>
-
                     <DataTrigger.ExitActions>
                         <BeginStoryboard>
                             <Storyboard SpeedRatio="10">
@@ -108,23 +98,20 @@
                         </BeginStoryboard>
                     </DataTrigger.ExitActions>
                 </DataTrigger>
-
                 <DataTrigger Binding="{Binding IsPass ,ElementName= _this}" Value="False">
                     <Setter Property="Visibility" Value="Collapsed"/>
                 </DataTrigger>
-
                 <DataTrigger Binding="{Binding IsPressed ,ElementName= ShowPass}" Value="True">
                     <Setter Property="Visibility" Value="Collapsed"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        
         <Style TargetType="{x:Type Button}">
             <Setter Property="HorizontalAlignment" Value="Right" />
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Foreground" Value="LightGray" />
+            <Setter Property="Foreground" Value="{StaticResource BackgroundPrimary}" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -141,28 +128,23 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-
     <Border 
         Height="60" 
         CornerRadius="15" 
         Background="{StaticResource BackgroundLight}"
         BorderBrush="{StaticResource BorderPrimary}" 
         BorderThickness="1">
-        
         <Border.Effect>
             <DropShadowEffect BlurRadius="23" ShadowDepth="5" Direction="270" Color="WhiteSmoke"></DropShadowEffect>
         </Border.Effect>
-
         <Grid Margin="20,10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="50" />
             </Grid.ColumnDefinitions>
-
             <TextBlock x:Name="title" Style="{StaticResource titleStyle}" Grid.Column="1"/>
             <TextBox x:Name="email" Style="{StaticResource titletbtextboxStyle}" Grid.Column="1" />
-
             <PasswordBox x:Name="passbox" PasswordChanged="passbox_PasswordChanged" Grid.Column="1" />
             <Button x:Name="ShowPass"
                     Background="Transparent"
@@ -171,7 +153,6 @@
                     VerticalAlignment="Center"
                     Grid.Column="2"
                     />
-
         </Grid>
     </Border>
 </UserControl>
