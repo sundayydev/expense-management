@@ -18,10 +18,9 @@ namespace GUI.UserControls
         {
             InitializeComponent();
             LoadData();
-            InvoiceDataGrid.ItemsSource = Expenses;
+            dvgExpense.ItemsSource = Expenses;
         }
 
-        // Load initial data
         private void LoadData()
         {
             Expenses = new ObservableCollection<Expense>
@@ -34,7 +33,6 @@ namespace GUI.UserControls
             };
         }
 
-        // TextChanged event for searching
         private void txtFind_TextChanged(object sender, TextChangedEventArgs e)
         {
             string searchText = txtFind.Text.ToLower();
@@ -44,29 +42,22 @@ namespace GUI.UserControls
                 expense.CategoryID.ToString().Equals(searchText)
             ).ToList();
 
-            InvoiceDataGrid.ItemsSource = new ObservableCollection<Expense>(res);
+            dvgExpense.ItemsSource = new ObservableCollection<Expense>(res);
         }
-
-        // Add new expense
+ 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            var newExpense = new Expense
-            {
-                ExpenseID = Expenses.Count + 1,
-                UserID = 106,
-                CategoryID = 2,
-                RecipientID = 206,
-                Amount = 250m,
-                ExpenseDate = DateTime.Now.Date,
-                Note = "New Item",
-                CreatedAt = DateTime.Now
-            };
+            WFormExpense formExpense = new WFormExpense();
+            formExpense.OnExpenseAdded += FormExpense_OnExpenseAdded;
+            formExpense.ShowDialog();
 
-            Expenses.Add(newExpense);
-            InvoiceDataGrid.ItemsSource = new ObservableCollection<Expense>(Expenses);
         }
-
-        // Delete an expense
+        private void FormExpense_OnExpenseAdded(Expense newExpense)
+        {
+            Expenses.Add(newExpense);
+            dvgExpense.ItemsSource = new ObservableCollection<Expense>(Expenses);
+        }
+   
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
@@ -74,17 +65,15 @@ namespace GUI.UserControls
            
             if (expenseToDelete != null)
             {
-                DialogCustoms dialog = new DialogCustoms("Bạn có muốn xoa ko ?", "Thông báo", DialogCustoms.YesNo);
+                DialogCustoms dialog = new DialogCustoms("Bạn có muốn xóa ko ?", "Thông báo", DialogCustoms.YesNo);
                 if (dialog.ShowDialog() == true)
                 {
                     Expenses.Remove(expenseToDelete);
-                    InvoiceDataGrid.ItemsSource = new ObservableCollection<Expense>(Expenses);
+                    dvgExpense.ItemsSource = new ObservableCollection<Expense>(Expenses);
                 }        
             }
         }
     }
-
-    // Expense class definition
     public class Expense
     {
         public int ExpenseID { get; set; }
