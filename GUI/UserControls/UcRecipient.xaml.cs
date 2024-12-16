@@ -21,7 +21,7 @@ namespace GUI.UserControls
     /// </summary>
     public partial class UcRecipient : UserControl
     {
-        public ObservableCollection<Recipient> Recipients { get; set; }
+        private ObservableCollection<Recipient> Recipients { get; set; }
 
         public UcRecipient()
         {

@@ -82,7 +82,6 @@
                     <uc:UcButtonIcon x:Name="BtnStatistical" Icon="Solid_ChartSimple" Text="Thống Kê" UcButtonIconClick="Btn_OnClick"/>
                     <uc:UcButtonIcon x:Name="BtnLoans" Icon="Solid_MoneyCheckDollar" Text="Mượn Nợ" UcButtonIconClick="Btn_OnClick"/>
                     <uc:UcButtonIcon x:Name="BtnRemind" Icon="Solid_ClockRotateLeft" Text="Nhắc Nhở" UcButtonIconClick="Btn_OnClick"/>
-                    <uc:UcButtonIcon x:Name="BtnNotification" Icon="Solid_Bell" Text="Thông Báo" UcButtonIconClick="Btn_OnClick"/>
                 </StackPanel>
 
                 <Grid Grid.Row="2" Background="{StaticResource BackgroundSecondaryLight}">

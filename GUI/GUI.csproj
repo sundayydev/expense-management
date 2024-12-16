@@ -111,7 +111,9 @@
     <Compile Include="UserControls\UcHome.xaml.cs">
       <DependentUpon>UcHome.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\UcIncome.xaml.cs" />
+    <Compile Include="UserControls\UcIncome.xaml.cs">
+      <DependentUpon>UcIncome.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UcLiveChart.xaml.cs">
       <DependentUpon>UcLiveChart.xaml</DependentUpon>
     </Compile>
@@ -141,6 +143,9 @@
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WFormCategory.xaml.cs">
+      <DependentUpon>WFormCategory.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WFormExpense.xaml.cs">
       <DependentUpon>WFormExpense.xaml</DependentUpon>
@@ -222,6 +227,7 @@
     </Page>
     <Page Include="View\DialogCustoms.xaml" />
     <Page Include="View\MainWindow.xaml" />
+    <Page Include="View\WFormCategory.xaml" />
     <Page Include="View\WFormExpense.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
