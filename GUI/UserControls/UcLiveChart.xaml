@@ -6,97 +6,43 @@
              xmlns:local="clr-namespace:GUI.UserControls"
              xmlns:lc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d">
-    <UserControl.Resources>
-        <LinearGradientBrush x:Key="IncomeGradient" StartPoint="0,0" EndPoint="1,0">
-            <GradientStop Color="#789DBC" Offset="0" />
-            <GradientStop Color="#A6AEBF" Offset="1" />
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="ExpenseGradient" StartPoint="0,0" EndPoint="1,0">
-            <GradientStop Color="#EF9C66" Offset="0" />
-            <GradientStop Color="#FFB38E" Offset="1" />
-        </LinearGradientBrush>
-        <!--style radiobutton-->
-        <Style x:Key="DayRadioButtonStyle" TargetType="RadioButton">
-            <Setter Property="Background" Value="AliceBlue" />
-            <Setter Property="BorderBrush" Value="LightBlue" />
-            <Setter Property="FontWeight" Value="Bold" />
-            <Style.Triggers>
-                <!-- Trigger khi Hover vào -->
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="gray" />
-                    <Setter Property="Foreground" Value="#ffff" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <!-- Style cho RadioButton Tháng -->
-        <Style x:Key="MonthRadioButtonStyle" TargetType="RadioButton">
-            <Setter Property="Background" Value="Honeydew" />
-            <Setter Property="BorderBrush" Value="LightGreen" />
-            <Setter Property="FontWeight" Value="Bold" />
-            <Style.Triggers>
-                <!-- Trigger khi Hover vào -->
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="GreenYellow" />
-                    <Setter Property="Foreground" Value="#ffff" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="borderstyleday" TargetType="Border">
-            <Setter Property="Background" Value="AliceBlue" />
-            <Setter Property="BorderBrush" Value="LightBlue" />
-            <Style.Triggers>
-                <!-- Trigger khi Hover vào -->
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="{StaticResource BackgroundPrimary}" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-        <Style x:Key="borderstylemonth" TargetType="Border">
-            <Setter Property="Background" Value="Honeydew" />
-            <Setter Property="BorderBrush" Value="LightGreen" />
-            <Style.Triggers>
-                <!-- Trigger khi Hover vào -->
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="{StaticResource BackgroundGreen}" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </UserControl.Resources>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
-        
+
         <StackPanel Grid.Row="0">
-            
+
             <Grid>
-                <Label Grid.Column="1" Content="Statisics" FontSize="16" 
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Thống kê chi tiêu" FontSize="16" 
                         FontWeight="SemiBold" HorizontalAlignment="Left"  
                         VerticalAlignment="Center" />
-                <StackPanel Width="165" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-            <!-- RadioButton: Ngày -->
-            <Border Style="{StaticResource borderstyleday}" BorderThickness="2" CornerRadius="5" Padding="5" Margin="6,0,0,0">
+                <StackPanel Grid.Column="1" Width="165" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <!-- RadioButton: Ngày -->
+                    <Border Style="{StaticResource BorderStyleDay}" BorderThickness="2" CornerRadius="5" Padding="5" Margin="6,0,0,0">
                         <RadioButton x:Name="rdbDay" Content="Tuần" GroupName="TimeSelection"  Checked="rdbDay_Checked"
                          Style="{StaticResource DayRadioButtonStyle}" 
                          HorizontalAlignment="Right" />
-            </Border>
+                    </Border>
 
-            <!-- RadioButton: Tháng -->
-            <Border  Style="{StaticResource borderstylemonth}" BorderThickness="2" CornerRadius="5" Padding="5" Margin="6,0,0,0">
+                    <!-- RadioButton: Tháng -->
+                    <Border  Style="{StaticResource BorderStyleMonth}" BorderThickness="2" CornerRadius="5" Padding="5" Margin="6,0,0,0">
                         <RadioButton x:Name="rdbMonth" Content="Tháng" GroupName="TimeSelection" Checked="rdbMonth_Checked"
                          Style="{StaticResource MonthRadioButtonStyle}" 
                          HorizontalAlignment="Left" />
-            </Border>
-        </StackPanel>
+                    </Border>
+                </StackPanel>
             </Grid>
         </StackPanel>
         <Grid Grid.Row="1" Height="300" Margin="5 15 5 5">
-            <Border Background="AliceBlue" BorderThickness="1" BorderBrush="Transparent" CornerRadius="5" Padding="5">
-                
+            <Border Background="AliceBlue" BorderThickness="1" BorderBrush="Transparent" 
+                    CornerRadius="5" Padding="5">
+
                 <lc:CartesianChart Series="{Binding SeriesCollection}" >
                     <lc:CartesianChart.AxisX>
                         <lc:Axis Labels="{Binding Labels}" LabelsRotation="0">
@@ -109,9 +55,9 @@
                         <lc:Axis LabelFormatter="{Binding Values}" />
                     </lc:CartesianChart.AxisY>
                 </lc:CartesianChart>
-               
+
             </Border>
         </Grid>
-    
+
     </Grid>
 </UserControl>

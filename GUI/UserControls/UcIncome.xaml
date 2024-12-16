@@ -121,7 +121,7 @@
                                         </Button>
                                         <Button Padding="6" Margin="5 0 0 0" 
                                         Background="{StaticResource BackgroundDanger}"
-                                        BorderBrush="{StaticResource BackgroundTransparent}"  CommandParameter="{Binding}" Click="DeleteButton_Click">
+                                        BorderBrush="{StaticResource BackgroundTransparent}"  CommandParameter="{Binding}" Click="BtnDelete_Click">
                                             <fa:ImageAwesome Icon="Solid_Trash" PrimaryColor="#FBFBFB"/>
                                         </Button>
                                     </StackPanel>

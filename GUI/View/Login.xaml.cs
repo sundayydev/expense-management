@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,17 +27,15 @@ namespace GUI
         public Login()
         {
             InitializeComponent();
-
-           
         }
         MainWindow  mainWindow { get => Application.Current.MainWindow as MainWindow; }
-
+        
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow f = new MainWindow();
             this.Hide();
+            MainWindow f = new MainWindow();
             f.ShowDialog();
-            this.Close();
+            this.Show();
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -58,7 +57,6 @@ namespace GUI
         {
             UcForgotPass f = new UcForgotPass();
             this.Content = f;
-
         }
     }
 }

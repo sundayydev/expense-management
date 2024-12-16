@@ -12,7 +12,7 @@
         WindowStartupLocation="CenterScreen"
         Title="DialogCustoms" Height="180" Width="400"
         FontSize="16"
-        Background="{StaticResource BgGradientBlueCus}"
+        Background="#4158A6"
         >
     
     <Window.Clip>
@@ -22,8 +22,8 @@
     <Border BorderThickness="1" BorderBrush="#FF807D7D" CornerRadius="10">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="26" />
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="26"/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
             <uc:UcControlBar2 Grid.Row="0" MinHeight="{Binding MinHeight_ucControlbar, Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}"
                           Tag="{Binding Title, ElementName=dialogcustom}"  Opacity="0.8" VerticalAlignment="Center" Height="26" >

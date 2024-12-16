@@ -74,6 +74,14 @@
         <GradientStop Color="#90c1fc" Offset="0.3" />
         <GradientStop Color="#f1dee4" Offset="0.7" />
     </LinearGradientBrush>
+    <LinearGradientBrush x:Key="IncomeGradient" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Color="#789DBC" Offset="0" />
+        <GradientStop Color="#A6AEBF" Offset="1" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="ExpenseGradient" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Color="#EF9C66" Offset="0" />
+        <GradientStop Color="#FFB38E" Offset="1" />
+    </LinearGradientBrush>
     
 
     <!--3. Border colors-->

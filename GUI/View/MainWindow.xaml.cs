@@ -85,8 +85,6 @@ namespace GUI
                     _ucRemind = new UcRemind();
                     ContentDisplayMain.Content = _ucRemind;
                     break;                
-                case "BtnNotification":
-                    break;
             }
             
         }
@@ -102,7 +100,6 @@ namespace GUI
             BtnRecipient.Background = bgTransparent;
             BtnLoans.Background = bgTransparent;
             BtnRemind.Background = bgTransparent;
-            BtnNotification.Background = bgTransparent;
         }
 
         private void BtnLogout_OnClick(object sender, RoutedEventArgs e)
