@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GUI.View;
 
 namespace GUI.UserControls
 {
@@ -56,6 +57,12 @@ namespace GUI.UserControls
                 new Recipient{RecipientID = "R020", Character = "K", RecipientName = "Kiều Phúc Hảo", CharacterColor = (Brush)brushConverter.ConvertFromString("#ADB36E"), CreatedAt = DateTime.Now.ToString("HH:mm:ss dd/MM/yyyy"), Description = "Luôn đầy năng lượng"}
             };
 
+        }
+
+        private void BtnAddRecipient_Click(object sender, RoutedEventArgs e)
+        {
+            WFormRecipient wf = new WFormRecipient();
+            wf.ShowDialog();
         }
     }
 
