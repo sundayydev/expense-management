@@ -160,9 +160,8 @@ namespace GUI.UserControls
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            Login f = new Login();
-            f.ShowDialog();
-            this.Visibility = Visibility.Collapsed;
+            UcLogin f = new UcLogin();
+            this.Content = f;
         }
     }
 }
