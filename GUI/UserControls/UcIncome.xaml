@@ -7,14 +7,14 @@
              xmlns:fa="http://schemas.fontawesome.com/icons/svg"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="1200">
-    
+
     <Border BorderBrush="#EEEEEE" BorderThickness="1" CornerRadius="10" Background="{StaticResource BackgroundWhite}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="120"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            
+
             <Grid Grid.Row="0">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -90,7 +90,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        
+
                         <!-- Số Tiền -->
                         <DataGridTemplateColumn Header="Tổng Tiền" Width="*" >
                             <DataGridTemplateColumn.CellTemplate>
@@ -124,7 +124,7 @@
                                         <Button Padding="6" Margin="0 0 5 0" 
                                         Background="{StaticResource BackgroundSuccess}"
                                         BorderBrush="{StaticResource BackgroundTransparent}">
-                                            <fa:ImageAwesome Icon="Regular_PenToSquare" PrimaryColor="#FBFBFB"/>
+                                            <fa:ImageAwesome Icon="Regular_PenToSquare" PrimaryColor="#FBFBFB" />
                                         </Button>
                                         <Button Padding="6" Margin="5 0 0 0" 
                                         Background="{StaticResource BackgroundDanger}"

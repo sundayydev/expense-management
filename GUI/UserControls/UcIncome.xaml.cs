@@ -39,39 +39,35 @@ namespace GUI.UserControls
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
-        { 
-            var button= sender as Button;
-            var income = button.DataContext as Income;
-            if (income == null)
+        {
+            var button = sender as Button;
+            var incomeToDelete = button.DataContext as Income;
+
+            if (incomeToDelete != null)
             {
-                return;
+                DialogCustoms dialog = new DialogCustoms("Bạn có muốn xóa ko ?", "Thông báo", DialogCustoms.YesNo);
+                if (dialog.ShowDialog() == true)
+                {
+                    Incomes.Remove(incomeToDelete);
+                    InvoiceDataGrid.ItemsSource = new ObservableCollection<Income>(Incomes);
+                }
             }
-            DialogCustoms dialog = new DialogCustoms("Bạn có muốn xóa không ?", "Thông báo", DialogCustoms.YesNo);
-            dialog.ShowDialog();
-            var dialog2 = new DialogCustoms("Bạn đã xóa thành công !", "Thông báo", DialogCustoms.OK);
-            var dialog3 = new DialogCustoms("Bạn đã hủy thành công !", "Thông báo",DialogCustoms.OK);
-            if(DialogCustoms.Show != DialogCustoms.OK)
-            {
-                Incomes.Remove(income);
-                dialog2.ShowDialog();
-            }
-            else if(DialogCustoms.Show == DialogCustoms.OK)
-            {
-               dialog3.ShowDialog();
-            }    
         }
 
-        }
-    public class Income
-    {
-        public string IncomeId { get; set; }
-        public string UserId { get; set; }
-        public string recipientId { get; set; }
 
-        public string Source { get; set; }
-        public float Amount { get; set; }
-        public string IncomeDate { get; set; }
-        public string Note { get; set; }
-        public string CreatedAt { get; set; }
     }
-}
+
+    public class Income
+        {
+            public string IncomeId { get; set; }
+            public string UserId { get; set; }
+            public string recipientId { get; set; }
+
+            public string Source { get; set; }
+            public float Amount { get; set; }
+            public string IncomeDate { get; set; }
+            public string Note { get; set; }
+            public string CreatedAt { get; set; }
+        }
+    }
+
