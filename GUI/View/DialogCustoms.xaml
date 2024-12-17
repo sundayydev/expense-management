@@ -22,11 +22,11 @@
     <Border BorderThickness="1" BorderBrush="#FF807D7D" CornerRadius="10">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="26"/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
             <uc:UcControlBar2 Grid.Row="0" MinHeight="{Binding MinHeight_ucControlbar, Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}"
-                          Tag="{Binding Title, ElementName=dialogcustom}"  Opacity="0.8" VerticalAlignment="Center">
+                          Tag="{Binding Title, ElementName=dialogcustom}"  Opacity="0.8" VerticalAlignment="Center" Height="26" >
             </uc:UcControlBar2>
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>

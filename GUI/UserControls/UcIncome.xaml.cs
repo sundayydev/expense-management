@@ -34,11 +34,15 @@ namespace GUI.UserControls
             var brushConverter = new BrushConverter();
             Incomes = new ObservableCollection<Income>
             {
-                new Income{IncomeId ="01", UserId = "1",recipientId = "10",Source="Lương",Amount=1000000f,IncomeDate = DateTime.Now.ToString("HH:mm:ss dd/MM/yyyy"),Note="Lương CV",CreatedAt=DateTime.Now.ToString("HH:mm:ss dd/MM/yyyy")}
+                new Income
+                {
+                    IncomeId = "01", UserId = "1", RecipientId = "10", Source = "Lương", Amount = 1000000f,
+                    IncomeDate = DateTime.Now.ToString("HH:mm:ss dd/MM/yyyy"), Note = "Lương CV",
+                    CreatedAt = DateTime.Now.ToString("HH:mm:ss dd/MM/yyyy")
+                }
             };
         }
-
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
             var incomeToDelete = button.DataContext as Income;
@@ -50,18 +54,15 @@ namespace GUI.UserControls
                 {
                     Incomes.Remove(incomeToDelete);
                     InvoiceDataGrid.ItemsSource = new ObservableCollection<Income>(Incomes);
+
                 }
             }
         }
-
-
-    }
-
-    public class Income
+        public class Income
         {
             public string IncomeId { get; set; }
             public string UserId { get; set; }
-            public string recipientId { get; set; }
+            public string RecipientId { get; set; }
 
             public string Source { get; set; }
             public float Amount { get; set; }
@@ -70,4 +71,5 @@ namespace GUI.UserControls
             public string CreatedAt { get; set; }
         }
     }
+}
 
