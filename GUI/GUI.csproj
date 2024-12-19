@@ -117,6 +117,9 @@
     <Compile Include="UserControls\UcLiveChart.xaml.cs">
       <DependentUpon>UcLiveChart.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UcLogin.xaml.cs">
+      <DependentUpon>UcLogin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UcPieChart.xaml.cs">
       <DependentUpon>UcPieChart.xaml</DependentUpon>
     </Compile>
@@ -197,6 +200,10 @@
     <Page Include="UserControls\UcHome.xaml" />
     <Page Include="UserControls\UcIncome.xaml" />
     <Page Include="UserControls\UcLiveChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UcLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

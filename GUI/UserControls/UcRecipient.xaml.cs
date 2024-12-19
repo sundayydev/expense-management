@@ -61,8 +61,8 @@ namespace GUI.UserControls
 
         private void BtnAddRecipient_Click(object sender, RoutedEventArgs e)
         {
-            WFormRecipient wf = new WFormRecipient();
-            wf.ShowDialog();
+           /* WFormRecipient wf = new WFormRecipient();
+            wf.ShowDialog();*/
         }
     }
 
