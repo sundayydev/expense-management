@@ -42,5 +42,25 @@ namespace BLL.Services
             // Thêm vào cơ sở dữ liệu
             _userRepository.AddUser(user);
         }
+        public User LoginUser(LoginDTO loginDTO)
+        {
+            
+            var user = _userRepository.GetUserByEmail(loginDTO.Email);
+
+            if (user == null)
+            {
+                throw new InvalidOperationException("Email không tồn tại.");
+            }
+            
+            bool isPasswordValid = BCrypt.Net.BCrypt.Verify(loginDTO.Password, user.PasswordHash);
+
+            if (!isPasswordValid)
+            {
+                throw new InvalidOperationException("Mật khẩu không đúng.");
+            }
+
+            return user;
+        }
     }
 }
+

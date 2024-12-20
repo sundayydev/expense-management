@@ -19,8 +19,8 @@
                 <StackPanel>
                     <Label Content="Let's Get Started" HorizontalAlignment="Center" Margin="0,30,0,0" FontSize="32" FontWeight="Bold" Foreground="{StaticResource TextPrimary}"/>
                     <Label Content="Login to continue to WebkitX " HorizontalAlignment="Center"  FontSize="16" Foreground="{StaticResource TextPrimary}" Grid.Column="1"/>
-                    <local:TextHolder  Width="500" Margin="0,20,0,0" PlaceHolder="Email" />
-                    <local:TextHolder  Width="500" Margin="0,15,0,0" PlaceHolder="Mật khẩu" IsPass="True"/>
+                    <local:TextHolder x:Name="txtEmail" Width="500" Margin="0,20,0,0" PlaceHolder="Email" />
+                    <local:TextHolder x:Name="txtPassword" Width="500" Margin="0,15,0,0" PlaceHolder="Mật khẩu" IsPass="True"/>
                     <Grid Width="30" Height="120" Margin="75,-118,0,0" HorizontalAlignment="Left">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="30px"/>
