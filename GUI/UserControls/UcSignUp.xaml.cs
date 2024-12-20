@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BLL.DTO.User;
+using BLL.Services;
+using DAL.Models;
+using DAL.Repositories;
+using GUI.View;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace GUI.UserControls
 {
@@ -20,16 +16,42 @@ namespace GUI.UserControls
     /// </summary>
     public partial class UcSignUp : UserControl
     {
+        private readonly UserService _userService;
         public UcSignUp()
         {
             InitializeComponent();
+
+            // Khởi tạo UserService
+
+            _userService = new UserService();
         }
 
-        private void btnSignUp_Click(object sender, RoutedEventArgs e)
+        private void BtnSignUp_Click(object sender, RoutedEventArgs e)
         {
-            UcUpdatePass f = new UcUpdatePass();
-            this.Content = f;
-            
+            try
+            {
+                var registerDTO = new RegisterDTO
+                {
+                    FullName = TxtFullName.Text,
+                    Email = TxtEmail.Text,
+                    Password = TxtPassword.passbox.Password
+                };
+
+                // Gọi UserService để đăng ký
+                _userService.RegisterUser(registerDTO);
+
+                DialogCustoms dialog = new DialogCustoms("Đăng ký thành công!", "Thông báo", DialogCustoms.OK);
+                dialog.ShowDialog();
+                
+                UcLogin uc = new UcLogin();
+                this.Content = uc;
+                
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi:  {ex.Message}!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
         }
 
@@ -46,7 +68,7 @@ namespace GUI.UserControls
         {
             if (!e.Text.All(c => char.IsLetter(c)))
             {
-                e.Handled = true; 
+                e.Handled = true;
             }
         }
     }

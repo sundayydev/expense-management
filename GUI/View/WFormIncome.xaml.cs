@@ -2,9 +2,9 @@
 
 namespace GUI.View
 {
-    public partial class WFormCategory : Window
+    public partial class WFormIncome : Window
     {
-        public WFormCategory()
+        public WFormIncome()
         {
             InitializeComponent();
         }

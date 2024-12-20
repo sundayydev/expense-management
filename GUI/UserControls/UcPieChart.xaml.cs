@@ -1,11 +1,9 @@
-﻿using LiveCharts.Wpf;
-using LiveCharts;
+﻿using LiveCharts;
+using LiveCharts.Wpf;
 using System;
-using System.Windows;
+using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Shapes;
-using System.Collections.Generic;
 using System.Windows.Media.Effects;
 
 namespace GUI.UserControls
@@ -14,9 +12,9 @@ namespace GUI.UserControls
     {
         public Func<ChartPoint, string> Pointlabel { get; set; }
 
-        private Random _random = new Random(); 
+        private Random _random = new Random();
 
-     
+
         private string[] colorArray = new string[]
         {
             "#B3CDE0", // Xanh dương nhạt
@@ -33,7 +31,7 @@ namespace GUI.UserControls
             InitializeComponent();
 
             Pointlabel = chartPoint => string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
-            var pieChart = this.PieChart; 
+            var pieChart = this.PieChart;
 
             var seriesList = new[]
             {
@@ -45,7 +43,7 @@ namespace GUI.UserControls
 
             for (int i = 0; i < seriesList.Length; i++)
             {
-                string color = GetRandomColor(); 
+                string color = GetRandomColor();
                 seriesList[i].Fill = (Brush)new BrushConverter().ConvertFrom(color);
             }
 
@@ -55,7 +53,7 @@ namespace GUI.UserControls
                 pieChart.Series.Add(series);
             }
             DataContext = this;
-        } 
+        }
         private List<string> usedColors = new List<string>();
 
         private string GetRandomColor()
@@ -63,34 +61,34 @@ namespace GUI.UserControls
             string color;
             do
             {
-                color = colorArray[_random.Next(colorArray.Length)]; 
+                color = colorArray[_random.Next(colorArray.Length)];
             }
-            while (usedColors.Contains(color));  
+            while (usedColors.Contains(color));
 
-            usedColors.Add(color);  
-            return color; 
+            usedColors.Add(color);
+            return color;
         }
         private PieSeries _selectedSeries = null;
         private void PieChart_DataClick(object sender, LiveCharts.ChartPoint chartPoint)
         {
             if (_selectedSeries != null)
             {
-                _selectedSeries.PushOut = 0; 
+                _selectedSeries.PushOut = 0;
                 _selectedSeries.Stroke = new SolidColorBrush(Colors.Transparent);
-                _selectedSeries.StrokeThickness = 0;  
+                _selectedSeries.StrokeThickness = 0;
                 _selectedSeries.Effect = null;
             }
 
             if (_selectedSeries == chartPoint.SeriesView)
             {
-                _selectedSeries = null;  
+                _selectedSeries = null;
                 return;
             }
 
             _selectedSeries = (PieSeries)chartPoint.SeriesView;
-            _selectedSeries.PushOut = 8;  
-            _selectedSeries.Stroke = new SolidColorBrush(Colors.Gray);  
-            _selectedSeries.StrokeThickness = 1;  
+            _selectedSeries.PushOut = 8;
+            _selectedSeries.Stroke = new SolidColorBrush(Colors.Gray);
+            _selectedSeries.StrokeThickness = 1;
 
             _selectedSeries.Effect = new DropShadowEffect
             {
