@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GUI.View;
+using System;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using GUI.View;
 
 namespace GUI.UserControls
 {
@@ -34,7 +24,7 @@ namespace GUI.UserControls
         {
             var brushConverter = new BrushConverter();
             Categories = new ObservableCollection<Category>
-            { 
+            {
                 new Category
                 {
                     CategoryId = "1", CategoryName = "Thức ăn", CategoryType = "Chi phí",
@@ -104,7 +94,7 @@ namespace GUI.UserControls
                     Description = "Chi phí học hành, giáo dục",
                     CreatedAt = DateTime.Now.ToString("ss:mm:hh dd/MM/yyyy"),
                     ColorCategoryType = (Brush)brushConverter.ConvertFromString("#DC8686")
-                } 
+                }
             };
         }
 

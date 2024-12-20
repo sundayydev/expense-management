@@ -1,23 +1,9 @@
 ﻿using GUI.View;
-using MaterialDesignThemes.Wpf;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
 using System.Net;
+using System.Net.Mail;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.IO;
 
 namespace GUI.UserControls
 {
@@ -95,7 +81,7 @@ namespace GUI.UserControls
             string smtpServer = "smtp.gmail.com";
             int smtpPort = 587;
             string senderEmail = "duyhoanggl98@gmail.com";
-            string senderPassword = "ekik wvlq bxnf rnqe"; 
+            string senderPassword = "ekik wvlq bxnf rnqe";
 
             using (SmtpClient smtp = new SmtpClient(smtpServer, smtpPort))
             {
@@ -105,7 +91,7 @@ namespace GUI.UserControls
                 MailMessage mail = new MailMessage(senderEmail, recipientEmail)
                 {
                     Subject = "Hướng dẫn khôi phục mật khẩu",
-                    IsBodyHtml = true, 
+                    IsBodyHtml = true,
                 };
                 mail.Body = $@"
                 <html>

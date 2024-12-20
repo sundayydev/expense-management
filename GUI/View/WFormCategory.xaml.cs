@@ -2,11 +2,11 @@
 
 namespace GUI.View
 {
-   public partial class WFormCategory : Window
-   {
-      public WFormCategory()
-      {
-         InitializeComponent();
-      }
-   }
+    public partial class WFormCategory : Window
+    {
+        public WFormCategory()
+        {
+            InitializeComponent();
+        }
+    }
 }

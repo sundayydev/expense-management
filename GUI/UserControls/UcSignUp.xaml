@@ -10,7 +10,8 @@
              x:Name="VSignUp">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid>
-            <Border Background="{StaticResource BackgroundLight}" BorderBrush="{StaticResource TextBuleBold}" BorderThickness="0" 
+            <Border Background="{StaticResource BackgroundLight}" BorderBrush="{StaticResource TextBuleBold}" 
+                    BorderThickness="0" 
                     Grid.Row="0" Width="600" Height="560" CornerRadius="20" HorizontalAlignment="Center"
                      materialDesign:ElevationAssist.Elevation="Dp12">
                 <Border.Effect>
@@ -19,9 +20,15 @@
                 <StackPanel>
                     <Label Content="Let's Get Started" HorizontalAlignment="Center" Margin="0,30,0,0" FontSize="32" FontWeight="Bold" Foreground="{StaticResource TextBuleBold}"/>
                     <Label Content="SignUp to continue to WebkitX " HorizontalAlignment="Center"  FontSize="16" Foreground="{StaticResource TextBuleBold}" Grid.Column="1"/>
-                    <local:TextHolder  Width="500" Margin="0,20,0,0" PlaceHolder="Tên Đăng Nhập" PreviewTextInput="TextBoxInput" />
-                    <local:TextHolder  Width="500" Margin="0,20,0,0" PlaceHolder="Email" />
-                    <local:TextHolder  Width="500" Margin="0,15,0,0" PlaceHolder="Mật khẩu" IsPass="True"/>
+                    <!--Tên người dùng-->
+                    <local:TextHolder  Width="500" Margin="0,20,0,0" PlaceHolder="Tên Người Dùng" 
+                                       PreviewTextInput="TextBoxInput" x:Name="TxtFullName"/>
+                    <!--Email-->
+                    <local:TextHolder  Width="500" Margin="0,20,0,0" PlaceHolder="Email" 
+                                       x:Name="TxtEmail"/>
+                    <!--Mật khẩu-->
+                    <local:TextHolder  Width="500" Margin="0,15,0,0" PlaceHolder="Mật khẩu" IsPass="True" 
+                                       x:Name="TxtPassword"/>
                     <Grid Width="30" Height="185" Margin="75,-215,0,0" HorizontalAlignment="Left">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="30px"/>
@@ -35,15 +42,17 @@
                     <Grid Width="250" Margin="0,15">
                         <CheckBox Content="Tôi đồng ý với các điều khoản" HorizontalAlignment="Center" FontSize="16" VerticalAlignment="Center" Foreground="{StaticResource TextSecondary}" />
                     </Grid>
-                    <Button x:Name="btnSignUp" Content="Đăng Ký" Height="50" Width="180" FontSize="16" BorderThickness="0"
-                                 HorizontalAlignment="Center" Margin="0,20" Background="{StaticResource BackgroundPrimary}" Click="btnSignUp_Click"></Button>
+                    <Button Content="Đăng Ký" Height="50" Width="180" FontSize="16" BorderThickness="0"
+                            HorizontalAlignment="Center" Margin="0,20" Background="{StaticResource BackgroundPrimary}" 
+                            x:Name="BtnSignUp" Click="BtnSignUp_Click"/>
                     <Grid Width="320">
                         <Label Content="Bạn đã có tài khoản ? " FontSize="16" 
                            FontWeight="SemiBold" HorizontalAlignment="Left"  
                            VerticalAlignment="Center" Margin="30,0,0,0"></Label>
                         <Button Width="120" Background="Transparent" BorderThickness="0" 
                             VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Đăng Nhập" 
-                            FontSize="16" FontWeight="Bold" Foreground="Red" Margin="180,0,0,0" Click="btnLogin_Click"></Button>
+                            FontSize="16" FontWeight="Bold" Foreground="Red" Margin="180,0,0,0" 
+                                Click="btnLogin_Click"/>
                     </Grid>
                 </StackPanel>
             </Border>

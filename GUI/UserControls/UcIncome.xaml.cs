@@ -1,19 +1,9 @@
 ﻿using GUI.View;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace GUI.UserControls
 {
@@ -48,12 +38,12 @@ namespace GUI.UserControls
             if (sender is Button button)
             {
                 var income = button.DataContext as Income;
-                
+
                 DialogCustoms dialog = new DialogCustoms("Bạn có muốn xóa không ?", "Thông báo", DialogCustoms.YesNo);
                 dialog.ShowDialog();
                 var dialog2 = new DialogCustoms("Bạn đã xóa thành công !", "Thông báo", DialogCustoms.OK);
-                var dialog3 = new DialogCustoms("Bạn đã hủy thành công !", "Thông báo",DialogCustoms.OK);
-                if(DialogCustoms.Show == DialogCustoms.OK)
+                var dialog3 = new DialogCustoms("Bạn đã hủy thành công !", "Thông báo", DialogCustoms.OK);
+                if (DialogCustoms.Show == DialogCustoms.OK)
                 {
                     Incomes.Remove(income);
                     dialog2.ShowDialog();
@@ -66,7 +56,7 @@ namespace GUI.UserControls
         }
 
     }
-    
+
     public class Income
     {
         public string IncomeId { get; set; }

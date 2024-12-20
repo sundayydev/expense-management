@@ -1,14 +1,13 @@
 ﻿using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace GUI.UserControls
 {
-   public partial class UcHome : UserControl
-   {
-      public UcHome()
-      {
+    public partial class UcHome : UserControl
+    {
+        public UcHome()
+        {
             InitializeComponent();
-           // AddMonthsToComboBox();
+            // AddMonthsToComboBox();
         }
 
         private void UcLiveChart_Loaded(object sender, System.Windows.RoutedEventArgs e)

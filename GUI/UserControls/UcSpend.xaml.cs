@@ -44,7 +44,7 @@ namespace GUI.UserControls
 
             dvgExpense.ItemsSource = new ObservableCollection<Expense>(res);
         }
- 
+
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             WFormExpense formExpense = new WFormExpense();
@@ -57,12 +57,12 @@ namespace GUI.UserControls
             Expenses.Add(newExpense);
             dvgExpense.ItemsSource = new ObservableCollection<Expense>(Expenses);
         }
-   
+
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
             var expenseToDelete = button.DataContext as Expense;
-           
+
             if (expenseToDelete != null)
             {
                 DialogCustoms dialog = new DialogCustoms("Bạn có muốn xóa ko ?", "Thông báo", DialogCustoms.YesNo);
@@ -70,7 +70,7 @@ namespace GUI.UserControls
                 {
                     Expenses.Remove(expenseToDelete);
                     dvgExpense.ItemsSource = new ObservableCollection<Expense>(Expenses);
-                }        
+                }
             }
         }
     }

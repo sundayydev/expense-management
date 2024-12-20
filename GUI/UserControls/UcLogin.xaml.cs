@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BLL.Services;
+using DAL.Models;
+using DAL.Repositories;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace GUI.UserControls
 {
@@ -23,8 +14,10 @@ namespace GUI.UserControls
         public UcLogin()
         {
             InitializeComponent();
+
+            // Khởi tạo UserService
         }
-        MainWindow mainWindow { get => Application.Current.MainWindow as MainWindow; }
+        
         private void btnForgotPass_Click(object sender, RoutedEventArgs e)
         {
             UcForgotPass f = new UcForgotPass();
