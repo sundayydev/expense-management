@@ -22,6 +22,7 @@
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
         Background="#fafbfd"
+        Closing="MainWindow_OnClosing"
         >
     <Grid>
         <Grid.RowDefinitions>

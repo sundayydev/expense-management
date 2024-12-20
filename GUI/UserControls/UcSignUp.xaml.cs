@@ -30,7 +30,7 @@ namespace GUI.UserControls
         {
             try
             {
-                var registerDTO = new RegisterDTO
+                var registerDTO = new RegisterDto
                 {
                     FullName = TxtFullName.Text,
                     Email = TxtEmail.Text,
