@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BLL.DTO.User
 {
-    public class RegisterDTO
+    public class RegisterDto
     {
         public string FullName { get; set; }
         public string Email { get; set; }

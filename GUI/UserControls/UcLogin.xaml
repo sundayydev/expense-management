@@ -19,8 +19,8 @@
                 <StackPanel>
                     <Label Content="Let's Get Started" HorizontalAlignment="Center" Margin="0,30,0,0" FontSize="32" FontWeight="Bold" Foreground="{StaticResource TextPrimary}"/>
                     <Label Content="Login to continue to WebkitX " HorizontalAlignment="Center"  FontSize="16" Foreground="{StaticResource TextPrimary}" Grid.Column="1"/>
-                    <local:TextHolder  Width="500" Margin="0,20,0,0" PlaceHolder="Email" />
-                    <local:TextHolder  Width="500" Margin="0,15,0,0" PlaceHolder="Mật khẩu" IsPass="True"/>
+                    <local:TextHolder  Width="500" Margin="0,20,0,0" PlaceHolder="Email" x:Name="TxtEmail"/>
+                    <local:TextHolder  Width="500" Margin="0,15,0,0" PlaceHolder="Mật khẩu" IsPass="True" x:Name="TxtPassword"/>
                     <Grid Width="30" Height="120" Margin="75,-118,0,0" HorizontalAlignment="Left">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="30px"/>
@@ -44,8 +44,8 @@
                                      Background="Transparent" Foreground="{StaticResource TextBuleBold}" Padding="5" Click="btnForgotPass_Click"></Button>
                         </Grid>
                     </Grid>
-                    <Button x:Name="btnLogin" Content="Đăng Nhập" Height="50" Width="180" FontSize="16" BorderThickness="0" Background="{StaticResource BackgroundPrimary}"
-                             HorizontalAlignment="Center" Margin="0,20" Click="btnLogin_Click" ></Button>
+                    <Button x:Name="BtnLogin" Content="Đăng Nhập" Height="50" Width="180" FontSize="16" BorderThickness="0" Background="{StaticResource BackgroundPrimary}"
+                             HorizontalAlignment="Center" Margin="0,20" Click="BtnLogin_Click" />
                     <Grid Width="320">
                         <Label Content="Bạn chưa có tài khoản ? " FontSize="16" 
                             FontWeight="SemiBold" HorizontalAlignment="Left"  
