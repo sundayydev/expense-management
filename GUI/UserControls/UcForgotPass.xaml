@@ -23,8 +23,8 @@
                     <Grid Width="500" Height="60" Margin="0,20,0,20">
                         <Border BorderBrush="{StaticResource BorderPrimary}" BorderThickness="1" CornerRadius="15" Padding="2px">
                             <Grid>
-                                <TextBox x:Name="txtPass" Foreground="{StaticResource TextBuleBold}" BorderBrush="Transparent" FontSize="18" FontWeight="SemiBold" 
-                                              Margin="20,0,0,0" VerticalAlignment="Center" Width="380" IsEnabled="False" />
+                                <TextBox x:Name="txtPass" Foreground="{StaticResource TextBuleBold}" Style="{StaticResource CustomStyleTextBox}" FontSize="18" Height="35" FontWeight="SemiBold"
+                                         Text="Mật khẩu mới"  Margin="20,10,0,0" Width="380" IsReadOnly="True" ></TextBox>
                             </Grid>
                         </Border>
                     </Grid>

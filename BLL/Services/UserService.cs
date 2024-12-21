@@ -61,6 +61,31 @@ namespace BLL.Services
                 return true;
             return false;
         }
+
+        public bool GetUserByEmail(string emailforgot)
+        {
+            var user = _userRepository.GetUserByEmail(emailforgot);
+            if (user == null)
+            {
+                return false;
+            }
+
+           
+            return true;
+        }
+
+       
+        public void UpdatePassword(string email, string newPassword)
+        {
+            var user = _userRepository.GetUserByEmail(email);
+            if (user == null)
+            {
+                throw new InvalidOperationException("Không tìm thấy tài khoản với email này.");
+            }
+
+            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(newPassword);
+            _userRepository.UpdateUser(user);
+        }
     }
 }
 

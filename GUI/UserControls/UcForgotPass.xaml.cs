@@ -1,44 +1,39 @@
-﻿using GUI.View;
+﻿using BLL.Services;
+using GUI.View;
 using System;
 using System.Net;
 using System.Net.Mail;
+using System.Security.Policy;
 using System.Text;
 using System.Windows;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace GUI.UserControls
 {
     public partial class UcForgotPass : System.Windows.Controls.UserControl
     {
+        private readonly UserService _userService;
         public UcForgotPass()
         {
             InitializeComponent();
+            _userService = new UserService();
         }
-
-        string emailtest = "duyhoanggl98@gmail.com";
 
         private void btnForgotPass_Click(object sender, RoutedEventArgs e)
         {
             string email = txtEmail.Text;
-
-            if (string.IsNullOrEmpty(email))
+            if (!IsValidation())
             {
-                DialogCustoms dialog = new DialogCustoms("Lấy cc mật khẩu cũng không nhớ ? m thích để trống email ko ?", "Thông báo", DialogCustoms.Show);
-                dialog.Show();
-                return;
+                return;  
             }
-
-            if (!IsValidEmail(email))
-            {
-                DialogCustoms dialog = new DialogCustoms("Địa chỉ email không hợp lệ.", "Thông báo", DialogCustoms.Show);
-                dialog.Show();
-                return;
-            }
-
             string newPassword = GenerateRandomPassword();
             txtPass.Text = newPassword;
+
             try
             {
+                _userService.UpdatePassword(email, newPassword);
                 SendPasswordResetEmail(email, newPassword);
+
                 DialogCustoms dialog = new DialogCustoms("Một email đã được gửi đến bạn để khôi phục mật khẩu.", "Thông báo", DialogCustoms.Show);
                 dialog.Show();
             }
@@ -61,14 +56,38 @@ namespace GUI.UserControls
                 return false;
             }
         }
+        bool IsValidation()
+        {
+            if (string.IsNullOrWhiteSpace(txtEmail.Text))
+            {
+                DialogCustoms dialog = new DialogCustoms("Lấy cc mật khẩu cũng không nhớ? Email không thể để trống.", "Thông báo", DialogCustoms.Show);
+                dialog.Show();
+                return false;
+            }
 
+            if (!IsValidEmail(txtEmail.Text))
+            {
+                DialogCustoms dialog = new DialogCustoms("Địa chỉ email không hợp lệ.", "Thông báo", DialogCustoms.Show);
+                dialog.Show();
+                return false;
+            }
+
+            bool userExists = _userService.GetUserByEmail(txtEmail.Text);
+            if (!userExists)
+            {
+                DialogCustoms dialog = new DialogCustoms("Email không tồn tại trong hệ thống.", "Thông báo", DialogCustoms.Show);
+                dialog.Show();
+                return false;
+            }
+            return true;
+        }
         private string GenerateRandomPassword()
         {
             const string validChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
             StringBuilder password = new StringBuilder();
             Random random = new Random();
 
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i <=10; i++)
             {
                 password.Append(validChars[random.Next(validChars.Length)]);
             }
@@ -105,7 +124,6 @@ namespace GUI.UserControls
                             border-radius: 10px;
                             background-color: #f4f4f4;
                             text-align: center;
-                            
                         }}
                         .content {{
                             font-size: 16px; 
@@ -138,7 +156,6 @@ namespace GUI.UserControls
                 </body>
                 </html>
                 ";
-
 
                 smtp.Send(mail);
             }
