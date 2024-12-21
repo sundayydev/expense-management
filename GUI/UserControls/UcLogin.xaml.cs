@@ -1,7 +1,9 @@
-﻿using System;
+using System;
 using BLL.Services;
 using DAL.Models;
 using DAL.Repositories;
+using GUI.View;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using BLL.DTO.User;
@@ -17,6 +19,7 @@ namespace GUI.UserControls
     public partial class UcLogin : UserControl
     {
         private readonly UserService _userService = new UserService();
+        
         public UcLogin()
         {
             InitializeComponent();
@@ -58,9 +61,11 @@ namespace GUI.UserControls
             }
             catch (Exception ex)
             {
+
                 MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
         private void btnSignUp_Click(object sender, RoutedEventArgs e)
         {

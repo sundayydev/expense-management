@@ -5,6 +5,7 @@ using DAL.Repositories;
 using GUI.View;
 using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -20,9 +21,6 @@ namespace GUI.UserControls
         public UcSignUp()
         {
             InitializeComponent();
-
-            // Khởi tạo UserService
-
             _userService = new UserService();
         }
 
@@ -30,7 +28,20 @@ namespace GUI.UserControls
         {
             try
             {
+                if (!IsValidInput())
+                {
+                    return; 
+                }
+
+                if (!cbAgree.IsChecked.GetValueOrDefault())
+                {
+                    DialogCustoms res = new DialogCustoms("Bạn phải đồng ý với các điều khoản để tiếp tục.", "Thông báo", DialogCustoms.OK);
+                    res.ShowDialog();
+                    return;
+                }
+
                 var registerDTO = new RegisterDto
+
                 {
                     FullName = TxtFullName.Text,
                     Email = TxtEmail.Text,
@@ -57,9 +68,6 @@ namespace GUI.UserControls
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            /*Login f = new Login();
-
-            f.ShowDialog();*/
             UcForgotPass f = new UcForgotPass();
             this.Content = f;
         }
@@ -70,6 +78,42 @@ namespace GUI.UserControls
             {
                 e.Handled = true;
             }
+        }
+        private void TextBoxEmailInput(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;  
+            }
+        }
+        private bool IsValidInput()
+        {
+            var password = TxtPassword.passbox.Password;
+            var email = TxtEmail.Text;
+
+
+            if (string.IsNullOrWhiteSpace(password)|| string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(TxtFullName.Text))
+            {
+                DialogCustoms dialog = new DialogCustoms("Vui lòng nhập đầy đủ thông tin", "Thông báo", DialogCustoms.OK);
+                dialog.ShowDialog();
+                return false;
+            }
+
+            if (password.Length < 10)
+            {
+                DialogCustoms dialog = new DialogCustoms("Mật khẩu phải có ít nhất 10 ký tự.", "Thông báo", DialogCustoms.OK);
+                dialog.ShowDialog();
+                return false;
+            }
+            var emailRegex = new Regex(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
+            if (!emailRegex.IsMatch(email))
+            {
+                DialogCustoms dialog = new DialogCustoms("Email không hợp lệ. Vui lòng kiểm tra lại email.!", "Thông báo", DialogCustoms.OK);
+                dialog.ShowDialog();
+                return false;
+            }
+
+            return true; 
         }
     }
 }

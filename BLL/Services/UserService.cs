@@ -42,6 +42,7 @@ namespace BLL.Services
             // Thêm vào cơ sở dữ liệu
             _userRepository.AddUser(user);
         }
+
         
         public bool LoginUser(LoginDto loginDto)
         {
@@ -62,3 +63,4 @@ namespace BLL.Services
         }
     }
 }
+
