@@ -7,6 +7,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using BLL.DTO.User;
+using DAL.Utils;
 using GUI.View;
 using MaterialDesignThemes.Wpf;
 using AppContext = BLL.AppContext;
@@ -23,6 +24,7 @@ namespace GUI.UserControls
         public UcLogin()
         {
             InitializeComponent();
+            LoadSavedCredentials();
         }
 
         private void btnForgotPass_Click(object sender, RoutedEventArgs e)
@@ -39,13 +41,25 @@ namespace GUI.UserControls
             {
                 if (IsValidation())
                 {
+                    string email = TxtEmail.Text;
+                    string password = TxtPassword.passbox.Password;
+                    
                     LoginDto loginDto = new LoginDto
                     {
-                        Email = TxtEmail.Text,
-                        Password = TxtPassword.passbox.Password
+                        Email = email,
+                        Password = password
                     };
 
                     isLogin = _userService.LoginUser(loginDto);
+                    
+                    if (ChkRememberMe.IsChecked == true)
+                    {
+                        SecureStorage.SaveCredentials(email, password);
+                    }
+                    else
+                    {
+                        SecureStorage.SaveCredentials("", ""); // Xóa thông tin nếu bỏ chọn
+                    }
                 }
 
                 if (isLogin)
@@ -92,6 +106,17 @@ namespace GUI.UserControls
             }
 
             return true;
+        }
+        
+        private void LoadSavedCredentials()
+        {
+            var (email, password) = SecureStorage.LoadCredentials();
+            if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
+            {
+                TxtEmail.Text = email;
+                TxtPassword.passbox.Password = password;
+                ChkRememberMe.IsChecked = true;
+            }
         }
     }
 }
