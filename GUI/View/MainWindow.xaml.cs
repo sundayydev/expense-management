@@ -1,4 +1,5 @@
-﻿using GUI.UserControls;
+﻿using System.ComponentModel;
+using GUI.UserControls;
 using GUI.View;
 using System.Windows;
 using System.Windows.Media;
@@ -106,6 +107,8 @@ namespace GUI
             DialogCustoms dialog = new DialogCustoms("Bạn có muốn đăng xuất ?", "Thông báo", DialogCustoms.YesNo);
             if (dialog.ShowDialog() == true)
             {
+                Login login = new Login();
+                login.Show();
                 this.Close();
             }
         }
@@ -114,6 +117,12 @@ namespace GUI
         {
             _ucAccount = new UcAccount();
             ContentDisplayMain.Content = _ucAccount;
+        }
+
+        private void MainWindow_OnClosing(object sender, CancelEventArgs e)
+        {
+            Login login = new Login();
+            login.Show();
         }
     }
 }

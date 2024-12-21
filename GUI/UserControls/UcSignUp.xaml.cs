@@ -39,7 +39,9 @@ namespace GUI.UserControls
                     res.ShowDialog();
                     return;
                 }
-                var registerDTO = new RegisterDTO
+
+                var registerDTO = new RegisterDto
+
                 {
                     FullName = TxtFullName.Text,
                     Email = TxtEmail.Text,

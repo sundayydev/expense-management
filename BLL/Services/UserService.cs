@@ -18,23 +18,23 @@ namespace BLL.Services
             _userRepository = new UserRepository();
         }
 
-        public void RegisterUser(RegisterDTO registerDTO)
+        public void RegisterUser(RegisterDto registerDto)
         {
             // Kiểm tra email đã tồn tại
-            if (_userRepository.ExistsByEmail(registerDTO.Email))
+            if (_userRepository.ExistsByEmail(registerDto.Email))
             {
                 throw new InvalidOperationException("Email đã tồn tại.");
             }
 
             // Hash mật khẩu (sử dụng ví dụ đơn giản)
-            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(registerDTO.Password);
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(registerDto.Password);
 
             // Tạo đối tượng User
             var user = new User
             {
                 UserId = Guid.NewGuid(),
-                FullName = registerDTO.FullName,
-                Email = registerDTO.Email,
+                FullName = registerDto.FullName,
+                Email = registerDto.Email,
                 PasswordHash = hashedPassword,
                 CreatedAt = DateTime.Now
             };
@@ -42,24 +42,24 @@ namespace BLL.Services
             // Thêm vào cơ sở dữ liệu
             _userRepository.AddUser(user);
         }
-        public User LoginUser(LoginDTO loginDTO)
+
+        
+        public bool LoginUser(LoginDto loginDto)
         {
-            
-            var user = _userRepository.GetUserByEmail(loginDTO.Email);
+            // Lấy thông tin user từ email
+            var user = _userRepository.GetUserByEmail(loginDto.Email);
 
-            if (user == null)
+            // Kiểm tra mật khẩu
+            if (user == null || !BCrypt.Net.BCrypt.Verify(loginDto.Password, user.PasswordHash))
             {
-                throw new InvalidOperationException("Email không tồn tại.");
+                throw new InvalidOperationException("Email hoặc mật khẩu không đúng.");
             }
             
-            bool isPasswordValid = BCrypt.Net.BCrypt.Verify(loginDTO.Password, user.PasswordHash);
-
-            if (!isPasswordValid)
-            {
-                throw new InvalidOperationException("Mật khẩu không đúng.");
-            }
-
-            return user;
+            AppContext.Instance.UserId = user.UserId.ToString();
+            
+            if(AppContext.Instance.UserId != null)
+                return true;
+            return false;
         }
     }
 }
