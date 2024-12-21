@@ -61,6 +61,24 @@ namespace BLL.Services
                 return true;
             return false;
         }
+        
+        public UserDto GetUserByUserId(string userId)
+        {
+            var user = _userRepository.GetUserByUserId(userId);
+            if (user == null)
+            {
+                throw new InvalidOperationException("User không tồn tại.");
+            }
+            
+            return new UserDto
+            {
+                FullName = user.FullName,
+                Gender = user.Gender,
+                Email = user.Email,
+            };
+        }
+        
+        
     }
 }
 
