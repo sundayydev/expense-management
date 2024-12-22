@@ -150,6 +150,9 @@
     <Compile Include="View\WFormExpense.xaml.cs">
       <DependentUpon>WFormExpense.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\WFormIcome.xaml.cs">
+      <DependentUpon>WFormIcome.xaml</DependentUpon>
+    </Compile>
     <Page Include="Library\Colors.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -229,6 +232,10 @@
     <Page Include="View\MainWindow.xaml" />
     <Page Include="View\WFormCategory.xaml" />
     <Page Include="View\WFormExpense.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WFormIcome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

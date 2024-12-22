@@ -37,11 +37,19 @@ namespace GUI.UserControls
                 new Income
                 {
                     IncomeId = "01", UserId = "1", RecipientId = "10", Source = "Lương", Amount = 1000000f,
-                    IncomeDate = DateTime.Now.ToString("HH:mm:ss dd/MM/yyyy"), Note = "Lương CV",
-                    CreatedAt = DateTime.Now.ToString("HH:mm:ss dd/MM/yyyy")
+                    IncomeDate =DateTime.Now.Date, Note = "Lương CV",
+                    CreatedAt = DateTime.Now.Date
                 }
             };
+
         }
+        private void btnSaveAdd_Click(object sender, RoutedEventArgs e)
+        {
+            WFormIcome wFormIcome = new WFormIcome();
+            wFormIcome.ShowDialog();
+            wFormIcome.OnExpenseAdded += FormExpense_OnExpenseAdded;
+        }
+
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
@@ -58,6 +66,15 @@ namespace GUI.UserControls
                 }
             }
         }
+        public void RefreshDataGrid()
+        {
+            InvoiceDataGrid.ItemsSource = Incomes;
+        }
+        private void FormExpense_OnExpenseAdded(Income newIcomes)
+        {
+            Incomes.Add(newIcomes);
+            InvoiceDataGrid.ItemsSource = new ObservableCollection<Income>(Incomes);
+        }
         public class Income
         {
             public string IncomeId { get; set; }
@@ -66,9 +83,9 @@ namespace GUI.UserControls
 
             public string Source { get; set; }
             public float Amount { get; set; }
-            public string IncomeDate { get; set; }
+            public DateTime IncomeDate { get; set; }
             public string Note { get; set; }
-            public string CreatedAt { get; set; }
+            public DateTime CreatedAt { get; set; }
         }
     }
 }

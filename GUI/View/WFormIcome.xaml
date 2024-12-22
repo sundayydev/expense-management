@@ -1,0 +1,99 @@
+﻿<Window x:Class="GUI.View.WFormIcome"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI.View"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:uc="clr-namespace:GUI.UserControls"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        AllowsTransparency="True" 
+        WindowStartupLocation="CenterScreen"
+        Title="WFormIcome" Height="450" Width="800">
+    <Window.Clip>
+        <RectangleGeometry Rect="0,0,800,450" RadiusX="10" RadiusY="10"/>
+    </Window.Clip>
+    <Border BorderBrush="#D9EAFD" BorderThickness="2" CornerRadius="10" >
+        <Grid Background="{StaticResource BackgroundTransparent}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <uc:UcControlBar2 Grid.Row="0" Margin="30 0 10 0" MinHeight="{Binding MinHeight_ucControlbar, Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}"
+                          Tag="{Binding Title, ElementName=dialogcustom}"  Opacity="0.8" VerticalAlignment="Center"></uc:UcControlBar2>
+            <Grid Grid.Row="1" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Margin="30 0 0 10" HorizontalAlignment="Left">
+                        <TextBlock Text="User ID*" Margin="0,0,0,5" FontSize="16"/>
+                        <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="1" Padding="1" Width="200">
+                            <ComboBox x:Name="txtUserID" Style="{DynamicResource MaterialDesignComboBox}" BorderBrush="Transparent" BorderThickness="0"
+                                       FontSize="16" FontWeight="SemiBold" Foreground="Black" Margin="5,0,5,0">
+                                <ComboBoxItem Content="US01" />
+                                <ComboBoxItem Content="US02" />
+                                <ComboBoxItem Content="1" />
+                            </ComboBox>
+                        </Border>
+                    </StackPanel>
+                    <StackPanel Grid.Row="0" Margin="0 0 0 10" HorizontalAlignment="Center">
+                        <TextBlock Text="Recipient ID *" Margin="0,0,0,5" FontSize="16"/>
+                        <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="1" Padding="1" Width="200">
+                            <ComboBox x:Name="txtRecipientID" Style="{DynamicResource MaterialDesignComboBox}" BorderBrush="Transparent" BorderThickness="0"
+                                    FontSize="16" FontWeight="SemiBold" Foreground="Black" Margin="5,0,5,0">
+                                <ComboBoxItem Content="RQ01" />
+                                <ComboBoxItem Content="RQ02" />
+                                <ComboBoxItem Content="2" />
+                            </ComboBox>
+                        </Border>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Margin="30 0 0 10" HorizontalAlignment="Left">
+                        <TextBlock Text="Ngày thu nhập  *" Margin="0,0,0,5" FontSize="16"/>
+                        <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="1" Padding="1" Width="200">
+                            <DatePicker x:Name="ExpenseDatePicker" 
+                             SelectedDate="{Binding ExpenseData.ExpenseDate, Mode=TwoWay}" 
+                             FontSize="16" FontWeight="SemiBold" Foreground="Black" 
+                             Margin="5,0,5,0" />
+                        </Border>
+                    </StackPanel>
+                   
+                    <StackPanel Grid.Row="1" Width="200" HorizontalAlignment="Center">
+                        <TextBlock Text="Nhập tiền *" Margin="0,0,0,5" FontSize="16"/>
+                        <Border BorderThickness="1" BorderBrush="#999" 
+                                     CornerRadius="5" Padding="10 5" 
+                                     Background="#fafbfd">
+                            <TextBox x:Name="txtTotal" FontSize="16" Style="{StaticResource CustomStyleTextBox}"/>
+                        </Border>
+                    </StackPanel>
+                    <StackPanel Margin="30 0 30 0" Grid.Row="2">
+                        <TextBlock Text="Ghi chú" Margin="0,0,0,5" FontSize="16"/>
+                        <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Padding="10">
+                            <RichTextBox x:Name="rtbNote" FontSize="16" FontWeight="SemiBold" Foreground="Black" Height="140"/>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="1" Margin="30 0 15 0" Width="300" HorizontalAlignment="Right">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Content="Lưu Thông Tin" Height="37" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0"
+                              Background="{StaticResource BackgroundGreen}" BorderBrush="{StaticResource BackgroundGree}" Click="btnSaveAdd_Click"
+                            FontWeight="Bold" />
+                    <Button Content="Hủy" Height="37" Width="122" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1"
+                            Background="{StaticResource BackgroundRed}" BorderBrush="{StaticResource BackgroundRed}" Click="btnCancel_Click"
+                            FontWeight="Bold"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
