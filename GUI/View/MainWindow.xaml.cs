@@ -1,15 +1,15 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
+﻿using System.ComponentModel;
 using GUI.UserControls;
 using GUI.View;
+using System.Windows;
+using System.Windows.Media;
 using Control = System.Windows.Controls.Control;
 
 namespace GUI
 {
-   /// <summary>
-   /// Interaction logic for MainWindow.xaml
-   /// </summary>
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
     public partial class MainWindow
     {
         private bool _isMenuCollapsed = false;
@@ -84,16 +84,16 @@ namespace GUI
                 case "BtnRemind":
                     _ucRemind = new UcRemind();
                     ContentDisplayMain.Content = _ucRemind;
-                    break;                
+                    break;
             }
-            
+
         }
 
         void ResetBackgroundButtonIcon()
         {
             var bgTransparent = (SolidColorBrush)Application.Current.Resources["BackgroundTransparent"];
             BtnHome.Background = bgTransparent;
-            BtnCategory.Background = bgTransparent; 
+            BtnCategory.Background = bgTransparent;
             BtnExpense.Background = bgTransparent;
             BtnIncome.Background = bgTransparent;
             BtnStatistical.Background = bgTransparent;
@@ -105,8 +105,10 @@ namespace GUI
         private void BtnLogout_OnClick(object sender, RoutedEventArgs e)
         {
             DialogCustoms dialog = new DialogCustoms("Bạn có muốn đăng xuất ?", "Thông báo", DialogCustoms.YesNo);
-            if(dialog.ShowDialog() == true)
+            if (dialog.ShowDialog() == true)
             {
+                Login login = new Login();
+                login.Show();
                 this.Close();
             }
         }
@@ -115,6 +117,12 @@ namespace GUI
         {
             _ucAccount = new UcAccount();
             ContentDisplayMain.Content = _ucAccount;
+        }
+
+        private void MainWindow_OnClosing(object sender, CancelEventArgs e)
+        {
+            Login login = new Login();
+            login.Show();
         }
     }
 }

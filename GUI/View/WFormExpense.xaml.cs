@@ -2,16 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace GUI.View
 {
@@ -44,7 +36,7 @@ namespace GUI.View
                 CreatedAt = DateTime.Now*/
                 ExpenseID = 11,
                 UserID = int.Parse(txtUser.Text.ToString()),
-                CategoryID = int.Parse(txtCatagory.Text.ToString()),
+                CategoryID = int.Parse(CmbCatagory.Text.ToString()),
                 RecipientID = int.Parse(txtRecipient.Text.ToString()),
                 Amount = decimal.Parse(txtAmount.Text.ToString()),
                 ExpenseDate = DateTime.Now,
@@ -71,8 +63,8 @@ namespace GUI.View
             else
             {
 
-                newExpense.ExpenseID = Expenses.Count + 1; 
-                Expenses.Add(newExpense); 
+                newExpense.ExpenseID = Expenses.Count + 1;
+                Expenses.Add(newExpense);
                 DialogCustoms dialog = new DialogCustoms("Thêm mới thành công!", "Thông báo", DialogCustoms.Show);
                 dialog.ShowDialog();
             }

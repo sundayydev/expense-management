@@ -1,19 +1,9 @@
 ﻿using GUI.View;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace GUI.UserControls
 {
@@ -57,8 +47,18 @@ namespace GUI.UserControls
 
             if (incomeToDelete != null)
             {
+<<<<<<< HEAD
                 DialogCustoms dialog = new DialogCustoms("Bạn có muốn xóa ko ?", "Thông báo", DialogCustoms.YesNo);
                 if (dialog.ShowDialog() == true)
+=======
+                var income = button.DataContext as Income;
+
+                DialogCustoms dialog = new DialogCustoms("Bạn có muốn xóa không ?", "Thông báo", DialogCustoms.YesNo);
+                dialog.ShowDialog();
+                var dialog2 = new DialogCustoms("Bạn đã xóa thành công !", "Thông báo", DialogCustoms.OK);
+                var dialog3 = new DialogCustoms("Bạn đã hủy thành công !", "Thông báo", DialogCustoms.OK);
+                if (DialogCustoms.Show == DialogCustoms.OK)
+>>>>>>> 243ea2ce251d03d8b0510887c18d3b81eb45194a
                 {
                     Incomes.Remove(incomeToDelete);
                     InvoiceDataGrid.ItemsSource = new ObservableCollection<Income>(Incomes);
@@ -81,12 +81,27 @@ namespace GUI.UserControls
             public string UserId { get; set; }
             public string RecipientId { get; set; }
 
+<<<<<<< HEAD
             public string Source { get; set; }
             public float Amount { get; set; }
             public DateTime IncomeDate { get; set; }
             public string Note { get; set; }
             public DateTime CreatedAt { get; set; }
         }
+=======
+    }
+
+    public class Income
+    {
+        public string IncomeId { get; set; }
+        public string UserId { get; set; }
+        public string RecipientId { get; set; }
+        public string Source { get; set; }
+        public float Amount { get; set; }
+        public string IncomeDate { get; set; }
+        public string Note { get; set; }
+        public string CreatedAt { get; set; }
+>>>>>>> 243ea2ce251d03d8b0510887c18d3b81eb45194a
     }
 }
 

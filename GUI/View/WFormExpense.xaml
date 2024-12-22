@@ -39,8 +39,9 @@
                     <StackPanel Grid.Row="0" Margin="30 0 0 10" HorizontalAlignment="Left">
                         <TextBlock Text="Mã người dùng *" Margin="0,0,0,5" FontSize="16"/>
                         <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="1" Padding="1" Width="200">
-                            <ComboBox x:Name="txtUser" Style="{DynamicResource MaterialDesignComboBox}" BorderBrush="Transparent" BorderThickness="0"
-                                       FontSize="16" FontWeight="SemiBold" Foreground="Black" Margin="5,0,5,0">
+                            <ComboBox x:Name="txtUser" Style="{DynamicResource MaterialDesignComboBox}" 
+                                      BorderBrush="Transparent" BorderThickness="0"
+                                      FontSize="16" FontWeight="SemiBold" Foreground="Black" Margin="5,0,5,0">
                                 <ComboBoxItem Content="US01" />
                                 <ComboBoxItem Content="US02" />
                                 <ComboBoxItem Content="1" />
@@ -48,10 +49,10 @@
                         </Border>
                     </StackPanel>
                     <StackPanel Grid.Row="0" Margin="0 0 30 10" HorizontalAlignment="Right">
-                        <TextBlock Text="Mã Loại *" Margin="0,0,0,5" FontSize="16"/>
+                        <TextBlock Text="Loại chi tiêu *" Margin="0,0,0,5" FontSize="16"/>
                         <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="1" Padding="1" Width="200">
-                            <ComboBox x:Name="txtCatagory" Style="{DynamicResource MaterialDesignComboBox}" BorderBrush="Transparent" BorderThickness="0"
-                                      FontSize="16" FontWeight="SemiBold" Foreground="Black" Margin="5,0,5,0">
+                            <ComboBox x:Name="CmbCatagory" 
+                                      Style="{StaticResource CustomStyleComboBox}"> 
                                 <ComboBoxItem Content="CTGR01" />
                                 <ComboBoxItem Content="CTGR02" />
                                 <ComboBoxItem Content="2" />
@@ -61,8 +62,12 @@
                     <StackPanel Grid.Row="0" Margin="0 0 0 10" HorizontalAlignment="Center">
                         <TextBlock Text="Mã Recipient *" Margin="0,0,0,5" FontSize="16"/>
                         <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="1" Padding="1" Width="200">
-                            <ComboBox x:Name="txtRecipient" Style="{DynamicResource MaterialDesignComboBox}" BorderBrush="Transparent" BorderThickness="0"
-                                    FontSize="16" FontWeight="SemiBold" Foreground="Black" Margin="5,0,5,0">
+                            <ComboBox x:Name="txtRecipient" 
+                                      Style="{DynamicResource MaterialDesignComboBox}" 
+                                      BorderBrush="Transparent" BorderThickness="0"
+                                      Background="Transparent"
+                                      FontSize="16" FontWeight="SemiBold" Foreground="Black" 
+                                      Margin="5,0,5,0">
                                 <ComboBoxItem Content="RQ01" />
                                 <ComboBoxItem Content="RQ02" />
                                 <ComboBoxItem Content="2" />
