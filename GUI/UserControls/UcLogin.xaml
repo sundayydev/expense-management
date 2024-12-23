@@ -32,8 +32,12 @@
                         <fa:ImageAwesome Icon="Solid_Lock" PrimaryColor="{StaticResource TextBuleBold}" Width="25" Height="25" HorizontalAlignment="Left" Grid.Column="1" Margin="0,25,0,0" Grid.Row="1"/>
                     </Grid>
                     <Grid Width="525" Margin="0,15">
-                        <CheckBox Content="Ghi Nhớ Mật Khẩu" HorizontalAlignment="Left" FontSize="16" VerticalAlignment="Center" 
-                               Foreground="{StaticResource TextBuleBold}" Margin="10,0,0,0" Background="{StaticResource TextBuleBold}" />
+                        <CheckBox Content="Ghi Nhớ Mật Khẩu" HorizontalAlignment="Left" 
+                                  FontSize="16" VerticalAlignment="Center" 
+                                  Foreground="{StaticResource TextBuleBold}" 
+                                  Margin="10,0,0,0" 
+                                  Background="{StaticResource TextBuleBold}" 
+                                  x:Name="ChkRememberMe"/>
                         <Grid Width="200" HorizontalAlignment="Right">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
