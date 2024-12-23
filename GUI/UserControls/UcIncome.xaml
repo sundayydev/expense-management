@@ -82,19 +82,19 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <!-- UserId-->
-                        <DataGridTemplateColumn Header="User ID" Width="*"  >
+                        <!-- Tên người nhận-->
+                        <DataGridTemplateColumn Header="Tên Người Nhận" Width="*"  >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding UserId}" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding RecipientName}" VerticalAlignment="Center"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <!-- RecipientId-->
-                        <DataGridTemplateColumn Header="Recipient ID" Width="*"  >
+                        <!-- Thể loại-->
+                        <DataGridTemplateColumn Header="Tên Loại" Width="*"  >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding RecipientId}" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding CategoryName}" VerticalAlignment="Center"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -139,7 +139,7 @@
                                     <StackPanel Orientation="Horizontal">
                                         <Button Padding="6" Margin="0 0 5 0" 
                                         Background="{StaticResource BackgroundSuccess}"
-                                        BorderBrush="{StaticResource BackgroundTransparent}">
+                                        BorderBrush="{StaticResource BackgroundTransparent}" Click="btnSaveAdd_Click">
                                             <fa:ImageAwesome Icon="Regular_PenToSquare" PrimaryColor="#FBFBFB" />
                                         </Button>
                                         <Button Padding="6" Margin="5 0 0 0" 

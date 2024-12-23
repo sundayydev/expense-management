@@ -47,16 +47,10 @@ namespace GUI.UserControls
             };
 
         }
-
-<<<<<<< HEAD
-
-=======
         private void BtnAddRecipient_Click(object sender, RoutedEventArgs e)
         {
-            /* WFormRecipient wf = new WFormRecipient();
-             wf.ShowDialog();*/
+
         }
->>>>>>> 243ea2ce251d03d8b0510887c18d3b81eb45194a
     }
 
     public class Recipient
