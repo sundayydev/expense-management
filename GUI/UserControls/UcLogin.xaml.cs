@@ -1,16 +1,10 @@
 using System;
 using BLL.Services;
-using DAL.Models;
-using DAL.Repositories;
 using GUI.View;
-using System;
 using System.Windows;
 using System.Windows.Controls;
 using BLL.DTO.User;
 using DAL.Utils;
-using GUI.View;
-using MaterialDesignThemes.Wpf;
-using AppContext = BLL.AppContext;
 
 namespace GUI.UserControls
 {

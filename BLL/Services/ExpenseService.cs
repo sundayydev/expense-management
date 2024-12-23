@@ -37,6 +37,7 @@ namespace BLL.Services
         {
             return _expenseRepository.GetExpenseByUserId(UserId);
         }
+        
         public void DeleteExpense(string expenseId)
         {
             var expense = _expenseRepository.GetExpenseById(expenseId);

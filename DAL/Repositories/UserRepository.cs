@@ -31,10 +31,10 @@ namespace DAL.Repositories
             return _context.Users.FirstOrDefault(u => u.Email == email);
         }
       
-        public bool UpdateUser(User user)
+        public void UpdateUser(User user)
         {
             _context.Users.AddOrUpdate(user);
-            return false;
+            _context.SaveChanges();
         }
         
         public User GetUserByUserId(string userId)
