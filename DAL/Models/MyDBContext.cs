@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
@@ -23,6 +23,18 @@ namespace DAL.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Category>()
+                .Property(e => e.CategoryId)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Expens>()
+                .Property(e => e.CategoryId)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Income>()
+                .Property(e => e.CategoryId)
+                .IsUnicode(false);
+
             modelBuilder.Entity<Loan>()
                 .HasMany(e => e.Payments)
                 .WithRequired(e => e.Loan)
@@ -32,6 +44,10 @@ namespace DAL.Models
                 .HasMany(e => e.Loans)
                 .WithRequired(e => e.Recipient)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Reminder>()
+                .Property(e => e.CategoryId)
+                .IsUnicode(false);
 
             modelBuilder.Entity<User>()
                 .HasMany(e => e.Categories)
