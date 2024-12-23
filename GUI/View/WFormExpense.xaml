@@ -36,19 +36,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <StackPanel Grid.Row="0" Margin="30 0 0 10" HorizontalAlignment="Left">
-                        <TextBlock Text="Mã người dùng *" Margin="0,0,0,5" FontSize="16"/>
-                        <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="1" Padding="1" Width="200">
-                            <ComboBox x:Name="txtUser" Style="{DynamicResource MaterialDesignComboBox}" 
-                                      BorderBrush="Transparent" BorderThickness="0"
-                                      FontSize="16" FontWeight="SemiBold" Foreground="Black" Margin="5,0,5,0">
-                                <ComboBoxItem Content="US01" />
-                                <ComboBoxItem Content="US02" />
-                                <ComboBoxItem Content="1" />
-                            </ComboBox>
-                        </Border>
-                    </StackPanel>
-                    <StackPanel Grid.Row="0" Margin="0 0 30 10" HorizontalAlignment="Right">
+                    <StackPanel Grid.Row="0" Margin="30 0 30 10" HorizontalAlignment="Center">
                         <TextBlock Text="Loại chi tiêu *" Margin="0,0,0,5" FontSize="16"/>
                         <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="1" Padding="1" Width="200">
                             <ComboBox x:Name="CmbCategory" 
@@ -56,34 +44,26 @@
                             </ComboBox>
                         </Border>
                     </StackPanel>
-                    <StackPanel Grid.Row="0" Margin="0 0 0 10" HorizontalAlignment="Center">
+                    <StackPanel Grid.Row="0" Margin="30 0 0 0" HorizontalAlignment="Left">
                         <TextBlock Text="Mã Recipient *" Margin="0,0,0,5" FontSize="16"/>
                         <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="1" Padding="1" Width="200">
-                            <ComboBox x:Name="txtRecipient" 
-                                      Style="{DynamicResource MaterialDesignComboBox}" 
-                                      BorderBrush="Transparent" BorderThickness="0"
-                                      Background="Transparent"
-                                      FontSize="16" FontWeight="SemiBold" Foreground="Black" 
-                                      Margin="5,0,5,0">
-                                <ComboBoxItem Content="RQ01" />
-                                <ComboBoxItem Content="RQ02" />
-                                <ComboBoxItem Content="2" />
-                            </ComboBox>
+                            <ComboBox x:Name="CmbRecipient" 
+                                Style="{StaticResource CustomStyleComboBox}"></ComboBox>
                         </Border>
                     </StackPanel>
                     <StackPanel Grid.Row="1" Margin="30 0 0 10" HorizontalAlignment="Left">
                         <TextBlock Text="Ngày chi tiêu *" Margin="0,0,0,5" FontSize="16"/>
                         <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="1" Padding="1" Width="200">
-                            <DatePicker x:Name="ExpenseDatePicker" 
+                            <DatePicker x:Name="dtpExpenseDate" 
                              SelectedDate="{Binding ExpenseData.ExpenseDate, Mode=TwoWay}" 
                              FontSize="16" FontWeight="SemiBold" Foreground="Black" 
                              Margin="5,0,5,0" />
                         </Border>
                     </StackPanel>
                     <StackPanel Grid.Row="1" Margin="0 0 30 10" HorizontalAlignment="Right">
-                        <TextBlock Text="Ngày chi tiêu *" Margin="0,0,0,5" FontSize="16"/>
+                        <TextBlock Text="Ngày tạo *" Margin="0,0,0,5" FontSize="16"/>
                         <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="1" Padding="1" Width="200">
-                            <DatePicker x:Name="ExpenseDate" 
+                            <DatePicker x:Name="DtpCreateAt" 
                               SelectedDate="{Binding ExpenseData.ExpenseDate, Mode=TwoWay}" 
                               FontSize="16" FontWeight="SemiBold" Foreground="Black" 
                               Margin="5,0,5,0" />

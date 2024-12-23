@@ -1,5 +1,10 @@
-﻿using GUI.View;
+﻿using BLL.DTO.Category;
+using BLL.DTO.Expenses;
+using BLL.Services;
+using DAL.Models;
+using GUI.View;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -12,25 +17,29 @@ namespace GUI.UserControls
     /// </summary>
     public partial class UcSpend : UserControl
     {
-        public ObservableCollection<Expense> Expenses { get; set; }
+        private List<Expens> Expenses { get; set; }
+
+        private readonly ExpenseService _expenseService = new();
 
         public UcSpend()
         {
             InitializeComponent();
             LoadData();
+        }
+        void LoadData()
+        {
+            Expenses = new List<Expens>();
+            Expenses = _expenseService.GetAllExpensesByUserId(BLL.AppContext.Instance.UserId);
             dvgExpense.ItemsSource = Expenses;
         }
 
-        private void LoadData()
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            Expenses = new ObservableCollection<Expense>
-            {
-                new Expense{ ExpenseID = 1, UserID = 101, CategoryID = 1, RecipientID = 201, Amount = 150000000, ExpenseDate = DateTime.Now.Date, Note = "Lunch", CreatedAt = DateTime.Now},
-                new Expense{ ExpenseID = 2, UserID = 102, CategoryID = 2, RecipientID = 202, Amount = 250000, ExpenseDate = DateTime.Now.Date, Note = "Office Supplies", CreatedAt = DateTime.Now},
-                new Expense{ ExpenseID = 3, UserID = 103, CategoryID = 3, RecipientID = 203, Amount = 99.99m, ExpenseDate = DateTime.Now.Date, Note = "Taxi Fare", CreatedAt = DateTime.Now },
-                new Expense{ ExpenseID = 4, UserID = 104, CategoryID = 1, RecipientID = 204, Amount = 500.00m, ExpenseDate = DateTime.Now.Date, Note = "Dinner", CreatedAt = DateTime.Now },
-                new Expense{ ExpenseID = 5, UserID = 105, CategoryID = 2, RecipientID = 205, Amount = 120.75m, ExpenseDate = DateTime.Now.Date, Note = "Stationery", CreatedAt = DateTime.Now}
-            };
+            WFormExpense wf = new WFormExpense();
+            wf.ShowDialog();
+            wf.Close();
+
+            LoadData();
         }
 
         private void txtFind_TextChanged(object sender, TextChangedEventArgs e)
@@ -39,49 +48,37 @@ namespace GUI.UserControls
 
             var res = Expenses.Where(expense =>
                 expense.Note.ToLower().Contains(searchText) ||
-                expense.CategoryID.ToString().Equals(searchText)
+                expense.ExpenseId.ToString().Equals(searchText)
             ).ToList();
 
-            dvgExpense.ItemsSource = new ObservableCollection<Expense>(res);
+            dvgExpense.ItemsSource = res;
         }
-
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
-        {
-            WFormExpense formExpense = new WFormExpense();
-            formExpense.ShowDialog();
-
-        }
-        private void FormExpense_OnExpenseAdded(Expense newExpense)
-        {
-            Expenses.Add(newExpense);
-            dvgExpense.ItemsSource = new ObservableCollection<Expense>(Expenses);
-        }
-
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            var button = sender as Button;
-            var expenseToDelete = button.DataContext as Expense;
-
-            if (expenseToDelete != null)
+            try
             {
-                DialogCustoms dialog = new DialogCustoms("Bạn có muốn xóa ko ?", "Thông báo", DialogCustoms.YesNo);
-                if (dialog.ShowDialog() == true)
+                var button = sender as Button;
+                if (button == null) return;
+                var expenseToDelete = button.DataContext as Expens;
+
+                if (expenseToDelete != null)
                 {
-                    Expenses.Remove(expenseToDelete);
-                    dvgExpense.ItemsSource = new ObservableCollection<Expense>(Expenses);
+                    DialogCustoms dialog = new DialogCustoms("Bạn có muốn xóa không?", "Thông báo", DialogCustoms.YesNo);
+
+                    if (dialog.ShowDialog() == true)
+                    {
+                        _expenseService.DeleteExpense(expenseToDelete.ExpenseId);
+                        Expenses.Remove(expenseToDelete);
+                        dvgExpense.ItemsSource = new ObservableCollection<Expens>(Expenses);
+                        MessageBox.Show("Xóa thành công.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Đã xảy ra lỗi khi xóa: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
-    public class Expense
-    {
-        public int ExpenseID { get; set; }
-        public int UserID { get; set; }
-        public int CategoryID { get; set; }
-        public int RecipientID { get; set; }
-        public decimal Amount { get; set; }
-        public DateTime ExpenseDate { get; set; }
-        public string Note { get; set; }
-        public DateTime CreatedAt { get; set; }
-    }
+    
 }
