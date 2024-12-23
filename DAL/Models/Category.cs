@@ -12,10 +12,12 @@ namespace DAL.Models
         public Category()
         {
             Expenses = new HashSet<Expens>();
+            Incomes = new HashSet<Income>();
             Reminders = new HashSet<Reminder>();
         }
 
-        public int CategoryId { get; set; }
+        [StringLength(18)]
+        public string CategoryId { get; set; }
 
         public Guid UserId { get; set; }
 
@@ -35,6 +37,9 @@ namespace DAL.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Expens> Expenses { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Income> Incomes { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reminder> Reminders { get; set; }

@@ -62,15 +62,14 @@ namespace BLL.Services
             return false;
         }
 
-        public bool GetUserByEmail(string emailforgot)
+        public bool GetUserByEmail(string emailForgot)
         {
-            var user = _userRepository.GetUserByEmail(emailforgot);
+            var user = _userRepository.GetUserByEmail(emailForgot);
             if (user == null)
             {
                 return false;
             }
-
-           
+            
             return true;
         }
 
