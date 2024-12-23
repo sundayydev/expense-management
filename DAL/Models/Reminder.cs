@@ -12,7 +12,8 @@ namespace DAL.Models
 
         public Guid UserId { get; set; }
 
-        public int? CategoryId { get; set; }
+        [StringLength(18)]
+        public string CategoryId { get; set; }
 
         [Required]
         [StringLength(255)]

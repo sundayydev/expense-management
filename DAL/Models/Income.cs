@@ -13,6 +13,9 @@ namespace DAL.Models
 
         public Guid UserId { get; set; }
 
+        [StringLength(18)]
+        public string CategoryId { get; set; }
+
         public int? RecipientId { get; set; }
 
         [StringLength(100)]
@@ -27,6 +30,8 @@ namespace DAL.Models
         public string Note { get; set; }
 
         public DateTime? CreatedAt { get; set; }
+
+        public virtual Category Category { get; set; }
 
         public virtual Recipient Recipient { get; set; }
 

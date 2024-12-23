@@ -1,6 +1,7 @@
 ﻿using DAL.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,18 +31,10 @@ namespace DAL.Repositories
             return _context.Users.FirstOrDefault(u => u.Email == email);
         }
       
-        public void UpdateUser(User user)
+        public bool UpdateUser(User user)
         {
-            var existingUser = _context.Users.FirstOrDefault(u => u.UserId == user.UserId);
-
-            if (existingUser != null)
-            {
-                existingUser.FullName = user.FullName; 
-                existingUser.Email = user.Email;
-                existingUser.PasswordHash = user.PasswordHash;
-
-                _context.SaveChanges();
-            }
+            _context.Users.AddOrUpdate(user);
+            return false;
         }
         
         public User GetUserByUserId(string userId)
