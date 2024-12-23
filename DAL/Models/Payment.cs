@@ -8,9 +8,12 @@ namespace DAL.Models
 
     public partial class Payment
     {
-        public int PaymentId { get; set; }
+        [StringLength(10)]
+        public string PaymentId { get; set; }
 
-        public int LoanId { get; set; }
+        [Required]
+        [StringLength(10)]
+        public string LoanId { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime PaymentDate { get; set; }

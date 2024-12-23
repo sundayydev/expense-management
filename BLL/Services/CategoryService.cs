@@ -54,7 +54,28 @@ public class CategoryService
          
          listDto.Add(categoryDto);
       }
+      
+      return listDto;
+   }
+   
+   public List<CmbCategoryDto> GetCategoriesByCategoryType(string userId, string categoryType)
+   {
+      List<Category> list = _categoryRepository.GetCategoriesByCategoryType(userId, categoryType);
 
+      List<CmbCategoryDto> listDto = new();
+      
+      foreach (var item in list)
+      {
+         CmbCategoryDto cmbCategoryDto = new()
+         {
+            CategoryId = item.CategoryId.ToString(),
+            CategoryName = item.CategoryName,
+            CategoryType = item.CategoryType
+         };
+         
+         listDto.Add(cmbCategoryDto);
+      }
+      
       return listDto;
    }
 }

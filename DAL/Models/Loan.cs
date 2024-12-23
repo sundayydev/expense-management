@@ -14,11 +14,14 @@ namespace DAL.Models
             Payments = new HashSet<Payment>();
         }
 
-        public int LoanId { get; set; }
+        [StringLength(10)]
+        public string LoanId { get; set; }
 
         public Guid UserId { get; set; }
 
-        public int RecipientId { get; set; }
+        [Required]
+        [StringLength(10)]
+        public string RecipientId { get; set; }
 
         [StringLength(50)]
         public string LoanType { get; set; }

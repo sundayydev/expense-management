@@ -47,6 +47,7 @@
     <Compile Include="AppContext.cs" />
     <Compile Include="DTO\Category\AddCategoryDto.cs" />
     <Compile Include="DTO\Category\CategoryDto.cs" />
+    <Compile Include="DTO\Category\CmbCategoryDto.cs" />
     <Compile Include="DTO\User\LoginDto.cs" />
     <Compile Include="DTO\User\RegisterDto.cs" />
     <Compile Include="DTO\User\UserDto.cs" />

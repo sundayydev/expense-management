@@ -26,5 +26,10 @@ namespace DAL.Repositories
       {
          return _context.Categories.Where(c => c.UserId.ToString() == userId).ToList();
       }
+      
+      public List<Category> GetCategoriesByCategoryType(string userId, string categoryType)
+      {
+         return _context.Categories.Where(c => c.UserId.ToString() == userId && c.CategoryType == categoryType).ToList();
+      }
    }
 }
