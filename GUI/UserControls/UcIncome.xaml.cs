@@ -1,8 +1,11 @@
-﻿using GUI.View;
+﻿using BLL.Services;
+using DAL.Models;
+using GUI.View;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace GUI.UserControls
@@ -13,59 +16,65 @@ namespace GUI.UserControls
     public partial class UcIncome : UserControl
     {
         public ObservableCollection<Income> Incomes { get; set; }
+        private readonly IncomeService _incomeService;
         public UcIncome()
         {
             InitializeComponent();
+            _incomeService = new IncomeService();
             LoadData();
-            InvoiceDataGrid.ItemsSource = Incomes;
+            DataContext = this;
         }
         private void LoadData()
         {
-            var brushConverter = new BrushConverter();
-            Incomes = new ObservableCollection<Income>
+            try
             {
-                new Income
-                {
-                    IncomeId = "01", UserId = "1", RecipientId = "10", Source = "Lương", Amount = 1000000f,
-                    IncomeDate = DateTime.Now.ToString("HH:mm:ss dd/MM/yyyy"), Note = "Lương CV",
-                    CreatedAt = DateTime.Now.ToString("HH:mm:ss dd/MM/yyyy")
-                }
-            };
+                Incomes = new ObservableCollection<Income>(_incomeService.GetAllIncomes());
+                InvoiceDataGrid.ItemsSource = Incomes;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải dữ liệu: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
-
+        private void btnSaveAdd_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var wFormIncome = new WFormIncome();
+                wFormIncome.OnIncomeAdded += () =>
+                {
+                    LoadData();
+                };
+                wFormIncome.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi mở cửa sổ thêm thu nhập: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is Button button)
-            {
-                var income = button.DataContext as Income;
+            var button = sender as Button;
+            var incomeToDelete = button.DataContext as Income;
 
-                DialogCustoms dialog = new DialogCustoms("Bạn có muốn xóa không ?", "Thông báo", DialogCustoms.YesNo);
-                dialog.ShowDialog();
-                var dialog2 = new DialogCustoms("Bạn đã xóa thành công !", "Thông báo", DialogCustoms.OK);
-                var dialog3 = new DialogCustoms("Bạn đã hủy thành công !", "Thông báo", DialogCustoms.OK);
-                if (DialogCustoms.Show == DialogCustoms.OK)
+            if (incomeToDelete != null)
+            {
+                try
                 {
-                    Incomes.Remove(income);
-                    dialog2.ShowDialog();
+                    DialogCustoms dialog = new DialogCustoms("Bạn có muốn xóa không?", "Thông báo", DialogCustoms.YesNo);
+                    if (dialog.ShowDialog() == true)
+                    {
+                        _incomeService.DeleteIncome(incomeToDelete); 
+                        Incomes.Remove(incomeToDelete); 
+                        InvoiceDataGrid.ItemsSource = new ObservableCollection<Income>(Incomes);
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    dialog3.ShowDialog();
+                    MessageBox.Show($"Lỗi khi xóa thu nhập: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
-
-    }
-
-    public class Income
-    {
-        public string IncomeId { get; set; }
-        public string UserId { get; set; }
-        public string RecipientId { get; set; }
-        public string Source { get; set; }
-        public float Amount { get; set; }
-        public string IncomeDate { get; set; }
-        public string Note { get; set; }
-        public string CreatedAt { get; set; }
     }
 }
+

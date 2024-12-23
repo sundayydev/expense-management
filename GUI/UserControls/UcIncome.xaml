@@ -7,6 +7,7 @@
              xmlns:fa="http://schemas.fontawesome.com/icons/svg"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="1200">
+
     <Border BorderBrush="#EEEEEE" BorderThickness="1" CornerRadius="10" Background="{StaticResource BackgroundWhite}">
         <Grid>
             <Grid.RowDefinitions>
@@ -22,7 +23,7 @@
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0">
-                        <TextBlock Text="Danh sách chi tiêu" FontSize="20" FontWeight="Bold"
+                        <TextBlock Text="Danh sách thu nhập" FontSize="20" FontWeight="Bold"
                            VerticalAlignment="Center" Margin="10"/>
                     </Grid>
                     <Grid Grid.Row="1">
@@ -33,10 +34,10 @@
 
                         <Grid Grid.Column="0">
                             <Button Height="40" Width="120" HorizontalAlignment="Left" 
-                            Margin="10 0 0 0" Background="#51829B" BorderBrush="Transparent">
+                            Margin="10 0 0 0" Background="#51829B" BorderBrush="Transparent" Click="btnSaveAdd_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Thêm mới" Margin="0 0 5 0"/>
-                                    <fa:ImageAwesome Icon="Solid_Plus" Height="15" PrimaryColor="White"/>
+                                    <fa:ImageAwesome Icon="Solid_Plus" Height="15" PrimaryColor="White" />
                                 </StackPanel>
                             </Button>
                         </Grid>
@@ -74,14 +75,29 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <!-- ID chi tiêu -->
-                        <DataGridTemplateColumn Header="Id" Width="*"  >
+                        <DataGridTemplateColumn Header="Icome ID" Width="*"  >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding IncomeId}" VerticalAlignment="Center"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        
+                        <!-- Tên người nhận-->
+                        <DataGridTemplateColumn Header="Tên Người Nhận" Width="*"  >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding RecipientName}" VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!-- Thể loại-->
+                        <DataGridTemplateColumn Header="Tên Loại" Width="*"  >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding CategoryName}" VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                         <!-- Thông tin -->
                         <DataGridTemplateColumn Header="Thông tin" Width="*" >
                             <DataGridTemplateColumn.CellTemplate>
@@ -90,7 +106,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        
+
                         <!-- Số Tiền -->
                         <DataGridTemplateColumn Header="Tổng Tiền" Width="*" >
                             <DataGridTemplateColumn.CellTemplate>
@@ -99,7 +115,14 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-
+                        <!--Ngày Nhận-->
+                        <DataGridTemplateColumn Header="Ngày thu nhập" Width="*" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding IncomeDate}" VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                         <!-- Ngày tạo -->
                         <DataGridTemplateColumn Header="Ngày tạo" Width="*" >
                             <DataGridTemplateColumn.CellTemplate>
@@ -116,12 +139,12 @@
                                     <StackPanel Orientation="Horizontal">
                                         <Button Padding="6" Margin="0 0 5 0" 
                                         Background="{StaticResource BackgroundSuccess}"
-                                        BorderBrush="{StaticResource BackgroundTransparent}">
-                                            <fa:ImageAwesome Icon="Regular_PenToSquare" PrimaryColor="#FBFBFB"/>
+                                        BorderBrush="{StaticResource BackgroundTransparent}" Click="btnSaveAdd_Click">
+                                            <fa:ImageAwesome Icon="Regular_PenToSquare" PrimaryColor="#FBFBFB" />
                                         </Button>
                                         <Button Padding="6" Margin="5 0 0 0" 
                                         Background="{StaticResource BackgroundDanger}"
-                                        BorderBrush="{StaticResource BackgroundTransparent}"  CommandParameter="{Binding}" Click="BtnDelete_Click">
+                                        BorderBrush="{StaticResource BackgroundTransparent}"  Click="BtnDelete_Click">
                                             <fa:ImageAwesome Icon="Solid_Trash" PrimaryColor="#FBFBFB"/>
                                         </Button>
                                     </StackPanel>
