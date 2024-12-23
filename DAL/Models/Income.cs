@@ -9,14 +9,16 @@ namespace DAL.Models
     [Table("Income")]
     public partial class Income
     {
-        public int IncomeId { get; set; }
+        [StringLength(14)]
+        public string IncomeId { get; set; }
 
         public Guid UserId { get; set; }
 
-        [StringLength(18)]
+        [StringLength(10)]
         public string CategoryId { get; set; }
 
-        public int? RecipientId { get; set; }
+        [StringLength(10)]
+        public string RecipientId { get; set; }
 
         [StringLength(100)]
         public string Source { get; set; }

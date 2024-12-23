@@ -48,7 +48,6 @@ namespace GUI.UserControls
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             WFormExpense formExpense = new WFormExpense();
-            formExpense.OnExpenseAdded += FormExpense_OnExpenseAdded;
             formExpense.ShowDialog();
 
         }

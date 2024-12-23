@@ -11,7 +11,7 @@
         AllowsTransparency="True" 
         WindowStartupLocation="CenterScreen"
         Title="WFormExpense" Height="450" Width="800"
-
+        Loaded="WFormExpense_OnLoaded"
         >
     <Window.Clip>
         <RectangleGeometry Rect="0,0,800,450" RadiusX="10" RadiusY="10"/>
@@ -51,11 +51,8 @@
                     <StackPanel Grid.Row="0" Margin="0 0 30 10" HorizontalAlignment="Right">
                         <TextBlock Text="Loại chi tiêu *" Margin="0,0,0,5" FontSize="16"/>
                         <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="1" Padding="1" Width="200">
-                            <ComboBox x:Name="CmbCatagory" 
+                            <ComboBox x:Name="CmbCategory" 
                                       Style="{StaticResource CustomStyleComboBox}"> 
-                                <ComboBoxItem Content="CTGR01" />
-                                <ComboBoxItem Content="CTGR02" />
-                                <ComboBoxItem Content="2" />
                             </ComboBox>
                         </Border>
                     </StackPanel>

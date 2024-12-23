@@ -22,7 +22,7 @@ namespace BLL.Services
 
             var newIncome = new Income
             {
-                IncomeId = new Random().Next(1000, 9999),
+                IncomeId = null,
                 Recipient = recipient,
                 Amount = Amount,
                 IncomeDate = DateTime.Now,
@@ -35,6 +35,7 @@ namespace BLL.Services
         {
             return _incomeRepository.GetAllIncomes();
         }
+
         public void DeleteIncome(Income income)
         {
             _incomeRepository.DeleteIncome(income);

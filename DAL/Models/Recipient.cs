@@ -16,7 +16,8 @@ namespace DAL.Models
             Loans = new HashSet<Loan>();
         }
 
-        public int RecipientId { get; set; }
+        [StringLength(10)]
+        public string RecipientId { get; set; }
 
         public Guid UserId { get; set; }
 
