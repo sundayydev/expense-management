@@ -25,13 +25,13 @@ namespace GUI.UserControls
         {
             InitializeComponent();
             LoadData();
-            CategoryDataGrid.ItemsSource = Categories;
         }
 
         void LoadData()
         {
             Categories = new List<CategoryDto>();
             Categories = _categoryService.GetCategoryByUserId(AppContext.Instance.UserId);
+            CategoryDataGrid.ItemsSource = Categories;
         }
 
         private void BtnAddCategory_OnClick(object sender, RoutedEventArgs e)
@@ -39,6 +39,8 @@ namespace GUI.UserControls
             WFormCategory wf = new WFormCategory();
             wf.ShowDialog();
             wf.Close();
+            
+            LoadData();
         }
     }
 }

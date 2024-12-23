@@ -16,7 +16,7 @@ namespace DAL.Models
             Reminders = new HashSet<Reminder>();
         }
 
-        [StringLength(18)]
+        [StringLength(10)]
         public string CategoryId { get; set; }
 
         public Guid UserId { get; set; }

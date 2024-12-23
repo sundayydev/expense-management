@@ -28,11 +28,35 @@ namespace DAL.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<Expens>()
+                .Property(e => e.ExpenseId)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Expens>()
                 .Property(e => e.CategoryId)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Expens>()
+                .Property(e => e.RecipientId)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Income>()
+                .Property(e => e.IncomeId)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Income>()
                 .Property(e => e.CategoryId)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Income>()
+                .Property(e => e.RecipientId)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Loan>()
+                .Property(e => e.LoanId)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Loan>()
+                .Property(e => e.RecipientId)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Loan>()
@@ -40,10 +64,26 @@ namespace DAL.Models
                 .WithRequired(e => e.Loan)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Payment>()
+                .Property(e => e.PaymentId)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Payment>()
+                .Property(e => e.LoanId)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Recipient>()
+                .Property(e => e.RecipientId)
+                .IsUnicode(false);
+
             modelBuilder.Entity<Recipient>()
                 .HasMany(e => e.Loans)
                 .WithRequired(e => e.Recipient)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Reminder>()
+                .Property(e => e.ReminderId)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Reminder>()
                 .Property(e => e.CategoryId)

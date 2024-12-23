@@ -8,11 +8,12 @@ namespace DAL.Models
 
     public partial class Reminder
     {
-        public int ReminderId { get; set; }
+        [StringLength(14)]
+        public string ReminderId { get; set; }
 
         public Guid UserId { get; set; }
 
-        [StringLength(18)]
+        [StringLength(10)]
         public string CategoryId { get; set; }
 
         [Required]

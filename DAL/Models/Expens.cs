@@ -10,14 +10,16 @@ namespace DAL.Models
     public partial class Expens
     {
         [Key]
-        public int ExpenseId { get; set; }
+        [StringLength(14)]
+        public string ExpenseId { get; set; }
 
         public Guid UserId { get; set; }
 
-        [StringLength(18)]
+        [StringLength(10)]
         public string CategoryId { get; set; }
 
-        public int? RecipientId { get; set; }
+        [StringLength(10)]
+        public string RecipientId { get; set; }
 
         public decimal Amount { get; set; }
 
