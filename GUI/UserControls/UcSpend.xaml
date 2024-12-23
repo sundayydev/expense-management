@@ -73,17 +73,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock FontWeight="Bold" Padding="5" 
-                                               Text="{Binding ExpenseID}"  
-                                               VerticalAlignment="Center"
-                                               HorizontalAlignment="Center"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Mã Loại" Width="Auto" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock FontWeight="Bold" Padding="5" 
-                                               Text="{Binding CategoryID}"  
+                                               Text="{Binding ExpenseId}"  
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Center"/>
                                 </DataTemplate>
@@ -133,8 +123,8 @@
                                         </Button>
                                         <Button x:Name="btnDelete" Padding="6" Margin="5 0 0 0" 
                                             Background="{StaticResource BackgroundDanger}"
-                                            BorderBrush="{StaticResource BackgroundTransparent}" 
-                                            Click="btnDelete_Click">
+                                            BorderBrush="{StaticResource BackgroundTransparent}"  Click="btnDelete_Click"
+                                            >
                                             <fa:ImageAwesome Icon="Solid_Trash" PrimaryColor="#FBFBFB"/>
                                         </Button>
                                     </StackPanel>
