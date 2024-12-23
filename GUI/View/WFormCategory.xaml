@@ -108,7 +108,7 @@
                     <Button  Height="35" Width="80" Margin="0 0 20 0"
                              Background="#B1C29E" 
                              BorderBrush="Transparent"
-                             x:Name="BtnCancel"
+                             x:Name="BtnCancel" Click="BtnCancel_OnClick"
                     >
                         <TextBlock Text="Hủy" Margin="0 0 5 0" FontWeight="Bold"/>
                     </Button>
