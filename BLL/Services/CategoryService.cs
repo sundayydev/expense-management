@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Media;
 using BLL.DTO.Category;
 using DAL.Models;
@@ -32,11 +33,11 @@ public class CategoryService
       _categoryRepository.AddCategory(category);
    }
    
-   public List<CategoryDto> GetCategoryByUserId(string userId)
+   public ObservableCollection<CategoryDto> GetCategoryByUserId(string userId)
    {
-      List<Category> list =_categoryRepository.GetCategoriesByUserId(userId);
+      ObservableCollection<Category> list = new ObservableCollection<Category>(_categoryRepository.GetCategoriesByUserId(userId));
 
-      List<CategoryDto> listDto = new();
+      ObservableCollection<CategoryDto> listDto = new();
       
       var brushConverter = new BrushConverter();
       
@@ -48,8 +49,8 @@ public class CategoryService
             CategoryName = item.CategoryName,
             CategoryType = item.CategoryType,
             Description = item.Description,
-            CreatedAt = item.CreatedAt.Value.ToString("ss:mm:hh dd/MM/yyyy"),
-            ColorCategoryType = item.CategoryType == "Chi tiêu" ? (Brush)brushConverter.ConvertFromString("#DC8686") : (Brush)brushConverter.ConvertFromString("#AAD9BB")
+            CreatedAt = item.CreatedAt.Value.ToString("HH:mm:ss dd/MM/yyyy"),
+            ColorCategoryType = item.CategoryType == "Chi tiêu" ? (Brush)brushConverter.ConvertFromString("#FFF1DB") : (Brush)brushConverter.ConvertFromString("#EF5A6F")
          };
          
          listDto.Add(categoryDto);
@@ -77,5 +78,42 @@ public class CategoryService
       }
       
       return listDto;
+   }
+
+   public CategoryDto GetCategoryByCategoryId(string userId, string categoryId)
+   {
+      Category item = _categoryRepository.GetCategoryByCategoryId(userId, categoryId);
+      var brushConverter = new BrushConverter();
+      return new CategoryDto()
+      {
+         CategoryId = item.CategoryId.ToString(),
+         CategoryName = item.CategoryName,
+         CategoryType = item.CategoryType,
+         Description = item.Description,
+         CreatedAt = item.CreatedAt.Value.ToString("ss:mm:hh dd/MM/yyyy"),
+         ColorCategoryType = item.CategoryType == "Chi tiêu" ? (Brush)brushConverter.ConvertFromString("#DC8686") : (Brush)brushConverter.ConvertFromString("#AAD9BB")
+      };
+   }
+   
+   public void UpdateCategory(Category category)
+   {
+      try
+      {
+         _categoryRepository.UpdateCategory(category);
+      }
+      catch (Exception ex)
+      {
+         throw new InvalidOperationException("Cập nhật danh mục thất bại.");
+      }
+   }
+   
+   public void DeleteCategory(string userId, string categoryId)
+   {
+      var category = _categoryRepository.GetCategoryByCategoryId(userId, categoryId);
+      if (category == null)
+      {
+         throw new Exception("Danh mục này không xóa được.");
+      }
+      _categoryRepository.DeleteCategory(category);
    }
 }
