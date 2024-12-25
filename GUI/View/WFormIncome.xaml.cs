@@ -1,18 +1,24 @@
-﻿using BLL.Services;
+﻿using BLL.DTO.Category;
+using BLL.DTO.Income;
+using BLL.Services;
 using DAL.Models;
+using DAL.Repositories;
 using GUI.UserControls;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
+using System.Windows.Media.TextFormatting;
+using AppContext = BLL.AppContext;
 
 namespace GUI.View
 {
     public partial class WFormIncome : Window
     {
-        private readonly IncomeService _incomeService;
-        public event Action OnIncomeAdded;
+        private readonly IncomeService _incomeService = new IncomeService();
+        private readonly CategoryService _categoryService = new CategoryService();
+        private readonly UcIncome _ucIncome;
         public WFormIncome()
         {
             InitializeComponent();
@@ -22,27 +28,78 @@ namespace GUI.View
         {
             try
             {
-                string recipientName = txtRecipientName.Text;
-                decimal amount = Decimal.Parse(txtTotal.Text);
-                string note = new TextRange(rtbNote.Document.ContentStart, rtbNote.Document.ContentEnd).Text.Trim();
-                var incomeService = new IncomeService();
-                incomeService.AddNewIncome(recipientName, amount, note);
-                OnIncomeAdded?.Invoke();
-                var dialog = new DialogCustoms("Thêm mới thành công!", "Thông báo", DialogCustoms.Show);
-                dialog.ShowDialog();
-                this.Close();
+                if (ValidateForm())
+                {
+                    var addIncomeDto = new AddIncomeDto
+                    {
+                        UserId = AppContext.Instance.UserId,
+                        CategoryId = cmbCategoryName.SelectedValue.ToString(),
+                        IncomeDate = ExpenseDatePicker.SelectedDate.Value,
+                        Amount = decimal.Parse(txtTotal.Text),
+                        Note = new TextRange(rtbNote.Document.ContentStart,
+                            rtbNote.Document.ContentEnd).Text.Trim()
+                    };
+
+                    _incomeService.AddIncome(addIncomeDto);
+                    MessageBox.Show("Thêm thu nhập thành công.", "Thông báo",
+                        MessageBoxButton.OK, MessageBoxImage.Information);
+                    DialogResult = true;
+                    Close();
+                }
             }
             catch (Exception ex)
             {
-                var dialog = new DialogCustoms($"Lỗi: {ex.Message}", "Thông báo", DialogCustoms.Show);
-                dialog.ShowDialog();
+                MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            ResetFormIncome();
+        }
+
+        private bool ValidateForm()
+        {
+            if (cmbCategoryName.SelectedValue == null)
+            {
+                MessageBox.Show("Vui lòng chọn danh mục.", "Thông báo");
+                return false;
+            }
+
+            if (ExpenseDatePicker.SelectedDate == null)
+            {
+                MessageBox.Show("Vui lòng chọn ngày.", "Thông báo");
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtTotal.Text) ||
+                !decimal.TryParse(txtTotal.Text, out decimal amount) ||
+                amount <= 0)
+            {
+                MessageBox.Show("Vui lòng nhập số tiền hợp lệ.", "Thông báo");
+                return false;
+            }
+
+            return true;
         }
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            DialogCustoms cancelDialog = new DialogCustoms("Hủy thao tác", "Thông báo", DialogCustoms.Show);
-            cancelDialog.ShowDialog();
-            this.Close();
+                DialogCustoms cancelDialog = new DialogCustoms("Hủy thao tác", "Thông báo", DialogCustoms.Show);
+                cancelDialog.ShowDialog();
+                this.Close();
         }
+        public void LoadCmbCategories()
+        {
+            cmbCategoryName.ItemsSource = _categoryService.GetCategoriesByCategoryType(AppContext.Instance.UserId, "Chi tiêu");
+            cmbCategoryName.DisplayMemberPath = "CategoryName";
+            cmbCategoryName.SelectedValuePath = "CategoryId";
+        }
+            private void WFormIncome_OnLoaded(object sender, RoutedEventArgs e)
+            {
+            LoadCmbCategories();
+            }
+
+            public void ResetFormIncome()
+            {
+            txtTotal.Text = "";
+            rtbNote.Document.Blocks.Clear();
+            }
     }
-}
+} 

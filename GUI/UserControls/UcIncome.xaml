@@ -82,6 +82,14 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
+                        <!-- Thể loại-->
+                        <DataGridTemplateColumn Header="Tên Loại" Width="*"  >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding CategoryName}" VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                         <!-- Tên người nhận-->
                         <DataGridTemplateColumn Header="Tên Người Nhận" Width="*"  >
                             <DataGridTemplateColumn.CellTemplate>
@@ -90,11 +98,21 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <!-- Thể loại-->
-                        <DataGridTemplateColumn Header="Tên Loại" Width="*"  >
+                        <!--Ngày Nhận-->
+                        <DataGridTemplateColumn Header="Ngày thu nhập" Width="*" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding CategoryName}" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding IncomeDate}" VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                       
+                        <!-- Số Tiền -->
+                        <DataGridTemplateColumn Header="Tổng Tiền" Width="*" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Amount, StringFormat=N0}" VerticalAlignment="Center"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -107,22 +125,6 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <!-- Số Tiền -->
-                        <DataGridTemplateColumn Header="Tổng Tiền" Width="*" >
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Amount, StringFormat=N0}" VerticalAlignment="Center"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <!--Ngày Nhận-->
-                        <DataGridTemplateColumn Header="Ngày thu nhập" Width="*" >
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding IncomeDate}" VerticalAlignment="Center"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
                         <!-- Ngày tạo -->
                         <DataGridTemplateColumn Header="Ngày tạo" Width="*" >
                             <DataGridTemplateColumn.CellTemplate>

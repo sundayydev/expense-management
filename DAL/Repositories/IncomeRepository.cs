@@ -11,25 +11,30 @@ namespace DAL.Repositories
     {
         private readonly MyDBContext _context = new MyDBContext();
         public IncomeRepository()
-        { }
+        {
+           _context = new MyDBContext();
+        }
         public void AddIncome(Income income)
         {
             _context.Incomes.Add(income);
             _context.SaveChanges();
         }
-        public void DeleteIncome(Income income)
+        public List<Income> GetIncomesByUserId(string userId)
         {
-            _context.Incomes.Remove(income);
-            _context.SaveChanges();
+            return _context.Incomes.Include("Category") .Where(i => i.UserId.ToString() == userId).OrderByDescending(i => i.IncomeDate).ToList();
         }
-        public void AddRecipient(Recipient recipient)
+        public void DeleteIncomeById(string incomeId)
         {
-            _context.Recipients.Add(recipient);
-            _context.SaveChanges();
+            var income = _context.Incomes.Find(incomeId);
+            if (income != null)
+            {
+                _context.Incomes.Remove(income);
+                _context.SaveChanges();
+            }
         }
-        public List<Income> GetAllIncomes()
+        public List<Income> GetIncomesByCategoryId(string categoryId)
         {
-            return _context.Incomes.ToList();
+            return _context.Incomes.Where(i => i.CategoryId == categoryId).ToList();
         }
     }
 }

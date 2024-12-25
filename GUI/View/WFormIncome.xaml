@@ -10,7 +10,10 @@
         WindowStyle="None"
         AllowsTransparency="True" 
         WindowStartupLocation="CenterScreen"
-        Title="WFormIcome" Height="450" Width="800">
+        Title="WFormIcome" Height="450" Width="800"
+        Loaded="WFormIncome_OnLoaded"
+        >
+    
     <Window.Clip>
         <RectangleGeometry Rect="0,0,800,450" RadiusX="10" RadiusY="10"/>
     </Window.Clip>
@@ -37,22 +40,15 @@
                     <StackPanel Grid.Row="0" Margin="30 0 0 10" HorizontalAlignment="Left">
                         <TextBlock Text="Thể loại*" Margin="0,0,0,5" FontSize="16"/>
                         <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="1" Padding="1" Width="200">
-                            <ComboBox x:Name="txtCategoryName" Style="{DynamicResource MaterialDesignComboBox}" BorderBrush="Transparent" BorderThickness="0"
-                                       FontSize="16" FontWeight="SemiBold" Foreground="Black" Margin="5,0,5,0">
-                                <ComboBoxItem Content="US01" />
-                                <ComboBoxItem Content="US02" />
-                                <ComboBoxItem Content="1" />
+                            <ComboBox x:Name="cmbCategoryName" Style="{StaticResource CustomStyleComboBox}">
                             </ComboBox>
                         </Border>
                     </StackPanel>
                     <StackPanel Grid.Row="0" Margin="0 0 0 10" HorizontalAlignment="Center">
                         <TextBlock Text="Tên người nhận*" Margin="0,0,0,5" FontSize="16"/>
                         <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="1" Padding="1" Width="200">
-                            <ComboBox x:Name="txtRecipientName" Style="{DynamicResource MaterialDesignComboBox}" BorderBrush="Transparent" BorderThickness="0"
-                                    FontSize="16" FontWeight="SemiBold" Foreground="Black" Margin="5,0,5,0">
-                                <ComboBoxItem Content="RQ01" />
-                                <ComboBoxItem Content="RQ02" />
-                                <ComboBoxItem Content="2" />
+                            <ComboBox x:Name="CmbRecipentName" 
+                              Style="{StaticResource CustomStyleComboBox}">
                             </ComboBox>
                         </Border>
                     </StackPanel>

@@ -48,6 +48,8 @@
     <Compile Include="DTO\Category\AddCategoryDto.cs" />
     <Compile Include="DTO\Category\CategoryDto.cs" />
     <Compile Include="DTO\Category\CmbCategoryDto.cs" />
+    <Compile Include="DTO\Income\AddIncomeDto.cs" />
+    <Compile Include="DTO\Income\IncomeDto.cs" />
     <Compile Include="DTO\Expenses\ExpenseDto.cs" />
     <Compile Include="DTO\User\LoginDto.cs" />
     <Compile Include="DTO\User\RegisterDto.cs" />
