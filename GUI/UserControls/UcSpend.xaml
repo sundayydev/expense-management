@@ -30,10 +30,10 @@
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0">
                             <Button x:Name="btnAdd" Height="40" Width="120" HorizontalAlignment="Left" 
-                                Margin="10 0 0 0" Background="#51829B" BorderBrush="Transparent" Click="btnAdd_Click" >
+                                Margin="10 0 0 0" Background="White" BorderBrush="Orange" Click="btnAdd_Click" >
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Thêm mới" Margin="0 0 5 0"/>
-                                    <fa:ImageAwesome Icon="Solid_Plus" Height="15" PrimaryColor="White"/>
+                                    <TextBlock Text="Thêm mới" Margin="0 0 5 0" Foreground="Orange" FontWeight="Bold"/>
+                                    <fa:ImageAwesome Icon="Solid_Plus" Height="15" PrimaryColor="Orange"/>
                                 </StackPanel>
                             </Button>
                         </Grid>
@@ -46,8 +46,8 @@
                                     <TextBox x:Name="txtFind" FontSize="16" Style="{StaticResource CustomStyleTextBox}" TextChanged="txtFind_TextChanged"/>
                                 </Border>
                                 <Button x:Name="btnFind" Padding="5" Margin="5 0 0 0" Height="40" 
-                                        Background="{StaticResource BackgroundLight}" BorderThickness="0">
-                                    <fa:ImageAwesome Icon="Solid_MagnifyingGlass" />
+                                        Background="#F0BB78" BorderThickness="0">
+                                    <fa:ImageAwesome Icon="Solid_MagnifyingGlass" PrimaryColor="#FBF6E9"/>
                                 </Button>
                             </StackPanel>
                         </Grid>
@@ -55,7 +55,11 @@
                 </Grid>
             </Grid>
             <Grid Grid.Row="1">
-                <DataGrid x:Name="dvgExpense" AutoGenerateColumns="False" CanUserAddRows="False" Margin="10" Style="{StaticResource CustomStyleDataGrid}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="582*"/>
+                    <ColumnDefinition Width="17*"/>
+                </Grid.ColumnDefinitions>
+                <DataGrid x:Name="dvgExpense" AutoGenerateColumns="False" CanUserAddRows="False" Margin="10,10,10,10" Style="{StaticResource CustomStyleDataGrid}" Grid.ColumnSpan="2">
                     <DataGrid.Columns>
                         <!-- Checkbox Column -->
                         <DataGridTemplateColumn Width="Auto">
@@ -69,13 +73,34 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <!-- Character Column (Recipient Name) -->
-                        <DataGridTemplateColumn Header="Mã Chi Tiêu" Width="Auto" IsReadOnly="True">
+                        <DataGridTemplateColumn Header="Mã Chi Tiêu" Width="*" IsReadOnly="True">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock FontWeight="Bold" Padding="5" 
                                                Text="{Binding ExpenseId}"  
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!-- Character Column (Recipient Name) -->
+                        <DataGridTemplateColumn Header="Loại Chi Tiêu" Width="*" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock FontWeight="Bold" Padding="5" 
+                                           Text="{Binding Category.CategoryName}"  
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Người nhận" Width="*" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock FontWeight="Bold" Padding="5" 
+                                        Text="{Binding RecipientId}"  
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -118,7 +143,7 @@
                                     <StackPanel Orientation="Horizontal">
                                         <Button x:Name="btnEdit" Padding="6" Margin="0 0 5 0" 
                                             Background="{StaticResource BackgroundSuccess}"
-                                            BorderBrush="{StaticResource BackgroundTransparent}"  Click="btnAdd_Click">
+                                            BorderBrush="{StaticResource BackgroundTransparent}"  Click="btnEdit_Click">
                                             <fa:ImageAwesome Icon="Regular_PenToSquare" PrimaryColor="#FBFBFB"/>
                                         </Button>
                                         <Button x:Name="btnDelete" Padding="6" Margin="5 0 0 0" 

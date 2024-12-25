@@ -20,7 +20,6 @@ namespace GUI.UserControls
         private List<Expens> Expenses { get; set; }
 
         private readonly ExpenseService _expenseService = new();
-
         public UcSpend()
         {
             InitializeComponent();
@@ -45,13 +44,18 @@ namespace GUI.UserControls
         private void txtFind_TextChanged(object sender, TextChangedEventArgs e)
         {
             string searchText = txtFind.Text.ToLower();
-
+            DateTime? searchDate = null;
+            if (DateTime.TryParse(searchText, out DateTime parsedDate))
+            {
+                searchDate = parsedDate.Date; 
+            }
             var res = Expenses.Where(expense =>
                 expense.Note.ToLower().Contains(searchText) ||
-                expense.ExpenseId.ToString().Equals(searchText)
+                expense.ExpenseId.ToString().Equals(searchText)||
+                (searchDate.HasValue && expense.ExpenseDate.Date == searchDate.Value)
             ).ToList();
 
-            dvgExpense.ItemsSource = res;
+            dvgExpense.ItemsSource = res.ToList();
         }
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
@@ -70,13 +74,34 @@ namespace GUI.UserControls
                         _expenseService.DeleteExpense(expenseToDelete.ExpenseId);
                         Expenses.Remove(expenseToDelete);
                         dvgExpense.ItemsSource = new ObservableCollection<Expens>(Expenses);
-                        MessageBox.Show("Xóa thành công.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                        
+                        DialogCustoms res = new DialogCustoms("Xóa thành công ","Thông báo",DialogCustoms.OK);
                     }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Đã xảy ra lỗi khi xóa: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var button = sender as Button;
+                var expenseToEdit = button?.DataContext as Expens;
+
+                if (expenseToEdit != null)
+                {
+                    var editForm = new WFormExpense(expenseToEdit);
+                    editForm.ShowDialog();
+                    LoadData();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Đã xảy ra lỗi khi chỉnh sửa: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
