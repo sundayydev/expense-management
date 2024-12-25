@@ -19,6 +19,7 @@ namespace GUI.UserControls
         {
             InitializeComponent();
             LoadSavedCredentials();
+            
         }
 
         private void btnForgotPass_Click(object sender, RoutedEventArgs e)
@@ -83,7 +84,7 @@ namespace GUI.UserControls
 
         bool IsValidation()
         {
-            if (string.IsNullOrEmpty(TxtEmail.Text))
+            if (string.IsNullOrEmpty(TxtEmail.Text) )
             {
                 DialogCustoms dialogCustoms = 
                     new DialogCustoms("Email không được để trống", "Lỗi", DialogCustoms.OK);
@@ -111,6 +112,17 @@ namespace GUI.UserControls
                 TxtPassword.passbox.Password = password;
                 ChkRememberMe.IsChecked = true;
             }
+        }
+        private void ChkRememberMe_Checked(object sender, RoutedEventArgs e)
+        {
+  
+            
+        }
+
+        // Event handler for Unchecked event of ChkRememberMe
+        private void ChkRememberMe_Unchecked(object sender, RoutedEventArgs e)
+        {
+           
         }
     }
 }

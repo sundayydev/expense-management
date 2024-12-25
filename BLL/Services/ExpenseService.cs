@@ -47,5 +47,25 @@ namespace BLL.Services
             }
             _expenseRepository.DeleteExpense(expense);
         }
+        public void UpdateExpense(Expens updateExpense)
+        {
+            var existingExpense = _expenseRepository.GetExpenseById(updateExpense.ExpenseId);
+
+            if (existingExpense == null)
+            {
+                throw new Exception("Chi tiêu không tồn tại.");
+            }
+            existingExpense.CategoryId = updateExpense.CategoryId;
+            existingExpense.RecipientId = updateExpense.RecipientId ?? null;
+            existingExpense.Amount = updateExpense.Amount;
+            existingExpense.ExpenseDate = updateExpense.ExpenseDate;
+            existingExpense.Note = updateExpense.Note;
+            _expenseRepository.UpdateExpense(existingExpense);
+        }
+        public decimal GetTotalExpensesByUserId(string userId)
+        {
+            return _expenseRepository.GetTotalExpenseByUserId(userId);
+        }
+
     }
 }
