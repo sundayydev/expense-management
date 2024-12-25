@@ -144,9 +144,6 @@
     <Compile Include="UserControls\UcSpend.xaml.cs">
       <DependentUpon>UcSpend.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\UcUpdatePass.xaml.cs">
-      <DependentUpon>UcUpdatePass.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -234,10 +231,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\UcSpend.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\UcUpdatePass.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
