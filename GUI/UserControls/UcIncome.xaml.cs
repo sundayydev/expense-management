@@ -1,12 +1,16 @@
-﻿using BLL.Services;
+﻿using BLL.DTO.Category;
+using BLL.DTO.Income;
+using BLL.Services;
 using DAL.Models;
 using GUI.View;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using AppContext = BLL.AppContext;
 
 namespace GUI.UserControls
 {
@@ -15,63 +19,48 @@ namespace GUI.UserControls
     /// </summary>
     public partial class UcIncome : UserControl
     {
-        public ObservableCollection<Income> Incomes { get; set; }
-        private readonly IncomeService _incomeService;
+        private List<IncomeDto> Incomes {get;set;}
+        private readonly IncomeService _incomeService = new ();
         public UcIncome()
         {
             InitializeComponent();
-            _incomeService = new IncomeService();
             LoadData();
-            DataContext = this;
-        }
-        private void LoadData()
-        {
-            try
-            {
-                Incomes = new ObservableCollection<Income>(_incomeService.GetAllIncomes());
-                InvoiceDataGrid.ItemsSource = Incomes;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi tải dữ liệu: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
         }
         private void btnSaveAdd_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                var wFormIncome = new WFormIncome();
-                wFormIncome.OnIncomeAdded += () =>
-                {
-                    LoadData();
-                };
-                wFormIncome.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi mở cửa sổ thêm thu nhập: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+           WFormIncome wf = new WFormIncome();
+           wf.ShowDialog();
+           wf.Close();
+           LoadData();
+        }
+        public void LoadData()
+        {
+            Incomes = new List<IncomeDto>();
+            Incomes = _incomeService.GetIncomeByUserId(AppContext.Instance.UserId);
+            InvoiceDataGrid.ItemsSource = Incomes;
         }
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            var button = sender as Button;
-            var incomeToDelete = button.DataContext as Income;
-
-            if (incomeToDelete != null)
+            var income = (IncomeDto)InvoiceDataGrid.SelectedItem;
+            if (income == null)
+            {
+                DialogCustoms chose = new DialogCustoms("Vui lòng chọn một dòng để xóa.", "Thông báo", DialogCustoms.Show);
+                return;
+            }
+            if (MessageBox.Show("Bạn có chắc chắn muốn xóa dòng này không?", "Xác nhận",
+                MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 try
                 {
-                    DialogCustoms dialog = new DialogCustoms("Bạn có muốn xóa không?", "Thông báo", DialogCustoms.YesNo);
-                    if (dialog.ShowDialog() == true)
-                    {
-                        _incomeService.DeleteIncome(incomeToDelete); 
-                        Incomes.Remove(incomeToDelete); 
-                        InvoiceDataGrid.ItemsSource = new ObservableCollection<Income>(Incomes);
-                    }
+                    _incomeService.DeleteIncome(income.IncomeId);
+                    MessageBox.Show("Xóa thu nhập thành công.", "Thông báo",
+                        MessageBoxButton.OK, MessageBoxImage.Information);
+                    LoadData();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Lỗi khi xóa thu nhập: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

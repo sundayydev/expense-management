@@ -1,45 +1,73 @@
-﻿using DAL.Models;
+﻿using BLL.DTO.Category;
+using BLL.DTO.Income;
+using DAL.Models;
 using DAL.Repositories;
+using DAL.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace BLL.Services
 {
     public class IncomeService
     {
-        private readonly IncomeRepository _incomeRepository;
+        private readonly IncomeRepository _incomeRepository = new();
+        private readonly CategoryRepository _categoryRepository = new();
         public IncomeService()
         {
             _incomeRepository = new IncomeRepository();
+            _categoryRepository = new CategoryRepository();
             
         }
-        public void AddNewIncome(string RecipientName,decimal Amount , string Note)
+        public void AddIncome(AddIncomeDto addIncomeDto)
         {
-            var recipient = new Recipient { RecipientName = RecipientName };
-
-            var newIncome = new Income
+            var income = new Income
             {
-                IncomeId = null,
-                Recipient = recipient,
-                Amount = Amount,
-                IncomeDate = DateTime.Now,
-                Note = Note,
+                IncomeId = new CodeGenerator().GenerateCodeIncome(),
+                UserId = Guid.Parse(addIncomeDto.UserId),
+                CategoryId = addIncomeDto.CategoryId,
+                IncomeDate = addIncomeDto.IncomeDate,
+                Amount = addIncomeDto.Amount,
+                Note = addIncomeDto.Note,
                 CreatedAt = DateTime.Now
             };
-            _incomeRepository.AddIncome(newIncome);
+            _incomeRepository.AddIncome(income);
         }
-        public List<Income> GetAllIncomes()
+        public List<IncomeDto> GetIncomeByUserId(string userId)
         {
-            return _incomeRepository.GetAllIncomes();
-        }
+            try
+            {
+                var incomes = _incomeRepository.GetIncomesByUserId(userId);
 
-        public void DeleteIncome(Income income)
+                return incomes.Select(i => new IncomeDto
+                {
+                    IncomeId = i.IncomeId,
+                    CategoryId = i.CategoryId,
+                    CategoryName = i.Category?.CategoryName,
+                    IncomeDate = i.IncomeDate,
+                    Amount = i.Amount,
+                    Note = i.Note,
+                    CreatedAt =i.CreatedAt ?? DateTime.Now
+                }).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Lỗi khi lấy danh sách thu nhập: {ex.Message}");
+            }
+        }
+        public void DeleteIncome(string incomeId)
         {
-            _incomeRepository.DeleteIncome(income);
+            var income = _incomeRepository.GetIncomesByUserId(incomeId);
+            if (income == null)
+            {
+                throw new Exception("Thu nhập không tồn tại.");
+            }
+            _incomeRepository.DeleteIncomeById(incomeId);
         }
-
     }
+
 }
