@@ -20,7 +20,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
-                        <TextBlock Text="Danh sách chi tiêu" FontSize="20" FontWeight="Bold" Foreground="{StaticResource TextPrimary}"
+                        <TextBlock Text="Danh Sách Chi Tiêu" FontSize="20" FontWeight="Bold" Foreground="Orange"
                                VerticalAlignment="Center" Margin="10"/>
                     </Grid>
                     <Grid Grid.Row="1">
@@ -36,6 +36,7 @@
                                     <fa:ImageAwesome Icon="Solid_Plus" Height="15" PrimaryColor="Orange"/>
                                 </StackPanel>
                             </Button>
+                            
                         </Grid>
                         <Grid Grid.Column="1">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 10 0">
@@ -59,16 +60,13 @@
                     <ColumnDefinition Width="582*"/>
                     <ColumnDefinition Width="17*"/>
                 </Grid.ColumnDefinitions>
-                <DataGrid x:Name="dvgExpense" AutoGenerateColumns="False" CanUserAddRows="False" Margin="10,10,10,10" Style="{StaticResource CustomStyleDataGrid}" Grid.ColumnSpan="2">
+                <DataGrid x:Name="dvgExpense" AutoGenerateColumns="False" CanUserAddRows="False" Margin="10,10,10,10" Style="{StaticResource CustomStyleDataGrid}" Grid.ColumnSpan="2" >
                     <DataGrid.Columns>
                         <!-- Checkbox Column -->
-                        <DataGridTemplateColumn Width="Auto">
-                            <DataGridTemplateColumn.Header>
-                                <CheckBox Background="SkyBlue"/>
-                            </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn Header="Chọn" Width="70">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <CheckBox Background="SkyBlue"/>
+                                    <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" Background="Orange"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

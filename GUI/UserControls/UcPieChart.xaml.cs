@@ -2,9 +2,11 @@
 using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Effects;
+using BLL.Services;
+using System.Windows.Media.Effects;  
 
 namespace GUI.UserControls
 {
@@ -13,7 +15,6 @@ namespace GUI.UserControls
         public Func<ChartPoint, string> Pointlabel { get; set; }
 
         private Random _random = new Random();
-
 
         private string[] colorArray = new string[]
         {
@@ -26,34 +27,21 @@ namespace GUI.UserControls
             "#85A98F"
         };
 
+        private readonly ExpenseService _expenseService = new ExpenseService();  
+        private string userId = BLL.AppContext.Instance.UserId;  
+        ExpenseService expense = new ExpenseService();
         public UcPieChart()
         {
             InitializeComponent();
+            Pointlabel = chartPoint => string.Format("{0} - {1:N0} VND ({2:P})", chartPoint.SeriesView.Title, chartPoint.Y, chartPoint.Participation);
 
-            Pointlabel = chartPoint => string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
-            var pieChart = this.PieChart;
 
-            var seriesList = new[]
-            {
-                new PieSeries { Title = "Game", Values = new ChartValues<int> { 3 }, DataLabels = true, LabelPoint = Pointlabel },
-                new PieSeries { Title = "Sim", Values = new ChartValues<int> { 4 }, DataLabels = true, LabelPoint = Pointlabel },
-                new PieSeries { Title = "Cafe", Values = new ChartValues<int> { 6 }, DataLabels = true, LabelPoint = Pointlabel },
-                new PieSeries { Title = "Beer", Values = new ChartValues<int> { 2 }, DataLabels = true, LabelPoint = Pointlabel }
-            };
-
-            for (int i = 0; i < seriesList.Length; i++)
-            {
-                string color = GetRandomColor();
-                seriesList[i].Fill = (Brush)new BrushConverter().ConvertFrom(color);
-            }
-
-            pieChart.Series.Clear();
-            foreach (var series in seriesList)
-            {
-                pieChart.Series.Add(series);
-            }
+            UpdateChartData(); 
             DataContext = this;
+            decimal totalExpense = expense.GetTotalExpensesByUserId(BLL.AppContext.Instance.UserId);
+            //txtTotal.Text = $"{totalExpense:N0} VND";
         }
+
         private List<string> usedColors = new List<string>();
 
         private string GetRandomColor()
@@ -68,7 +56,48 @@ namespace GUI.UserControls
             usedColors.Add(color);
             return color;
         }
+
+        private void UpdateChartData()
+        {
+            var dailyExpenses = _expenseService.GetDailyExpenses(userId);
+            var groupedExpenses = dailyExpenses
+                .GroupBy(e => e.CategoryId)  
+                .Select(group => new
+                {
+                    CategoryId = group.Key,
+                    TotalAmount = group.Sum(e => e.Amount),
+                    CategoryName = group.First().Note 
+                })
+                .ToList();
+
+            var pieSeriesList = new List<PieSeries>();
+            foreach (var expense in groupedExpenses)
+            {
+                var pieSeries = new PieSeries
+                {
+                    Title = expense.CategoryName ?? "null",
+                    Values = new ChartValues<int> { (int)expense.TotalAmount },
+                    DataLabels = true,
+                    LabelPoint = chartPoint => string.Format("{0:N0} VND", chartPoint.Y),
+
+
+            };
+
+                // Gán màu ngẫu nhiên cho từng danh mục
+                string color = GetRandomColor();
+                pieSeries.Fill = (Brush)new BrushConverter().ConvertFrom(color);
+                pieSeriesList.Add(pieSeries);
+            }
+
+            PieChart.Series.Clear();
+            foreach (var series in pieSeriesList)
+            {
+                PieChart.Series.Add(series);
+            }
+        }
+
         private PieSeries _selectedSeries = null;
+
         private void PieChart_DataClick(object sender, LiveCharts.ChartPoint chartPoint)
         {
             if (_selectedSeries != null)
@@ -81,23 +110,26 @@ namespace GUI.UserControls
 
             if (_selectedSeries == chartPoint.SeriesView)
             {
-                _selectedSeries = null;
-                return;
+                _selectedSeries = null;  
+                return;  
             }
 
             _selectedSeries = (PieSeries)chartPoint.SeriesView;
-            _selectedSeries.PushOut = 8;
-            _selectedSeries.Stroke = new SolidColorBrush(Colors.Gray);
-            _selectedSeries.StrokeThickness = 1;
-
-            _selectedSeries.Effect = new DropShadowEffect
+            _selectedSeries.PushOut = 8;  
+            _selectedSeries.Stroke = new SolidColorBrush(Colors.Gray);  
+            _selectedSeries.StrokeThickness = 1;  
+            _selectedSeries.Effect = new DropShadowEffect  
             {
                 Color = Colors.Gray,
                 Direction = 470,
                 ShadowDepth = 30,
                 Opacity = 0.8
             };
+            var totalAmount = chartPoint.Y;  
+            var categoryName = chartPoint.SeriesView.Title;  
+            var percentage = chartPoint.Participation * 100;  
 
+            InfoTextBlock.Text = $"{categoryName}: {totalAmount:N0} VND ({percentage:N2}%)";
         }
     }
 }

@@ -67,8 +67,8 @@
         <GradientStop Color="#93F9B9" Offset="1.0" />
     </LinearGradientBrush>
     <LinearGradientBrush x:Key="BgGradientBlueCus" StartPoint="0.1,0.2" EndPoint="1,1">
-        <GradientStop Color="#61BAFF" Offset="0.0" />
-        <GradientStop Color="#A6EFFD" Offset="0.901" />
+        <GradientStop Color="#90c1fc" Offset="0.4" />
+        <GradientStop Color="#D9EAFD" Offset="1.0" />
     </LinearGradientBrush>
     <LinearGradientBrush x:Key="BgGradientCyanPurple" StartPoint="0,0" EndPoint="1,1">
         <GradientStop Color="#90c1fc" Offset="0.3" />

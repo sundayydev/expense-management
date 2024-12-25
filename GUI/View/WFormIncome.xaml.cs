@@ -33,7 +33,7 @@ namespace GUI.View
                     var addIncomeDto = new AddIncomeDto
                     {
                         UserId = AppContext.Instance.UserId,
-                        CategoryId = cmbCategoryName.SelectedValue.ToString(),
+                        CategoryId = cmbCategoryType.SelectedValue.ToString(),
                         IncomeDate = ExpenseDatePicker.SelectedDate.Value,
                         Amount = decimal.Parse(txtTotal.Text),
                         Note = new TextRange(rtbNote.Document.ContentStart,
@@ -57,7 +57,7 @@ namespace GUI.View
 
         private bool ValidateForm()
         {
-            if (cmbCategoryName.SelectedValue == null)
+            if (cmbCategoryType.SelectedValue == null)
             {
                 MessageBox.Show("Vui lòng chọn danh mục.", "Thông báo");
                 return false;
@@ -87,9 +87,11 @@ namespace GUI.View
         }
         public void LoadCmbCategories()
         {
-            cmbCategoryName.ItemsSource = _categoryService.GetCategoriesByCategoryType(AppContext.Instance.UserId, "Chi tiêu");
-            cmbCategoryName.DisplayMemberPath = "CategoryName";
-            cmbCategoryName.SelectedValuePath = "CategoryId";
+            var categories = _categoryService.GetCategoriesByCategoryType(AppContext.Instance.UserId, "Thu nhập");
+            var filteredCategories = categories.Where(c => c.CategoryType == "Thu nhập").ToList();
+            cmbCategoryType.ItemsSource = filteredCategories;
+            cmbCategoryType.DisplayMemberPath = "CategoryName";
+            cmbCategoryType.SelectedValuePath = "CategoryId";
         }
             private void WFormIncome_OnLoaded(object sender, RoutedEventArgs e)
             {

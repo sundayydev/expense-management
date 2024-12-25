@@ -6,6 +6,7 @@ using DAL.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,7 +15,7 @@ namespace BLL.Services
     public class ExpenseService
     {
         private readonly ExpenseRepository _expenseRepository = new();
-
+       
         public void AddExpense(ExpenseDto addExpense)
         {
 
@@ -66,6 +67,49 @@ namespace BLL.Services
         {
             return _expenseRepository.GetTotalExpenseByUserId(userId);
         }
+        public List<ExpenseDto> GetMonthlyExpenses(string userId)
+        {
+            var expenses = _expenseRepository.GetExpenseByUserId(userId);
+
+            // Nhóm chi tiêu theo tháng và năm
+            var monthlyExpenses = expenses
+                .GroupBy(e => new DateTime(e.ExpenseDate.Year, e.ExpenseDate.Month, 1))  // Nhóm theo năm và tháng
+                .Select(g => new ExpenseDto
+                {
+                    CategoryId = g.Key.ToString("MMMM yyyy"),  // Lấy chuỗi tháng và năm
+                    Amount = g.Sum(e => e.Amount),  // Tính tổng chi tiêu của tháng đó
+                })
+                .OrderBy(e => DateTime.ParseExact(e.CategoryId, "MMMM yyyy", null))  // Sắp xếp theo tháng năm
+                .ToList();
+
+            return monthlyExpenses;
+        }
+        public List<ExpenseDto> GetDailyExpenses(string userId)
+        {
+            var expenses = _expenseRepository.GetDailyExpenses(userId);
+            return expenses.Select(e => new ExpenseDto
+            {
+                Amount = e.Amount,
+                CategoryId = e.CategoryId,
+                Note = e.Note,
+            }).ToList();
+        }
+        public List<string> GetMonthsWithExpenses(string userId)
+        {
+            var expenses = _expenseRepository.GetExpenseByUserId(userId);
+
+            
+            var months = expenses
+                .Select(e => new DateTime(e.ExpenseDate.Year, e.ExpenseDate.Month, 1))  
+                .Distinct()
+                .OrderBy(date => date) 
+                .ToList();
+
+           
+            return months.Select(m => m.ToString("MMMM yyyy")).ToList();
+        }
+
+
 
     }
 }
