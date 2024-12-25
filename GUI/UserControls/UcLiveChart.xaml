@@ -6,43 +6,52 @@
              xmlns:local="clr-namespace:GUI.UserControls"
              xmlns:lc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <!-- Định nghĩa màu gradient cho biểu đồ -->
+        <LinearGradientBrush x:Key="IncomeGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#ACE6F6" Offset="-0.005" />
+            <GradientStop Color="#446491" Offset="0.998" />
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="ExpenseGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#f6d794" Offset="0" />
+            <GradientStop Color="#ef8377" Offset="1" />
+        </LinearGradientBrush>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
-
+        <!-- Header Section -->
         <StackPanel Grid.Row="0">
-
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Content="Thống kê chi tiêu" FontSize="16" 
-                        FontWeight="SemiBold" HorizontalAlignment="Left"  
-                        VerticalAlignment="Center" />
+                       FontWeight="SemiBold" HorizontalAlignment="Left"  
+                       VerticalAlignment="Center" />
                 <StackPanel Grid.Column="1" Width="165" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                     <!-- RadioButton: Ngày -->
                     <Border Style="{StaticResource BorderStyleDay}" BorderThickness="2" CornerRadius="5" Padding="5" Margin="6,0,0,0">
-                        <RadioButton x:Name="rdbDay" Content="Tuần" GroupName="TimeSelection"  Checked="rdbDay_Checked"
-                         Style="{StaticResource DayRadioButtonStyle}" 
-                         HorizontalAlignment="Right" />
+                        <RadioButton x:Name="rdbDay" Content="Ngày" GroupName="TimeSelection"  Checked="rdbDay_Checked"
+                                     Style="{StaticResource DayRadioButtonStyle}" 
+                                     HorizontalAlignment="Right" />
                     </Border>
-
                     <!-- RadioButton: Tháng -->
                     <Border  Style="{StaticResource BorderStyleMonth}" BorderThickness="2" CornerRadius="5" Padding="5" Margin="6,0,0,0">
                         <RadioButton x:Name="rdbMonth" Content="Tháng" GroupName="TimeSelection" Checked="rdbMonth_Checked"
-                         Style="{StaticResource MonthRadioButtonStyle}" 
-                         HorizontalAlignment="Left" />
+                                     Style="{StaticResource MonthRadioButtonStyle}" 
+                                     HorizontalAlignment="Left" />
                     </Border>
                 </StackPanel>
             </Grid>
         </StackPanel>
+        <!-- Chart Section -->
         <Grid Grid.Row="1" Height="300" Margin="5 15 5 5">
             <Border Background="AliceBlue" BorderThickness="1" BorderBrush="Transparent" 
                     CornerRadius="5" Padding="5">
-
                 <lc:CartesianChart Series="{Binding SeriesCollection}" >
                     <lc:CartesianChart.AxisX>
                         <lc:Axis Labels="{Binding Labels}" LabelsRotation="0">
@@ -55,9 +64,7 @@
                         <lc:Axis LabelFormatter="{Binding Values}" />
                     </lc:CartesianChart.AxisY>
                 </lc:CartesianChart>
-
             </Border>
         </Grid>
-
     </Grid>
 </UserControl>

@@ -16,7 +16,9 @@ namespace BLL.DTO.Expenses
         public decimal Amount { get; set; }
         public DateTime ExpenseDate { get; set; }
         public string Note { get; set; }
-
+        
         public DateTime CreatedAt { get; set; }
+
+        public bool IsSelected { get; set; }
     }
 }

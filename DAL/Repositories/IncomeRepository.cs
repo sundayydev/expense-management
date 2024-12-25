@@ -36,5 +36,27 @@ namespace DAL.Repositories
         {
             return _context.Incomes.Where(i => i.CategoryId == categoryId).ToList();
         }
+        public decimal GetTotalIncomeByUserId(string userId)
+        {
+            return _context.Incomes
+                           .Where(e => e.UserId.ToString() == userId)
+                           .Sum(e => e.Amount);
+        }
+        public List<Income> GetMonthlyIncome(string userId)
+        {
+            var userGuid = Guid.Parse(userId);
+            return _context.Incomes
+                .Where(i => i.UserId == userGuid && i.IncomeDate.Month == DateTime.Now.Month)
+                .ToList();
+        }
+
+        // Lấy thu nhập hàng ngày của người dùng
+        public List<Income> GetDailyIncome(string userId)
+        {
+            var userGuid = Guid.Parse(userId);
+            return _context.Incomes
+                .Where(i => i.UserId == userGuid && i.IncomeDate.Day == DateTime.Now.Day)
+                .ToList();
+        }
     }
 }

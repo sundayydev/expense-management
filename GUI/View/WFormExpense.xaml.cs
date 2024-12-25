@@ -22,7 +22,7 @@ namespace GUI.View
         private readonly ExpenseService _expenseService = new();
         private readonly Expens _expense;
         private readonly bool _isEditMode;
-
+        private readonly string _expenseId;
         public WFormExpense()
         {
             InitializeComponent();
@@ -33,13 +33,15 @@ namespace GUI.View
             InitializeComponent();
             _expense = expense;
             _isEditMode = expense != null;
-           
+            
             LoadExpenseData();
         }
+       
         private void LoadExpenseData()
         {
             if (_expense != null)
             {
+                txtExpenseId.Text = _expense.ExpenseId.ToString();
                 CmbCategory.SelectedValuePath = _expense.CategoryId;
                 txtAmount.Text = _expense.Amount.ToString();
                 dtpExpenseDate.DisplayDate = _expense.ExpenseDate;
@@ -87,7 +89,8 @@ namespace GUI.View
                     };
 
                     _expenseService.AddExpense(addExpense);
-                    MessageBox.Show("Thêm chi tiêu thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    DialogCustoms dialogCustomsUpdate = new DialogCustoms("Thêm chi tiêu thành công!", "Thông báo", DialogCustoms.OK);
+                    dialogCustomsUpdate.ShowDialog();
                 }
 
                 this.Close();

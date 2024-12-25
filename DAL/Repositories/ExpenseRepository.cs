@@ -46,5 +46,22 @@ namespace DAL.Repositories
                            .Where(e => e.UserId.ToString() == userId)
                            .Sum(e => e.Amount);
         }
+        public List<Expens> GetMonthlyExpenses(string userId)
+        {
+            var userGuid = Guid.Parse(userId);
+            return _context.Expenses
+                .Where(e => e.UserId == userGuid && e.ExpenseDate.Month == DateTime.Now.Month)
+                .ToList();
+        }
+
+        // Lấy chi tiêu hàng ngày của người dùng
+        public List<Expens> GetDailyExpenses(string userId)
+        {
+            var userGuid = Guid.Parse(userId);
+            return _context.Expenses
+                .Where(e => e.UserId == userGuid && e.ExpenseDate.Day == DateTime.Now.Day)
+                .ToList();
+        }
+
     }
 }

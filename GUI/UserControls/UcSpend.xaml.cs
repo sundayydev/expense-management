@@ -17,6 +17,8 @@ namespace GUI.UserControls
     /// </summary>
     public partial class UcSpend : UserControl
     {
+        private List<Expens> selectedExpenses = new List<Expens>();
+
         private List<Expens> Expenses { get; set; }
 
         private readonly ExpenseService _expenseService = new();
@@ -47,11 +49,11 @@ namespace GUI.UserControls
             DateTime? searchDate = null;
             if (DateTime.TryParse(searchText, out DateTime parsedDate))
             {
-                searchDate = parsedDate.Date; 
+                searchDate = parsedDate.Date;
             }
             var res = Expenses.Where(expense =>
                 expense.Note.ToLower().Contains(searchText) ||
-                expense.ExpenseId.ToString().Equals(searchText)||
+                expense.ExpenseId.ToString().Equals(searchText) ||
                 (searchDate.HasValue && expense.ExpenseDate.Date == searchDate.Value)
             ).ToList();
 
@@ -74,8 +76,8 @@ namespace GUI.UserControls
                         _expenseService.DeleteExpense(expenseToDelete.ExpenseId);
                         Expenses.Remove(expenseToDelete);
                         dvgExpense.ItemsSource = new ObservableCollection<Expens>(Expenses);
-                        
-                        DialogCustoms res = new DialogCustoms("Xóa thành công ","Thông báo",DialogCustoms.OK);
+
+                        DialogCustoms res = new DialogCustoms("Xóa thành công ", "Thông báo", DialogCustoms.OK);
                     }
                 }
             }
@@ -84,7 +86,6 @@ namespace GUI.UserControls
                 MessageBox.Show($"Đã xảy ra lỗi khi xóa: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -105,5 +106,4 @@ namespace GUI.UserControls
             }
         }
     }
-    
 }
