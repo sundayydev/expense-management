@@ -10,6 +10,7 @@ using BLL.DTO.Category;
 using BLL.DTO.Expenses;
 using DAL.Models;
 using System.Windows.Controls;
+using BLL.DTO.Recipient;
 
 namespace GUI.View
 {
@@ -20,6 +21,7 @@ namespace GUI.View
     {
         private readonly CategoryService _categoryService = new();
         private readonly ExpenseService _expenseService = new();
+        private readonly RecipientService _recipientService = new();
         private readonly Expens _expense;
         private readonly bool _isEditMode;
         private readonly string _expenseId;
@@ -35,6 +37,7 @@ namespace GUI.View
             _isEditMode = expense != null;
             
             LoadExpenseData();
+            
         }
        
         private void LoadExpenseData()
@@ -43,19 +46,20 @@ namespace GUI.View
             {
                 txtExpenseId.Text = _expense.ExpenseId.ToString();
                 CmbCategory.SelectedValuePath = _expense.CategoryId;
+                CmbRecipient.SelectedValuePath = _expense.RecipientId;
                 txtAmount.Text = _expense.Amount.ToString();
                 dtpExpenseDate.DisplayDate = _expense.ExpenseDate;
                 rtbNote.Document.Blocks.Clear();
                 rtbNote.Document.Blocks.Add(new Paragraph(new Run(_expense.Note)));
             }
         }
-            private void btnSaveAdd_Click(object sender, RoutedEventArgs e)
+        private void btnSaveAdd_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 if (_isEditMode)
                 {
-                    _expense.RecipientId = null;
+                    _expense.RecipientId = CmbRecipient.SelectedValue?.ToString();
                     _expense.CategoryId = (CmbCategory.SelectedItem as CmbCategoryDto).CategoryId;
                     _expense.Amount = decimal.Parse(txtAmount.Text);
                     _expense.ExpenseDate = dtpExpenseDate.SelectedDate.HasValue ? dtpExpenseDate.SelectedDate.Value : _expense.ExpenseDate;
@@ -67,7 +71,7 @@ namespace GUI.View
                         ExpenseId = _expense.ExpenseId,
                         UserId = _expense.UserId,
                         CategoryId = _expense.CategoryId,
-                        RecipientId = _expense.RecipientId ?? null,
+                        RecipientId = _expense.RecipientId,
                         Amount = _expense.Amount,
                         ExpenseDate = _expense.ExpenseDate,
                         Note = _expense.Note
@@ -82,9 +86,9 @@ namespace GUI.View
                     {
                         UserId = BLL.AppContext.Instance.UserId,
                         CategoryId = (CmbCategory.SelectedItem as CmbCategoryDto).CategoryId,
-                        RecipientId = null,
+                        RecipientId = CmbRecipient.SelectedValue?.ToString(),
                         Amount = decimal.Parse(txtAmount.Text),
-                        ExpenseDate = dtpExpenseDate.SelectedDate.Value,
+                        ExpenseDate = dtpExpenseDate.SelectedDate ?? DateTime.Now,
                         Note = new TextRange(rtbNote.Document.ContentStart, rtbNote.Document.ContentEnd).Text.Trim()
                     };
 
@@ -116,12 +120,20 @@ namespace GUI.View
             CmbCategory.DisplayMemberPath = "CategoryName";
             CmbCategory.SelectedValuePath = "CategoryId";
         }
-
+        void LoadCmbRecipient()
+        {
+            var recipients =_recipientService.GetRecipientsByUserId(AppContext.Instance.UserId);
+            CmbRecipient.ItemsSource = recipients;
+            CmbRecipient.DisplayMemberPath = "RecipientName";
+            CmbRecipient.SelectedValuePath = "RecipientId";
+        }
         private void WFormExpense_OnLoaded(object sender, RoutedEventArgs e)
         {
             LoadCmbCategories();
+            LoadCmbRecipient();
             if (_isEditMode && _expense != null)
-            {
+            {   
+                CmbRecipient.SelectedValue = _expense.RecipientId; 
                 CmbCategory.SelectedValue = _expense.CategoryId;
                 txtAmount.Text = _expense.Amount.ToString();
                 dtpExpenseDate.SelectedDate = _expense.ExpenseDate;

@@ -24,14 +24,13 @@ namespace BLL.Services
                 ExpenseId = new CodeGenerator().GenerateCodeExpense(),
                 UserId = Guid.Parse(addExpense.UserId),
                 CategoryId = addExpense.CategoryId,
-                RecipientId = addExpense.RecipientId ?? null,
+                RecipientId = addExpense.RecipientId,
                 Amount = addExpense.Amount,
                 ExpenseDate = addExpense.ExpenseDate,
                 Note = addExpense.Note,
                 CreatedAt = DateTime.Now
             };
             _expenseRepository.AddExpense(expense);
-            
         }
 
         public List<Expens> GetAllExpensesByUserId(string UserId)
