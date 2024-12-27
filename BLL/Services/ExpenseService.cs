@@ -70,19 +70,17 @@ namespace BLL.Services
         public List<ExpenseDto> GetMonthlyExpenses(string userId)
         {
             var expenses = _expenseRepository.GetExpenseByUserId(userId);
-
-            // Nhóm chi tiêu theo tháng và năm
             var monthlyExpenses = expenses
                 .GroupBy(e => new DateTime(e.ExpenseDate.Year, e.ExpenseDate.Month, 1))  // Nhóm theo năm và tháng
                 .Select(g => new ExpenseDto
                 {
                     CategoryId = g.Key.ToString("MMMM yyyy"),  // Lấy chuỗi tháng và năm
-                    Amount = g.Sum(e => e.Amount),  // Tính tổng chi tiêu của tháng đó
+                    Amount = g.Sum(e => e.Amount),
                 })
-                .OrderBy(e => DateTime.ParseExact(e.CategoryId, "MMMM yyyy", null))  // Sắp xếp theo tháng năm
+                .OrderBy(e => DateTime.ParseExact(e.CategoryId, "MMMM yyyy", null)) 
                 .ToList();
 
-            return monthlyExpenses;
+            return monthlyExpenses ?? null;
         }
         public List<ExpenseDto> GetDailyExpenses(string userId)
         {
@@ -97,8 +95,12 @@ namespace BLL.Services
         public List<string> GetMonthsWithExpenses(string userId)
         {
             var expenses = _expenseRepository.GetExpenseByUserId(userId);
+            if (expenses == null || !expenses.Any())
+            {
+                return new List<string>(); // Trả về danh sách rỗng
+            }
 
-            
+
             var months = expenses
                 .Select(e => new DateTime(e.ExpenseDate.Year, e.ExpenseDate.Month, 1))  
                 .Distinct()
@@ -106,10 +108,7 @@ namespace BLL.Services
                 .ToList();
 
            
-            return months.Select(m => m.ToString("MMMM yyyy")).ToList();
+            return months.Select(m => m.ToString("MMMM yyyy")).ToList() ?? null;
         }
-
-
-
     }
 }

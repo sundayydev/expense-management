@@ -6,12 +6,14 @@ using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media;
 using BLL.Services;
-using System.Windows.Media.Effects;  
+using System.Windows.Media.Effects;
+using System.Windows;
 
 namespace GUI.UserControls
 {
     public partial class UcPieChart : UserControl
     {
+        private readonly CategoryService _categoryService = new CategoryService();
         public Func<ChartPoint, string> Pointlabel { get; set; }
 
         private Random _random = new Random();
@@ -33,13 +35,10 @@ namespace GUI.UserControls
         public UcPieChart()
         {
             InitializeComponent();
-            Pointlabel = chartPoint => string.Format("{0} - {1:N0} VND ({2:P})", chartPoint.SeriesView.Title, chartPoint.Y, chartPoint.Participation);
+            UpdateChartData();
+            //  DataContext = this;
 
-
-            UpdateChartData(); 
-            DataContext = this;
-            decimal totalExpense = expense.GetTotalExpensesByUserId(BLL.AppContext.Instance.UserId);
-            //txtTotal.Text = $"{totalExpense:N0} VND";
+            decimal totalExpense = expense.GetTotalExpensesByUserId(userId);
         }
 
         private List<string> usedColors = new List<string>();
@@ -59,40 +58,51 @@ namespace GUI.UserControls
 
         private void UpdateChartData()
         {
-            var dailyExpenses = _expenseService.GetDailyExpenses(userId);
-            var groupedExpenses = dailyExpenses
-                .GroupBy(e => e.CategoryId)  
-                .Select(group => new
-                {
-                    CategoryId = group.Key,
-                    TotalAmount = group.Sum(e => e.Amount),
-                    CategoryName = group.First().Note 
-                })
-                .ToList();
-
-            var pieSeriesList = new List<PieSeries>();
-            foreach (var expense in groupedExpenses)
+            try
             {
-                var pieSeries = new PieSeries
+                var dailyExpenses = _expenseService.GetDailyExpenses(userId);
+                if (dailyExpenses == null || !dailyExpenses.Any())
                 {
-                    Title = expense.CategoryName ?? "null",
-                    Values = new ChartValues<int> { (int)expense.TotalAmount },
-                    DataLabels = true,
-                    LabelPoint = chartPoint => string.Format("{0:N0} VND", chartPoint.Y),
+                    PieChart.Series.Clear();    
+                    return;
+                }
+                var categories = _categoryService.GetCategoryByUserId(userId);
+                var groupedExpenses = dailyExpenses
+                    .GroupBy(e => e.CategoryId)  
+                    .Select(group => new
+                    {
+                        CategoryId = group.Key,
+                        TotalAmount = group.Sum(e => e.Amount),
+                        CategoryName = categories.FirstOrDefault(c => c.CategoryId == group.Key)?.CategoryName ?? null
+                    })
+                    .ToList();
 
+                var pieSeriesList = new List<PieSeries>();
+                foreach (var expense in groupedExpenses)
+                {
+                        var pieSeries = new PieSeries
+                        {
+                            Title = expense.CategoryName ?? "null",
+                            Values = new ChartValues<int> { (int)expense.TotalAmount },
+                            DataLabels = true,
+                            LabelPoint = chartPoint => string.Format("{0:P}", chartPoint.Participation),
+                        };
 
-            };
+                    // Gán màu ngẫu nhiên cho từng danh mục
+                    string color = GetRandomColor();
+                    pieSeries.Fill = (Brush)new BrushConverter().ConvertFrom(color);
+                    pieSeriesList.Add(pieSeries);
+                }
 
-                // Gán màu ngẫu nhiên cho từng danh mục
-                string color = GetRandomColor();
-                pieSeries.Fill = (Brush)new BrushConverter().ConvertFrom(color);
-                pieSeriesList.Add(pieSeries);
-            }
-
-            PieChart.Series.Clear();
-            foreach (var series in pieSeriesList)
+                PieChart.Series.Clear();
+                foreach (var series in pieSeriesList)
+                {
+                    PieChart.Series.Add(series);
+                }
+             }
+            catch (Exception ex)
             {
-                PieChart.Series.Add(series);
+                return;
             }
         }
 
@@ -129,7 +139,7 @@ namespace GUI.UserControls
             var categoryName = chartPoint.SeriesView.Title;  
             var percentage = chartPoint.Participation * 100;  
 
-            InfoTextBlock.Text = $"{categoryName}: {totalAmount:N0} VND ({percentage:N2}%)";
+           InfoTextBlock.Text = $"{totalAmount:N0} VND";
         }
     }
 }
