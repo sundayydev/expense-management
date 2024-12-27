@@ -15,7 +15,7 @@
                     <Style.Triggers>
                         <!-- Highlight a grid row as the mouse passes over -->
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#9BB0C1" />
+                            <Setter Property="Background" Value="#e9edf2" />
                         </Trigger>
                     </Style.Triggers>
                 </Style>
@@ -27,12 +27,12 @@
                     <Style.Triggers>
                         <!-- Highlight selected rows -->
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="#9BB0C1" />
+                            <Setter Property="Background" Value="#e9edf2" />
                             <Setter Property="BorderBrush" Value="Transparent" />
                             <Setter Property="Foreground" Value="Black" />
                         </Trigger>
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter Property="Background" Value="#9BB0C1" />
+                            <Setter Property="Background" Value="#e9edf2" />
                             <Setter Property="BorderBrush" Value="Black" />
                             <Setter Property="BorderThickness" Value="1"/>
                             <Setter Property="Foreground" Value="Black" />

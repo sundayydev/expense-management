@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using DAL.Models;
@@ -12,7 +11,7 @@ namespace DAL.Repositories
       
       public CategoryRepository()
       { }
-      
+       
       public bool ExistsByCategoryName(string categoryName)
       {
          return _context.Categories.Any(c => c.CategoryName == categoryName);

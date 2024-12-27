@@ -3,7 +3,9 @@ using System.Windows.Controls;
 using BLL;
 using BLL.DTO.User;
 using BLL.Services;
+using DAL.Utils;
 using GUI.View;
+using System.Windows.Media;
 
 namespace GUI.UserControls
 {
@@ -12,7 +14,8 @@ namespace GUI.UserControls
     /// </summary>
     public partial class UcAccount : UserControl
     {
-        private UserService userService = new UserService();
+        private Brush ColorAvatar { get; set; }
+        private readonly UserService _userService = new UserService();
         public UcAccount()
         {
             InitializeComponent();
@@ -20,6 +23,7 @@ namespace GUI.UserControls
 
         private void UcAccount_OnLoaded(object sender, RoutedEventArgs e)
         {
+            ColorAvatar = new RandomColorGenerator().GetRandomColor();
             //Load info user
             LoadData();
         }
@@ -31,7 +35,7 @@ namespace GUI.UserControls
         
         private void LoadData()
         {
-            var userDto = userService.GetUserByUserId(AppContext.Instance.UserId);
+            var userDto = _userService.GetUserByUserId(AppContext.Instance.UserId);
             if (userDto != null)
             {
                 TblFullName.Text = userDto.FullName;

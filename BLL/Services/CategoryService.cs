@@ -50,7 +50,6 @@ public class CategoryService
             CategoryType = item.CategoryType,
             Description = item.Description,
             CreatedAt = item.CreatedAt.Value.ToString("HH:mm:ss dd/MM/yyyy"),
-            ColorCategoryType = item.CategoryType == "Chi tiêu" ? (Brush)brushConverter.ConvertFromString("#FFF1DB") : (Brush)brushConverter.ConvertFromString("#EF5A6F")
          };
          
          listDto.Add(categoryDto);
@@ -83,7 +82,6 @@ public class CategoryService
    public CategoryDto GetCategoryByCategoryId(string userId, string categoryId)
    {
       Category item = _categoryRepository.GetCategoryByCategoryId(userId, categoryId);
-      var brushConverter = new BrushConverter();
       return new CategoryDto()
       {
          CategoryId = item.CategoryId.ToString(),
@@ -91,7 +89,6 @@ public class CategoryService
          CategoryType = item.CategoryType,
          Description = item.Description,
          CreatedAt = item.CreatedAt.Value.ToString("ss:mm:hh dd/MM/yyyy"),
-         ColorCategoryType = item.CategoryType == "Chi tiêu" ? (Brush)brushConverter.ConvertFromString("#DC8686") : (Brush)brushConverter.ConvertFromString("#AAD9BB")
       };
    }
    

@@ -52,6 +52,8 @@
     <Compile Include="DTO\Income\AddIncomeDto.cs" />
     <Compile Include="DTO\Income\IncomeDto.cs" />
     <Compile Include="DTO\Expenses\ExpenseDto.cs" />
+      <Compile Include="DTO\Recipient\AddRecipientDto.cs"/>
+      <Compile Include="DTO\Recipient\RecipientDto.cs" />
     <Compile Include="DTO\User\LoginDto.cs" />
     <Compile Include="DTO\User\RegisterDto.cs" />
     <Compile Include="DTO\User\UserDto.cs" />
@@ -59,6 +61,7 @@
     <Compile Include="Services\ExpenseService.cs" />
     <Compile Include="Services\IncomeService.cs" />
     <Compile Include="Services\CategoryService.cs" />
+    <Compile Include="Services\RecipientService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -27,7 +27,7 @@
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0">
-                    <TextBlock Text="Danh sách người nhận" FontSize="20" FontWeight="Bold"
+                    <TextBlock Text="Danh Sách Các Loại" FontSize="20" FontWeight="Bold" Foreground="#640D5F"
                                VerticalAlignment="Center" Margin="10"/> 
                 </Grid>
                 <Grid Grid.Row="1">
@@ -37,14 +37,15 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="0">
+                        <!-- Button Add Category -->
                         <Button Height="40" Width="120" HorizontalAlignment="Left" 
-                                Margin="10 0 0 0" Background="#51829B" 
-                                BorderBrush="Transparent"
+                                Margin="10 0 0 0" Background="White" 
+                                BorderBrush="#640D5F"
                                 x:Name="BtnAddCategory" Click="BtnAddCategory_OnClick"
-                                >
+                        >
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Thêm mới" Margin="0 0 5 0" FontWeight="Bold"/>
-                                <fa:ImageAwesome Icon="Solid_Plus" Height="15" PrimaryColor="White"/>
+                                <TextBlock Text="Thêm mới" Margin="0 0 5 0" FontWeight="Bold" Foreground="#640D5F"/>
+                                <fa:ImageAwesome Icon="Solid_Plus" Height="15" PrimaryColor="#640D5F"/>
                             </StackPanel>
                         </Button>
                     </Grid>
@@ -59,7 +60,7 @@
                                 <TextBox FontSize="16" Style="{StaticResource CustomStyleTextBox}"/>
                             </Border>
                             <Button Padding="8" Margin="5 0 0 0" Height="40"
-                                    Background="#93BFCF" BorderBrush="Transparent"
+                                    Background="#640D5F" BorderBrush="Transparent"
                                     >
                                 <fa:ImageAwesome Icon="Solid_MagnifyingGlass" PrimaryColor="#F9F5F6"/>
                             </Button>
@@ -86,7 +87,7 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <!-- Character Column -->
+                    <!-- Mã loại -->
                     <DataGridTemplateColumn Header="Mã Loại" Width="120" >
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -108,10 +109,11 @@
                     <DataGridTemplateColumn Header="Kiểu loại" Width="140" >
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Border Background="{Binding ColorCategoryType}" 
+                                <Border Background="{Binding BgCategoryType}" 
                                         CornerRadius="5" Width="80" Height="30" >
                                     <TextBlock Text="{Binding CategoryType}" 
-                                               VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Medium"/>
+                                               VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                               FontWeight="Medium" Foreground="{Binding ColorCategoryType}"/>
                                 </Border>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -150,7 +152,7 @@
                                     <Button Padding="6" Margin="5 0 0 0" 
                                             Background="{StaticResource BackgroundDanger}"
                                             BorderBrush="{StaticResource BackgroundTransparent}"
-                                            Click="ButtonBase_OnClick"
+                                            Click="ButtonDelete_OnClick"
                                             >
                                         <fa:ImageAwesome Icon="Solid_Trash" PrimaryColor="#FBFBFB"/>
                                     </Button>

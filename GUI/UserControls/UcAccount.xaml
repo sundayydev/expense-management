@@ -30,7 +30,7 @@
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <!-- Avatar -->
                             <Border Width="80" Height="80" Margin="0,0,10,0" CornerRadius="10">
-                                <fa:ImageAwesome Icon="Brands_SquareGithub" PrimaryColor="{StaticResource BgGradientDanger}"/>
+                                <fa:ImageAwesome Icon="Brands_SquareGithub" PrimaryColor="{Binding ColorAvatar}"/>
                             </Border>
 
                             <StackPanel VerticalAlignment="Center">
