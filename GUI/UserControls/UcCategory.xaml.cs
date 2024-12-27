@@ -66,7 +66,7 @@ namespace GUI.UserControls
             }
         }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        private void ButtonDelete_OnClick(object sender, RoutedEventArgs e)
         {
             // Lấy Button được nhấn
             Button button = sender as Button;
