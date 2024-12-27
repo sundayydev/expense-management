@@ -29,9 +29,11 @@ namespace GUI.UserControls
         }
         void LoadData()
         {
-            Expenses = new List<Expens>();
             Expenses = _expenseService.GetAllExpensesByUserId(BLL.AppContext.Instance.UserId);
-            dvgExpense.ItemsSource = Expenses;
+
+            var sortedExpenses = Expenses.OrderByDescending(e => e.Amount).ToList();
+
+            dvgExpense.ItemsSource = sortedExpenses;
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
@@ -47,18 +49,20 @@ namespace GUI.UserControls
         {
             string searchText = txtFind.Text.ToLower();
             DateTime? searchDate = null;
+
             if (DateTime.TryParse(searchText, out DateTime parsedDate))
             {
                 searchDate = parsedDate.Date;
             }
             var res = Expenses.Where(expense =>
-                expense.Note.ToLower().Contains(searchText) ||
-                expense.ExpenseId.ToString().Equals(searchText) ||
-                (searchDate.HasValue && expense.ExpenseDate.Date == searchDate.Value)
+                expense.Note.ToLower().Contains(searchText)  
+                || expense.ExpenseId.ToString().Contains(searchText)
+                || (searchDate.HasValue && expense.ExpenseDate.Date == searchDate.Value) 
+                || expense.Amount.ToString().Contains(searchText)  
             ).ToList();
-
-            dvgExpense.ItemsSource = res.ToList();
+            dvgExpense.ItemsSource = res;
         }
+
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             try

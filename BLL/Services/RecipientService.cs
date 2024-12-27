@@ -1,4 +1,5 @@
-﻿using BLL.DTO.Recipient;
+﻿using BLL.DTO.Category;
+using BLL.DTO.Recipient;
 using DAL.Models;
 using DAL.Repositories;
 using DAL.Utils;
@@ -69,6 +70,25 @@ namespace BLL.Services
         {
             Recipient recipient = _recipientRepository.GetRecipientByRecipientId(recipientId);
             _recipientRepository.DeleteRecipient(recipient);
+        }
+        public List<CmbRecipientDto> GetCategoriesByCategoryType(string userId)
+        {
+            List<Recipient> list = _recipientRepository.GetRecipientsByUserId(userId);
+
+            List<CmbRecipientDto> listDto = new();
+
+            foreach (var item in list)
+            {
+                CmbRecipientDto cmbRecipientDto = new()
+                {
+                    RecipientId = item.RecipientId.ToString(),
+                    RecipientName = item.RecipientName,
+                };
+
+                listDto.Add(cmbRecipientDto);
+            }
+
+            return listDto;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace BLL.DTO.Recipient
         {
             get
             {
-                return !string.IsNullOrEmpty(RecipientName) ? RecipientName[0].ToString() : string.Empty;
+                return !string.IsNullOrEmpty(RecipientName) ? RecipientName[0].ToString().ToUpper() : string.Empty;
             }
         }
 

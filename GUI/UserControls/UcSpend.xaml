@@ -85,18 +85,18 @@
                         <DataGridTemplateColumn Header="Loại Chi Tiêu" Width="*" IsReadOnly="True">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock FontWeight="Bold" Padding="5" 
+                                    <TextBlock  Padding="5" 
                                            Text="{Binding Category.CategoryName}"  
                                            VerticalAlignment="Center"
-                                           HorizontalAlignment="Center"/>
+                                           HorizontalAlignment="Center" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn Header="Người nhận" Width="*" IsReadOnly="True">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock FontWeight="Bold" Padding="5" 
-                                        Text="{Binding RecipientId}"  
+                                    <TextBlock  Padding="5" 
+                                        Text="{Binding Recipient.RecipientName}"  
                                         VerticalAlignment="Center"
                                         HorizontalAlignment="Center"/>
                                 </DataTemplate>
