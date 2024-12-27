@@ -37,19 +37,21 @@ namespace GUI.UserControls
 
         private void UpdateChartData(bool isMonthly)
         {
-            string userId = BLL.AppContext.Instance.UserId;
-
-            if (isMonthly)
+            try
             {
-                var months = _expenseService.GetMonthsWithExpenses(userId);
+                string userId = BLL.AppContext.Instance.UserId;
 
-                var monthlyExpenses = _expenseService.GetMonthlyExpenses(userId);
-                var monthlyIncome = _incomeService.GetMonthlyIncome(userId);
+                if (isMonthly)
+                {
+                    var months = _expenseService.GetMonthsWithExpenses(userId);
 
-                var monthlyExpenseValues = monthlyExpenses.Select(e => (int)e.Amount).ToList();
-                var monthlyIncomeValues = monthlyIncome.Select(i => (int)i.Amount).ToList();
+                    var monthlyExpenses = _expenseService.GetMonthlyExpenses(userId);
+                    var monthlyIncome = _incomeService.GetMonthlyIncome(userId);
 
-                SeriesCollection = new SeriesCollection
+                    var monthlyExpenseValues = monthlyExpenses.Select(e => (int)e.Amount).ToList();
+                    var monthlyIncomeValues = monthlyIncome.Select(i => (int)i.Amount).ToList();
+
+                    SeriesCollection = new SeriesCollection
                 {
                     new ColumnSeries
                     {
@@ -67,16 +69,21 @@ namespace GUI.UserControls
                     }
                 };
 
-                
-                Labels = months.ToArray();
-            }
-            else
-            {
-                // Cập nhật dữ liệu cho chế độ ngày nếu cần
-            }
 
-            DataContext = null;
-            DataContext = this;
+                    Labels = months.ToArray();
+                }
+                else
+                {
+                    // Cập nhật dữ liệu cho chế độ ngày nếu cần
+                }
+
+                DataContext = null;
+                DataContext = this;
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
         }
     }
 }

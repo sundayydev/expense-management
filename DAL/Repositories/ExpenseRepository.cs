@@ -42,9 +42,12 @@ namespace DAL.Repositories
         }
         public decimal GetTotalExpenseByUserId(string userId)
         {
-            return _context.Expenses
-                           .Where(e => e.UserId.ToString() == userId)
-                           .Sum(e => e.Amount);
+            var userGuid = Guid.Parse(userId);
+            var total = _context.Expenses
+              .Where(e => e.UserId == userGuid)
+              .Sum(e => (decimal?)e.Amount) ?? 0;
+
+            return total;
         }
         public List<Expens> GetMonthlyExpenses(string userId)
         {

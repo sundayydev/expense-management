@@ -38,9 +38,12 @@ namespace DAL.Repositories
         }
         public decimal GetTotalIncomeByUserId(string userId)
         {
-            return _context.Incomes
-                           .Where(e => e.UserId.ToString() == userId)
-                           .Sum(e => e.Amount);
+            var userGuid = Guid.Parse(userId);
+            var total = _context.Incomes
+              .Where(e => e.UserId == userGuid)
+              .Sum(e => (decimal?)e.Amount) ?? 0;
+
+            return total;
         }
         public List<Income> GetMonthlyIncome(string userId)
         {
