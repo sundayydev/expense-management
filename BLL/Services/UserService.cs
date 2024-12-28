@@ -101,6 +101,28 @@ namespace BLL.Services
                 Email = user.Email,
             };
         }
+        public void UpdatePassword(string email, string oldPassword, string newPassword)
+        {
+            var user = _userRepository.GetUserByEmail(email);
+            if (user == null)
+            {
+                throw new InvalidOperationException("Không tìm thấy tài khoản với email này.");
+            }
+            if (!BCrypt.Net.BCrypt.Verify(oldPassword, user.PasswordHash))
+            {
+                throw new InvalidOperationException("Mật khẩu cũ không chính xác.");
+            }
+            if (newPassword.Length < 10)
+            {
+                throw new InvalidOperationException("Mật khẩu mới phải lớn hơn 10 ký tự.");
+            }
+            if (newPassword.Any(ch => !char.IsLetterOrDigit(ch)))
+            {
+                throw new InvalidOperationException("Mật khẩu mới không được chứa ký tự đặc biệt.");
+            }
+            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(newPassword);
+            _userRepository.UpdateUser(user);
+        }
 
     }
 }

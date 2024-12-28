@@ -11,14 +11,12 @@
              d:DesignHeight="600" d:DesignWidth="1100"
              Loaded="UcAccount_OnLoaded"
              >
-
     <Border BorderBrush="#EEEEEE" BorderThickness="1" CornerRadius="10" Background="{StaticResource BackgroundWhite}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-
             <Grid Grid.Column="0" Margin="20" Background="{StaticResource BgGradientMistyPurple}">
                 <!-- Card container -->
                 <Border CornerRadius="10" Background="White" 
@@ -32,7 +30,6 @@
                             <Border Width="80" Height="80" Margin="0,0,10,0" CornerRadius="10">
                                 <fa:ImageAwesome Icon="Brands_SquareGithub" PrimaryColor="{Binding ColorAvatar}"/>
                             </Border>
-
                             <StackPanel VerticalAlignment="Center">
                                 <TextBlock Text="Ngô Mạnh Hùng" FontWeight="Bold" FontSize="20" 
                                            Foreground="{StaticResource BackgroundDark}"
@@ -42,14 +39,12 @@
                                            />
                             </StackPanel>
                         </StackPanel>
-
                         <!-- Statistics -->
                         <StackPanel Margin="0,20,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
                             <StackPanel HorizontalAlignment="Center" Margin="10">
                                 <TextBlock Text="12.000" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center"/>
                                 <TextBlock Text="HÓA ĐƠN CHI TIÊU" FontSize="13" HorizontalAlignment="Center" Foreground="#999"/>
                             </StackPanel>
-
                             <StackPanel HorizontalAlignment="Center" Margin="10">
                                 <TextBlock Text="550" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center"/>
                                 <TextBlock Text="NGUỒN THU NHẬP" FontSize="13" HorizontalAlignment="Center" Foreground="#999"/>
@@ -58,7 +53,6 @@
                     </StackPanel>
                 </Border>
             </Grid>
-
             <Grid Margin="20" Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -69,7 +63,6 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-
                 <!-- Họ và tên -->
                 <StackPanel Grid.Row="0" Margin="0 0 0 10">
                     <TextBlock Text="Họ và Tên *" Margin="0,0,0,5" FontSize="16"/>
@@ -82,7 +75,6 @@
                                  />
                     </Border>
                 </StackPanel>
-
                 <!-- Giới tính -->
                 <StackPanel Grid.Row="1" Margin="0 0 0 10">
                     <TextBlock Text="Giới Tính *" Margin="0,0, 0 , 5" FontSize="16"/>
@@ -97,7 +89,6 @@
                             Style="{StaticResource MaterialDesignLightRadioButton}" FontSize="16"/>
                     </StackPanel>
                 </StackPanel>
-
                 <!-- Email -->
                 <StackPanel Grid.Row="2" Margin="0 0 0 10">
                     <TextBlock Text="Email *" Margin="0,5" FontSize="16"/>
@@ -106,10 +97,7 @@
                                  IsEnabled="False" x:Name="TxtEmail"/>
                     </Border>
                 </StackPanel>
-
-
                 <Grid Grid.Row="3" Height="1" Margin="0 40 0 20" Background="{StaticResource BackgroundGray}"/>
-
                 <!-- Mật khẩu cũ-->
                 <StackPanel Grid.Row="4" Margin="0 0 0 10">
                     <TextBlock Text="Mật khẩu cũ *" Margin="0,5" FontSize="16"/>
@@ -117,13 +105,11 @@
                         <PasswordBox Style="{StaticResource CustomStylePasswordBox}" x:Name="PbPassWordOld"/>
                     </Border>
                 </StackPanel>
-
                 <Grid Grid.Row="5" Margin="0 0 0 10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-
                     <!-- Mật khẩu Mới -->
                     <StackPanel Grid.Column="0" Margin="0 0 5 0">
                         <TextBlock Text="Mật khẩu mới *" Margin="0,5" FontSize="16"/>
@@ -131,7 +117,6 @@
                             <PasswordBox Style="{StaticResource CustomStylePasswordBox}" x:Name="PbPasswordNew"/>
                         </Border>
                     </StackPanel>
-
                     <!-- Mật khẩu Lại -->
                     <StackPanel Grid.Column="1" Margin="5 0 0 0">
                         <TextBlock Text="Nhập lại mật khẩu mới *" Margin="0,5" FontSize="16"/>
@@ -140,12 +125,11 @@
                         </Border>
                     </StackPanel>
                 </Grid>
-
-                <Button Grid.Row="6" VerticalAlignment="Center"
+                <Button Grid.Row="6" VerticalAlignment="Top"
                         FontSize="16" Height="40" x:Name="BtnSave" Click="BtnSave_OnClick"
-                        HorizontalAlignment="Right" Margin="0 40 0 0"
+                        HorizontalAlignment="Left"
                         Background="{StaticResource BackgroundPrimary}"
-                        BorderBrush="{StaticResource BackgroundTransparent}"
+                        BorderBrush="{StaticResource BackgroundTransparent}" Margin="378,0,0,0"
                 >
                     <TextBlock>Lưu thông tin</TextBlock>
                 </Button>
