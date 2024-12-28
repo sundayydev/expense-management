@@ -6,6 +6,8 @@ using BLL.Services;
 using DAL.Utils;
 using GUI.View;
 using System.Windows.Media;
+using System;
+using System.Linq;
 
 namespace GUI.UserControls
 {
@@ -30,16 +32,39 @@ namespace GUI.UserControls
 
         private void BtnSave_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                string email =  TxtEmail.Text;
+                string oldPassword = PbPassWordOld.Password;
+                string newPassword = PbPasswordNew.Password;
+                string confirmPassword = PbPasswordNewAgain.Password;
+               
+                if (newPassword != confirmPassword)
+                {
+                    DialogCustoms dialog2 = new DialogCustoms("Mật khẩu mới và xác nhận không khớp.", "Thông báo", DialogCustoms.OK);
+                    dialog2.Show();
+                    return;
+                }
+                var userService = new UserService();
+                userService.UpdatePassword(email, oldPassword, newPassword);
+
+                DialogCustoms dialog = new DialogCustoms("Cập nhật mật khẩu thành công.", "Thông báo", DialogCustoms.Show);
+                dialog.Show();
+            }
+            catch (Exception ex)
+            {
+                DialogCustoms dialog = new DialogCustoms($"Lỗi: {ex.Message}", "Thông báo", DialogCustoms.Show);
+                dialog.Show();
+            }
         }
         
         private void LoadData()
         {
-            var userDto = _userService.GetUserByUserId(AppContext.Instance.UserId);
+            var userDto = _userService.GetUserByUserId(BLL.AppContext.Instance.UserId);
             if (userDto != null)
             {
                 TblFullName.Text = userDto.FullName;
-                TblUserId.Text = AppContext.Instance.UserId;
+                TblUserId.Text = BLL.AppContext.Instance.UserId;
             
                 TxtFullName.Text = userDto.FullName;
                 TxtEmail.Text = userDto.Email;

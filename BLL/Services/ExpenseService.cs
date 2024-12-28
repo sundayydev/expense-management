@@ -98,8 +98,6 @@ namespace BLL.Services
             {
                 return new List<string>(); // Trả về danh sách rỗng
             }
-
-
             var months = expenses
                 .Select(e => new DateTime(e.ExpenseDate.Year, e.ExpenseDate.Month, 1))  
                 .Distinct()

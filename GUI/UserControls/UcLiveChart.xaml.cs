@@ -20,6 +20,7 @@ namespace GUI.UserControls
         public UcLiveChart()
         {
             InitializeComponent();
+            rdbMonth.IsChecked = true;
             UpdateChartData(true);
             Values = value => value.ToString("N0") + " VND";
             DataContext = this;
@@ -82,6 +83,7 @@ namespace GUI.UserControls
             }
             catch (Exception ex)
             {
+                MessageBox.Show($"{ex}");
                 return;
             }
         }
