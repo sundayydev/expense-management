@@ -20,6 +20,7 @@ namespace GUI.UserControls
         public UcLiveChart()
         {
             InitializeComponent();
+
             UpdateChartData(true);
             Values = value => value.ToString("N0") + " VND";
             DataContext = this;
@@ -82,7 +83,8 @@ namespace GUI.UserControls
             }
             catch (Exception ex)
             {
-                return;
+                //Todo: Chổ này đang lỗi
+                //MessageBox.Show($"Đã xảy ra lỗi khi cập nhật dữ liệu: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

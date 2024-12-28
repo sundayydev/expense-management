@@ -109,5 +109,10 @@ namespace BLL.Services
            
             return months.Select(m => m.ToString("MMMM yyyy")).ToList() ?? null;
         }
+        
+        public decimal GetTotalAmountByMonthly(string userId, int month, int year)
+        {
+            return _expenseRepository.GetTotalAmountByMonthly(userId, month, year);
+        }
     }
 }

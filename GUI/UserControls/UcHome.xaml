@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:GUI.UserControls"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:fa="http://schemas.fontawesome.com/icons/svg"
              mc:Ignorable="d"
              d:DesignHeight="700" d:DesignWidth="1200"
              Background="White">
@@ -26,17 +27,14 @@
 
                 <StackPanel Grid.Row="0">
                     <Grid Margin="20 5">
-                        <Label Content="View All " FontSize="16" 
-                           FontWeight="SemiBold" HorizontalAlignment="Right"  
-                           VerticalAlignment="Center" />
-                        <Label  Content="Info Card" FontSize="16" 
+                        <Label  Content="Thông Tin Chi Tiêu" FontSize="16" 
                            FontWeight="SemiBold" HorizontalAlignment="Left"  
                            VerticalAlignment="Center" />
                     </Grid>
                 </StackPanel>
 
                 <StackPanel Grid.Row="1">
-                    <Grid Grid.Row="1" Margin="20 5">
+                    <Grid Margin="20 5">
                         <Grid Grid.Column="0" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
@@ -44,82 +42,174 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
+                            <!-- CardInfo Ví -->
                             <Grid Grid.Column="0">
-                                <StackPanel>
-                                    <Border Style="{StaticResource HoverStyle}"
-                                        CornerRadius="15" materialDesign:ElevationAssist.Elevation="Dp16" Margin="10" >
+                                <Border Background="White" CornerRadius="10" BorderThickness="1" 
+                                        BorderBrush="#D1D1D1" materialDesign:ElevationAssist.Elevation="Dp8">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
 
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="70" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <Image Grid.Column="0" Source="../Resource/wallet.png" Width="50" Height="50" 
-                                               HorizontalAlignment="Right" Margin="0,0,0,40"/>
-
-                                            <StackPanel Grid.Column="1" HorizontalAlignment="Center" Height="120" Width="auto">
-                                                <TextBlock Text="Chi Tiêu" FontSize="18" FontWeight="Bold" Foreground="White"
-                                                      HorizontalAlignment="Left" Margin="0,10,0,0" />
-                                                <TextBlock x:Name="txtExpense" FontSize="24" Margin="0,10,0,0" FontWeight="Bold" Foreground="White"
-                                                      HorizontalAlignment="Left" Text="{Binding TotalExpense, StringFormat={}{0:N0} VND}" />
-                                                <TextBlock Text="All Rights Reserved." FontSize="12" Margin="0,15,30,0" Foreground="White"
-                                                      HorizontalAlignment="Left" />
+                                        <Grid Grid.Row="0">
+                                            <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                                                <fa:ImageAwesome Icon="Solid_Wallet" Width="30"
+                                                                 Height="30" Margin="30 0" PrimaryColor="#B4B4B8"/>
+                                                <TextBlock Text="Số Tiền Trong Ví" FontSize="20" Foreground="#B4B4B8"
+                                                           FontWeight="Medium" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </Grid>
-                                    </Border>
-                                </StackPanel>
+                                        
+                                        <Grid Grid.Row="1">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock x:Name="TxtWallet"  Text="0" FontSize="20" Margin="30 0 0 0"
+                                                           VerticalAlignment="Center" FontWeight="Bold"/>
+                                                <TextBlock Text="VND" FontSize="16" VerticalAlignment="Center"/>
+                                                <Border Background="{StaticResource BackgroundSuccessLight}" 
+                                                        BorderThickness="1" CornerRadius="5" 
+                                                        Padding="5 0" Margin="10 0 0 0" Height="20"
+                                                        x:Name="BorderBgWallet"
+                                                        >
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <fa:ImageAwesome Icon="Solid_ArrowUp" Width="10" x:Name="FaIconWallet"
+                                                                         Height="15" Margin="0 0 5 0" PrimaryColor="{StaticResource BackgroundSuccess}"/>
+                                                        <TextBlock x:Name="TxtPercentWallet" Text="0 %" FontSize="13" FontWeight="Bold"
+                                                                   VerticalAlignment="Center" Foreground="{StaticResource BackgroundSuccess}"/>
+                                                    </StackPanel>
+                                                </Border>
+                                            </StackPanel>
+                                        </Grid>
+
+                                        <Grid Grid.Row="2">
+                                            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                                                <TextBlock Text="0" FontSize="13" x:Name="TxtWalletLastMonth"
+                                                           FontWeight="Medium" VerticalAlignment="Center" Margin="30 0 10 0"/>
+                                                <TextBlock Text="So với tháng trước" FontSize="13" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
                             </Grid>
 
-                            <StackPanel Grid.Column="1">
-                                <Border Style="{StaticResource HoverStyle}"
-                                CornerRadius="15" materialDesign:ElevationAssist.Elevation="Dp16" Margin="10">
-
+                            <!-- CardInfo Chi Tiêu -->
+                            <Grid Grid.Column="1" Margin="10 0 0 0">
+                                <Border Background="White" CornerRadius="10" BorderThickness="1" 
+                                        BorderBrush="#D1D1D1" materialDesign:ElevationAssist.Elevation="Dp8">
                                     <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="70" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
 
-                                        <Image Grid.Column="0" Source="../Resource/mail2.png" Width="50" Height="50" 
-                                            HorizontalAlignment="Right" Margin="0,0,0,40"/>
+                                        <Grid Grid.Row="0">
+                                            <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                                                <fa:ImageAwesome Icon="Solid_MoneyBill" Width="30"
+                                                                 Height="30" Margin="30 0" PrimaryColor="#B4B4B8"/>
+                                                <TextBlock Text="Chi tiêu" FontSize="20" Foreground="#B4B4B8"
+                                                           FontWeight="Medium" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Grid>
 
-                                        <StackPanel Grid.Column="1" HorizontalAlignment="Center" Height="120" Width="auto">
-                                            <TextBlock Text="Thông báo" FontSize="18" FontWeight="Bold" Foreground="{StaticResource BackgroundWhite}"
-                                                 HorizontalAlignment="Left" Margin="0,10,0,0" />
-                                            <TextBlock Text="2222222VND" FontSize="24" Margin="0,10,0,0" FontWeight="Bold" Foreground="{StaticResource BackgroundWhite}"
-                                                 HorizontalAlignment="Left" />
-                                            <TextBlock Text="All Rights Reserved." FontSize="12" Margin="0,15,30,0" Foreground="{StaticResource BackgroundWhite}"
-                                                 HorizontalAlignment="Left"  />
-                                        </StackPanel>
+                                        <Grid Grid.Row="1">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock x:Name="TxtExpense" Text="{Binding TotalExpense, StringFormat={}{0:N0}}" 
+                                                           FontSize="20" Margin="30 0 0 0"
+                                                           VerticalAlignment="Center" FontWeight="Bold"/>
+                                                <TextBlock Text="VND" FontSize="16" VerticalAlignment="Center"/>
+                                                <Border Background="{StaticResource BackgroundSuccess}" 
+                                                        BorderThickness="1" CornerRadius="5" 
+                                                        x:Name="BorderBgExpense"
+                                                        Padding="5 0" Margin="10 0 0 0" Height="20">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <fa:ImageAwesome Icon="Solid_ArrowUp" Width="10" x:Name="FaIconExpense"
+                                                                         Height="15" Margin="0 0 5 0"/>
+                                                        <TextBlock Text="0 %" FontSize="13" VerticalAlignment="Center" 
+                                                                   FontWeight="Bold"
+                                                                   x:Name="TxtPercentExpense"
+                                                                   />
+                                                    </StackPanel>
+                                                </Border>
+                                            </StackPanel>
+                                        </Grid>
+
+                                        <Grid Grid.Row="2">
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0 0 0 10">
+                                                <TextBlock Text="0" FontSize="13" x:Name="TxtExpenseLastMonth"
+                                                           FontWeight="Medium" VerticalAlignment="Center" Margin="30 0 10 0"/>
+                                                <TextBlock Text="So với tháng trước" FontSize="13" VerticalAlignment="Center"/>
+                                                <Button Background="Transparent" Padding="0" BorderBrush="Transparent"
+                                                        HorizontalAlignment="Right" Margin="10 0"
+                                                        x:Name="BtnOpenFormExpense" Click="BtnOpenFormExpense_OnClick"
+                                                        >
+                                                    <fa:ImageAwesome Icon="Solid_CirclePlus" Height="25" PrimaryColor="#A9A9A9"/>
+                                                </Button>
+                                            </StackPanel>
+                                        </Grid>
                                     </Grid>
                                 </Border>
-                            </StackPanel>
+                            </Grid>
 
-                            <StackPanel Grid.Column="2">
-                                <Border Style="{StaticResource HoverStyle}"
-                                    CornerRadius="15" materialDesign:ElevationAssist.Elevation="Dp16" Margin="10">
-
+                            <!-- CardInfo Thu Nhập -->
+                            <Grid Grid.Column="2" Margin="10 0 0 0">
+                                <Border Background="White" CornerRadius="10" BorderThickness="1" 
+                                        BorderBrush="#D1D1D1" materialDesign:ElevationAssist.Elevation="Dp8">
                                     <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="70" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="60"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
 
-                                        <Image Grid.Column="0" Source="../Resource/salary.png" Width="50" Height="50" 
-                                       HorizontalAlignment="Right" Margin="0,0,0,40"/>
+                                        <Grid Grid.Row="0">
+                                            <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                                                <fa:ImageAwesome Icon="Solid_MoneyBillTransfer" Width="30"
+                                                                 Height="30" Margin="30 0" PrimaryColor="#B4B4B8"/>
+                                                <TextBlock Text="Thu nhập" FontSize="20" Foreground="#B4B4B8"
+                                                           FontWeight="Medium" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Grid>
 
-                                        <StackPanel Grid.Column="1" HorizontalAlignment="Center" Height="120" Width="auto">
-                                            <TextBlock Text="Thu Nhập" FontSize="18" FontWeight="Bold" Foreground="{StaticResource BackgroundWhite}"
-                                       HorizontalAlignment="Left" Margin="0,10,0,0" />
-                                            <TextBlock x:Name="txtIncome" FontSize="24" Margin="0,10,0,0" FontWeight="Bold" Foreground="{StaticResource BackgroundWhite}"
-                                       HorizontalAlignment="Left" Text="{Binding TotalExpense, StringFormat={}{0:N0} VND}" />
-                                            <TextBlock Text="All Rights Reserved." FontSize="12" Margin="0,15,30,0" Foreground="{StaticResource BackgroundWhite}"
-                                       HorizontalAlignment="Left"  />
-                                        </StackPanel>
+                                        <Grid Grid.Row="1">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock x:Name="TxtIncome" Text="{Binding TotalExpense, StringFormat={}{0:N0}}" 
+                                                           FontSize="20" Margin="30 0 0 0"
+                                                           VerticalAlignment="Center" FontWeight="Bold"/>
+                                                <TextBlock Text="VND" FontSize="16" VerticalAlignment="Center"/>
+                                                <Border Background="{StaticResource BackgroundSuccess}" 
+                                                        BorderThickness="1" CornerRadius="5" 
+                                                        Padding="5 0" Margin="10 0 0 0" Height="20"
+                                                        x:Name="BorderBgIncome"
+                                                        >
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <fa:ImageAwesome Icon="Solid_ArrowUp" Width="10" x:Name="FaIconIncome"
+                                                                         Height="15" Margin="0 0 5 0"/>
+                                                        <TextBlock Text="0 %" FontSize="13" VerticalAlignment="Center" x:Name="TxtPercentIncome"
+                                                                   FontWeight="Bold"
+                                                                   />
+                                                    </StackPanel>
+                                                </Border>
+                                            </StackPanel>
+                                        </Grid>
+
+                                        <Grid Grid.Row="2">
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0 0 0 10">
+                                                <TextBlock Text="0" FontSize="13" x:Name="TxtIncomeLastMonth"
+                                                           FontWeight="Medium" VerticalAlignment="Center" Margin="30 0 10 0"/>
+                                                <TextBlock Text="So với tháng trước" FontSize="13" VerticalAlignment="Center"/>
+                                                <Button Background="Transparent" Padding="0" BorderBrush="Transparent"
+                                                        HorizontalAlignment="Right" Margin="10 0"
+                                                        x:Name="BtnOpenFormIncome" Click="BtnOpenFormIncome_OnClick"
+                                                        >
+                                                    <fa:ImageAwesome Icon="Solid_CirclePlus" Height="25" PrimaryColor="#A9A9A9"/>
+                                                </Button>
+                                            </StackPanel>
+                                        </Grid>
                                     </Grid>
                                 </Border>
-                            </StackPanel>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </StackPanel>
@@ -160,7 +250,7 @@
 
                 <Grid Grid.Row="1">
                     <StackPanel >
-                        <local:UcPieChart />
+                        <!--<local:UcPieChart />-->
                     </StackPanel>
                 </Grid>
 

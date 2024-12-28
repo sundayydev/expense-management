@@ -61,5 +61,16 @@ namespace DAL.Repositories
                 .Where(i => i.UserId == userGuid && i.IncomeDate.Day == DateTime.Now.Day)
                 .ToList();
         }
+
+        //Lấy tổng tiền theo tháng và năm
+        public decimal GetTotalAmountByMonthly(string userId, int month, int year)
+        {
+            var userGuid = Guid.Parse(userId);
+            var total = _context.Incomes
+              .Where(i => i.UserId == userGuid && i.IncomeDate.Month == month && i.IncomeDate.Year == year)
+              .Sum(e => (decimal?)e.Amount) ?? 0;
+            return total;
+        }
+
     }
 }

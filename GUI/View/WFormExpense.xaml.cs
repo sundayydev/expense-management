@@ -11,6 +11,7 @@ using BLL.DTO.Expenses;
 using DAL.Models;
 using System.Windows.Controls;
 using BLL.DTO.Recipient;
+using System.Globalization;
 
 namespace GUI.View
 {
@@ -37,7 +38,6 @@ namespace GUI.View
             _isEditMode = expense != null;
             
             LoadExpenseData();
-            
         }
        
         private void LoadExpenseData()
@@ -132,10 +132,10 @@ namespace GUI.View
             LoadCmbCategories();
             LoadCmbRecipient();
             if (_isEditMode && _expense != null)
-            {   
-                CmbRecipient.SelectedValue = _expense.RecipientId; 
+            {
+                CmbRecipient.SelectedValue = _expense.RecipientId;
                 CmbCategory.SelectedValue = _expense.CategoryId;
-                txtAmount.Text = _expense.Amount.ToString();
+                txtAmount.Text = ((int)_expense.Amount).ToString();
                 dtpExpenseDate.SelectedDate = _expense.ExpenseDate;
                 rtbNote.Document.Blocks.Clear();
                 rtbNote.Document.Blocks.Add(new Paragraph(new Run(_expense.Note)));
@@ -143,6 +143,30 @@ namespace GUI.View
             }
         }
 
-       
+        private void txtAmount_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var textBox = sender as TextBox;
+
+            if (textBox != null)
+            {
+                // Lấy giá trị hiện tại của TextBox
+                string text = textBox.Text;
+
+                // Loại bỏ dấu chấm, dấu phẩy hoặc ký tự không phải số
+                string numericText = new string(text.Where(char.IsDigit).ToArray());
+
+                if (!string.IsNullOrEmpty(numericText))
+                {
+                    // Chuyển đổi sang định dạng số có phân tách bằng dấu phẩy
+                    string formattedText = $"{long.Parse(numericText):N0}";
+
+                    // Cập nhật TextBox mà không tạo vòng lặp sự kiện
+                    textBox.TextChanged -= txtAmount_TextChanged;
+                    textBox.Text = formattedText;
+                    textBox.CaretIndex = textBox.Text.Length; // Đưa con trỏ về cuối
+                    textBox.TextChanged += txtAmount_TextChanged;
+                }
+            }
+        }
     }
 }

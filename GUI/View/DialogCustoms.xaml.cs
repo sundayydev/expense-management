@@ -7,7 +7,7 @@ namespace GUI.View
     {
         public static int YesNo = 1;
         public static int OK = 0;
-        public static int Show = 0;
+        public static new int Show = 0;
 
         public DialogCustoms()
         {
