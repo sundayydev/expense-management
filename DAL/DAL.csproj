@@ -218,6 +218,7 @@
     <Compile Include="Repositories\IncomeRepository.cs" />
     <Compile Include="Repositories\CategoryRepository.cs" />
     <Compile Include="Repositories\RecipientRepository.cs" />
+    <Compile Include="Repositories\ReminderRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Utils\CodeGenerator.cs" />
     <Compile Include="Utils\RandomColorGenerator.cs" />

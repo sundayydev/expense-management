@@ -9,12 +9,13 @@
         AllowsTransparency="True" 
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
+        x:Name="WfCategory"
         TextElement.FontWeight="Regular"
         TextElement.FontFamily="Segoe UI"
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
-        Title="Form Category" Height="500" Width="500">
+        Title="Phân loại" Height="500" Width="500">
     <Window.Clip>
         <RectangleGeometry Rect="0,0,500,500" RadiusX="10" RadiusY="10"/>
     </Window.Clip>
@@ -26,7 +27,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <uc:UcControlBar2 Grid.Row="0" MinHeight="{Binding MinHeight_ucControlbar, Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}"
-                              Tag="{Binding Title, ElementName=dialogcustom}"  Opacity="0.8" VerticalAlignment="Center" Height="26" >
+                              Tag="{Binding Title, ElementName=WfCategory}"  Opacity="0.8" VerticalAlignment="Center" Height="26" >
             </uc:UcControlBar2>
 
             <Grid Grid.Row="1" Background="#fafbfd">

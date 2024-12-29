@@ -39,7 +39,6 @@ namespace GUI.View
             
             LoadExpenseData();
         }
-       
         private void LoadExpenseData()
         {
             if (_expense != null)
@@ -48,7 +47,8 @@ namespace GUI.View
                 CmbCategory.SelectedValuePath = _expense.CategoryId;
                 CmbRecipient.SelectedValuePath = _expense.RecipientId;
                 txtAmount.Text = _expense.Amount.ToString();
-                dtpExpenseDate.DisplayDate = _expense.ExpenseDate;
+                DtpExpenseDate.DisplayDate = _expense.ExpenseDate;
+                DtpExpenseDate.SelectedDate = _expense.ExpenseDate;
                 rtbNote.Document.Blocks.Clear();
                 rtbNote.Document.Blocks.Add(new Paragraph(new Run(_expense.Note)));
             }
@@ -62,7 +62,7 @@ namespace GUI.View
                     _expense.RecipientId = CmbRecipient.SelectedValue?.ToString();
                     _expense.CategoryId = (CmbCategory.SelectedItem as CmbCategoryDto).CategoryId;
                     _expense.Amount = decimal.Parse(txtAmount.Text);
-                    _expense.ExpenseDate = dtpExpenseDate.SelectedDate.HasValue ? dtpExpenseDate.SelectedDate.Value : _expense.ExpenseDate;
+                    _expense.ExpenseDate = DtpExpenseDate.SelectedDate ?? _expense.ExpenseDate;
                     _expense.Note = new TextRange(rtbNote.Document.ContentStart, rtbNote.Document.ContentEnd).Text.Trim();
                     _expense.CreatedAt = DateTime.Now;
 
@@ -88,7 +88,7 @@ namespace GUI.View
                         CategoryId = (CmbCategory.SelectedItem as CmbCategoryDto).CategoryId,
                         RecipientId = CmbRecipient.SelectedValue?.ToString(),
                         Amount = decimal.Parse(txtAmount.Text),
-                        ExpenseDate = dtpExpenseDate.SelectedDate ?? DateTime.Now,
+                        ExpenseDate = DtpExpenseDate.SelectedDate ?? DateTime.Now,
                         Note = new TextRange(rtbNote.Document.ContentStart, rtbNote.Document.ContentEnd).Text.Trim()
                     };
 
@@ -136,7 +136,7 @@ namespace GUI.View
                 CmbRecipient.SelectedValue = _expense.RecipientId;
                 CmbCategory.SelectedValue = _expense.CategoryId;
                 txtAmount.Text = ((int)_expense.Amount).ToString();
-                dtpExpenseDate.SelectedDate = _expense.ExpenseDate;
+                DtpExpenseDate.SelectedDate = _expense.ExpenseDate;
                 rtbNote.Document.Blocks.Clear();
                 rtbNote.Document.Blocks.Add(new Paragraph(new Run(_expense.Note)));
 
@@ -145,9 +145,7 @@ namespace GUI.View
 
         private void txtAmount_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var textBox = sender as TextBox;
-
-            if (textBox != null)
+            if (sender is TextBox textBox)
             {
                 // Lấy giá trị hiện tại của TextBox
                 string text = textBox.Text;

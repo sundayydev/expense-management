@@ -33,13 +33,11 @@ public class CategoryService
       _categoryRepository.AddCategory(category);
    }
    
-   public ObservableCollection<CategoryDto> GetCategoryByUserId(string userId)
+   public List<CategoryDto> GetCategoryByUserId(string userId)
    {
-      ObservableCollection<Category> list = new ObservableCollection<Category>(_categoryRepository.GetCategoriesByUserId(userId));
+      List<Category> list = [.._categoryRepository.GetCategoriesByUserId(userId)];
 
-      ObservableCollection<CategoryDto> listDto = new();
-      
-      var brushConverter = new BrushConverter();
+      List<CategoryDto> listDto = new List<CategoryDto>();
       
       foreach (var item in list)
       {
