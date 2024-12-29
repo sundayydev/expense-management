@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppContext.cs" />
+    <Compile Include="DTO\CardInfoDto.cs" />
     <Compile Include="DTO\Category\AddCategoryDto.cs" />
     <Compile Include="DTO\Category\CategoryDto.cs" />
     <Compile Include="DTO\Category\CmbCategoryDto.cs" />

@@ -102,7 +102,7 @@ namespace GUI.UserControls
              }
             catch (Exception ex)
             {
-                return;
+                MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

@@ -73,6 +73,7 @@ namespace BLL.Services
         {
             return _incomeRepository.GetTotalIncomeByUserId(userId);
         }
+
         public List<IncomeDto> GetMonthlyIncome(string userId)
         {
             var income = _incomeRepository.GetIncomesByUserId(userId);
@@ -90,6 +91,12 @@ namespace BLL.Services
 
             return monthlyIncome;
         }
+
+        public decimal GetTotalAmountByMonthly(string userId, int month, int year)
+        {
+            return _incomeRepository.GetTotalAmountByMonthly(userId, month, year);
+        }
+
         public List<IncomeDto> GetDailyIncome(string userId)
         {
             var incomes = _incomeRepository.GetDailyIncome(userId);
