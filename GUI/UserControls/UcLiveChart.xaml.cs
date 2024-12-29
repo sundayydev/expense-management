@@ -20,7 +20,11 @@ namespace GUI.UserControls
         public UcLiveChart()
         {
             InitializeComponent();
+
             rdbMonth.IsChecked = true;
+
+
+
             UpdateChartData(true);
             Values = value => value.ToString("N0") + " VND";
             DataContext = this;
@@ -75,7 +79,7 @@ namespace GUI.UserControls
                 }
                 else
                 {
-                    // Cập nhật dữ liệu cho chế độ ngày nếu cần
+                    
                 }
 
                 DataContext = null;
@@ -83,8 +87,9 @@ namespace GUI.UserControls
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex}");
+                MessageBox.Show($"Đã xảy ra lỗi khi cập nhật dữ liệu: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
+
             }
         }
     }

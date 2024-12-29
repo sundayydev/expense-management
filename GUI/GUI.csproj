@@ -162,7 +162,9 @@
     <Compile Include="View\WFormIncome.xaml.cs">
       <DependentUpon>WFormIncome.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\WFormRecipient.xaml.cs" />
+    <Compile Include="View\WFormRecipient.xaml.cs">
+      <DependentUpon>WFormRecipient.xaml</DependentUpon>
+    </Compile>
     <Page Include="Library\Colors.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

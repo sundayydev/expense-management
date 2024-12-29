@@ -6,8 +6,10 @@ using DAL.Repositories;
 using GUI.UserControls;
 using System;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media.TextFormatting;
 using AppContext = BLL.AppContext;
@@ -18,7 +20,7 @@ namespace GUI.View
     {
         private readonly IncomeService _incomeService = new IncomeService();
         private readonly CategoryService _categoryService = new CategoryService();
-        private readonly UcIncome _ucIncome;
+        
         public WFormIncome()
         {
             InitializeComponent();
@@ -93,15 +95,42 @@ namespace GUI.View
             cmbCategoryType.DisplayMemberPath = "CategoryName";
             cmbCategoryType.SelectedValuePath = "CategoryId";
         }
-            private void WFormIncome_OnLoaded(object sender, RoutedEventArgs e)
-            {
+        private void WFormIncome_OnLoaded(object sender, RoutedEventArgs e)
+        {
             LoadCmbCategories();
-            }
+        }
 
-            public void ResetFormIncome()
-            {
+        public void ResetFormIncome()
+        {
             txtTotal.Text = "";
             rtbNote.Document.Blocks.Clear();
+        }
+
+        private void txtTotal_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            var textBox = sender as TextBox;
+
+            if (textBox != null)
+            {
+                // Lấy giá trị hiện tại của TextBox
+                string text = textBox.Text;
+
+                // Loại bỏ dấu chấm, dấu phẩy hoặc ký tự không phải số
+                string numericText = new string(text.Where(char.IsDigit).ToArray());
+
+                if (!string.IsNullOrEmpty(numericText))
+                {
+
+                    // Chuyển đổi sang định dạng số có phân tách bằng dấu phẩy
+                    string formattedText = $"{long.Parse(numericText):N0}";
+
+                    // Cập nhật TextBox mà không tạo vòng lặp sự kiện
+                    textBox.TextChanged -= txtTotal_TextChanged;
+                    textBox.Text = formattedText;
+                    textBox.CaretIndex = textBox.Text.Length; // Đưa con trỏ về cuối
+                    textBox.TextChanged += txtTotal_TextChanged;
+                }
             }
+        }
     }
 } 
