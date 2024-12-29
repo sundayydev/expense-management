@@ -56,6 +56,8 @@
     <Compile Include="DTO\Recipient\AddRecipientDto.cs" />
     <Compile Include="DTO\Recipient\CmbRecipientDto.cs" />
     <Compile Include="DTO\Recipient\RecipientDto.cs" />
+    <Compile Include="DTO\Reminder\AddReminderDto.cs" />
+    <Compile Include="DTO\Reminder\ReminderDto.cs" />
     <Compile Include="DTO\User\LoginDto.cs" />
     <Compile Include="DTO\User\RegisterDto.cs" />
     <Compile Include="DTO\User\UserDto.cs" />
@@ -64,6 +66,7 @@
     <Compile Include="Services\IncomeService.cs" />
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\RecipientService.cs" />
+    <Compile Include="Services\ReminderService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
