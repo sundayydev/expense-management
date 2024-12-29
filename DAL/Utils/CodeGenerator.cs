@@ -14,31 +14,37 @@ namespace DAL.Utils
         public string GenerateCodeIncome()
         {
             string uniqueId = Nanoid.Generate(size: 10); // Định nghĩa độ dài mã
-            return $"CAT-{uniqueId}";
+            return $"INC-{uniqueId}";
         }
         
         public string GenerateCodeExpense()
         {
             string uniqueId = Nanoid.Generate(size: 10); // Định nghĩa độ dài mã
-            return $"CAT-{uniqueId}";
+            return $"EXP-{uniqueId}";
         }
         
         public string GenerateCodeRecipient()
         {
             string uniqueId = Nanoid.Generate(size: 4); // Định nghĩa độ dài mã
-            return $"CAT-{uniqueId}";
+            return $"REC-{uniqueId}";
         }
         
         public string GenerateCodePayment()
         {
             string uniqueId = Nanoid.Generate(size: 4); // Định nghĩa độ dài mã
-            return $"CAT-{uniqueId}";
+            return $"PAY-{uniqueId}";
         }
         
         public string GenerateCodeLoans()
         {
             string uniqueId = Nanoid.Generate(size: 4); // Định nghĩa độ dài mã
-            return $"CAT-{uniqueId}";
+            return $"LOA-{uniqueId}";
+        }
+
+        public string GenerateCodeReminder()
+        {
+            string uniqueId = Nanoid.Generate(size: 4); // Định nghĩa độ dài mã
+            return $"REM-{uniqueId}";
         }
     }
 }

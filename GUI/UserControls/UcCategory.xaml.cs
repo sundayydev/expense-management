@@ -66,7 +66,7 @@ namespace GUI.UserControls
             }
         }
 
-        private void ButtonDelete_OnClick(object sender, RoutedEventArgs e)
+        private void BtnDelete_OnClick(object sender, RoutedEventArgs e)
         {
             // Lấy Button được nhấn
             Button button = sender as Button;
@@ -97,6 +97,20 @@ namespace GUI.UserControls
                     MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+        }
+
+        private void TxtSearch_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            string searchText = TxtSearch.Text.ToLower();
+            
+            var res = Categories.Where(category =>
+                category.CategoryName.ToLower().Contains(searchText)  
+                || category.CategoryId.ToString().Contains(searchText)
+                || category.CategoryType.ToLower().Contains(searchText) 
+                || category.Description.ToLower().Contains(searchText)
+                || category.CreatedAt.ToString().Contains(searchText)
+            ).ToList();
+            CategoryDataGrid.ItemsSource = res;
         }
     }
 }
