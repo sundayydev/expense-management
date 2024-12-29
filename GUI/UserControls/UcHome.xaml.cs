@@ -158,8 +158,5 @@ namespace GUI.UserControls
             TxtPercentWallet.Text = $"{percentWallet:N2}%";
             TxtWallet.Text = $"{totalWallet:N0}";
         }
-
-
-
     }
 }
