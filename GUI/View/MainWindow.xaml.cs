@@ -21,6 +21,7 @@ namespace GUI
         private UcRecipient _ucRecipient;
         private UcIncome _ucIncome;
         private UcSpend _ucSpend;
+        private UcStatistics _ucStatistics;
 
         public MainWindow()
         {
@@ -80,6 +81,8 @@ namespace GUI
                 case "BtnLoans":
                     break;
                 case "BtnStatistical":
+                    _ucStatistics = new UcStatistics();
+                    ContentDisplayMain.Content = _ucStatistics;
                     break;
                 case "BtnRemind":
                     _ucRemind = new UcRemind();
