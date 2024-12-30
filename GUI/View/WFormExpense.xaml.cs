@@ -26,7 +26,7 @@ namespace GUI.View
         private readonly Expens _expense;
         private readonly bool _isEditMode;
         private readonly string _expenseId;
-        public WFormExpense()
+        public WFormExpense(Income incomeToEdit)
         {
             InitializeComponent();
           

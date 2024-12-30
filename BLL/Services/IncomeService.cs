@@ -1,6 +1,7 @@
 ﻿using BLL.DTO.Category;
 using BLL.DTO.Expenses;
 using BLL.DTO.Income;
+using BLL.DTO.Recipient;
 using DAL.Models;
 using DAL.Repositories;
 using DAL.Utils;
@@ -31,6 +32,7 @@ namespace BLL.Services
                 IncomeId = new CodeGenerator().GenerateCodeIncome(),
                 UserId = Guid.Parse(addIncomeDto.UserId),
                 CategoryId = addIncomeDto.CategoryId,
+                RecipientId = addIncomeDto.RecipientId,
                 IncomeDate = addIncomeDto.IncomeDate,
                 Amount = addIncomeDto.Amount,
                 Note = addIncomeDto.Note,
@@ -49,6 +51,8 @@ namespace BLL.Services
                     IncomeId = i.IncomeId,
                     CategoryId = i.CategoryId,
                     CategoryName = i.Category?.CategoryName,
+                    RecipientId = i.RecipientId,
+                    RecipientName = i.Recipient?.RecipientName,
                     IncomeDate = i.IncomeDate,
                     Amount = i.Amount,
                     Note = i.Note,
@@ -59,6 +63,25 @@ namespace BLL.Services
             {
                 throw new Exception($"Lỗi khi lấy danh sách thu nhập: {ex.Message}");
             }
+        }
+        public void UpdateIncome(Income updateIncome)
+        {
+            var existingIncome = _incomeRepository.GetIncomeById(updateIncome.IncomeId);
+
+            if (existingIncome == null)
+            {
+                throw new Exception("Chi tiêu không tồn tại.");
+            }
+            existingIncome.CategoryId = updateIncome.CategoryId;
+            existingIncome.RecipientId = updateIncome.RecipientId ?? null;
+            existingIncome.Amount = updateIncome.Amount;
+            existingIncome.IncomeDate = updateIncome.IncomeDate;
+            existingIncome.Note = updateIncome.Note;
+            _incomeRepository.UpdateIncome(existingIncome);
+        }
+        public Income GetIncomeById(string incomeId)
+        {
+            return _incomeRepository.GetIncomeById(incomeId);
         }
         public void DeleteIncome(string incomeId)
         {
@@ -105,6 +128,17 @@ namespace BLL.Services
                 Amount = i.Amount,
                 CategoryId = i.CategoryId
             }).ToList();
+        }
+        public IncomeDto GetIncomesByIncomesId(string incomeId)
+        {
+            Income income = _incomeRepository.GetIncomesByIncomesId(incomeId);
+            return new IncomeDto()
+            {
+                IncomeId = income.IncomeId,
+                CategoryName = income.Category.CategoryName,
+                Amount = income.Amount,
+                Note = income.Note,
+            };
         }
     }
 

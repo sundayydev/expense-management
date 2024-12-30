@@ -12,7 +12,8 @@ namespace BLL.DTO.Income
         public string CategoryId { get; set; }
         public string RecipientId { get; set; }  
         public string Source { get; set; }      
-        public string CategoryName { get; set; } 
+        public string CategoryName { get; set; }
+        public string RecipientName { get; set; }
         public DateTime IncomeDate { get; set; }
         public decimal Amount { get; set; }
         public string Note { get; set; }

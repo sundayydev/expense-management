@@ -1,11 +1,14 @@
 ﻿using BLL.DTO.Category;
 using BLL.DTO.Income;
+using BLL.DTO.Recipient;
 using BLL.Services;
 using DAL.Models;
 using GUI.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -19,24 +22,24 @@ namespace GUI.UserControls
     /// </summary>
     public partial class UcIncome : UserControl
     {
-        private List<IncomeDto> Incomes {get;set;}
-        private readonly IncomeService _incomeService = new ();
+        private ObservableCollection<IncomeDto> Incomes { get; set; }
+        private readonly IncomeService _incomeService = new();
         public UcIncome()
         {
             InitializeComponent();
             LoadData();
+            InvoiceDataGrid.ItemsSource = Incomes;
         }
         private void btnSaveAdd_Click(object sender, RoutedEventArgs e)
         {
-           WFormIncome wf = new WFormIncome();
-           wf.ShowDialog();
-           wf.Close();
-           LoadData();
+            WFormIncome wf = new WFormIncome();
+            wf.ShowDialog();
+            LoadData();
         }
         public void LoadData()
         {
-            Incomes = new List<IncomeDto>();
-            Incomes = _incomeService.GetIncomeByUserId(AppContext.Instance.UserId);
+            InvoiceDataGrid.ItemsSource = null;
+            Incomes = new ObservableCollection<IncomeDto>(_incomeService.GetIncomeByUserId(AppContext.Instance.UserId));
             InvoiceDataGrid.ItemsSource = Incomes;
         }
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
@@ -47,14 +50,13 @@ namespace GUI.UserControls
                 DialogCustoms chose = new DialogCustoms("Vui lòng chọn một dòng để xóa.", "Thông báo", DialogCustoms.Show);
                 return;
             }
-            if (MessageBox.Show("Bạn có chắc chắn muốn xóa dòng này không?", "Xác nhận",
-                MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            DialogCustoms remove = new DialogCustoms("Bạn có chắc chắn muốn xóa dòng này không?", "Xác nhận", DialogCustoms.YesNo);
+            if (remove.ShowDialog() == true)
             {
                 try
                 {
                     _incomeService.DeleteIncome(income.IncomeId);
-                    MessageBox.Show("Xóa thu nhập thành công.", "Thông báo",
-                        MessageBoxButton.OK, MessageBoxImage.Information);
+                    DialogCustoms success = new DialogCustoms("Xóa thu nhập thành công.", "Thông báo", DialogCustoms.Show);
                     LoadData();
                 }
                 catch (Exception ex)
@@ -64,6 +66,34 @@ namespace GUI.UserControls
                 }
             }
         }
-    }
+        private void BtnEdit_OnClick(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            DataGridRow row = DataGridRow.GetRowContainingElement(button);
+            if (row != null)
+            {
+                var incomeDto = row.Item as IncomeDto;
+                if (incomeDto != null)
+                {
+                    var income = _incomeService.GetIncomeById(incomeDto.IncomeId);
+
+                    if (income != null)
+                    {
+                        WFormIncome wf = new WFormIncome(income);
+                        var result = wf.ShowDialog();
+                        if (result == true)
+                        {
+                            LoadData();
+                        }
+                    }
+                    else
+                    {
+                        DialogCustoms error = new DialogCustoms("Không tìm thấy thông tin thu nhập.", "Lỗi", DialogCustoms.Show);
+                        error.ShowDialog();
+                    }
+                }
+            }
+        }
+    } 
 }
 
