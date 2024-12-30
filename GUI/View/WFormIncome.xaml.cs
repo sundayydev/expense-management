@@ -6,6 +6,7 @@ using DAL.Repositories;
 using GUI.UserControls;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics.Eventing.Reader;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
@@ -20,11 +21,17 @@ namespace GUI.View
     {
         private readonly IncomeService _incomeService = new IncomeService();
         private readonly CategoryService _categoryService = new CategoryService();
-        
-        public WFormIncome()
+        private readonly RecipientService _recipientService = new RecipientService();
+        private readonly Income _income;
+        private readonly bool _isEditMode;
+        private readonly string _incomeId;
+
+        public WFormIncome(Income income = null)
         {
             InitializeComponent();
-            _incomeService = new IncomeService();
+            _income = income;
+            _isEditMode = income != null;
+            filldata();
         }
         private void btnSaveAdd_Click(object sender, RoutedEventArgs e)
         {
@@ -32,21 +39,55 @@ namespace GUI.View
             {
                 if (ValidateForm())
                 {
-                    var addIncomeDto = new AddIncomeDto
+                    if (_isEditMode)
                     {
-                        UserId = AppContext.Instance.UserId,
-                        CategoryId = cmbCategoryType.SelectedValue.ToString(),
-                        IncomeDate = ExpenseDatePicker.SelectedDate.Value,
-                        Amount = decimal.Parse(txtTotal.Text),
-                        Note = new TextRange(rtbNote.Document.ContentStart,
-                            rtbNote.Document.ContentEnd).Text.Trim()
-                    };
+                        _income.RecipientId = CmbRecipentName.SelectedValue?.ToString();
+                        _income.CategoryId = (cmbCategoryType.SelectedItem as CmbCategoryDto).CategoryId;
+                        _income.Amount = decimal.Parse(txtTotal.Text);
+                        _income.IncomeDate = dtpIncomeDate.SelectedDate.HasValue ? dtpIncomeDate.SelectedDate.Value : _income.IncomeDate;
+                        _income.Note = new TextRange(rtbNote.Document.ContentStart, rtbNote.Document.ContentEnd).Text.Trim();
+                        _income.CreatedAt = DateTime.Now;
 
-                    _incomeService.AddIncome(addIncomeDto);
-                    MessageBox.Show("Thêm thu nhập thành công.", "Thông báo",
-                        MessageBoxButton.OK, MessageBoxImage.Information);
-                    DialogResult = true;
-                    Close();
+                        var updateIncome = new Income()
+                        {
+                            IncomeId = _income.IncomeId,
+                            UserId = _income.UserId,
+                            CategoryId = _income.CategoryId,
+                            RecipientId = _income.RecipientId,
+                            Amount = _income.Amount,
+                            IncomeDate = _income.IncomeDate,
+                            Note = _income.Note
+                        };
+                        _incomeService.UpdateIncome(updateIncome);
+                        DialogCustoms dialogCustomsUpdate = new DialogCustoms("Cập nhật danh mục thành công.", "Thông báo", DialogCustoms.OK);
+                        dialogCustomsUpdate.ShowDialog();
+                        LoadData();
+                        Close(); 
+                       
+                    }
+                    
+                    else
+                    {
+                        var addIncomeDto = new AddIncomeDto
+                        {
+                            UserId = AppContext.Instance.UserId,
+                            CategoryId = cmbCategoryType.SelectedValue.ToString(),
+                            RecipientId = CmbRecipentName.SelectedValue.ToString(),
+                            IncomeDate = dtpIncomeDate.SelectedDate.Value,
+                            Amount = decimal.Parse(txtTotal.Text),
+                            Note = new TextRange(rtbNote.Document.ContentStart,
+                                rtbNote.Document.ContentEnd).Text.Trim()
+                        };
+
+                        _incomeService.AddIncome(addIncomeDto);
+                        DialogCustoms dialogCustomsUpdate = new DialogCustoms("Thêm Thu Nhập thành công!", "Thông báo", DialogCustoms.OK);
+                        dialogCustomsUpdate.ShowDialog();
+                        DialogResult = true;
+                        LoadData();
+                        Close();
+
+                    } 
+                    
                 }
             }
             catch (Exception ex)
@@ -65,7 +106,7 @@ namespace GUI.View
                 return false;
             }
 
-            if (ExpenseDatePicker.SelectedDate == null)
+            if (dtpIncomeDate.SelectedDate == null)
             {
                 MessageBox.Show("Vui lòng chọn ngày.", "Thông báo");
                 return false;
@@ -95,9 +136,27 @@ namespace GUI.View
             cmbCategoryType.DisplayMemberPath = "CategoryName";
             cmbCategoryType.SelectedValuePath = "CategoryId";
         }
+        public void LoadCmbRecipients()
+        {
+            var recipients = _recipientService.GetRecipientsByUserId(AppContext.Instance.UserId);
+            CmbRecipentName.ItemsSource = recipients;
+            CmbRecipentName.DisplayMemberPath = "RecipientName";
+            CmbRecipentName.SelectedValuePath = "RecipientId";
+        }
         private void WFormIncome_OnLoaded(object sender, RoutedEventArgs e)
         {
             LoadCmbCategories();
+            LoadCmbRecipients();
+            if (_isEditMode && _income != null)
+            {
+                CmbRecipentName.SelectedValue = _income.RecipientId;
+                cmbCategoryType.SelectedValue = _income.CategoryId;
+                txtTotal.Text = ((int)_income.Amount).ToString();
+                dtpIncomeDate.SelectedDate = _income.IncomeDate;
+                rtbNote.Document.Blocks.Clear();
+                rtbNote.Document.Blocks.Add(new Paragraph(new Run(_income.Note)));
+
+            }
         }
 
         public void ResetFormIncome()
@@ -130,6 +189,33 @@ namespace GUI.View
                     textBox.CaretIndex = textBox.Text.Length; // Đưa con trỏ về cuối
                     textBox.TextChanged += txtTotal_TextChanged;
                 }
+            }
+        }
+        private void filldata()
+        {
+            if (_income != null)
+            {
+                cmbCategoryType.Text = _income.Category.CategoryName;
+                CmbRecipentName.Text = _income.Recipient.RecipientName;
+                txtTotal.Text = _income.Amount.ToString();
+                dtpIncomeDate.DisplayDate = _income.IncomeDate;
+                rtbNote.Document.Blocks.Clear();
+                rtbNote.Document.Blocks.Add(new Paragraph(new Run(_income.Note)));
+            }
+        }
+        private void LoadData()
+        {
+            LoadCmbCategories();
+            LoadCmbRecipients();
+
+            if (_isEditMode && _income != null)
+            {
+                CmbRecipentName.SelectedValue = _income.RecipientId;
+                cmbCategoryType.SelectedValue = _income.CategoryId;
+                txtTotal.Text = ((int)_income.Amount).ToString();
+                dtpIncomeDate.SelectedDate = _income.IncomeDate;
+                rtbNote.Document.Blocks.Clear();
+                rtbNote.Document.Blocks.Add(new Paragraph(new Run(_income.Note)));
             }
         }
     }
