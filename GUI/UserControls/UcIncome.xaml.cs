@@ -48,12 +48,13 @@ namespace GUI.UserControls
             var res = Incomes.Where(Income =>
                 Income.Note.ToLower().Contains(searchText) 
                 || Income.IncomeId.ToString().Contains(searchText)
-                || (searchDate.HasValue && Income.IncomeDate.Date == searchDate.Value) 
+                || (searchDate.HasValue && Income.IncomeDate.Date == searchDate.Value.Date)
                 || Income.Amount.ToString().Contains(searchText)
                 || Income.RecipientName.ToLower().Contains(searchText)
             ).ToList();
 
             InvoiceDataGrid.ItemsSource = res;
+            InvoiceDataGrid.Items.Refresh();
         }
         public void LoadData()
         {

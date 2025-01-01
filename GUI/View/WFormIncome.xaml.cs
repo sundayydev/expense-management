@@ -196,7 +196,7 @@ namespace GUI.View
             if (_income != null)
             {
                 cmbCategoryType.Text = _income.Category.CategoryName;
-                CmbRecipentName.Text = _income.Recipient.RecipientName;
+                CmbRecipentName.Text = _income.Recipient.RecipientName ;
                 txtTotal.Text = _income.Amount.ToString();
                 dtpIncomeDate.DisplayDate = _income.IncomeDate;
                 rtbNote.Document.Blocks.Clear();
