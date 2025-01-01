@@ -72,7 +72,7 @@ namespace GUI.View
                         {
                             UserId = AppContext.Instance.UserId,
                             CategoryId = cmbCategoryType.SelectedValue.ToString(),
-                            RecipientId = CmbRecipentName.SelectedValue.ToString(),
+                            RecipientId = CmbRecipentName.SelectedValue?.ToString(),
                             IncomeDate = dtpIncomeDate.SelectedDate.Value,
                             Amount = decimal.Parse(txtTotal.Text),
                             Note = new TextRange(rtbNote.Document.ContentStart,
@@ -195,8 +195,9 @@ namespace GUI.View
         {
             if (_income != null)
             {
+                txtIncomeId.Text = _income.IncomeId.ToString();
                 cmbCategoryType.Text = _income.Category.CategoryName;
-                CmbRecipentName.Text = _income.Recipient.RecipientName ;
+                CmbRecipentName.SelectedValuePath = _income.Recipient.RecipientName;
                 txtTotal.Text = _income.Amount.ToString();
                 dtpIncomeDate.DisplayDate = _income.IncomeDate;
                 rtbNote.Document.Blocks.Clear();
@@ -210,6 +211,7 @@ namespace GUI.View
 
             if (_isEditMode && _income != null)
             {
+                txtIncomeId.Text = _income.IncomeId.ToString();
                 CmbRecipentName.SelectedValue = _income.RecipientId;
                 cmbCategoryType.SelectedValue = _income.CategoryId;
                 txtTotal.Text = ((int)_income.Amount).ToString();

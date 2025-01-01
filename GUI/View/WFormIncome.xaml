@@ -8,14 +8,15 @@
         xmlns:uc="clr-namespace:GUI.UserControls"
         mc:Ignorable="d"
         WindowStyle="None"
+        x:Name="WfIncome"
         AllowsTransparency="True" 
         WindowStartupLocation="CenterScreen"
-        Title="WFormIcome" Height="450" Width="500"
+        Title="Thu Nhập" Height="550" Width="500"
         Loaded="WFormIncome_OnLoaded"
         >
     
     <Window.Clip>
-        <RectangleGeometry Rect="0,0,500,450" RadiusX="10" RadiusY="10"/>
+        <RectangleGeometry Rect="0,0,550,600" RadiusX="10" RadiusY="10"/>
     </Window.Clip>
     <Border BorderBrush="#D9EAFD" BorderThickness="2" CornerRadius="10" >
         <Grid Background="{StaticResource BackgroundTransparent}">
@@ -24,7 +25,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <uc:UcControlBar2 Grid.Row="0" Margin="30 0 10 0" MinHeight="{Binding MinHeight_ucControlbar, Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}"
-                          Tag="{Binding Title, ElementName=dialogcustom}"  Opacity="0.8" VerticalAlignment="Center"></uc:UcControlBar2>
+                          Tag="{Binding Title, ElementName=WfIncome}"  Opacity="0.8" VerticalAlignment="Center"></uc:UcControlBar2>
             <Grid Grid.Row="1" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -37,14 +38,22 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <StackPanel Grid.Row="0" Margin="30 0 0 10" HorizontalAlignment="Left">
+                    <StackPanel Grid.Row="0" Margin="30 20 30 10">
+                        <TextBlock Text="Mã Thu Nhập *" Margin="0,0,0,5" FontSize="16"/>
+                        <Border BorderThickness="1" BorderBrush="#999" 
+                 CornerRadius="5" Padding="10 5" 
+                 Background="#fafbfd">
+                            <TextBox Style="{StaticResource CustomStyleTextBox}" IsEnabled="False" x:Name="txtIncomeId"/>
+                        </Border>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Margin="30 0 0 10" HorizontalAlignment="Left">
                         <TextBlock Text="Loại thu nhập*" Margin="0,0,0,5" FontSize="16"/>
                         <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="1" Padding="1" Width="200">
                             <ComboBox x:Name="cmbCategoryType" Style="{StaticResource CustomStyleComboBox}">
                             </ComboBox>
                         </Border>
                     </StackPanel>
-                    <StackPanel Grid.Row="0" Margin="0 0 30 10" HorizontalAlignment="Right">
+                    <StackPanel Grid.Row="1" Margin="0 0 30 10" HorizontalAlignment="Right">
                         <TextBlock Text="Tên người nhận*" Margin="0,0,0,5" FontSize="16"/>
                         <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="1" Padding="1" Width="200">
                             <ComboBox x:Name="CmbRecipentName" 
@@ -52,7 +61,7 @@
                             </ComboBox>
                         </Border>
                     </StackPanel>
-                    <StackPanel Grid.Row="1" Margin="30 0 0 10" HorizontalAlignment="Left">
+                    <StackPanel Grid.Row="2" Margin="30 0 0 10" HorizontalAlignment="Left">
                         <TextBlock Text="Ngày thu nhập  *" Margin="0,0,0,5" FontSize="16"/>
                         <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="1" Padding="1" Width="200">
                             <DatePicker x:Name="dtpIncomeDate" 
@@ -62,7 +71,7 @@
                         </Border>
                     </StackPanel>
 
-                    <StackPanel Grid.Row="1" Width="200" Margin="0 0 30 0" HorizontalAlignment="Right">
+                    <StackPanel Grid.Row="2" Width="200" Margin="0 0 30 0" HorizontalAlignment="Right">
                         <TextBlock Text="Nhập tiền *" Margin="0,0,30,5" FontSize="16"/>
                         <Border BorderThickness="1" BorderBrush="#999" 
                                      CornerRadius="5" Padding="10 5" 
@@ -71,7 +80,7 @@
                                      FontSize="16" Style="{StaticResource CustomStyleTextBox}"/>
                         </Border>
                     </StackPanel>
-                    <StackPanel Margin="30 0 30 0" Grid.Row="2">
+                    <StackPanel Margin="30 0 30 0" Grid.Row="3">
                         <TextBlock Text="Ghi chú" Margin="0,0,0,5" FontSize="16"/>
                         <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Padding="10">
                             <RichTextBox x:Name="rtbNote" FontSize="16" FontWeight="SemiBold" Foreground="Black" Height="140" Style="{StaticResource CustomStyleRichTextBox}"/>
