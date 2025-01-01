@@ -117,5 +117,10 @@ namespace BLL.Services
         {
             return _expenseRepository.GetQuantityExpenses(userId);
         }
+
+        public decimal GetTotalAmountByDate(string userId, DateTime date)
+        {
+            return _expenseRepository.GetTotalAmountByDate(userId, date);
+        }
     }
 }

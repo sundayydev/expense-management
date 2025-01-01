@@ -51,5 +51,49 @@ namespace DAL.Utils
             }
         }
 
+        public static List<DateTime> GetDatesInWeek(DateTime date)
+        {
+            var daysInWeek = new List<DateTime>();
+
+            // Tìm ngày bắt đầu của tuần (Thứ Hai)
+            DateTime startOfWeek = date.AddDays(-(int)date.DayOfWeek + (int)DayOfWeek.Monday);
+
+            // Nếu ngày hiện tại là Chủ nhật, điều chỉnh để tuần bắt đầu từ Thứ Hai
+            if (date.DayOfWeek == DayOfWeek.Sunday)
+            {
+                startOfWeek = date.AddDays(-6);
+            }
+
+            // Thêm 7 ngày trong tuần vào danh sách
+            for (int i = 0; i < 7; i++)
+            {
+                daysInWeek.Add(startOfWeek.AddDays(i));
+            }
+
+            return daysInWeek;
+        }
+
+        public static string GetDayOfWeekInVietnamese(DateTime date)
+        {
+            switch (date.DayOfWeek)
+            {
+                case DayOfWeek.Monday:
+                    return "Thứ Hai";
+                case DayOfWeek.Tuesday:
+                    return "Thứ Ba";
+                case DayOfWeek.Wednesday:
+                    return "Thứ Tư";
+                case DayOfWeek.Thursday:
+                    return "Thứ Năm";
+                case DayOfWeek.Friday:
+                    return "Thứ Sáu";
+                case DayOfWeek.Saturday:
+                    return "Thứ Bảy";
+                case DayOfWeek.Sunday:
+                    return "Chủ Nhật";
+                default:
+                    return string.Empty;
+            }
+        }
     }
 }

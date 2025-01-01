@@ -145,6 +145,11 @@ namespace BLL.Services
         {
             return _incomeRepository.GetQuantityIncomes(userId);
         }
+
+        public decimal GetTotalAmountByDate(string userId, DateTime date)
+        {
+            return _incomeRepository.GetTotalAmountByDate(userId, date);
+        }
     }
 
 }

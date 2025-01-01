@@ -221,6 +221,7 @@
     <Compile Include="Repositories\ReminderRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Utils\CodeGenerator.cs" />
+    <Compile Include="Utils\FunctionHelper.cs" />
     <Compile Include="Utils\RandomColorGenerator.cs" />
     <Compile Include="Utils\SecureStorage.cs" />
   </ItemGroup>
