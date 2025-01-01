@@ -28,10 +28,10 @@
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <!-- Avatar -->
                             <Border Width="80" Height="80" Margin="0,0,10,0" CornerRadius="10">
-                                <fa:ImageAwesome Icon="Brands_SquareGithub" PrimaryColor="{Binding ColorAvatar}"/>
+                                <fa:ImageAwesome Icon="Brands_SquareGithub" x:Name="FaAvatar"/>
                             </Border>
                             <StackPanel VerticalAlignment="Center">
-                                <TextBlock Text="Ngô Mạnh Hùng" FontWeight="Bold" FontSize="20" 
+                                <TextBlock Text="Người dùng" FontWeight="Bold" FontSize="20" 
                                            Foreground="{StaticResource BackgroundDark}"
                                            x:Name="TblFullName"/>
                                 <TextBlock Text="User" FontSize="14" Foreground="#888"
@@ -42,11 +42,15 @@
                         <!-- Statistics -->
                         <StackPanel Margin="0,20,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
                             <StackPanel HorizontalAlignment="Center" Margin="10">
-                                <TextBlock Text="12.000" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center"/>
-                                <TextBlock Text="HÓA ĐƠN CHI TIÊU" FontSize="13" HorizontalAlignment="Center" Foreground="#999"/>
+                                <TextBlock Text="0" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center"
+                                           x:Name="TblSumExpense"
+                                           />
+                                <TextBlock Text="HÓA ĐƠN CHI TIÊU" FontSize="13" HorizontalAlignment="Center" 
+                                           Foreground="#999"/>
                             </StackPanel>
                             <StackPanel HorizontalAlignment="Center" Margin="10">
-                                <TextBlock Text="550" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center"/>
+                                <TextBlock Text="0" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center"
+                                           x:Name="TblSumIncome"/>
                                 <TextBlock Text="NGUỒN THU NHẬP" FontSize="13" HorizontalAlignment="Center" Foreground="#999"/>
                             </StackPanel>
                         </StackPanel>
@@ -127,9 +131,9 @@
                 </Grid>
                 <Button Grid.Row="6" VerticalAlignment="Top"
                         FontSize="16" Height="40" x:Name="BtnSave" Click="BtnSave_OnClick"
-                        HorizontalAlignment="Left"
+                        HorizontalAlignment="Right"
                         Background="{StaticResource BackgroundPrimary}"
-                        BorderBrush="{StaticResource BackgroundTransparent}" Margin="378,0,0,0"
+                        BorderBrush="{StaticResource BackgroundTransparent}"
                 >
                     <TextBlock>Lưu thông tin</TextBlock>
                 </Button>
