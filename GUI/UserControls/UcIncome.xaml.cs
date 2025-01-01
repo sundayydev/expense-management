@@ -36,6 +36,25 @@ namespace GUI.UserControls
             wf.ShowDialog();
             LoadData();
         }
+        private void txtFind_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string searchText = txtFind.Text.ToLower();
+            DateTime? searchDate = null;
+            if (DateTime.TryParse(searchText, out DateTime parsedDate))
+            {
+                searchDate = parsedDate.Date;
+            }
+
+            var res = Incomes.Where(Income =>
+                Income.Note.ToLower().Contains(searchText) 
+                || Income.IncomeId.ToString().Contains(searchText)
+                || (searchDate.HasValue && Income.IncomeDate.Date == searchDate.Value) 
+                || Income.Amount.ToString().Contains(searchText)
+                || Income.RecipientName.ToLower().Contains(searchText)
+            ).ToList();
+
+            InvoiceDataGrid.ItemsSource = res;
+        }
         public void LoadData()
         {
             InvoiceDataGrid.ItemsSource = null;
@@ -66,6 +85,7 @@ namespace GUI.UserControls
                 }
             }
         }
+        
         private void BtnEdit_OnClick(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
