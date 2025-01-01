@@ -75,5 +75,20 @@ namespace DAL.Repositories
                 .Sum(e => (decimal?)e.Amount) ?? 0;
             return total;
         }
+
+        public decimal GetTotalAmountByDate(string userId, DateTime date)
+        {
+            var userGuid = Guid.Parse(userId);
+            var total = _context.Expenses
+                .Where(e => e.UserId == userGuid && e.ExpenseDate.Day == date.Day &&
+                e.ExpenseDate.Month == date.Month && e.ExpenseDate.Year == date.Year)
+                .Sum(e => (decimal?)e.Amount) ?? 0;
+            return total;
+        }
+
+        public int GetQuantityExpenses(string userId)
+        {
+            return _context.Expenses.Where(e => e.UserId.ToString() == userId).Count();
+        }
     }
 }
