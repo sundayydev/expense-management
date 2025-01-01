@@ -90,9 +90,25 @@ namespace DAL.Repositories
               .Sum(e => (decimal?)e.Amount) ?? 0;
             return total;
         }
+
+        public decimal GetTotalAmountByDate(string userId, DateTime date)
+        {
+            var userGuid = Guid.Parse(userId);
+            var total = _context.Incomes
+              .Where(i => i.UserId == userGuid && i.IncomeDate.Day == date.Day &&
+              i.IncomeDate.Month == date.Month && i.IncomeDate.Year == date.Year)
+              .Sum(e => (decimal?)e.Amount) ?? 0;
+            return total;
+        }
+
         public Income GetIncomesByIncomesId(string incomeId)
         {
             return _context.Incomes.FirstOrDefault(r => r.IncomeId == incomeId);
+        }
+
+        public int GetQuantityIncomes(string userId)
+        {
+            return _context.Incomes.Where(i => i.UserId.ToString() == userId).Count();
         }
 
     }

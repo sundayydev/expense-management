@@ -109,7 +109,11 @@ namespace GUI.UserControls
             decimal lastMonthAmountIncome = _incomeService.GetTotalAmountByMonthly(_userId, lastMonth, year);
 
             decimal incomeLastMonthly = currentMonthAmountIncome - lastMonthAmountIncome;
-            decimal percentIncome = (currentMonthAmountIncome - lastMonthAmountIncome) / currentMonthAmountIncome * 100;
+            decimal percentIncome = 0;
+            if(currentMonthAmountIncome != 0)
+            {
+                percentIncome = (currentMonthAmountIncome - lastMonthAmountIncome) / currentMonthAmountIncome * 100;
+            }
             if (percentIncome >= 0)
             {
                 FaIconIncome.Icon = EFontAwesomeIcon.Solid_ArrowUp;
@@ -143,7 +147,11 @@ namespace GUI.UserControls
             decimal lastMonthAmountExpense = _expenseService.GetTotalAmountByMonthly(_userId, lastMonth, year);
 
             decimal expenseLastMonthly = currentMonthAmountExpense - lastMonthAmountExpense;
-            decimal percentExpense = (currentMonthAmountExpense - lastMonthAmountExpense) / currentMonthAmountExpense * 100;
+            decimal percentExpense = 0;
+            if (currentMonthAmountExpense != 0)
+            {
+                percentExpense = (currentMonthAmountExpense - lastMonthAmountExpense) / currentMonthAmountExpense * 100;
+            }
             if (percentExpense >= 0)
             {
                 FaIconExpense.Icon = EFontAwesomeIcon.Solid_ArrowUp;
@@ -182,7 +190,11 @@ namespace GUI.UserControls
                                             - _expenseService.GetTotalAmountByMonthly(_userId, lastMonth, year);
 
             decimal incomeLastMonthly = currentMonthAmountWallet - lastMonthAmountWallet;
-            decimal percentWallet = (currentMonthAmountWallet - lastMonthAmountWallet) / currentMonthAmountWallet * 100;
+            decimal percentWallet = 0;
+            if (currentMonthAmountWallet != 0)
+            {
+                percentWallet = (currentMonthAmountWallet - lastMonthAmountWallet) / currentMonthAmountWallet * 100;
+            }
             if (percentWallet >= 0)
             {
                 FaIconWallet.Icon = EFontAwesomeIcon.Solid_ArrowUp;
