@@ -129,6 +129,7 @@ namespace BLL.Services
                 CategoryId = i.CategoryId
             }).ToList();
         }
+
         public IncomeDto GetIncomesByIncomesId(string incomeId)
         {
             Income income = _incomeRepository.GetIncomesByIncomesId(incomeId);
@@ -139,6 +140,10 @@ namespace BLL.Services
                 Amount = income.Amount,
                 Note = income.Note,
             };
+        }
+        public int GetQuantityIncomes(string userId)
+        {
+            return _incomeRepository.GetQuantityIncomes(userId);
         }
     }
 

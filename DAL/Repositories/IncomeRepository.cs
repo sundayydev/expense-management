@@ -90,9 +90,15 @@ namespace DAL.Repositories
               .Sum(e => (decimal?)e.Amount) ?? 0;
             return total;
         }
+
         public Income GetIncomesByIncomesId(string incomeId)
         {
             return _context.Incomes.FirstOrDefault(r => r.IncomeId == incomeId);
+        }
+
+        public int GetQuantityIncomes(string userId)
+        {
+            return _context.Incomes.Where(i => i.UserId.ToString() == userId).Count();
         }
 
     }

@@ -75,5 +75,10 @@ namespace DAL.Repositories
                 .Sum(e => (decimal?)e.Amount) ?? 0;
             return total;
         }
+
+        public int GetQuantityExpenses(string userId)
+        {
+            return _context.Expenses.Where(e => e.UserId.ToString() == userId).Count();
+        }
     }
 }
