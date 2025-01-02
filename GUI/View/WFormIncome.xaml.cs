@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics.Eventing.Reader;
 using System.Globalization;
 using System.Linq;
+using System.Security.Cryptography.Pkcs;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -72,7 +73,7 @@ namespace GUI.View
                         {
                             UserId = AppContext.Instance.UserId,
                             CategoryId = cmbCategoryType.SelectedValue.ToString(),
-                            RecipientId = CmbRecipentName.SelectedValue.ToString(),
+                            RecipientId = CmbRecipentName.SelectedValue?.ToString(),
                             IncomeDate = dtpIncomeDate.SelectedDate.Value,
                             Amount = decimal.Parse(txtTotal.Text),
                             Note = new TextRange(rtbNote.Document.ContentStart,
@@ -196,7 +197,7 @@ namespace GUI.View
             if (_income != null)
             {
                 cmbCategoryType.Text = _income.Category.CategoryName;
-                CmbRecipentName.Text = _income.Recipient.RecipientName;
+                CmbRecipentName.SelectedValuePath = _income.RecipientId;
                 txtTotal.Text = _income.Amount.ToString();
                 dtpIncomeDate.DisplayDate = _income.IncomeDate;
                 rtbNote.Document.Blocks.Clear();

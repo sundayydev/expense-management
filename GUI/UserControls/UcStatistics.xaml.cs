@@ -233,76 +233,8 @@ namespace GUI.UserControls
 
         private void BtnExportExcel_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                using (var context = new MyDBContext()) 
-                {
-                    var expenses = context.Expenses.ToList();
-
-                    if (expenses == null || expenses.Count == 0)
-                    {
-                        MessageBox.Show("Không có dữ liệu để xuất!");
-                        return;
-                    }
-
-                    var saveFileDialog = new Microsoft.Win32.SaveFileDialog
-                    {
-                        Filter = "Excel Files|*.xlsx",
-                        FileName = "Data_Export"
-                    };
-
-                    if (saveFileDialog.ShowDialog() == true)
-                    {
-                        string filePath = saveFileDialog.FileName; 
-
-                        IWorkbook workbook = new XSSFWorkbook();  
-                        ISheet sheet = workbook.CreateSheet("Expenses");
-
-                        IRow headerRow = sheet.CreateRow(0);
-                        headerRow.CreateCell(0).SetCellValue("Mã Chi Tiêu");
-                        headerRow.CreateCell(1).SetCellValue("Danh Mục");
-                        headerRow.CreateCell(2).SetCellValue("Người Nhận");
-                        headerRow.CreateCell(3).SetCellValue("Số Tiền");
-                        headerRow.CreateCell(4).SetCellValue("Ngày Chi Tiêu");
-                        headerRow.CreateCell(5).SetCellValue("Ghi Chú");
-                        headerRow.CreateCell(6).SetCellValue("Ngày Tạo Chi Tiêu");
-
-                        sheet.SetColumnWidth(0, 20 * 256); 
-                        sheet.SetColumnWidth(1, 20 * 256); 
-                        sheet.SetColumnWidth(2, 20 * 256); 
-                        sheet.SetColumnWidth(3, 15 * 256); 
-                        sheet.SetColumnWidth(4, 20 * 256); 
-                        sheet.SetColumnWidth(5, 30 * 256); 
-                        sheet.SetColumnWidth(6, 20 * 256);
-
-                        // Duyệt qua dữ liệu và điền vào file Excel
-                        int rowIndex = 1;
-                        foreach (var expense in expenses)
-                        {
-                            IRow row = sheet.CreateRow(rowIndex);
-                            row.CreateCell(0).SetCellValue(expense.ExpenseId); 
-                            row.CreateCell(1).SetCellValue(expense.Category?.CategoryName ?? ""); 
-                            row.CreateCell(2).SetCellValue(expense.Recipient?.RecipientName ?? ""); 
-                            row.CreateCell(3).SetCellValue((double)expense.Amount);
-                            row.CreateCell(4).SetCellValue(expense.ExpenseDate.ToString("yyyy-MM-dd"));
-                            row.CreateCell(5).SetCellValue(expense.Note ?? "");
-                            row.CreateCell(6).SetCellValue(expense.CreatedAt.ToString()); 
-                            rowIndex++;
-                        }
-                        // Lưu file Excel vào đường dẫn đã chọn
-                        using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
-                        {
-                            workbook.Write(fileStream);
-                        }
-
-                        MessageBox.Show("Xuất Excel thành công!");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}");
-            }
+            WFormStatistic wf = new WFormStatistic();
+            wf.ShowDialog();    
         }
     }
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -49,12 +50,13 @@ namespace DAL.Repositories
 
             return total;
         }
-        public List<Expens> GetMonthlyExpenses(string userId)
+        public List<Expens> GetMonthlyExpenses(string userId, int month, int year)
         {
             var userGuid = Guid.Parse(userId);
-            return _context.Expenses
-                .Where(e => e.UserId == userGuid && e.ExpenseDate.Month == DateTime.Now.Month)
-                .ToList();
+            var total = _context.Expenses
+                .Where(e => e.UserId == userGuid && e.ExpenseDate.Month == month && e.ExpenseDate.Year == year).ToList();
+            return total;
+            
         }
 
         // Lấy chi tiêu hàng ngày của người dùng
@@ -85,10 +87,57 @@ namespace DAL.Repositories
                 .Sum(e => (decimal?)e.Amount) ?? 0;
             return total;
         }
-
+        public List<Expens> GetExpenseByDate(string userId, DateTime date)
+        {
+            var userGuid = Guid.Parse(userId);
+            var total = _context.Expenses
+                .Where(e => e.UserId == userGuid && e.ExpenseDate.Day == date.Day &&
+                e.ExpenseDate.Month == date.Month && e.ExpenseDate.Year == date.Year).ToList();
+            return total;
+        }
         public int GetQuantityExpenses(string userId)
         {
             return _context.Expenses.Where(e => e.UserId.ToString() == userId).Count();
+        }
+
+        public List<int> GetMonths(string userId)
+        {
+            var userGuid = Guid.Parse(userId);
+            return _context.Expenses
+                    .Where(e => e.UserId.ToString() == userId && e.ExpenseDate != null) 
+                    .Select(e => e.ExpenseDate.Month)  
+                    .Distinct()  
+                    .OrderBy(m => m)  
+                    .ToList();
+        }
+        public List<int> GetYear(string userId)
+        {
+            var userGuid = Guid.Parse(userId);
+            return _context.Expenses
+                    .Where(e => e.UserId.ToString() == userId && e.ExpenseDate != null)
+                    .Select(e => e.ExpenseDate.Year)
+                    .Distinct()
+                    .OrderBy(m => m)
+                    .ToList();
+        }
+        public List<int> GetYearsByMonth(string userId, int month)
+        {
+            using (var context = new MyDBContext())
+            {
+                var expenseYears = context.Expenses
+                    .Where(e => e.UserId.ToString() == userId && e.ExpenseDate.Month == month)
+                    .Select(e => e.ExpenseDate.Year)
+                    .Distinct()
+                    .ToList();
+
+                var incomeYears = context.Incomes
+                    .Where(i => i.UserId.ToString() == userId && i.IncomeDate.Month == month)
+                    .Select(i => i.IncomeDate.Year)
+                    .Distinct()
+                    .ToList();
+
+                return expenseYears.Union(incomeYears).Distinct().OrderBy(y => y).ToList();
+            }
         }
     }
 }
