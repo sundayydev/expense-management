@@ -52,11 +52,11 @@ namespace BLL.Services
                     CategoryId = i.CategoryId,
                     CategoryName = i.Category?.CategoryName,
                     RecipientId = i.RecipientId,
-                    RecipientName = i.Recipient?.RecipientName,
+                    RecipientName = i.Recipient?.RecipientName ?? null,
                     IncomeDate = i.IncomeDate,
                     Amount = i.Amount,
                     Note = i.Note,
-                    CreatedAt =i.CreatedAt ?? DateTime.Now
+                    CreatedAt = i.CreatedAt ?? DateTime.Now
                 }).ToList();
             }
             catch (Exception ex)
@@ -83,6 +83,10 @@ namespace BLL.Services
         {
             return _incomeRepository.GetIncomeById(incomeId);
         }
+        public List<Income> GetAll(string UserId)
+        {
+            return _incomeRepository.Getall(UserId);
+        }
         public void DeleteIncome(string incomeId)
         {
             var income = _incomeRepository.GetIncomesByUserId(incomeId);
@@ -97,22 +101,9 @@ namespace BLL.Services
             return _incomeRepository.GetTotalIncomeByUserId(userId);
         }
 
-        public List<IncomeDto> GetMonthlyIncome(string userId)
+        public List<Income> GetMonthlyIncome(string userId, int month, int year)
         {
-            var income = _incomeRepository.GetIncomesByUserId(userId);
-
-            // Nhóm chi tiêu theo tháng và năm
-            var monthlyIncome = income
-                .GroupBy(e => new DateTime(e.IncomeDate.Year, e.IncomeDate.Month, 1))  // Nhóm theo năm và tháng
-                .Select(g => new IncomeDto
-                {
-                    CategoryId = g.Key.ToString("MMMM yyyy"),  // Lấy chuỗi tháng và năm
-                    Amount = g.Sum(e => e.Amount),  // Tính tổng chi tiêu của tháng đó
-                })
-                .OrderBy(e => DateTime.ParseExact(e.CategoryId, "MMMM yyyy", null))  // Sắp xếp theo tháng năm
-                .ToList();
-
-            return monthlyIncome;
+            return _incomeRepository.GetMonthlyIncome(userId, month, year);
         }
 
         public decimal GetTotalAmountByMonthly(string userId, int month, int year)
@@ -149,6 +140,11 @@ namespace BLL.Services
         public decimal GetTotalAmountByDate(string userId, DateTime date)
         {
             return _incomeRepository.GetTotalAmountByDate(userId, date);
+        }
+
+        public List<Income> GetIncomeByDate(string userId, DateTime date)
+        {
+            return _incomeRepository.GetIncomeByDate(userId, date);
         }
     }
 

@@ -66,20 +66,9 @@ namespace BLL.Services
         {
             return _expenseRepository.GetTotalExpenseByUserId(userId);
         }
-        public List<ExpenseDto> GetMonthlyExpenses(string userId)
+       public List<Expens> GetMonthlyExpenses(string userId, int month, int year)
         {
-            var expenses = _expenseRepository.GetExpenseByUserId(userId);
-            var monthlyExpenses = expenses
-                .GroupBy(e => new DateTime(e.ExpenseDate.Year, e.ExpenseDate.Month, 1))  // Nhóm theo năm và tháng
-                .Select(g => new ExpenseDto
-                {
-                    CategoryId = g.Key.ToString("MMMM yyyy"),  // Lấy chuỗi tháng và năm
-                    Amount = g.Sum(e => e.Amount),
-                })
-                .OrderBy(e => DateTime.ParseExact(e.CategoryId, "MMMM yyyy", null)) 
-                .ToList();
-
-            return monthlyExpenses ?? null;
+            return _expenseRepository.GetMonthlyExpenses(userId, month, year);
         }
         public List<ExpenseDto> GetDailyExpenses(string userId)
         {
@@ -90,22 +79,6 @@ namespace BLL.Services
                 CategoryId = e.CategoryId,
                 Note = e.Note,
             }).ToList();
-        }
-        public List<string> GetMonthsWithExpenses(string userId)
-        {
-            var expenses = _expenseRepository.GetExpenseByUserId(userId);
-            if (expenses == null || !expenses.Any())
-            {
-                return new List<string>(); // Trả về danh sách rỗng
-            }
-            var months = expenses
-                .Select(e => new DateTime(e.ExpenseDate.Year, e.ExpenseDate.Month, 1))  
-                .Distinct()
-                .OrderBy(date => date) 
-                .ToList();
-
-           
-            return months.Select(m => m.ToString("MMMM yyyy")).ToList() ?? null;
         }
         
         public decimal GetTotalAmountByMonthly(string userId, int month, int year)
@@ -121,6 +94,10 @@ namespace BLL.Services
         public decimal GetTotalAmountByDate(string userId, DateTime date)
         {
             return _expenseRepository.GetTotalAmountByDate(userId, date);
+        }
+        public List<Expens> GetExpenseByDate(string userId, DateTime date)
+        {
+            return _expenseRepository.GetExpenseByDate(userId, date);
         }
     }
 }

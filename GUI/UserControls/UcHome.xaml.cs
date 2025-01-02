@@ -36,12 +36,12 @@ namespace GUI.UserControls
         void ShowInfoCard()
         {
 
-                int currentMonth = DateTime.Now.Month;
-                int currentYear = DateTime.Now.Year;
+            int currentMonth = DateTime.Now.Month;
+            int currentYear = DateTime.Now.Year;
 
-                LoadCardIncome(currentMonth, currentYear);
-                LoadCardExpense(currentMonth, currentYear);
-                LoadCardWallet(currentMonth, currentYear);
+            LoadCardIncome(currentMonth, currentYear);
+            LoadCardExpense(currentMonth, currentYear);
+            LoadCardWallet(currentMonth, currentYear);
 
         }
 
