@@ -53,9 +53,9 @@
                             Background="#fafbfd"
                             Height="40" Width="300" 
                             >
-                                    <TextBox FontSize="16" Style="{StaticResource MaterialDesignComboBoxEditableTextBox}"/>
+                                    <TextBox  x:Name="txtFind" FontSize="16" Style="{StaticResource CustomStyleTextBox}" TextChanged="txtFind_TextChanged"/>
                                 </Border>
-                                <Button Padding="5" Margin="5 0 0 0" Height="40" Width="42" Background="#66785F">
+                                <Button Padding="5" Margin="5 0 0 0" Height="40" Width="42" Background="#999900">
                                     <fa:ImageAwesome Icon="Solid_MagnifyingGlass" Style="{StaticResource Angle}"/>
                                 </Button>
                             </StackPanel>
