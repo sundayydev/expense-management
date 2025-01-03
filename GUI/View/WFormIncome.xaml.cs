@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics.Eventing.Reader;
 using System.Globalization;
 using System.Linq;
+using System.Security.Cryptography.Pkcs;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -197,6 +198,7 @@ namespace GUI.View
             {
                 txtIncomeId.Text = _income.IncomeId.ToString();
                 cmbCategoryType.Text = _income.Category.CategoryName;
+
                 CmbRecipentName.SelectedValuePath = _income.Recipient.RecipientName;
                 txtTotal.Text = _income.Amount.ToString();
                 dtpIncomeDate.DisplayDate = _income.IncomeDate;

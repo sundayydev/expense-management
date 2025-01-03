@@ -24,6 +24,10 @@ namespace DAL.Repositories
         {
             return _context.Incomes.FirstOrDefault(e => e.IncomeId == id);
         }
+        public List<Income> Getall(string userId)
+        {
+            return _context.Incomes.AsNoTracking().Where(c => c.UserId.ToString() == userId).ToList();
+        }
         public List<Income> GetIncomesByUserId(string userId)
         {
             return _context.Incomes.Include("Category").Where(i => i.UserId.ToString() == userId).OrderByDescending(i => i.IncomeDate).ToList();
@@ -64,14 +68,14 @@ namespace DAL.Repositories
             return total;
         }
        
-        public List<Income> GetMonthlyIncome(string userId)
+        public List<Income> GetMonthlyIncome(string userId, int month, int year)
         {
             var userGuid = Guid.Parse(userId);
             return _context.Incomes
-                .Where(i => i.UserId == userGuid && i.IncomeDate.Month == DateTime.Now.Month)
+                .Where(e => e.UserId == userGuid && e.IncomeDate.Month == month && e.IncomeDate.Year == year).ToList()
                 .ToList();
         }
-
+        
         // Lấy thu nhập hàng ngày của người dùng
         public List<Income> GetDailyIncome(string userId)
         {
@@ -110,6 +114,33 @@ namespace DAL.Repositories
         {
             return _context.Incomes.Where(i => i.UserId.ToString() == userId).Count();
         }
-
+        public List<int> GetMonths(string userId)
+        {
+            var userGuid = Guid.Parse(userId);
+            return _context.Incomes
+                    .Where(e => e.UserId.ToString() == userId && e.IncomeDate != null)
+                    .Select(e => e.IncomeDate.Month)
+                    .Distinct()
+                    .OrderBy(m => m)
+                    .ToList();
+        }
+        public List<int> GetYear(string userId)
+        {
+            var userGuid = Guid.Parse(userId);
+            return _context.Incomes
+                    .Where(e => e.UserId.ToString() == userId)
+                    .Select(e => e.IncomeDate.Year)
+                    .Distinct()
+                    .OrderBy(m => m)
+                    .ToList();
+        }
+        public List<Income> GetIncomeByDate(string userId, DateTime date)
+        {
+            var userGuid = Guid.Parse(userId);
+            var total = _context.Incomes
+                .Where(e => e.UserId == userGuid && e.IncomeDate.Day == date.Day &&
+                e.IncomeDate.Month == date.Month && e.IncomeDate.Year == date.Year).ToList();
+            return total;
+        }
     }
 }

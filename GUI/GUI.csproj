@@ -264,6 +264,9 @@
     <Compile Include="View\WFormReminder.xaml.cs">
       <DependentUpon>WFormReminder.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\WFormStatistic.xaml.cs">
+      <DependentUpon>WFormStatistic.xaml</DependentUpon>
+    </Compile>
     <Page Include="Library\Colors.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -353,6 +356,10 @@
     <Page Include="View\WFormIncome.xaml" />
     <Page Include="View\WFormRecipient.xaml" />
     <Page Include="View\WFormReminder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WFormStatistic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
