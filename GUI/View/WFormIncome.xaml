@@ -64,10 +64,11 @@
                     <StackPanel Grid.Row="2" Margin="30 0 0 10" HorizontalAlignment="Left">
                         <TextBlock Text="Ngày thu nhập  *" Margin="0,0,0,5" FontSize="16"/>
                         <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="1" Padding="1" Width="200">
-                            <DatePicker x:Name="dtpIncomeDate" 
-                             SelectedDate="{Binding ExpenseData.ExpenseDate, Mode=TwoWay}" 
-                             FontSize="16" FontWeight="SemiBold" Foreground="Black" 
-                             Margin="5,0,5,0" />
+                            <DatePicker FontSize="16" Padding="5" Margin="5,0,5,0"
+                            materialDesign:TextFieldAssist.HasClearButton="True"
+                            Style="{StaticResource MaterialDesignDatePicker}"
+                            materialDesign:CalendarAssist.Orientation="Horizontal"
+                            x:Name="dtpIncomeDate"/>   
                         </Border>
                     </StackPanel>
 

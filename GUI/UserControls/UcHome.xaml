@@ -234,7 +234,7 @@
 
                 <Grid Grid.Row="1">
                     <StackPanel >
-                        <!--<local:UcPieChart />-->
+                        <local:UcPieChart />
                     </StackPanel>
                 </Grid>
 

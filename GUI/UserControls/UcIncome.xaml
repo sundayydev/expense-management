@@ -53,7 +53,8 @@
                             Background="#fafbfd"
                             Height="40" Width="300" 
                             >
-                                    <TextBox  x:Name="txtFind" FontSize="16" Style="{StaticResource CustomStyleTextBox}" TextChanged="txtFind_TextChanged"/>
+                                    <TextBox  x:Name="txtFind" FontSize="16" VerticalAlignment="Center" Style="{StaticResource CustomStyleTextBox}" 
+                                              TextChanged="txtFind_TextChanged"/>
                                 </Border>
                                 <Button Padding="5" Margin="5 0 0 0" Height="40" Width="42" Background="#999900">
                                     <fa:ImageAwesome Icon="Solid_MagnifyingGlass" Style="{StaticResource Angle}"/>
@@ -106,7 +107,7 @@
                         <DataGridTemplateColumn Header="Ngày thu nhập" Width="*" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding IncomeDate}" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding IncomeDate, StringFormat='dd/MM/yyyy'}" VerticalAlignment="Center"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -133,7 +134,7 @@
                         <DataGridTemplateColumn Header="Ngày tạo" Width="*" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding CreatedAt}" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding CreatedAt, StringFormat='dd/MM/yyyy'}" VerticalAlignment="Center"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

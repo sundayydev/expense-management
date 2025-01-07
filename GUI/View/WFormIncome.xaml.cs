@@ -197,9 +197,8 @@ namespace GUI.View
             if (_income != null)
             {
                 txtIncomeId.Text = _income.IncomeId.ToString();
-                cmbCategoryType.Text = _income.Category.CategoryName;
-
-                CmbRecipentName.SelectedValuePath = _income.Recipient.RecipientName;
+                cmbCategoryType.Text = _income.CategoryId;
+                CmbRecipentName.SelectedValuePath = _income.RecipientId;
                 txtTotal.Text = _income.Amount.ToString();
                 dtpIncomeDate.DisplayDate = _income.IncomeDate;
                 rtbNote.Document.Blocks.Clear();

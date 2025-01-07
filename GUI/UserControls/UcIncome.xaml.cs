@@ -50,7 +50,7 @@ namespace GUI.UserControls
                 || Income.IncomeId.ToString().Contains(searchText)
                 || (searchDate.HasValue && Income.IncomeDate.Date == searchDate.Value.Date)
                 || Income.Amount.ToString().Contains(searchText)
-                || Income.RecipientName.ToLower().Contains(searchText)
+              
             ).ToList();
 
             InvoiceDataGrid.ItemsSource = res;
@@ -113,6 +113,7 @@ namespace GUI.UserControls
                         error.ShowDialog();
                     }
                 }
+                LoadData();
             }
         }
     } 

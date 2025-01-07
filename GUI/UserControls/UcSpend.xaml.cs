@@ -31,7 +31,7 @@ namespace GUI.UserControls
         {
             Expenses = _expenseService.GetAllExpensesByUserId(BLL.AppContext.Instance.UserId);
 
-            var sortedExpenses = Expenses.OrderByDescending(e => e.Amount).ToList();
+            var sortedExpenses = Expenses.OrderByDescending(e => e.ExpenseDate).ToList();
 
             dvgExpense.ItemsSource = sortedExpenses;
         }
