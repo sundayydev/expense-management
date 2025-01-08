@@ -37,19 +37,30 @@ namespace GUI.UserControls
         {
             try
             {
+                string name = TxtFullName.Text;
                 string email = TxtEmail.Text;
                 string oldPassword = PbPassWordOld.Password;
                 string newPassword = PbPasswordNew.Password;
                 string confirmPassword = PbPasswordNewAgain.Password;
+                bool gender = (bool)RdbMale.IsChecked ? true : false;
 
+                var userService = new UserService();
+
+                if (string.IsNullOrEmpty(oldPassword))
+                {
+                    userService.UpdateName(_userId, name,gender); 
+                    DialogCustoms dialog3 = new DialogCustoms("Cập nhật thông tin người dùng thành công.", "Thông báo", DialogCustoms.Show);
+                    dialog3.Show();
+                    return;
+                }
                 if (newPassword != confirmPassword)
                 {
                     DialogCustoms dialog2 = new DialogCustoms("Mật khẩu mới và xác nhận không khớp.", "Thông báo", DialogCustoms.OK);
                     dialog2.Show();
                     return;
                 }
-                var userService = new UserService();
-                userService.UpdatePassword(email, oldPassword, newPassword);
+             
+                userService.UpdatePassword(_userId, oldPassword, newPassword);
 
                 DialogCustoms dialog = new DialogCustoms("Cập nhật mật khẩu thành công.", "Thông báo", DialogCustoms.Show);
                 dialog.Show();

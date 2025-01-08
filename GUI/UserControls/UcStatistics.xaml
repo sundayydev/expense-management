@@ -62,7 +62,7 @@
                     </StackPanel>
                     <StackPanel Grid.Row="1">
                         <Grid Margin="20 5">
-                            <Label  Content="Thông Tin Chi Tiêu" FontSize="16" 
+                            <Label  Content="Thông Tin Chi Tiêu" FontSize="16"  Foreground="{StaticResource BackgroundBlueBold}"
                            FontWeight="SemiBold" HorizontalAlignment="Left"  
                            VerticalAlignment="Center" />
                         </Grid>
@@ -245,7 +245,7 @@
                         </StackPanel>
                         <StackPanel Grid.Row="0" Grid.Column="1">
                             <Grid Margin="20 5">
-                                <Label  Content="Ngày Chi Tiêu" FontSize="16" 
+                                <Label  Content="Ngày Chi Tiêu" FontSize="16"  Foreground="{StaticResource BackgroundBlueBold}"
                                  FontWeight="SemiBold" HorizontalAlignment="Left"  
                                  VerticalAlignment="Center" />
                             </Grid>
@@ -267,7 +267,7 @@
                     </Grid>
                     <StackPanel Grid.Row="4" Grid.Column="1">
                         <Grid Margin="20 5">
-                            <Label  Content="Thông Tin Chi Tiêu" FontSize="16" 
+                            <Label  Content="Thông Tin Chi Tiêu" FontSize="16"  Foreground="{StaticResource BackgroundBlueBold}"
                                 FontWeight="SemiBold" HorizontalAlignment="Left"  
                                 VerticalAlignment="Center" />
                         </Grid>

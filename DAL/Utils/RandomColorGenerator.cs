@@ -12,7 +12,7 @@ namespace DAL.Utils
 
         private static readonly Random Random = new Random();
         private static readonly Queue<Brush> RecentColors = new Queue<Brush >();
-        private static readonly int MaxRecentColors = 5; // Số lượng màu tránh trùng lặp
+        private static readonly int MaxRecentColors = 10; // Số lượng màu tránh trùng lặp
 
         public RandomColorGenerator()
         { }
@@ -22,11 +22,11 @@ namespace DAL.Utils
             var brushConverter = new BrushConverter();
             var colorHexes = new[]
             {
-                "#FFF5E4", "#FFD1D1", "#FF9494", "#FF7878", "#FF4C4C",  
-                "#F0D9FF", "#CAB8FF", "#C490E4", "#BFA2DB", "#949CDF",  
-                "#BEDBBB", "#CCF6C8", "#CFF6CF", "#89C9B8", "#8DB596",  
-                "#DDF3F5", "#E1F2FB", "#BADFDB", "#ABC2E8", "#4F91D2",
-                "#FFE6A9", "#FDFFAE", "#F6EFBD", "#FFF9BF", "#FFD2A0"
+                "#CCD6A6", "#FFD1D1", "#FF9494", "#FFC1B6", "#FF4C4C",  
+                "#F0D9FF", "#CAB8FF", "#C490E4", "#8174A0", "#949CDF",  
+                "#BEDBBB", "#91C788", "#B1C29E", "#89C9B8", "#8DB596",
+                "#1D97C1", "#E1F2FB", "#F39E60", "#ABC2E8", "#4F91D2",
+                "#F0BB78", "#70AF85", "#F8E1B7", "#E6BA95", "#FFD2A0"
             };
 
 

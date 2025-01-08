@@ -140,10 +140,11 @@
                                 HorizontalAlignment="Left" Margin="10" Padding="0"
                                 Background="{StaticResource BackgroundLightest}"
                                 BorderBrush="{StaticResource BackgroundTransparent}"
+                                Click="OnBackButtonClick"
                         >
                             <fa:ImageAwesome Icon="Solid_ArrowLeft" Height="25" Width="25" PrimaryColor="{StaticResource BackgroundPrimary}"/>
                         </Button>
-                        <Button Height="40" Width="40" VerticalAlignment="Center"
+                        <Button Height="40" Width="40" VerticalAlignment="Center" Click="OnNextButtonClick"
                                 HorizontalAlignment="Left" Margin="10" Padding="0"
                                 Background="{StaticResource BackgroundLightest}"
                                 BorderBrush="{StaticResource BackgroundTransparent}"

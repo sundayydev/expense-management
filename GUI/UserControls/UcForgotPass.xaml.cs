@@ -26,6 +26,12 @@ namespace GUI.UserControls
             {
                 return;  
             }
+            if (!cbAgree.IsChecked.GetValueOrDefault())
+            {
+                DialogCustoms res = new DialogCustoms("Bạn phải đồng ý với các điều khoản để tiếp tục.", "Thông báo", DialogCustoms.OK);
+                res.ShowDialog();
+                return;
+            }
             string newPassword = GenerateRandomPassword();
             txtPass.Text = newPassword;
 
@@ -41,6 +47,7 @@ namespace GUI.UserControls
             {
                 DialogCustoms dialog = new DialogCustoms("Đã xảy ra lỗi khi gửi email: " + ex.Message, "Lỗi", DialogCustoms.Show);
                 dialog.Show();
+                txtPass.Text = "";
             }
         }
 
@@ -60,7 +67,7 @@ namespace GUI.UserControls
         {
             if (string.IsNullOrWhiteSpace(txtEmail.Text))
             {
-                DialogCustoms dialog = new DialogCustoms("Lấy cc mật khẩu cũng không nhớ? Email không thể để trống.", "Thông báo", DialogCustoms.Show);
+                DialogCustoms dialog = new DialogCustoms("Email không thể để trống.", "Thông báo", DialogCustoms.Show);
                 dialog.Show();
                 return false;
             }
@@ -100,7 +107,7 @@ namespace GUI.UserControls
             string smtpServer = "smtp.gmail.com";
             int smtpPort = 587;
             string senderEmail = "duyhoanggl98@gmail.com";
-            string senderPassword = "ekik wvlq bxnf rnqe";
+            string senderPassword = "lmxz pdja zphu biyc";
 
             using (SmtpClient smtp = new SmtpClient(smtpServer, smtpPort))
             {

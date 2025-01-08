@@ -14,6 +14,7 @@
     <SolidColorBrush x:Key="BackgroundDark" Color="#172b4c"/>
     <SolidColorBrush x:Key="BackgroundGray" Color="#758694" />
     <SolidColorBrush x:Key="BackgroundBuleSky" Color="#80C4E9" />
+    <SolidColorBrush x:Key="BackgroundBlueBold" Color="#295F98" />
 
     <!--Light colors-->
     <SolidColorBrush x:Key="BackgroundPrimaryLight" Color="#e1eaf9"/>

@@ -15,7 +15,7 @@ namespace GUI.UserControls
     {
         private readonly ExpenseService _expenseService = new ExpenseService();
         private readonly IncomeService _incomeService = new IncomeService();
-        private readonly string _userId = BLL.AppContext.Instance.UserId;
+        private readonly string userId = BLL.AppContext.Instance.UserId;
 
         public SeriesCollection SeriesCollection { get; set; }
         public string[] Labels { get; set; }
@@ -45,8 +45,11 @@ namespace GUI.UserControls
         {
             try
             {
-                string userId = BLL.AppContext.Instance.UserId;
-
+                if (string.IsNullOrEmpty(userId))
+                {
+                    //MessageBox.Show("Vui lòng đăng nhập để xem dữ liệu!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return; 
+                }
                 if (isMonthly)
                 {
                     int currentMonth = DateTime.Now.Month;
