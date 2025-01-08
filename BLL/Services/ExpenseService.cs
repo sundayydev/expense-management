@@ -70,16 +70,7 @@ namespace BLL.Services
         {
             return _expenseRepository.GetMonthlyExpenses(userId, month, year);
         }
-        public List<ExpenseDto> GetDailyExpenses(string userId)
-        {
-            var expenses = _expenseRepository.GetDailyExpenses(userId);
-            return expenses.Select(e => new ExpenseDto
-            {
-                Amount = e.Amount,
-                CategoryId = e.CategoryId,
-                Note = e.Note,
-            }).ToList();
-        }
+       
         
         public decimal GetTotalAmountByMonthly(string userId, int month, int year)
         {

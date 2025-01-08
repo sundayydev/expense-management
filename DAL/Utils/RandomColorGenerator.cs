@@ -22,10 +22,11 @@ namespace DAL.Utils
             var brushConverter = new BrushConverter();
             var colorHexes = new[]
             {
-                "#E16A54", "#7E5CAD", "#605678", "#898121", "#3E5879",
-                "#D0B8A8", "#405D72", "#DA7297", "#E88D67", "#597445",
-                "#3AA6B9", "#74512D", "#FFC470", "#FA7070", "#8E7AB5",
-                "#88AB8E", "#EDB7ED", "#82A0D8", "#867070", "#EA8FEA",
+                "#FFF5E4", "#FFD1D1", "#FF9494", "#FF7878", "#FF4C4C",  
+                "#F0D9FF", "#CAB8FF", "#C490E4", "#BFA2DB", "#949CDF",  
+                "#BEDBBB", "#CCF6C8", "#CFF6CF", "#89C9B8", "#8DB596",  
+                "#DDF3F5", "#E1F2FB", "#BADFDB", "#ABC2E8", "#4F91D2",
+                "#FFE6A9", "#FDFFAE", "#F6EFBD", "#FFF9BF", "#FFD2A0"
             };
 
 
