@@ -59,7 +59,7 @@
                                 >
                                 <TextBox FontSize="16" Style="{StaticResource CustomStyleTextBox}" x:Name="TxtSearch" TextChanged="TxtSearch_OnTextChanged"/>
                             </Border>
-                            <Button Padding="8" Margin="5 0 0 0" Height="40"
+                                <Button Padding="8" Margin="5 0 0 0" Height="40" 
                                     Background="#640D5F" BorderBrush="Transparent"
                                     >
                                 <fa:ImageAwesome Icon="Solid_MagnifyingGlass" PrimaryColor="#F9F5F6"/>

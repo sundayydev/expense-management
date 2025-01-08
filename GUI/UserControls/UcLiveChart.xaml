@@ -29,8 +29,8 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Content="Thống kê chi tiêu" FontSize="16" 
-                       FontWeight="SemiBold" HorizontalAlignment="Left"  
+                <Label Grid.Column="0" Content="Thống Kê Chi Tiêu Và Thu Nhập " FontSize="16" 
+                       FontWeight="SemiBold" HorizontalAlignment="Left"  Foreground="{StaticResource BackgroundBlueBold}"
                        VerticalAlignment="Center" />
                 <StackPanel Grid.Column="1" Width="165" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                     <!-- RadioButton: Ngày -->

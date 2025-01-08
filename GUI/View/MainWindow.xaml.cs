@@ -4,6 +4,8 @@ using GUI.View;
 using System.Windows;
 using System.Windows.Media;
 using Control = System.Windows.Controls.Control;
+using System.Collections.Generic;
+using System.Windows.Controls;
 
 namespace GUI
 {
@@ -13,6 +15,8 @@ namespace GUI
     public partial class MainWindow
     {
         private bool _isMenuCollapsed = false;
+
+        private Queue<UserControl> navigationQueue = new Queue<UserControl>();
 
         private UcHome _ucHome;
         private UcAccount _ucAccount;
@@ -59,37 +63,129 @@ namespace GUI
             switch (btn.Name)
             {
                 case "BtnHome":
-                    _ucHome = new UcHome();
-                    ContentDisplayMain.Content = _ucHome;
+                    NavigateToNewScreen(new UcHome());
                     break;
                 case "BtnCategory":
-                    _ucCategory = new UcCategory();
-                    ContentDisplayMain.Content = _ucCategory;
+                    NavigateToNewScreen(new UcCategory());
                     break;
                 case "BtnExpense":
-                    _ucSpend = new UcSpend();
-                    ContentDisplayMain.Content = _ucSpend;
+                    NavigateToNewScreen(new UcSpend());
                     break;
                 case "BtnIncome":
-                    _ucIncome = new UcIncome();
-                    ContentDisplayMain.Content = _ucIncome;
+                    NavigateToNewScreen(new UcIncome());
                     break;
                 case "BtnRecipient":
-                    _ucRecipient = new UcRecipient();
-                    ContentDisplayMain.Content = _ucRecipient;
-                    break;
-                case "BtnLoans":
+                    NavigateToNewScreen(new UcRecipient());
                     break;
                 case "BtnStatistical":
-                    _ucStatistics = new UcStatistics();
-                    ContentDisplayMain.Content = _ucStatistics;
+                    NavigateToNewScreen(new UcStatistics());
                     break;
                 case "BtnRemind":
-                    _ucRemind = new UcRemind();
-                    ContentDisplayMain.Content = _ucRemind;
+                    NavigateToNewScreen(new UcRemind());
                     break;
             }
 
+        }
+        private void NavigateToNewScreen(UserControl newControl)
+        {
+            // Lưu UserControl hiện tại vào Queue trước khi điều hướng đến màn hình mới
+            if (ContentDisplayMain.Content != null)
+            {
+                navigationQueue.Enqueue(ContentDisplayMain.Content as UserControl);
+            }
+
+            DisplayUserControl(newControl);
+        }
+
+        // Phương thức để hiển thị UserControl
+        private void DisplayUserControl(UserControl control)
+        {
+            ContentDisplayMain.Content = control;
+        }
+
+        // Phương thức xử lý quay lại
+        private void OnBackButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (navigationQueue.Count > 0)
+            {
+                ResetBackgroundButtonIcon();
+                var previousControl = navigationQueue.Dequeue();
+                DisplayUserControl(previousControl);
+                if (previousControl is UcHome)
+                {
+                    BtnHome.Background = (SolidColorBrush)Application.Current.Resources["BackgroundSecondaryLight"];
+                }
+                else if (previousControl is UcCategory)
+                {
+                    BtnCategory.Background = (SolidColorBrush)Application.Current.Resources["BackgroundSecondaryLight"];
+                }
+                else if (previousControl is UcSpend)
+                {
+                    BtnExpense.Background = (SolidColorBrush)Application.Current.Resources["BackgroundSecondaryLight"];
+                }
+                else if (previousControl is UcIncome)
+                {
+                    BtnIncome.Background = (SolidColorBrush)Application.Current.Resources["BackgroundSecondaryLight"];
+                }
+                else if (previousControl is UcStatistics)
+                {
+                    BtnStatistical.Background = (SolidColorBrush)Application.Current.Resources["BackgroundSecondaryLight"];
+                }
+                else if (previousControl is UcRecipient)
+                {
+                    BtnRecipient.Background = (SolidColorBrush)Application.Current.Resources["BackgroundSecondaryLight"];
+                }
+                else if (previousControl is UcRemind)
+                {
+                    BtnRemind.Background = (SolidColorBrush)Application.Current.Resources["BackgroundSecondaryLight"];
+                }
+            }
+            else
+            {
+                MessageBox.Show("Không có màn hình trước đó để quay lại.");
+            }
+        }
+        private void OnNextButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (navigationQueue.Count > 0)
+            {
+                ResetBackgroundButtonIcon();
+                var nextControl = navigationQueue.Peek(); 
+                DisplayUserControl(nextControl);
+
+                if (nextControl is UcHome)
+                {
+                    BtnHome.Background = (SolidColorBrush)Application.Current.Resources["BackgroundSecondaryLight"];
+                }
+                else if (nextControl is UcCategory)
+                {
+                    BtnCategory.Background = (SolidColorBrush)Application.Current.Resources["BackgroundSecondaryLight"];
+                }
+                else if (nextControl is UcSpend)
+                {
+                    BtnExpense.Background = (SolidColorBrush)Application.Current.Resources["BackgroundSecondaryLight"];
+                }
+                else if (nextControl is UcIncome)
+                {
+                    BtnIncome.Background = (SolidColorBrush)Application.Current.Resources["BackgroundSecondaryLight"];
+                }
+                else if (nextControl is UcStatistics)
+                {
+                    BtnStatistical.Background = (SolidColorBrush)Application.Current.Resources["BackgroundSecondaryLight"];
+                }
+                else if (nextControl is UcRecipient)
+                {
+                    BtnRecipient.Background = (SolidColorBrush)Application.Current.Resources["BackgroundSecondaryLight"];
+                }
+                else if (nextControl is UcRemind)
+                {
+                    BtnRemind.Background = (SolidColorBrush)Application.Current.Resources["BackgroundSecondaryLight"];
+                }
+            }
+            else
+            {
+                MessageBox.Show("Không có màn hình tiếp theo để chuyển.");
+            }
         }
 
         void ResetBackgroundButtonIcon()

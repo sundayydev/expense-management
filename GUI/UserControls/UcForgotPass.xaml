@@ -18,7 +18,7 @@
                 </Border.Effect>
                 <StackPanel>
                     <Label Content="Quên mật khẩu" HorizontalAlignment="Center" Margin="0,30,0,0" FontSize="32" FontWeight="Bold" Foreground="{StaticResource TextBuleBold}"/>
-                    <Label Content="SignUp to continue to WebkitX " HorizontalAlignment="Center"  FontSize="16" Foreground="{StaticResource TextBuleBold}" Grid.Column="1"/>
+                    <Label Content="Nhập Email để lấy lại mật khẩu" HorizontalAlignment="Center"  FontSize="16" Foreground="{StaticResource TextBuleBold}" Grid.Column="1"/>
                     <local:TextHolder x:Name="txtEmail"  Width="500" Margin="0,20,0,0" PlaceHolder="Email" />
                     <Grid Width="500" Height="60" Margin="0,20,0,20">
                         <Border BorderBrush="{StaticResource BorderPrimary}" BorderThickness="1" CornerRadius="15" Padding="2px">
@@ -37,7 +37,7 @@
                         <fa:ImageAwesome Icon="Solid_Lock" PrimaryColor="{StaticResource TextBuleBold}" Width="25" Height="25" HorizontalAlignment="Left" Margin="0,35,0,0" Grid.Row="1"/>
                     </Grid>
                     <Grid Width="250" Margin="0,15">
-                        <CheckBox Content="Tôi đồng ý với các điều khoản" HorizontalAlignment="Center" FontSize="16" VerticalAlignment="Center" Foreground="{StaticResource TextSecondary}" />
+                        <CheckBox Content="Tôi đồng ý với các điều khoản" x:Name="cbAgree" HorizontalAlignment="Center" FontSize="16" VerticalAlignment="Center" Foreground="{StaticResource TextSecondary}" />
                     </Grid>
                     <Button x:Name="btnForgotPass" Content="Lấy lại mật khẩu" Height="50" Width="180" FontSize="16" BorderThickness="0"
                         HorizontalAlignment="Center" Margin="0,20" Background="{StaticResource BackgroundPrimary}" Click="btnForgotPass_Click" ></Button>

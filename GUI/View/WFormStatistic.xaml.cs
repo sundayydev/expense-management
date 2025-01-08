@@ -24,8 +24,7 @@ namespace GUI.View
         public WFormStatistic()
         {
             InitializeComponent();
-            LoadMonths();
-           // LoadYear();
+            LoadMonths(); 
         }
         private void rdbDay_Checked(object sender, RoutedEventArgs e)
         {

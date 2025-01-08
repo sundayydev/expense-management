@@ -5,6 +5,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace GUI.UserControls
 {
@@ -13,10 +14,22 @@ namespace GUI.UserControls
         private readonly ExpenseService _expenseService = new ExpenseService();
         private readonly IncomeService _incomeService  = new IncomeService();
         readonly string _userId = BLL.AppContext.Instance.UserId;
+        private int _currentImageIndex = 0; // Vị trí ảnh hiện tại
+        private readonly Image[] _images;   // Mảng chứa các hình ảnh
+        private readonly DispatcherTimer _bannerTimer; // Bộ đếm thời gian
         public UcHome()
         {
             InitializeComponent();
             ShowInfoCard();
+            _images = new[] { Image1, Image2};
+
+            // Khởi tạo timer cho việc chuyển banner
+            _bannerTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(3) // Chuyển sau mỗi 3 giây
+            };
+            _bannerTimer.Tick += BannerTimer_Tick;
+            _bannerTimer.Start(); // Bắt đầu tự động chuyển
         }
 
         private void BtnOpenFormExpense_OnClick(object sender, RoutedEventArgs e)
@@ -164,6 +177,24 @@ namespace GUI.UserControls
                 
             TxtPercentWallet.Text = $"{percentWallet:N2}%";
             TxtWallet.Text = $"{totalWallet:N0}";
+        }
+
+        private void BannerTimer_Tick(object sender, EventArgs e)
+        {
+            ShowNextBanner();
+        }
+
+        // Hiển thị hình ảnh tiếp theo
+        private void ShowNextBanner()
+        {
+            // Ẩn hình ảnh hiện tại
+            _images[_currentImageIndex].Visibility = Visibility.Collapsed;
+
+            // Chuyển sang hình ảnh tiếp theo
+            _currentImageIndex = (_currentImageIndex + 1) % _images.Length;
+
+            // Hiển thị hình ảnh mới
+            _images[_currentImageIndex].Visibility = Visibility.Visible;
         }
     }
 }

@@ -101,12 +101,12 @@ namespace BLL.Services
                 Email = user.Email,
             };
         }
-        public void UpdatePassword(string email, string oldPassword, string newPassword)
+        public void UpdatePassword(string userId, string oldPassword, string newPassword)
         {
-            var user = _userRepository.GetUserByEmail(email);
+            var user = _userRepository.GetUserByUserId(userId);
             if (user == null)
             {
-                throw new InvalidOperationException("Không tìm thấy tài khoản với email này.");
+                throw new InvalidOperationException("Không tìm thấy tài khoản này.");
             }
             if (!BCrypt.Net.BCrypt.Verify(oldPassword, user.PasswordHash))
             {
@@ -123,7 +123,13 @@ namespace BLL.Services
             user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(newPassword);
             _userRepository.UpdateUser(user);
         }
-
+        public void UpdateName(string userId, string name ,bool gender)
+        {
+            var user = _userRepository.GetUserByUserId(userId);
+            user.FullName = name;
+            user.Gender = gender;
+            _userRepository.UpdateUser(user);
+        }
     }
 }
 

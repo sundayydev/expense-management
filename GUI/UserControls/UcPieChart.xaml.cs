@@ -29,6 +29,10 @@ namespace GUI.UserControls
         {
             try
             {
+                if (string.IsNullOrEmpty(userId))
+                {
+                    return; 
+                }
                 var dailyExpenses = _expenseService.GetExpenseByDate(userId, DateTime.Now);
                 if (dailyExpenses == null || !dailyExpenses.Any())
                 {

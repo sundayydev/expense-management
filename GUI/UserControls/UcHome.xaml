@@ -11,238 +11,240 @@
              Background="White">
 
     <Border BorderBrush="#EEEEEE" BorderThickness="1" CornerRadius="10" Background="{StaticResource BackgroundWhite}">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2.5*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            <Grid Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <StackPanel Grid.Row="0">
-                    <Grid Margin="20 5">
-                        <Label  Content="Thông Tin Chi Tiêu" FontSize="16" 
-                           FontWeight="SemiBold" HorizontalAlignment="Left"  
+        <ScrollViewer VerticalScrollBarVisibility="Hidden" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2.5*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0">
+                        <Grid Margin="20 5">
+                            <Label  Content="Thông Tin Chi Tiêu" FontSize="16" 
+                           FontWeight="SemiBold" HorizontalAlignment="Left" Foreground="{StaticResource BackgroundBlueBold}"
                            VerticalAlignment="Center" />
-                    </Grid>
-                </StackPanel>
-                <StackPanel Grid.Row="1">
-                    <Grid Margin="20 5">
-                        <Grid Grid.Column="0" >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <!-- CardInfo Ví -->
-                            <Grid Grid.Column="0">
-                                <Border Background="White" CornerRadius="10" BorderThickness="1" 
+                        </Grid>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1">
+                        <Grid Margin="20 5">
+                            <Grid Grid.Column="0" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <!-- CardInfo Ví -->
+                                <Grid Grid.Column="0">
+                                    <Border Background="White" CornerRadius="10" BorderThickness="1" 
                                         BorderBrush="#D1D1D1" materialDesign:ElevationAssist.Elevation="Dp8">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="*"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid Grid.Row="0">
-                                            <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
-                                                <fa:ImageAwesome Icon="Solid_Wallet" Width="30"
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid Grid.Row="0">
+                                                <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                                                    <fa:ImageAwesome Icon="Solid_Wallet" Width="30"
                                                                  Height="30" Margin="30 0" PrimaryColor="#B4B4B8"/>
-                                                <TextBlock Text="Số Tiền Trong Ví" FontSize="20" Foreground="#B4B4B8"
+                                                    <TextBlock Text="Số Tiền Trong Ví" FontSize="20" Foreground="#B4B4B8"
                                                            FontWeight="Medium" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </Grid>
-                                        <Grid Grid.Row="1">
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock x:Name="TxtWallet"  Text="0" FontSize="20" Margin="30 0 0 0"
+                                                </StackPanel>
+                                            </Grid>
+                                            <Grid Grid.Row="1">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock x:Name="TxtWallet"  Text="0" FontSize="20" Margin="30 0 0 0"
                                                            VerticalAlignment="Center" FontWeight="Bold"/>
-                                                <TextBlock Text="VND" FontSize="16" VerticalAlignment="Center"/>
-                                                <Border Background="{StaticResource BackgroundSuccessLight}" 
+                                                    <TextBlock Text="VND" FontSize="16" VerticalAlignment="Center"/>
+                                                    <Border Background="{StaticResource BackgroundSuccessLight}" 
                                                         BorderThickness="1" CornerRadius="5" 
                                                         Padding="5 0" Margin="10 0 0 0" Height="20"
                                                         x:Name="BorderBgWallet"
                                                         >
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <fa:ImageAwesome Icon="Solid_ArrowUp" Width="10" x:Name="FaIconWallet"
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <fa:ImageAwesome Icon="Solid_ArrowUp" Width="10" x:Name="FaIconWallet"
                                                                          Height="15" Margin="0 0 5 0" PrimaryColor="{StaticResource BackgroundSuccess}"/>
-                                                        <TextBlock x:Name="TxtPercentWallet" Text="0 %" FontSize="13" FontWeight="Bold"
+                                                            <TextBlock x:Name="TxtPercentWallet" Text="0 %" FontSize="13" FontWeight="Bold"
                                                                    VerticalAlignment="Center" Foreground="{StaticResource BackgroundSuccess}"/>
-                                                    </StackPanel>
-                                                </Border>
-                                            </StackPanel>
-                                        </Grid>
-                                        <Grid Grid.Row="2">
-                                            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                                                <TextBlock Text="0" FontSize="13" x:Name="TxtWalletLastMonth"
+                                                        </StackPanel>
+                                                    </Border>
+                                                </StackPanel>
+                                            </Grid>
+                                            <Grid Grid.Row="2">
+                                                <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                                                    <TextBlock Text="0" FontSize="13" x:Name="TxtWalletLastMonth"
                                                            FontWeight="Medium" VerticalAlignment="Center" Margin="30 0 10 0"/>
-                                                <TextBlock Text="So với tháng trước" FontSize="13" VerticalAlignment="Center"/>
-                                            </StackPanel>
+                                                    <TextBlock Text="So với tháng trước" FontSize="13" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                            </Grid>
                                         </Grid>
-                                    </Grid>
-                                </Border>
-                            </Grid>
-                            <!-- CardInfo Chi Tiêu -->
-                            <Grid Grid.Column="1" Margin="10 0 0 0">
-                                <Border Background="White" CornerRadius="10" BorderThickness="1" 
+                                    </Border>
+                                </Grid>
+                                <!-- CardInfo Chi Tiêu -->
+                                <Grid Grid.Column="1" Margin="10 0 0 0">
+                                    <Border Background="White" CornerRadius="10" BorderThickness="1" 
                                         BorderBrush="#D1D1D1" materialDesign:ElevationAssist.Elevation="Dp8">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="*"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid Grid.Row="0">
-                                            <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
-                                                <fa:ImageAwesome Icon="Solid_MoneyBill" Width="30"
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid Grid.Row="0">
+                                                <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                                                    <fa:ImageAwesome Icon="Solid_MoneyBill" Width="30"
                                                                  Height="30" Margin="30 0" PrimaryColor="#B4B4B8"/>
-                                                <TextBlock Text="Chi tiêu" FontSize="20" Foreground="#B4B4B8"
+                                                    <TextBlock Text="Chi tiêu" FontSize="20" Foreground="#B4B4B8"
                                                            FontWeight="Medium" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </Grid>
-                                        <Grid Grid.Row="1">
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock x:Name="TxtExpense" Text="{Binding TotalExpense, StringFormat={}{0:N0}}" 
+                                                </StackPanel>
+                                            </Grid>
+                                            <Grid Grid.Row="1">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock x:Name="TxtExpense" Text="{Binding TotalExpense, StringFormat={}{0:N0}}" 
                                                            FontSize="20" Margin="30 0 0 0"
                                                            VerticalAlignment="Center" FontWeight="Bold"/>
-                                                <TextBlock Text="VND" FontSize="16" VerticalAlignment="Center"/>
-                                                <Border Background="{StaticResource BackgroundSuccess}" 
+                                                    <TextBlock Text="VND" FontSize="16" VerticalAlignment="Center"/>
+                                                    <Border Background="{StaticResource BackgroundSuccess}" 
                                                         BorderThickness="1" CornerRadius="5" 
                                                         x:Name="BorderBgExpense"
                                                         Padding="5 0" Margin="10 0 0 0" Height="20">
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <fa:ImageAwesome Icon="Solid_ArrowUp" Width="10" x:Name="FaIconExpense"
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <fa:ImageAwesome Icon="Solid_ArrowUp" Width="10" x:Name="FaIconExpense"
                                                                          Height="15" Margin="0 0 5 0"/>
-                                                        <TextBlock Text="0 %" FontSize="13" VerticalAlignment="Center" 
+                                                            <TextBlock Text="0 %" FontSize="13" VerticalAlignment="Center" 
                                                                    FontWeight="Bold"
                                                                    x:Name="TxtPercentExpense"
                                                                    />
-                                                    </StackPanel>
-                                                </Border>
-                                            </StackPanel>
-                                        </Grid>
-                                        <Grid Grid.Row="2">
-                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0 0 0 10">
-                                                <TextBlock Text="0" FontSize="13" x:Name="TxtExpenseLastMonth"
+                                                        </StackPanel>
+                                                    </Border>
+                                                </StackPanel>
+                                            </Grid>
+                                            <Grid Grid.Row="2">
+                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0 0 0 10">
+                                                    <TextBlock Text="0" FontSize="13" x:Name="TxtExpenseLastMonth"
                                                            FontWeight="Medium" VerticalAlignment="Center" Margin="30 0 10 0"/>
-                                                <TextBlock Text="So với tháng trước" FontSize="13" VerticalAlignment="Center"/>
-                                                <Button Background="Transparent" Padding="0" BorderBrush="Transparent"
+                                                    <TextBlock Text="So với tháng trước" FontSize="13" VerticalAlignment="Center"/>
+                                                    <Button Background="Transparent" Padding="0" BorderBrush="Transparent"
                                                         HorizontalAlignment="Right" Margin="10 0"
                                                         x:Name="BtnOpenFormExpense" Click="BtnOpenFormExpense_OnClick"
                                                         >
-                                                    <fa:ImageAwesome Icon="Solid_CirclePlus" Height="25" PrimaryColor="#A9A9A9"/>
-                                                </Button>
-                                            </StackPanel>
+                                                        <fa:ImageAwesome Icon="Solid_CirclePlus" Height="25" PrimaryColor="#A9A9A9"/>
+                                                    </Button>
+                                                </StackPanel>
+                                            </Grid>
                                         </Grid>
-                                    </Grid>
-                                </Border>
-                            </Grid>
-                            <!-- CardInfo Thu Nhập -->
-                            <Grid Grid.Column="2" Margin="10 0 0 0">
-                                <Border Background="White" CornerRadius="10" BorderThickness="1" 
+                                    </Border>
+                                </Grid>
+                                <!-- CardInfo Thu Nhập -->
+                                <Grid Grid.Column="2" Margin="10 0 0 0">
+                                    <Border Background="White" CornerRadius="10" BorderThickness="1" 
                                         BorderBrush="#D1D1D1" materialDesign:ElevationAssist.Elevation="Dp8">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="60"/>
-                                            <RowDefinition Height="*"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid Grid.Row="0">
-                                            <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
-                                                <fa:ImageAwesome Icon="Solid_MoneyBillTransfer" Width="30"
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="60"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid Grid.Row="0">
+                                                <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                                                    <fa:ImageAwesome Icon="Solid_MoneyBillTransfer" Width="30"
                                                                  Height="30" Margin="30 0" PrimaryColor="#B4B4B8"/>
-                                                <TextBlock Text="Thu nhập" FontSize="20" Foreground="#B4B4B8"
+                                                    <TextBlock Text="Thu nhập" FontSize="20" Foreground="#B4B4B8"
                                                            FontWeight="Medium" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </Grid>
-                                        <Grid Grid.Row="1">
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock x:Name="TxtIncome" Text="{Binding TotalExpense, StringFormat={}{0:N0}}" 
+                                                </StackPanel>
+                                            </Grid>
+                                            <Grid Grid.Row="1">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock x:Name="TxtIncome" Text="{Binding TotalExpense, StringFormat={}{0:N0}}" 
                                                            FontSize="20" Margin="30 0 0 0"
                                                            VerticalAlignment="Center" FontWeight="Bold"/>
-                                                <TextBlock Text="VND" FontSize="16" VerticalAlignment="Center"/>
-                                                <Border Background="{StaticResource BackgroundSuccess}" 
+                                                    <TextBlock Text="VND" FontSize="16" VerticalAlignment="Center"/>
+                                                    <Border Background="{StaticResource BackgroundSuccess}" 
                                                         BorderThickness="1" CornerRadius="5" 
                                                         Padding="5 0" Margin="10 0 0 0" Height="20"
                                                         x:Name="BorderBgIncome"
                                                         >
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <fa:ImageAwesome Icon="Solid_ArrowUp" Width="10" x:Name="FaIconIncome"
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <fa:ImageAwesome Icon="Solid_ArrowUp" Width="10" x:Name="FaIconIncome"
                                                                          Height="15" Margin="0 0 5 0"/>
-                                                        <TextBlock Text="0 %" FontSize="13" VerticalAlignment="Center" x:Name="TxtPercentIncome"
+                                                            <TextBlock Text="0 %" FontSize="13" VerticalAlignment="Center" x:Name="TxtPercentIncome"
                                                                    FontWeight="Bold"
                                                                    />
-                                                    </StackPanel>
-                                                </Border>
-                                            </StackPanel>
-                                        </Grid>
-                                        <Grid Grid.Row="2">
-                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0 0 0 10">
-                                                <TextBlock Text="0" FontSize="13" x:Name="TxtIncomeLastMonth"
+                                                        </StackPanel>
+                                                    </Border>
+                                                </StackPanel>
+                                            </Grid>
+                                            <Grid Grid.Row="2">
+                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0 0 0 10">
+                                                    <TextBlock Text="0" FontSize="13" x:Name="TxtIncomeLastMonth"
                                                            FontWeight="Medium" VerticalAlignment="Center" Margin="30 0 10 0"/>
-                                                <TextBlock Text="So với tháng trước" FontSize="13" VerticalAlignment="Center"/>
-                                                <Button Background="Transparent" Padding="0" BorderBrush="Transparent"
+                                                    <TextBlock Text="So với tháng trước" FontSize="13" VerticalAlignment="Center"/>
+                                                    <Button Background="Transparent" Padding="0" BorderBrush="Transparent"
                                                         HorizontalAlignment="Right" Margin="10 0"
                                                         x:Name="BtnOpenFormIncome" Click="BtnOpenFormIncome_OnClick"
                                                         >
-                                                    <fa:ImageAwesome Icon="Solid_CirclePlus" Height="25" PrimaryColor="#A9A9A9"/>
-                                                </Button>
-                                            </StackPanel>
+                                                        <fa:ImageAwesome Icon="Solid_CirclePlus" Height="25" PrimaryColor="#A9A9A9"/>
+                                                    </Button>
+                                                </StackPanel>
+                                            </Grid>
                                         </Grid>
-                                    </Grid>
-                                </Border>
+                                    </Border>
+                                </Grid>
                             </Grid>
                         </Grid>
-                    </Grid>
-                </StackPanel>
-                <Grid Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="582*"/>
-                        <ColumnDefinition Width="75*"/>
-                        <ColumnDefinition Width="60*"/>
-                        <ColumnDefinition Width="140*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Margin="20,5,20,5" Grid.ColumnSpan="4" >
-                        <local:UcLiveChart />
                     </StackPanel>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="582*"/>
+                            <ColumnDefinition Width="75*"/>
+                            <ColumnDefinition Width="60*"/>
+                            <ColumnDefinition Width="140*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Margin="20,5,20,5" Grid.ColumnSpan="4" >
+                            <local:UcLiveChart />
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="3" Margin="25">
+                        <Grid x:Name="BannerGrid" VerticalAlignment="Center">
+                            <Border CornerRadius="20" ClipToBounds="True">
+                                <Grid>
+                                    <!-- Image 1 -->
+                                    <Image x:Name="Image1" Source="/Resource/banner2.png" Stretch="UniformToFill" Visibility="Visible" />
+                                    <!-- Image 2 -->
+                                    <Image x:Name="Image2" Source="/Resource/banner1.png" Stretch="UniformToFill" Visibility="Collapsed" />
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </Grid>
                 </Grid>
-            </Grid>
-            <!--right-->
-            <Grid Grid.Column="1" Grid.Row="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-
-                <StackPanel>
-                    <Grid Margin="20 5">
-                        <Label Content="View All " FontSize="16" 
-                   FontWeight="SemiBold" HorizontalAlignment="Right"  
-                   VerticalAlignment="Center" />
-                        <Label Content="New Activity" FontSize="16" 
-                   FontWeight="SemiBold" HorizontalAlignment="Left"  
+                <!--right-->
+                <Grid Grid.Column="1" Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel>
+                        <Grid Margin="20 5">
+                            <Label Content="Thống kê chi tiêu theo ngày" FontSize="16" 
+                   FontWeight="SemiBold" HorizontalAlignment="Left"   Foreground="{StaticResource BackgroundBlueBold}"
                    VerticalAlignment="Center"/>
-                    </Grid>
-                </StackPanel>
-
-                <Grid Grid.Row="1">
-                    <StackPanel >
-                        <local:UcPieChart />
+                        </Grid>
                     </StackPanel>
+                    <Grid Grid.Row="1">
+                        <StackPanel >
+                            <local:UcPieChart />
+                        </StackPanel>
+                    </Grid>
                 </Grid>
-
             </Grid>
-
-
-
-
-        </Grid>
+        </ScrollViewer> 
     </Border>
 </UserControl>

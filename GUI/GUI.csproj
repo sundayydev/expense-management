@@ -387,13 +387,6 @@
     <Resource Include="Resource\logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resource\mail2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resource\salary.png" />
-    <Resource Include="Resource\wallet.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
       <Project>{c18a6017-d929-47ba-945d-6d52a50318a2}</Project>
       <Name>BLL</Name>
@@ -402,6 +395,10 @@
       <Project>{a8d3a318-0429-4b15-9eb4-bbdd68d2c190}</Project>
       <Name>DAL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\banner1.png" />
+    <Resource Include="Resource\banner2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.5.1.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.5.1.0\build\MaterialDesignThemes.targets')" />

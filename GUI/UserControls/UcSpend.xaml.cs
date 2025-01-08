@@ -17,8 +17,6 @@ namespace GUI.UserControls
     /// </summary>
     public partial class UcSpend : UserControl
     {
-        private List<Expens> selectedExpenses = new List<Expens>();
-
         private List<Expens> Expenses { get; set; }
 
         private readonly ExpenseService _expenseService = new();
