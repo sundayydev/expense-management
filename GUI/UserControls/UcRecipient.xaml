@@ -50,7 +50,9 @@
                                 Background="#fafbfd"
                                 Height="40" Width="300" 
                                 >
-                                <TextBox FontSize="16" Style="{StaticResource CustomStyleTextBox}"/>
+                                <TextBox FontSize="16" Style="{StaticResource CustomStyleTextBox}"
+                                         x:Name="TxtSearch" TextChanged="TxtSearch_OnTextChanged"
+                                         />
                             </Border>
                             <Button Padding="5" Margin="5 0 0 0" Height="40" Background="#7C444F">
                                 <fa:ImageAwesome Icon="Solid_MagnifyingGlass" PrimaryColor="White"/>

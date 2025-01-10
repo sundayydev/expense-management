@@ -20,9 +20,6 @@ namespace DAL.Models
         [StringLength(10)]
         public string RecipientId { get; set; }
 
-        [StringLength(100)]
-        public string Source { get; set; }
-
         public decimal Amount { get; set; }
 
         [Column(TypeName = "date")]

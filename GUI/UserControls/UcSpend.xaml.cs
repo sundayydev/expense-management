@@ -1,11 +1,14 @@
 ﻿using BLL.DTO.Category;
 using BLL.DTO.Expenses;
+using BLL.DTO.Income;
 using BLL.Services;
 using DAL.Models;
+using DAL.Utils;
 using GUI.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,13 +20,15 @@ namespace GUI.UserControls
     /// </summary>
     public partial class UcSpend : UserControl
     {
+        private SearchManager<Expens> _searchManager;
         private List<Expens> Expenses { get; set; }
 
-        private readonly ExpenseService _expenseService = new();
+        private readonly ExpenseService _expenseService = new ExpenseService();
         public UcSpend()
         {
             InitializeComponent();
             LoadData();
+            HandleExpenseSearch();
         }
         void LoadData()
         {
@@ -31,7 +36,24 @@ namespace GUI.UserControls
 
             var sortedExpenses = Expenses.OrderByDescending(e => e.ExpenseDate).ToList();
 
-            dvgExpense.ItemsSource = sortedExpenses;
+            ExpenseDateGrid.ItemsSource = sortedExpenses;
+        }
+
+        void HandleExpenseSearch()
+        {
+            // Khởi tạo SearchManager
+            _searchManager = new SearchManager<Expens>(
+            Expenses,
+            results => ExpenseDateGrid.ItemsSource = results, // Cập nhật DataGrid
+            (expense, searchText) => // Logic lọc dữ liệu
+                expense.Category.CategoryName.ToLower().Contains(searchText) ||
+                expense.Note.ToLower().Contains(searchText) ||
+                expense.Amount.ToString(CultureInfo.InvariantCulture).Contains(searchText) ||
+                expense.ExpenseDate.ToString(CultureInfo.InvariantCulture).Contains(searchText) ||
+                expense.CreatedAt.ToString().Contains(searchText) 
+            );
+
+            ExpenseDateGrid.ItemsSource = Expenses;
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
@@ -41,24 +63,6 @@ namespace GUI.UserControls
             wf.Close();
 
             LoadData();
-        }
-
-        private void txtFind_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            string searchText = txtFind.Text.ToLower();
-            DateTime? searchDate = null;
-
-            if (DateTime.TryParse(searchText, out DateTime parsedDate))
-            {
-                searchDate = parsedDate.Date;
-            }
-            var res = Expenses.Where(expense =>
-                expense.Note.ToLower().Contains(searchText)  
-                || expense.ExpenseId.ToString().Contains(searchText)
-                || (searchDate.HasValue && expense.ExpenseDate.Date == searchDate.Value) 
-                || expense.Amount.ToString().Contains(searchText)  
-            ).ToList();
-            dvgExpense.ItemsSource = res;
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -77,7 +81,7 @@ namespace GUI.UserControls
                     {
                         _expenseService.DeleteExpense(expenseToDelete.ExpenseId);
                         Expenses.Remove(expenseToDelete);
-                        dvgExpense.ItemsSource = new ObservableCollection<Expens>(Expenses);
+                        ExpenseDateGrid.ItemsSource = new ObservableCollection<Expens>(Expenses);
 
                         DialogCustoms res = new DialogCustoms("Xóa thành công ", "Thông báo", DialogCustoms.OK);
                     }
@@ -88,6 +92,7 @@ namespace GUI.UserControls
                 MessageBox.Show($"Đã xảy ra lỗi khi xóa: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -106,6 +111,11 @@ namespace GUI.UserControls
             {
                 MessageBox.Show($"Đã xảy ra lỗi khi chỉnh sửa: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void TxtSearch_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            _searchManager.OnSearchTextChanged(TxtSearch.Text);
         }
     }
 }

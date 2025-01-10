@@ -228,20 +228,29 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
-                    <StackPanel>
+                    <StackPanel Grid.Column="0">
                         <Grid Margin="20 5">
-                            <Label Content="Thống kê chi tiêu theo ngày" FontSize="16" 
-                   FontWeight="SemiBold" HorizontalAlignment="Left"   Foreground="{StaticResource BackgroundBlueBold}"
-                   VerticalAlignment="Center"/>
+                            <Label Content="Thống Kê Chi Tiêu Theo Ngày" FontSize="16" 
+                                   FontWeight="SemiBold" HorizontalAlignment="Left"   
+                                   Foreground="{StaticResource BackgroundBlueBold}"
+                                   VerticalAlignment="Center"/>
                         </Grid>
+                        <local:UcPieChart />
                     </StackPanel>
                     <Grid Grid.Row="1">
-                        <StackPanel >
-                            <local:UcPieChart />
-                        </StackPanel>
+                        <GroupBox Header="Top 5 Chi Tiêu" Margin="10">
+                            <ItemsControl x:Name="TopCategoriesList">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Vertical" Margin="10">
+                                            <TextBlock Text="{Binding CategoryName}" FontWeight="Bold" FontSize="16"/>
+                                            <TextBlock Text="{Binding TotalAmount, StringFormat={}{0:N0} VND}" FontSize="16"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </GroupBox>
                     </Grid>
                 </Grid>
             </Grid>

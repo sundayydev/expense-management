@@ -61,5 +61,6 @@ namespace DAL.Repositories
          _context.Categories.Remove(category);
          _context.SaveChanges();
       }
+      
    }
 }

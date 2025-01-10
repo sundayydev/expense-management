@@ -1,5 +1,6 @@
 ﻿using BLL.DTO.Recipient;
 using BLL.Services;
+using DAL.Utils;
 using GUI.View;
 using System;
 using System.Collections.ObjectModel;
@@ -18,11 +19,13 @@ namespace GUI.UserControls
     {
         private ObservableCollection<RecipientDto> Recipients { get; set; }
         private readonly RecipientService _recipientService = new RecipientService();
+        private SearchManager<RecipientDto> _searchManager;
 
         public UcRecipient()
         {
             InitializeComponent();
             LoadData();
+            HandleRecipientSearch();
             RecipientDataGrid.ItemsSource = Recipients;
         }
         
@@ -30,6 +33,21 @@ namespace GUI.UserControls
         {
             RecipientDataGrid.ItemsSource = null;
             Recipients = new ObservableCollection<RecipientDto>(_recipientService.GetRecipientsByUserId(AppContext.Instance.UserId));
+            RecipientDataGrid.ItemsSource = Recipients;
+        }
+
+        void HandleRecipientSearch()
+        {
+            // Khởi tạo SearchManager
+            _searchManager = new SearchManager<RecipientDto>(
+            Recipients,
+            results => RecipientDataGrid.ItemsSource = results, // Cập nhật DataGrid
+            (recipient, searchText) => // Logic lọc dữ liệu
+                recipient.RecipientName.ToLower().Contains(searchText) ||
+                recipient.Description.ToLower().Contains(searchText) ||
+                recipient.CreatedAt.ToString().Contains(searchText)
+            );
+
             RecipientDataGrid.ItemsSource = Recipients;
         }
 
@@ -94,6 +112,11 @@ namespace GUI.UserControls
                     MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+        }
+
+        private void TxtSearch_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            _searchManager.OnSearchTextChanged(TxtSearch.Text);
         }
     }
 }

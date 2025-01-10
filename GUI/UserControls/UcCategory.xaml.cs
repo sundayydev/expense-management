@@ -6,6 +6,9 @@ using System.Windows;
 using System.Windows.Controls;
 using BLL.DTO.Category;
 using BLL.Services;
+using DAL.Models;
+using DAL.Utils;
+using System.Windows.Threading;
 using AppContext = BLL.AppContext;
 
 namespace GUI.UserControls
@@ -18,18 +21,38 @@ namespace GUI.UserControls
     {
         private ObservableCollection<CategoryDto> Categories { get; set; }
         
-        private readonly CategoryService _categoryService = new();
+        private readonly CategoryService _categoryService = new CategoryService();
+        
+        private SearchManager<CategoryDto> _searchManager;
         
         public UcCategory()
         {
             InitializeComponent();
             LoadData();
+            HandleCategorySearch();
         }
 
         void LoadData()
         {
             CategoryDataGrid.ItemsSource = null;
             Categories = new ObservableCollection<CategoryDto>(_categoryService.GetCategoryByUserId(AppContext.Instance.UserId));
+            CategoryDataGrid.ItemsSource = Categories;
+        }
+
+        void HandleCategorySearch()
+        {
+            // Khởi tạo SearchManager
+            _searchManager = new SearchManager<CategoryDto>(
+            Categories,
+            results => CategoryDataGrid.ItemsSource = results, // Cập nhật DataGrid
+            (category, searchText) => // Logic lọc dữ liệu
+                category.CategoryName.ToLower().Contains(searchText) ||
+                category.CategoryId.ToString().Contains(searchText) ||
+                category.CategoryType.ToLower().Contains(searchText) ||
+                category.Description.ToLower().Contains(searchText) ||
+                category.CreatedAt.ToString().Contains(searchText)
+            );
+
             CategoryDataGrid.ItemsSource = Categories;
         }
 
@@ -101,16 +124,7 @@ namespace GUI.UserControls
 
         private void TxtSearch_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            string searchText = TxtSearch.Text.ToLower();
-            
-            var res = Categories.Where(category =>
-                category.CategoryName.ToLower().Contains(searchText)  
-                || category.CategoryId.ToString().Contains(searchText)
-                || category.CategoryType.ToLower().Contains(searchText) 
-                || category.Description.ToLower().Contains(searchText)
-                || category.CreatedAt.ToString().Contains(searchText)
-            ).ToList();
-            CategoryDataGrid.ItemsSource = res;
+            _searchManager.OnSearchTextChanged(TxtSearch.Text);
         }
     }
 }

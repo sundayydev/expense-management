@@ -5,6 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GUI.UserControls"
              xmlns:lc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             TextElement.FontWeight="Regular"
+             TextElement.FontFamily="Segoe UI"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
              mc:Ignorable="d">
     <UserControl.Resources>
         <!-- Định nghĩa màu gradient cho biểu đồ -->
@@ -52,16 +57,16 @@
         <Grid Grid.Row="1" Height="300" Margin="5 15 5 5">
             <Border Background="AliceBlue" BorderThickness="1" BorderBrush="Transparent" 
                     CornerRadius="5" Padding="5">
-                <lc:CartesianChart Series="{Binding SeriesCollection}" >
+                <lc:CartesianChart FontSize="16" Series="{Binding SeriesCollection}" >
                     <lc:CartesianChart.AxisX>
-                        <lc:Axis Labels="{Binding Labels}" LabelsRotation="0">
+                        <lc:Axis FontSize="16" FontWeight="Bold" Labels="{Binding Labels}" LabelsRotation="0">
                             <lc:Axis.Separator>
                                 <lc:Separator Step="1" />
                             </lc:Axis.Separator>
                         </lc:Axis>
                     </lc:CartesianChart.AxisX>
                     <lc:CartesianChart.AxisY>
-                        <lc:Axis LabelFormatter="{Binding Values}" />
+                        <lc:Axis FontFamily="16" FontWeight="Bold" LabelFormatter="{Binding Values}" />
                     </lc:CartesianChart.AxisY>
                 </lc:CartesianChart>
             </Border>

@@ -15,8 +15,6 @@ namespace DAL.Models
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Expens> Expenses { get; set; }
         public virtual DbSet<Income> Incomes { get; set; }
-        public virtual DbSet<Loan> Loans { get; set; }
-        public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<Recipient> Recipients { get; set; }
         public virtual DbSet<Reminder> Reminders { get; set; }
         public virtual DbSet<User> Users { get; set; }
@@ -51,35 +49,9 @@ namespace DAL.Models
                 .Property(e => e.RecipientId)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Loan>()
-                .Property(e => e.LoanId)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Loan>()
-                .Property(e => e.RecipientId)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Loan>()
-                .HasMany(e => e.Payments)
-                .WithRequired(e => e.Loan)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Payment>()
-                .Property(e => e.PaymentId)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Payment>()
-                .Property(e => e.LoanId)
-                .IsUnicode(false);
-
             modelBuilder.Entity<Recipient>()
                 .Property(e => e.RecipientId)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<Recipient>()
-                .HasMany(e => e.Loans)
-                .WithRequired(e => e.Recipient)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Reminder>()
                 .Property(e => e.ReminderId)
@@ -101,11 +73,6 @@ namespace DAL.Models
 
             modelBuilder.Entity<User>()
                 .HasMany(e => e.Incomes)
-                .WithRequired(e => e.User)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<User>()
-                .HasMany(e => e.Loans)
                 .WithRequired(e => e.User)
                 .WillCascadeOnDelete(false);
 

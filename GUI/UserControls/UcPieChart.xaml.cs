@@ -29,11 +29,9 @@ namespace GUI.UserControls
         {
             try
             {
-                if (string.IsNullOrEmpty(userId))
+                if (!string.IsNullOrEmpty(userId))
                 {
-                    return; 
-                }
-                var dailyExpenses = _expenseService.GetExpenseByDate(userId, DateTime.Now);
+                                    var dailyExpenses = _expenseService.GetExpenseByDate(userId, DateTime.Now);
                 if (dailyExpenses == null || !dailyExpenses.Any())
                 {
                     PieChart.Series.Clear();
@@ -97,6 +95,7 @@ namespace GUI.UserControls
                 foreach (var series in pieSeriesList)
                 {
                     PieChart.Series.Add(series);
+                }
                 }
             }
             catch (Exception ex)
