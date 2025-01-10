@@ -13,7 +13,6 @@ namespace DAL.Models
         {
             Expenses = new HashSet<Expens>();
             Incomes = new HashSet<Income>();
-            Loans = new HashSet<Loan>();
         }
 
         [StringLength(10)]
@@ -35,9 +34,6 @@ namespace DAL.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Income> Incomes { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Loan> Loans { get; set; }
 
         public virtual User User { get; set; }
     }

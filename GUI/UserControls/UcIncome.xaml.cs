@@ -1,18 +1,13 @@
-﻿using BLL.DTO.Category;
-using BLL.DTO.Income;
-using BLL.DTO.Recipient;
+﻿using BLL.DTO.Income;
 using BLL.Services;
-using DAL.Models;
+using DAL.Utils;
 using GUI.View;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
 using AppContext = BLL.AppContext;
 
 namespace GUI.UserControls
@@ -23,48 +18,50 @@ namespace GUI.UserControls
     public partial class UcIncome : UserControl
     {
         private ObservableCollection<IncomeDto> Incomes { get; set; }
-        private readonly IncomeService _incomeService = new();
+        private readonly IncomeService _incomeService = new IncomeService();
+        private SearchManager<IncomeDto> _searchManager;
+        
         public UcIncome()
         {
             InitializeComponent();
             LoadData();
-            InvoiceDataGrid.ItemsSource = Incomes;
+            IncomeDataGrid.ItemsSource = Incomes;
+            HandleIncomeSearch();
         }
+        
         private void btnSaveAdd_Click(object sender, RoutedEventArgs e)
         {
             WFormIncome wf = new WFormIncome();
             wf.ShowDialog();
             LoadData();
         }
-        private void txtFind_TextChanged(object sender, TextChangedEventArgs e)
+        
+        void LoadData()
         {
-            string searchText = txtFind.Text.ToLower();
-            DateTime? searchDate = null;
-            if (DateTime.TryParse(searchText, out DateTime parsedDate))
-            {
-                searchDate = parsedDate.Date;
-            }
-
-            var res = Incomes.Where(Income =>
-                Income.Note.ToLower().Contains(searchText) 
-                || Income.IncomeId.ToString().Contains(searchText)
-                || (searchDate.HasValue && Income.IncomeDate.Date == searchDate.Value.Date)
-                || Income.Amount.ToString().Contains(searchText)
-              
-            ).ToList();
-
-            InvoiceDataGrid.ItemsSource = res;
-            InvoiceDataGrid.Items.Refresh();
-        }
-        public void LoadData()
-        {
-            InvoiceDataGrid.ItemsSource = null;
+            IncomeDataGrid.ItemsSource = null;
             Incomes = new ObservableCollection<IncomeDto>(_incomeService.GetIncomeByUserId(AppContext.Instance.UserId));
-            InvoiceDataGrid.ItemsSource = Incomes;
+            IncomeDataGrid.ItemsSource = Incomes;
         }
+
+        void HandleIncomeSearch()
+        {
+            // Khởi tạo SearchManager
+            _searchManager = new SearchManager<IncomeDto>(
+            Incomes,
+            results => IncomeDataGrid.ItemsSource = results, // Cập nhật DataGrid
+            (recipient, searchText) => // Logic lọc dữ liệu
+                recipient.CategoryName.ToLower().Contains(searchText) ||
+                recipient.Note.ToLower().Contains(searchText) ||
+                recipient.Amount.ToString(CultureInfo.InvariantCulture).Contains(searchText) ||
+                recipient.CreatedAt.ToString(CultureInfo.InvariantCulture).Contains(searchText)
+            );
+
+            IncomeDataGrid.ItemsSource = Incomes;
+        }
+        
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            var income = (IncomeDto)InvoiceDataGrid.SelectedItem;
+            var income = (IncomeDto)IncomeDataGrid.SelectedItem;
             if (income == null)
             {
                 DialogCustoms chose = new DialogCustoms("Vui lòng chọn một dòng để xóa.", "Thông báo", DialogCustoms.Show);
@@ -115,6 +112,11 @@ namespace GUI.UserControls
                 }
                 LoadData();
             }
+        }
+
+        private void TxtSearch_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            _searchManager.OnSearchTextChanged(TxtSearch.Text);
         }
     } 
 }

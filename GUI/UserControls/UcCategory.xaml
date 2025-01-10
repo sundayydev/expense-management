@@ -57,7 +57,8 @@
                                 Background="#fafbfd"
                                 Height="40" Width="300" 
                                 >
-                                <TextBox FontSize="16" Style="{StaticResource CustomStyleTextBox}" x:Name="TxtSearch" TextChanged="TxtSearch_OnTextChanged"/>
+                                <TextBox FontSize="16" Style="{StaticResource CustomStyleTextBox}" 
+                                         x:Name="TxtSearch" TextChanged="TxtSearch_OnTextChanged"/>
                             </Border>
                                 <Button Padding="8" Margin="5 0 0 0" Height="40" 
                                     Background="#640D5F" BorderBrush="Transparent"

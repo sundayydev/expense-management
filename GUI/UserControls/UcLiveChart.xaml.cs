@@ -15,7 +15,7 @@ namespace GUI.UserControls
     {
         private readonly ExpenseService _expenseService = new ExpenseService();
         private readonly IncomeService _incomeService = new IncomeService();
-        private readonly string userId = BLL.AppContext.Instance.UserId;
+        private readonly string _userId = BLL.AppContext.Instance.UserId;
 
         public SeriesCollection SeriesCollection { get; set; }
         public string[] Labels { get; set; }
@@ -45,96 +45,95 @@ namespace GUI.UserControls
         {
             try
             {
-                if (string.IsNullOrEmpty(userId))
+                if (!string.IsNullOrEmpty(_userId))
                 {
-                    //MessageBox.Show("Vui lòng đăng nhập để xem dữ liệu!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return; 
-                }
-                if (isMonthly)
-                {
-                    int currentMonth = DateTime.Now.Month;
-                    int currentYear = DateTime.Now.Year;
-
-                    var monthlyIncomeValues = new int[6];
-                    var monthlyExpenseValues = new int[6];
-                    string[] months = new string[6];
-
-                    for (int i = 0; i < 6; i++)
+                    if (isMonthly)
                     {
-                        monthlyExpenseValues[i] = (int)_expenseService.GetTotalAmountByMonthly(userId, currentMonth, currentYear);
-                        monthlyIncomeValues[i] = (int)_incomeService.GetTotalAmountByMonthly(userId, currentMonth, currentYear);
+                        int currentMonth = DateTime.Now.Month;
+                        int currentYear = DateTime.Now.Year;
 
-                        months[i] = $"{currentMonth}/{currentYear}";
-                        (currentMonth, currentYear) = FunctionHelper.GetPreviousMonth(currentMonth, currentYear);
+                        var monthlyIncomeValues = new int[6];
+                        var monthlyExpenseValues = new int[6];
+                        string[] months = new string[6];
+
+                        for (int i = 0; i < 6; i++)
+                        {
+                            monthlyExpenseValues[i] = (int)_expenseService.GetTotalAmountByMonthly(_userId, currentMonth, currentYear);
+                            monthlyIncomeValues[i] = (int)_incomeService.GetTotalAmountByMonthly(_userId, currentMonth, currentYear);
+
+                            months[i] = $"{currentMonth}/{currentYear}";
+                            (currentMonth, currentYear) = FunctionHelper.GetPreviousMonth(currentMonth, currentYear);
+                        }
+
+                        // Lật ngược thứ tự dữ liệu
+                        Array.Reverse(months);
+                        Array.Reverse(monthlyIncomeValues);
+                        Array.Reverse(monthlyExpenseValues);
+
+                        SeriesCollection = new SeriesCollection
+                        {
+                            new ColumnSeries
+                            {
+                                Title = "Thu Nhập",
+                                Values = new ChartValues<int>(monthlyIncomeValues),
+                                Fill = (Brush)FindResource("IncomeGradient"),
+                                LabelPoint = point => point.Y.ToString("N0") + " VND"
+                            },
+                            new ColumnSeries
+                            {
+                                Title = "Chi Tiêu",
+                                Values = new ChartValues<int>(monthlyExpenseValues),
+                                Fill = (Brush)FindResource("ExpenseGradient"),
+                                LabelPoint = point => point.Y.ToString("N0") + " VND"
+                            }
+                        };
+
+                        Labels = months.ToArray();
+                    }
+                    else
+                    {
+                        DateTime date = DateTime.Now;
+                        var dailyIncomeValues = new int[7];
+                        var dailyExpenseValues = new int[7];
+
+                        string[] days = new string[7];
+
+                        List<DateTime> datesInWeek = FunctionHelper.GetDatesInWeek(date);
+
+                        foreach (var day in datesInWeek)
+                        {
+                            dailyIncomeValues[datesInWeek.IndexOf(day)] = (int)_incomeService.GetTotalAmountByDate(_userId, day);
+                            dailyExpenseValues[datesInWeek.IndexOf(day)] = (int)_expenseService.GetTotalAmountByDate(_userId, day);
+                            days[datesInWeek.IndexOf(day)] = FunctionHelper.GetDayOfWeekInVietnamese(day);
+                        }
+
+                        SeriesCollection = new SeriesCollection
+                        {
+                            new ColumnSeries
+                            {
+                                Title = "Thu Nhập",
+                                Values = new ChartValues<int>(dailyIncomeValues),
+                                Fill = (Brush)FindResource("IncomeGradient"),
+                                LabelPoint = point => point.Y.ToString("N0") + " VND"
+                            },
+                            new ColumnSeries
+                            {
+                                Title = "Chi Tiêu",
+                                Values = new ChartValues<int>(dailyExpenseValues),
+                                Fill = (Brush)FindResource("ExpenseGradient"),
+                                LabelPoint = point => point.Y.ToString("N0") + " VND"
+                            }
+                        };
+
+                        Labels = days.ToArray();
+
                     }
 
-                    // Lật ngược thứ tự dữ liệu
-                    Array.Reverse(months);
-                    Array.Reverse(monthlyIncomeValues);
-                    Array.Reverse(monthlyExpenseValues);
-
-                    SeriesCollection = new SeriesCollection
-                    {
-                        new ColumnSeries
-                        {
-                            Title = "Thu Nhập",
-                            Values = new ChartValues<int>(monthlyIncomeValues),
-                            Fill = (Brush)FindResource("IncomeGradient"),
-                            LabelPoint = point => point.Y.ToString("N0") + " VND"
-                        },
-                        new ColumnSeries
-                        {
-                            Title = "Chi Tiêu",
-                            Values = new ChartValues<int>(monthlyExpenseValues),
-                            Fill = (Brush)FindResource("ExpenseGradient"),
-                            LabelPoint = point => point.Y.ToString("N0") + " VND"
-                        }
-                    };
-
-                    Labels = months.ToArray();
+                    DataContext = null;
+                    DataContext = this;
                 }
-                else
-                {
-                    DateTime date = DateTime.Now;
-                    var dailyIncomeValues = new int[7];
-                    var dailyExpenseValues = new int[7];
-
-                    string[] days = new string[7];
-
-                    List<DateTime> datesInWeek = FunctionHelper.GetDatesInWeek(date);
-
-                    foreach (var day in datesInWeek)
-                    {
-                        dailyIncomeValues[datesInWeek.IndexOf(day)] = (int)_incomeService.GetTotalAmountByDate(userId, day);
-                        dailyExpenseValues[datesInWeek.IndexOf(day)] = (int)_expenseService.GetTotalAmountByDate(userId, day);
-                        days[datesInWeek.IndexOf(day)] = FunctionHelper.GetDayOfWeekInVietnamese(day);
-                    }
-
-                    SeriesCollection = new SeriesCollection
-                    {
-                        new ColumnSeries
-                        {
-                            Title = "Thu Nhập",
-                            Values = new ChartValues<int>(dailyIncomeValues),
-                            Fill = (Brush)FindResource("IncomeGradient"),
-                            LabelPoint = point => point.Y.ToString("N0") + " VND"
-                        },
-                        new ColumnSeries
-                        {
-                            Title = "Chi Tiêu",
-                            Values = new ChartValues<int>(dailyExpenseValues),
-                            Fill = (Brush)FindResource("ExpenseGradient"),
-                            LabelPoint = point => point.Y.ToString("N0") + " VND"
-                        }
-                    };
-
-                    Labels = days.ToArray();
-
-                }
-
-                DataContext = null;
-                DataContext = this;
             }
+        
             catch (Exception ex)
             {
                 MessageBox.Show($"Đã xảy ra lỗi khi cập nhật dữ liệu: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);

@@ -1,7 +1,9 @@
 ﻿using BLL.Services;
+using DAL.Utils;
 using FontAwesome6;
 using GUI.View;
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -13,14 +15,16 @@ namespace GUI.UserControls
     {
         private readonly ExpenseService _expenseService = new ExpenseService();
         private readonly IncomeService _incomeService  = new IncomeService();
-        readonly string _userId = BLL.AppContext.Instance.UserId;
+        private readonly string _userId = BLL.AppContext.Instance.UserId;
         private int _currentImageIndex = 0; // Vị trí ảnh hiện tại
         private readonly Image[] _images;   // Mảng chứa các hình ảnh
         private readonly DispatcherTimer _bannerTimer; // Bộ đếm thời gian
+        
         public UcHome()
         {
             InitializeComponent();
             ShowInfoCard();
+            LoadTopCategories();
             _images = new[] { Image1, Image2};
 
             // Khởi tạo timer cho việc chuyển banner
@@ -63,12 +67,11 @@ namespace GUI.UserControls
             var brushConverter = new BrushConverter();
 
             decimal totalIncome = _incomeService.GetTotalIncomeByUserId(_userId);
-
-            int lastMonth = currentMonth - 1;
-            int year = lastMonth > 0 ? currentYear : currentYear - 1;
+            int previousMonth, previousYear;
+            (previousMonth, previousYear) = FunctionHelper.GetPreviousMonth(currentMonth, currentYear);
 
             decimal currentMonthAmountIncome = _incomeService.GetTotalAmountByMonthly(_userId, currentMonth, currentYear);
-            decimal lastMonthAmountIncome = _incomeService.GetTotalAmountByMonthly(_userId, lastMonth, year);
+            decimal lastMonthAmountIncome = _incomeService.GetTotalAmountByMonthly(_userId, previousMonth, previousYear);
 
             decimal incomeLastMonthly = currentMonthAmountIncome - lastMonthAmountIncome;
             decimal percentIncome = 0;
@@ -102,12 +105,12 @@ namespace GUI.UserControls
         {
             var brushConverter = new BrushConverter();
             decimal totalExpense = _expenseService.GetTotalExpensesByUserId(_userId);
-            
-            int lastMonth = currentMonth - 1;
-            int year = lastMonth > 0 ? currentYear : currentYear - 1;
+
+            int previousMonth, previousYear;
+            (previousMonth, previousYear) = FunctionHelper.GetPreviousMonth(currentMonth, currentYear);
 
             decimal currentMonthAmountExpense = _expenseService.GetTotalAmountByMonthly(_userId, currentMonth, currentYear);
-            decimal lastMonthAmountExpense = _expenseService.GetTotalAmountByMonthly(_userId, lastMonth, year);
+            decimal lastMonthAmountExpense = _expenseService.GetTotalAmountByMonthly(_userId, previousMonth, previousYear);
 
             decimal expenseLastMonthly = currentMonthAmountExpense - lastMonthAmountExpense;
             decimal percentExpense = 0;
@@ -143,14 +146,14 @@ namespace GUI.UserControls
             decimal totalExpense = _expenseService.GetTotalExpensesByUserId(_userId);
             decimal totalIncome = _incomeService.GetTotalIncomeByUserId(_userId);
             decimal totalWallet = totalIncome - totalExpense;
-            
-            int lastMonth = currentMonth - 1;
-            int year = lastMonth > 0 ? currentYear : currentYear - 1;
+
+            int previousMonth, previousYear;
+            (previousMonth, previousYear) = FunctionHelper.GetPreviousMonth(currentMonth, currentYear);
 
             decimal currentMonthAmountWallet = _incomeService.GetTotalAmountByMonthly(_userId, currentMonth, currentYear) 
                                                - _expenseService.GetTotalAmountByMonthly(_userId, currentMonth, currentYear);
-            decimal lastMonthAmountWallet = _incomeService.GetTotalAmountByMonthly(_userId, lastMonth, year) 
-                                            - _expenseService.GetTotalAmountByMonthly(_userId, lastMonth, year);
+            decimal lastMonthAmountWallet = _incomeService.GetTotalAmountByMonthly(_userId, previousMonth, previousYear) 
+                                            - _expenseService.GetTotalAmountByMonthly(_userId, previousMonth, previousYear);
 
             decimal incomeLastMonthly = currentMonthAmountWallet - lastMonthAmountWallet;
             decimal percentWallet = 0;
@@ -177,6 +180,28 @@ namespace GUI.UserControls
                 
             TxtPercentWallet.Text = $"{percentWallet:N2}%";
             TxtWallet.Text = $"{totalWallet:N0}";
+        }
+
+        void LoadTopCategories()
+        {
+            if (!string.IsNullOrEmpty(_userId))
+            {
+                int month = DateTime.Now.Month;
+                int year = DateTime.Now.Year;
+                var listExpense = _expenseService.GetMonthlyExpenses(_userId, month, year);
+                var groupedExpenses = listExpense.GroupBy(e => new { e.Category })
+                    .Select(group => new
+                    {
+                        CategoryName = group.Key.Category.CategoryName,
+                        TotalAmount = group.Sum(e => e.Amount)
+                    })
+                    .OrderByDescending(g => g.TotalAmount) // Sắp xếp giảm dần theo số tiền
+                    .Take(5) // Lấy Top 5
+                    .ToList();
+            
+                // Bind dữ liệu vào ItemsControl
+                TopCategoriesList.ItemsSource = groupedExpenses;
+            }
         }
 
         private void BannerTimer_Tick(object sender, EventArgs e)

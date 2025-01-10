@@ -26,6 +26,7 @@ using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using System.Data.Entity;
 using Microsoft.Win32;
+using DAL.Utils;
 
 
 namespace GUI.UserControls
@@ -102,11 +103,11 @@ namespace GUI.UserControls
 
             decimal totalIncome = _incomeService.GetTotalIncomeByUserId(_userId);
 
-            int lastMonth = currentMonth - 1;
-            int year = lastMonth > 0 ? currentYear : currentYear - 1;
+            int previousMonth, previousYear;
+            (previousMonth, previousYear) = FunctionHelper.GetPreviousMonth(currentMonth, currentYear);
 
             decimal currentMonthAmountIncome = _incomeService.GetTotalAmountByMonthly(_userId, currentMonth, currentYear);
-            decimal lastMonthAmountIncome = _incomeService.GetTotalAmountByMonthly(_userId, lastMonth, year);
+            decimal lastMonthAmountIncome = _incomeService.GetTotalAmountByMonthly(_userId, previousMonth, previousYear);
 
             decimal incomeLastMonthly = currentMonthAmountIncome - lastMonthAmountIncome;
             decimal percentIncome = 0;
@@ -140,11 +141,11 @@ namespace GUI.UserControls
             var brushConverter = new BrushConverter();
             decimal totalExpense = _expenseService.GetTotalExpensesByUserId(_userId);
 
-            int lastMonth = currentMonth - 1;
-            int year = lastMonth > 0 ? currentYear : currentYear - 1;
+            int previousMonth, previousYear;
+            (previousMonth, previousYear) = FunctionHelper.GetPreviousMonth(currentMonth, currentYear);
 
             decimal currentMonthAmountExpense = _expenseService.GetTotalAmountByMonthly(_userId, currentMonth, currentYear);
-            decimal lastMonthAmountExpense = _expenseService.GetTotalAmountByMonthly(_userId, lastMonth, year);
+            decimal lastMonthAmountExpense = _expenseService.GetTotalAmountByMonthly(_userId, previousMonth, previousYear);
 
             decimal expenseLastMonthly = currentMonthAmountExpense - lastMonthAmountExpense;
             decimal percentExpense = 0;
@@ -181,13 +182,13 @@ namespace GUI.UserControls
             decimal totalIncome = _incomeService.GetTotalIncomeByUserId(_userId);
             decimal totalWallet = totalIncome - totalExpense;
 
-            int lastMonth = currentMonth - 1;
-            int year = lastMonth > 0 ? currentYear : currentYear - 1;
+            int previousMonth, previousYear;
+            (previousMonth, previousYear) = FunctionHelper.GetPreviousMonth(currentMonth, currentYear);
 
             decimal currentMonthAmountWallet = _incomeService.GetTotalAmountByMonthly(_userId, currentMonth, currentYear)
                                                - _expenseService.GetTotalAmountByMonthly(_userId, currentMonth, currentYear);
-            decimal lastMonthAmountWallet = _incomeService.GetTotalAmountByMonthly(_userId, lastMonth, year)
-                                            - _expenseService.GetTotalAmountByMonthly(_userId, lastMonth, year);
+            decimal lastMonthAmountWallet = _incomeService.GetTotalAmountByMonthly(_userId, previousMonth, previousYear)
+                                            - _expenseService.GetTotalAmountByMonthly(_userId, previousMonth, previousYear);
 
             decimal incomeLastMonthly = currentMonthAmountWallet - lastMonthAmountWallet;
             decimal percentWallet = 0;
