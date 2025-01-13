@@ -21,7 +21,7 @@ namespace GUI.UserControls
     public partial class UcSpend : UserControl
     {
         private SearchManager<Expens> _searchManager;
-        private List<Expens> Expenses { get; set; }
+        private ObservableCollection<Expens> Expenses { get; set; }
 
         private readonly ExpenseService _expenseService = new ExpenseService();
         public UcSpend()
@@ -30,9 +30,13 @@ namespace GUI.UserControls
             LoadData();
             HandleExpenseSearch();
         }
+        
         void LoadData()
         {
-            Expenses = _expenseService.GetAllExpensesByUserId(BLL.AppContext.Instance.UserId);
+            Expenses = new ObservableCollection<Expens>(
+                _expenseService.GetAllExpensesByUserId(BLL.AppContext.Instance.UserId)
+            );
+
 
             var sortedExpenses = Expenses.OrderByDescending(e => e.ExpenseDate).ToList();
 

@@ -40,7 +40,12 @@
                 <StackPanel>
                     <!-- Title -->
                     <Label Content="Hãy Bắt Đầu" HorizontalAlignment="Center" Margin="0,30,0,0" FontSize="32" FontWeight="Bold" Foreground="{StaticResource TextPrimary}"/>
-                    <Label Content="Đăng nhập để tiếp tục với EXP" HorizontalAlignment="Center" FontSize="16" Foreground="{StaticResource TextPrimary}" />
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Label Content="Đăng nhập để tiếp tục với " VerticalAlignment="Center" FontSize="16" 
+                               Foreground="{StaticResource TextPrimary}" Padding="0"/>
+                        <Label Content="ExpenseManagement" VerticalAlignment="Center" FontSize="20" 
+                               Foreground="{StaticResource TextPrimary}" FontWeight="Bold" Padding="0"/>
+                    </StackPanel>
                 </StackPanel>
                 <!-- Email and Password -->
                 <StackPanel Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0">

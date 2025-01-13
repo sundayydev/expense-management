@@ -19,7 +19,12 @@
                 </Border.Effect>
                 <StackPanel>
                     <Label Content="Hãy Bắt Đầu" HorizontalAlignment="Center" Margin="0,30,0,0" FontSize="32" FontWeight="Bold" Foreground="{StaticResource TextBuleBold}"/>
-                    <Label Content="Đăng ký để tiếp tục với EXP" HorizontalAlignment="Center"  FontSize="16" Foreground="{StaticResource TextBuleBold}" Grid.Column="1"/>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Label Content="Đăng nhập để tiếp tục với " VerticalAlignment="Center" FontSize="16" 
+                               Foreground="{StaticResource TextPrimary}" Padding="0"/>
+                        <Label Content="ExpenseManagement" VerticalAlignment="Center" FontSize="20" 
+                               Foreground="{StaticResource TextPrimary}" FontWeight="Bold" Padding="0"/>
+                    </StackPanel>
                     <!--Tên người dùng-->
                     <local:TextHolder  Width="500" Margin="0,20,0,0" PlaceHolder="Tên Người Dùng" 
                                        PreviewTextInput="TextBoxInput" x:Name="TxtFullName"/>

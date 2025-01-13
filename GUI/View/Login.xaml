@@ -20,7 +20,7 @@
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="Login" Height="800" Width="1440"
+        Title="Đăng nhập" Height="800" Width="1440"
         x:Name="VLogin">
     <Grid>
         <Grid>

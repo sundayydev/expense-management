@@ -1,5 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{C18A6017-D929-47BA-945D-6D52A50318A2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{A8D3A318-0429-4B15-9EB4-BBDD68D2C190}"
@@ -24,5 +27,8 @@ Global
 		{DE812F54-BFD0-4EE4-AD88-18CAAB6055E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE812F54-BFD0-4EE4-AD88-18CAAB6055E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE812F54-BFD0-4EE4-AD88-18CAAB6055E0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
