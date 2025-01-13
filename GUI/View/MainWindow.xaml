@@ -78,10 +78,9 @@
                     <uc:UcButtonIcon x:Name="BtnHome" Icon="Solid_House" Text="Trang Chủ" UcButtonIconClick="Btn_OnClick"/>
                     <uc:UcButtonIcon x:Name="BtnCategory" Icon="Brands_Dropbox" Text="Phân Loại" UcButtonIconClick="Btn_OnClick"/>
                     <uc:UcButtonIcon x:Name="BtnExpense" Icon="Solid_MoneyBill" Text="Chi Tiêu" UcButtonIconClick="Btn_OnClick"/>
-                    <uc:UcButtonIcon x:Name="BtnIncome" Icon="Solid_Coins" Text="Thu Nhâp" UcButtonIconClick="Btn_OnClick"/>
+                    <uc:UcButtonIcon x:Name="BtnIncome" Icon="Solid_Coins" Text="Thu Nhập" UcButtonIconClick="Btn_OnClick"/>
                     <uc:UcButtonIcon x:Name="BtnRecipient" Icon="Solid_UserGroup" Text="Người Nhận" UcButtonIconClick="Btn_OnClick"/>
                     <uc:UcButtonIcon x:Name="BtnStatistical" Icon="Solid_ChartSimple" Text="Thống Kê" UcButtonIconClick="Btn_OnClick"/>
-                    <uc:UcButtonIcon x:Name="BtnLoans" Icon="Solid_MoneyCheckDollar" Text="Mượn Nợ" UcButtonIconClick="Btn_OnClick"/>
                     <uc:UcButtonIcon x:Name="BtnRemind" Icon="Solid_ClockRotateLeft" Text="Nhắc Nhở" UcButtonIconClick="Btn_OnClick"/>
                 </StackPanel>
 

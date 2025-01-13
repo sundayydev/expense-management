@@ -18,8 +18,8 @@ public class CategoryDto
       {
          return CategoryType switch
          {
-            "Chi tiêu" => (Brush)_brushConverter.ConvertFromString("#FFCF9D"),
-            "Thu nhập" => (Brush)_brushConverter.ConvertFromString("#7AB2D3"),
+            "Chi tiêu" => (Brush)_brushConverter.ConvertFromString("#ff562f"),
+            "Thu nhập" => (Brush)_brushConverter.ConvertFromString("#04a08b"),
             _ => throw new ArgumentOutOfRangeException()
          };
       }
@@ -30,8 +30,8 @@ public class CategoryDto
       {
          return CategoryType switch
          {
-            "Chi tiêu" => (Brush)_brushConverter.ConvertFromString("#DE8F5F"),
-            "Thu nhập" => (Brush)_brushConverter.ConvertFromString("#4A628A"),
+            "Chi tiêu" => (Brush)_brushConverter.ConvertFromString("#ffeae5"),
+            "Thu nhập" => (Brush)_brushConverter.ConvertFromString("#d1f5f0"),
             _ => throw new ArgumentOutOfRangeException()
          };
       }

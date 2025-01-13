@@ -129,14 +129,24 @@
                         </Border>
                     </StackPanel>
                 </Grid>
-                <Button Grid.Row="6" VerticalAlignment="Top"
-                        FontSize="16" Height="40" x:Name="BtnSave" Click="BtnSave_OnClick"
-                        HorizontalAlignment="Right"
-                        Background="{StaticResource BackgroundPrimary}"
-                        BorderBrush="{StaticResource BackgroundTransparent}"
-                >
-                    <TextBlock>Lưu thông tin</TextBlock>
-                </Button>
+                <StackPanel Grid.Row="6" Orientation="Horizontal">
+                    <Button VerticalAlignment="Top"
+                            FontSize="16" Height="40" x:Name="BtnSave" Click="BtnSave_OnClick"
+                            HorizontalAlignment="Left"
+                            Background="{StaticResource BackgroundPrimary}"
+                            BorderBrush="{StaticResource BackgroundTransparent}"
+                    >
+                        <TextBlock>Lưu thông tin</TextBlock>
+                    </Button>
+                    <Button VerticalAlignment="Top"
+                            FontSize="16" Height="40" x:Name="BtnDeleteAccount" Click="BtnSave_OnClick"
+                            HorizontalAlignment="Right" Margin="20 0"
+                            Background="{StaticResource BackgroundDanger}"
+                            BorderBrush="{StaticResource BackgroundTransparent}"
+                    >
+                        <TextBlock>Xóa tài khoản</TextBlock>
+                    </Button>
+                </StackPanel>
             </Grid>
         </Grid>
     </Border>

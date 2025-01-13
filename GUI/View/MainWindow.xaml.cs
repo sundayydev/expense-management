@@ -16,16 +16,7 @@ namespace GUI
     {
         private bool _isMenuCollapsed = false;
 
-        private Queue<UserControl> navigationQueue = new Queue<UserControl>();
-
-        private UcHome _ucHome;
-        private UcAccount _ucAccount;
-        private UcRemind _ucRemind;
-        private UcCategory _ucCategory;
-        private UcRecipient _ucRecipient;
-        private UcIncome _ucIncome;
-        private UcSpend _ucSpend;
-        private UcStatistics _ucStatistics;
+        private readonly Queue<UserControl> _navigationQueue = new Queue<UserControl>();
 
         public MainWindow()
         {
@@ -34,8 +25,7 @@ namespace GUI
             var bgSecondaryLight = (SolidColorBrush)Application.Current.Resources["BackgroundSecondaryLight"];
             ResetBackgroundButtonIcon();
             BtnHome.Background = bgSecondaryLight;
-            _ucHome = new UcHome();
-            ContentDisplayMain.Content = _ucHome;
+            ContentDisplayMain.Content = new UcHome();
         }
 
         private void ToggleMenu_Click(object sender, RoutedEventArgs e)
@@ -91,7 +81,7 @@ namespace GUI
             // Lưu UserControl hiện tại vào Queue trước khi điều hướng đến màn hình mới
             if (ContentDisplayMain.Content != null)
             {
-                navigationQueue.Enqueue(ContentDisplayMain.Content as UserControl);
+                _navigationQueue.Enqueue(ContentDisplayMain.Content as UserControl);
             }
 
             DisplayUserControl(newControl);
@@ -106,10 +96,10 @@ namespace GUI
         // Phương thức xử lý quay lại
         private void OnBackButtonClick(object sender, RoutedEventArgs e)
         {
-            if (navigationQueue.Count > 0)
+            if (_navigationQueue.Count > 0)
             {
                 ResetBackgroundButtonIcon();
-                var previousControl = navigationQueue.Dequeue();
+                var previousControl = _navigationQueue.Dequeue();
                 DisplayUserControl(previousControl);
                 if (previousControl is UcHome)
                 {
@@ -147,10 +137,10 @@ namespace GUI
         }
         private void OnNextButtonClick(object sender, RoutedEventArgs e)
         {
-            if (navigationQueue.Count > 0)
+            if (_navigationQueue.Count > 0)
             {
                 ResetBackgroundButtonIcon();
-                var nextControl = navigationQueue.Peek(); 
+                var nextControl = _navigationQueue.Peek(); 
                 DisplayUserControl(nextControl);
 
                 if (nextControl is UcHome)
@@ -197,7 +187,6 @@ namespace GUI
             BtnIncome.Background = bgTransparent;
             BtnStatistical.Background = bgTransparent;
             BtnRecipient.Background = bgTransparent;
-            BtnLoans.Background = bgTransparent;
             BtnRemind.Background = bgTransparent;
         }
 
@@ -214,8 +203,8 @@ namespace GUI
 
         private void BtnAccount_Click(object sender, RoutedEventArgs e)
         {
-            _ucAccount = new UcAccount();
-            ContentDisplayMain.Content = _ucAccount;
+            UcAccount ucAccount = new UcAccount();
+            ContentDisplayMain.Content = ucAccount;
         }
 
         private void MainWindow_OnClosing(object sender, CancelEventArgs e)

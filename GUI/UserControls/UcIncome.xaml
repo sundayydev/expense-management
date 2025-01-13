@@ -80,10 +80,10 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <!-- ID chi tiêu -->
-                        <DataGridTemplateColumn Header="Icome ID" Width="*"  >
+                        <DataGridTemplateColumn Header="Mã Thu Nhập" Width="*"  >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding IncomeId}" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding IncomeId}" VerticalAlignment="Center" FontWeight="Bold"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
